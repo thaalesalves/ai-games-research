@@ -1,5 +1,3 @@
-// Any functions you define here will be available in your other modifier scripts.
-
 const capitalize = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
