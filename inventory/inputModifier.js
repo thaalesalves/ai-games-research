@@ -10,7 +10,7 @@ const modifier = (text) => {
   if (lowered.includes('inventory')) {
     if (lowered.includes('check')) {
       stop = true;
-      modifiedText = modifiedText + checkInventory();
+      modifiedText += checkInventory();
       console.log(getInventory());
     } else if (lowered.includes('add')) {
       stop = true;
@@ -18,7 +18,7 @@ const modifier = (text) => {
       const itemName = capitalize(itemToBeAdded.replace(/[0-9]/g, '').trim());
       const itemQuantity = parseInt(itemToBeAdded.replace(/\D/g, '').trim());
 
-      modifiedText = modifiedText + addToInventory(itemName, itemQuantity);
+      modifiedText += addToInventory(itemName, itemQuantity);
       console.log(getInventory());
     } else if (lowered.includes('remove')) {
       stop = true;
@@ -26,7 +26,7 @@ const modifier = (text) => {
       const itemName = capitalize(itemToBeRemoved.replace(/[0-9]/g, '').trim());
       const itemQuantity = parseInt(itemToBeRemoved.replace(/\D/g, '').trim());
 
-      modifiedText = modifiedText + removeFromInventory(itemName, itemQuantity);
+      modifiedText += removeFromInventory(itemName, itemQuantity);
       console.log(getInventory());
     }
   }
