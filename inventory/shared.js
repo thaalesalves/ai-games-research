@@ -1,3 +1,5 @@
+// Any functions you define here will be available in your other modifier scripts.
+
 const capitalize = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
@@ -13,9 +15,13 @@ const removeFromInventory = (itemName, itemQuantity) => {
   if (!(parseInt(item.quantity) == parseInt(itemQuantity)) 
           && (parseInt(item.quantity) > 1 && parseInt(item.quantity) >= parseInt(itemQuantity))) {
     item.quantity = (parseInt(item.quantity) - parseInt(itemQuantity)).toString();
+    
+    return '\nYou have removed ' + itemQuantity + ' ' + itemName + ' from your inventory.';
   } else {
     let index = getInventory().indexOf(item);
     getInventory().splice(index, 1);
+    
+    return '\nYou have removed all ' + itemName + ' from your inventory.';
   }
 }
 

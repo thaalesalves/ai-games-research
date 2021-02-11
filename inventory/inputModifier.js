@@ -26,8 +26,7 @@ const modifier = (text) => {
       const itemName = capitalize(itemToBeRemoved.replace(/[0-9]/g, '').trim());
       const itemQuantity = itemToBeRemoved.replace(/\D/g, '').trim();
 
-      removeFromInventory(itemName, itemQuantity);
-      modifiedText = modifiedText + '\nYou have removed ' + itemQuantity + ' ' + itemName + ' from your inventory';
+      modifiedText = modifiedText + removeFromInventory(itemName, itemQuantity);
       console.log(getInventory());
     }
   }
