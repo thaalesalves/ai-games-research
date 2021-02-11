@@ -12,7 +12,8 @@ const findItemInInventory = (itemName) => {
 
 const removeFromInventory = (itemName, itemQuantity) => {
   let item = findItemInInventory(itemName);
-  if (!(parseInt(item.quantity) == parseInt(itemQuantity)) && (parseInt(item.quantity) > 1 && parseInt(item.quantity) >= parseInt(itemQuantity))) {
+  if (!(parseInt(item.quantity) == parseInt(itemQuantity)) 
+          && (parseInt(item.quantity) > 1 && parseInt(item.quantity) >= parseInt(itemQuantity))) {
     item.quantity = (parseInt(item.quantity) - parseInt(itemQuantity)).toString();
   } else {
     let index = getInventory().indexOf(item);
@@ -43,15 +44,22 @@ const getInventory = () => {
 }
 
 const addToInventory = (itemName, itemQuantity) => {
+  
+  let item = findItemInInventory(itemName);
   if (typeof state.inventory == 'undefined') {
     state.inventory = [];
   }
 
-  item = {
-    name: itemName,
-    quantity: itemQuantity
-  };
+  if (typeof item == 'undefined') {
+    item = {
+      name: itemName,
+      quantity: itemQuantity
+    };
 
-  state.inventory.push(item);
+    state.inventory.push(item);
+  } else {
+    item.quantity = (parseInt(item.quantity) + parseInt(itemQuantity)).toString();
+  }
+
   return '\nYou have added ' + itemQuantity + ' ' + itemName + ' to your inventory.'
 }
