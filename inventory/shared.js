@@ -13,11 +13,11 @@ const removeFromInventory = (itemName, itemQuantity) => {
   if (!(item.quantity == itemQuantity) && (item.quantity > 1 && item.quantity >= itemQuantity)) {
     item.quantity -= itemQuantity;
     return `\nYou have removed ${itemQuantity} ${itemName} from your inventory.`;
-  } else {
-    let index = getInventory().indexOf(item);
-    getInventory().splice(index, 1);
-    return `\nYou have removed all ${itemName} from your inventory.`;
   }
+  
+  let index = getInventory().indexOf(item);
+  getInventory().splice(index, 1);
+  return `\nYou have removed all ${itemName} from your inventory.`;
 }
 
 const checkInventory = () => {
