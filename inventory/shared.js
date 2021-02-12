@@ -44,7 +44,12 @@ const removeFromInventory = (itemName, itemQuantity) => {
 const checkInventory = () => {
 
   if (getInventory().length > 0) {
-    return `\nYour inventory contains: ` + getInventory().join(', ');
+    let items = '';
+    getInventory().foreach(item => {
+      items = `${item.quantity} ${item.name}`;
+    });
+
+    return `\nYour inventory contains: ${items}`;
   }
 
   return `\nYour inventory is empty.`;
