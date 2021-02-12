@@ -12,7 +12,11 @@ const modifier = (text) => {
       class: 'Mage'
     };
 
-    const dataBasedOnRace = parseRace(state.character.race);
+    addToInventory('Apprentice Mage Robes', 1);
+    addToInventory('Apprentice Mage Boots', 1);
+    addToInventory('Apprentice Mage Hood', 1);
+
+    const dataBasedOnRace = parseRace(state.character.race, state.character.gender);
     getInventory();
     state.init = true;
     modifiedText = modifiedText.replace(BRACKETS, '') + dataBasedOnRace;
