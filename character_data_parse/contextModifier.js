@@ -4,13 +4,7 @@ const modifier = (text) => {
   const lines = context.split("\n");
   const lowered = text.toLowerCase();
   let stop = false;
-
-  if (lowered.includes('inventory')) {
-    if (lowered.includes('check') || lowered.includes('add') || lowered.includes('remove')) {
-      stop = true;
-    }
-  }
-
+  
   const combinedLines = lines.join("\n").slice(-(info.maxChars - info.memoryLength));
   const finalText = [contextMemory, combinedLines].join("");
   return { text: finalText, stop: stop };
