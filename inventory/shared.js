@@ -45,8 +45,8 @@ const checkInventory = () => {
 
   if (getInventory().length > 0) {
     let items = '';
-    getInventory().foreach(item => {
-      items = `${item.quantity} ${item.name}`;
+    getInventory().forEach((item) => {
+      items += item.quantity + ' ' + item.name + ', ';
     });
 
     return `\nYour inventory contains: ${items}`;
