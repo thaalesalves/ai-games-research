@@ -1,5 +1,6 @@
 const LETTER_REGEX = /[0-9]/g;
 const DIGIT_REGEX = /\D/g;
+const PUNCTUATION_REMOVE = /[^\w\s]/gi;
 
 /**
  * Simple frunction to capitalize the first letter of a string
@@ -15,8 +16,9 @@ const capitalize = (string) => {
  * @param {string} itemName 
  */
 const findItemInInventory = (itemName) => {
+  let loweredName = itemName.toLowerCase().replace(PUNCTUATION_REMOVE, '');
   return getInventory().find(item => {
-    return item.name == itemName;
+    return item.name == loweredName;
   });
 }
 
@@ -27,15 +29,16 @@ const findItemInInventory = (itemName) => {
  * @param {integer} itemQuantity 
  */
 const removeFromInventory = (itemName, itemQuantity) => {
-  let item = findItemInInventory(itemName);
+  let loweredName = itemName.toLowerCase().replace(PUNCTUATION_REMOVE, '');
+  let item = findItemInInventory(loweredName);
   if (!(item.quantity == itemQuantity) && (item.quantity > 1 && item.quantity >= itemQuantity)) {
     item.quantity -= itemQuantity;
-    return `\nYou have removed ${itemQuantity} ${itemName} from your inventory.`;
+    return `\nYou have removed ${itemQuantity} ${loweredName} from your inventory.`;
   }
 
   let index = getInventory().indexOf(item);
   getInventory().splice(index, 1);
-  return `\nYou have removed all ${itemName} from your inventory.`;
+  return `\nYou have removed all ${loweredName} from your inventory.`;
 }
 
 /**
@@ -73,11 +76,13 @@ const getInventory = () => {
  */
 const addToInventory = (itemName, itemQuantity) => {
 
-  let item = findItemInInventory(itemName);
+  let loweredName = itemName.toLowerCase().replace(PUNCTUATION_REMOVE, '');
+  let item = findItemInInventory(loweredName);
   if (typeof item == 'undefined') {
     item = {
-      name: itemName,
-      quantity: itemQuantity
+      name: loweredName,
+      quantity: itemQuantity,
+      status: 'in inventory'
     };
 
     state.inventory.push(item);
@@ -85,5 +90,21 @@ const addToInventory = (itemName, itemQuantity) => {
     item.quantity = item.quantity + itemQuantity;
   }
 
-  return `\nYou have added ${itemQuantity} ${itemName} to your inventory.`;
+  return `\nYou have added ${itemQuantity} ${loweredName} to your inventory.`;
+}
+
+/**
+ * Simple function to make the player wear something.
+ * 
+ * @param {string} itemName 
+ */
+const wearItem = (itemName) => {
+  let item = findItemInInventory(itemName);
+  if (typeof item != 'undefined') {
+    item.status = 'Worn';
+    state.memory.context += `The player is wearing ${item.name}`;
+    return `\nYou are now wearing/wielding ${item.name}`;
+  } else {
+    return `You do not have \"${itemName}\" in your inventory.`;
+  }
 }

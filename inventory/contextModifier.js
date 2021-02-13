@@ -5,10 +5,9 @@ const modifier = (text) => {
   const lowered = text.toLowerCase();
   let stop = false;
 
-  if (lowered.includes('inventory')) {
-    if (lowered.includes('check') || lowered.includes('add') || lowered.includes('remove')) {
-      stop = true;
-    }
+  if (state.shouldStop) {
+    state.shouldStop = false;
+    stop = true;
   }
 
   const combinedLines = lines.join("\n").slice(-(info.maxChars - info.memoryLength));
