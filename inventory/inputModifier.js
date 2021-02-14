@@ -6,8 +6,10 @@ const modifier = (text) => {
   if (!state.init && info.actionCount < 1) {
     state.shouldStop = false;
     getInventory();
-    addToInventory('Wooden Sword', 1);
-    addToInventory('Rags', 1);
+    addToInventory('Rusty Sword', 1);
+    addToInventory('Commoner clothes', 1);
+    equipItem('Commoner clothes');
+    equipItem('Rusty Sword');
     
     state.init = true;
     modifiedText = modifiedText.replace(BRACKETS, '') + dataBasedOnRace;
@@ -35,10 +37,11 @@ const modifier = (text) => {
       modifiedText += removeFromInventory(itemName, itemQuantity);
       console.log(getInventory());
     }
-  } else if (lowered.includes('put on')) {
+  } else if (lowered.includes('equip')) {
     state.shouldStop = true;
-    let itemName = lowered.split('put on')[1].trim();
-    modifiedText += wearItem(itemName);
+    let itemName = lowered.split('equip')[1].trim();
+    modifiedText += equipItem(itemName);
+    console.log(getInventory());
   }
 
   return { text: modifiedText, stop: stop };

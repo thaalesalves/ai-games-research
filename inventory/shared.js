@@ -1,6 +1,13 @@
 const LETTER_REGEX = /[0-9]/g;
 const DIGIT_REGEX = /\D/g;
 const PUNCTUATION_REMOVE = /[^\w\s]/gi;
+const WEAPONS = [
+  'sword', 'knife', 'spear', 'hammer', 'axe', 'battleaxe', 'sledgehammer', 'longsword',
+];
+
+const CLOTHING = [
+  'rags', 'armor', 'dress', 'kilt', 'skirt', 'jerkin', 'shirt', 'clothes', 'robes', 'leathers', 'hooded'
+];
 
 /**
  * Simple frunction to capitalize the first letter of a string
@@ -82,7 +89,8 @@ const addToInventory = (itemName, itemQuantity) => {
     item = {
       name: loweredName,
       quantity: itemQuantity,
-      status: 'in inventory'
+      status: 'in inventory',
+      type: getType(itemName)
     };
 
     state.inventory.push(item);
@@ -94,17 +102,46 @@ const addToInventory = (itemName, itemQuantity) => {
 }
 
 /**
- * Simple function to make the player wear something.
+ * Simple function to make the player equip something.
  * 
  * @param {string} itemName 
  */
-const wearItem = (itemName) => {
+const equipItem = (itemName) => {
   let item = findItemInInventory(itemName);
   if (typeof item != 'undefined') {
-    item.status = 'Worn';
-    state.memory.context += `The player is wearing ${item.name}`;
-    return `\nYou are now wearing/wielding ${item.name}`;
-  } else {
-    return `You do not have \"${itemName}\" in your inventory.`;
+    if (item.type != 'weapon' && item.type != 'clothing') {
+      return `\nThis item is not equippable.`;
+    }
+
+    let oldItem = getInventory().find(oldItem => {
+      return oldItem.status == 'worn' && oldItem.type == item.type;
+    });
+
+    if (typeof oldItem != 'undefined') {
+      console.log(`Removing worn status from ${oldItem.name}.`);
+      oldItem.status = 'in inventory';
+      state.memory.context.replace(` The player is ${oldItem.type == 'weapon' ? 'wielding' : 'wearing'} ${oldItem.name}. `, '');
+    }
+
+    console.log(`Removing worn status from ${item.name}.`);
+    item.status = 'worn';
+    state.memory.context += ` The player is ${item.type == 'weapon' ? 'wielding' : 'wearing'} ${item.name}. `;
+    return `\nYou are now ${item.type == 'weapon' ? 'wielding' : 'wearing'} ${item.name}.`;
   }
+
+  return `\nYou do not have \"${itemName}\" in your inventory.`;
+}
+
+/**
+ * Function to determine item type
+ * 
+ * @param {string} itemType
+ */
+const getType = (itemName) => {
+  const checker = (input) => {
+    return WEAPONS.some(word => input.toLowerCase().includes(word.toLowerCase())) ? 'weapon' :
+      CLOTHING.some(word => input.toLowerCase().includes(word.toLowerCase())) ? 'clothing' : 'misc';
+  }
+
+  return checker(itemName);
 }
