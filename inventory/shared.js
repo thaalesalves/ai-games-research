@@ -54,12 +54,17 @@ const removeFromInventory = (itemName, itemQuantity) => {
 const checkInventory = () => {
 
   if (getInventory().length > 0) {
-    let items = '';
-    getInventory().forEach((item) => {
-      items += item.quantity + ' ' + item.name + ', ';
-    });
+    let items = Object.keys(getInventory()).map((k) => {
+      return getInventory()[k].name;
+    }).join(', ');
 
-    return `\nYour inventory contains: ${items}`;
+    let itemsWorn = Object.keys(getInventory().filter((item) => {
+      return item.status == 'worn';
+    })).map((k) => {
+      return getInventory()[k].name;
+    }).join(', ');
+
+    return `\nYour inventory contains: ${items}. Items equipped: ${itemsWorn}.`;
   }
 
   return `\nYour inventory is empty.`;
