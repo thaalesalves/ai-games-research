@@ -55,10 +55,10 @@ const parseRace = (character) => {
 
   let race = character.race.toLowerCase();
   let possibleLines = [
-    `"Let me guess... you're only here because you want to the join the College? That's all folks come here for."\n`,
-    '"Welcome to the Fronzen Hearth! If you need anything, talk to me or to my wife Astrid. We have warm beds and quality mead!". Baelin smiles.\n',
-    '"Need a room? We have warm beds and nice mead!". Baelin smiles.\n',
-    `"Need a room? Talk to me or my wife Astrid, and we'll set you up!"\n`,
+    `"Let me guess... you're only here because you want to the join the Companions? That's all folks come here for."\n`,
+    '"Welcome to the Bloated Goat! If you need anything, talk to me or to my wife Sigrid. We have warm beds and quality mead!". Isekaid smiles.\n',
+    '"Need a room? We have warm beds and nice mead!". Isekaid smiles.\n',
+    `"Need a room? Talk to me or my wife Sigrid, and we'll set you up!"\n`,
   ];
 
   if (race.includes("orsimer") || race.includes("orc")) {
@@ -72,7 +72,7 @@ const parseRace = (character) => {
     possibleLines.push(
       '"What do you want here, elf?"\n',
       '"Another elf? Your kind is not welcome here."\n',
-      `"You may stay, but I'm watching you, damn elf. One false movement and I'll have you thrown in the Sea of Ghosts!"\n`,
+      `"You may stay, but I'm watching you, damn elf. One false movement and I'll have you thrown in the White River!"\n`,
       `"Good, an Altmer. Now I'm happy.". He speech seems sarcastic.\n`
     );
   } else if (race.includes("dunmer") || race.includes("dark elf")) {
@@ -80,7 +80,7 @@ const parseRace = (character) => {
     possibleLines.push(
       '"What do you want here, elf?"\n',
       '"Another elf? Your kind is not welcome here."\n',
-      `"You may stay, but I'm watching you, damn elf. One false movement and I'll have you thrown in the Sea of Ghosts!"\n`,
+      `"You may stay, but I'm watching you, damn elf. One false movement and I'll have you thrown in the White River!"\n`,
       `"What do you want here? Is your kind trying to take over Skyrim? Now a damn Dunmer is Empress!". You notice disdain in his voice.\n`
     );
   } else if (race.includes("bosmer") || race.includes("wood elf")) {
@@ -88,7 +88,7 @@ const parseRace = (character) => {
     possibleLines.push(
       '"What do you want here, elf?"\n',
       '"Another elf? Your kind is not welcome here."\n',
-      `"You may stay, but I'm watching you, damn elf. One false movement and I'll have you thrown in the Sea of Ghosts!"\n`,
+      `"You may stay, but I'm watching you, damn elf. One false movement and I'll have you thrown in the White River!"\n`,
       `"Are you... a Bosmer? I've never seen one in real life. You ain't gonna eat me, right?". He seems frightened.\n`,
       `"You're a Bosmer? Is it true that you eat people's flesh?". He seems frightened.\n`
     );
@@ -98,7 +98,7 @@ const parseRace = (character) => {
       `"You must be cold, friend. Here, have a mug of mead on the house.". He hands you a mug of mead.\n`
     );
   } else if (race == 'breton') {
-    `"Oh, a midget. How can I help you, friend?", Baelin laughs.\n`,
+    `"Oh, a midget. How can I help you, friend?", Isekaid laughs.\n`,
       `"A Breton in these parts? Are you lost, friend?"\n`
   } else if (race == 'imperial') {
     possibleLines.push(
@@ -117,15 +117,15 @@ const parseRace = (character) => {
     );
   } else if (race == 'redguard') {
     possibleLines.push(
-      `"Good day, friend. Keeping well? It's a long way from Hammerfell. Enjoy your stay in Winterhold."\n`,
+      `"Good day, friend. Keeping well? It's a long way from Hammerfell. Enjoy your stay in Whiterun."\n`,
       `"A Redguard? You're good people. Strong and foolhardy like us Nords, not a bunrch of milk-drinkers like these damned elves."\n`
     );
   } else {
     possibleLines.push(
       `"Oh, you're a weird one, aren't you?". He laughs. "What race are you, ${character.gender == 'male' ? 'lad' : 'lass'}?"`,
-      `"Oh, you're a weird one. What race are you? Doesn't matter, my family and I don't judge. What do you need, friend?". Baelin smiles.\n`,
-      `"Oh... hello...". Baelin looks at you and raises his eyebrow. He's clearly confused because you don't look like any known race. "Do... you... need something?"\n`
-      `"Oh... you're on of those... people.". Baelin looks at you and raises his eyebrow. He's clearly confused because you don't look like any known race. "Do you... need something?"\n`
+      `"Oh, you're a weird one. What race are you? Doesn't matter, my family and I don't judge. What do you need, friend?". Isekaid smiles.\n`,
+      `"Oh... hello...". Isekaid looks at you and raises his eyebrow. He's clearly confused because you don't look like any known race. "Do... you... need something?"\n`
+      `"Oh... you're on of those... people.". Isekaid looks at you and raises his eyebrow. He's clearly confused because you don't look like any known race. "Do you... need something?"\n`
     );
   }
 
@@ -390,7 +390,7 @@ function setupNamelist() {
   "Artreyu","Artur","Arun","Arvid","Arvida","Arving","Arvo","Arwen","Arwin","Aryen","Aryion","Aryon","Aryus",
   "Arzamark","Asa","Asaf","Aschar","Asfrid","Asgard","Asger","Asgerd","Asgrim","Ash","Ashan","Ashane","Ashburton",
   "Ashcar","Ashdown","Ashgaroth","Ashley","Ashlyn","Ashne'e","Ashnici","Ashur","Asiria","Askew","Askold","Aslak","Aslan",
-  "Asleif","Aslior","Asperon","Asta","Astar","Astinus","Astnid","Astnild","Astoiphe","Astra","Astraea","Astran","Astrid",
+  "Asleif","Aslior","Asperon","Asta","Astar","Astinus","Astnid","Astnild","Astoiphe","Astra","Astraea","Astran","Sigrid",
   "Astrin","Atazra","Athabasca","Athana","Athol","Atiaran","Atli","Atmeh","Atreyu","Atropos","Atticus","Attor","Atul",
   "Aturin","Atyre","Aubrey","Aud","Audrey","Audrianna","Audric","August","Augustus","Aule","Aulius","Aun","Aura",
   "Aurian","Auril","Aurion","Aurora","Avall","Avarath","Avascaen","Avedar","Aveole","Avery","Avon","Avril","Axel",

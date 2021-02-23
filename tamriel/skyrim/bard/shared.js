@@ -55,10 +55,9 @@ const parseRace = (character) => {
 
   let race = character.race.toLowerCase();
   let possibleLines = [
-    `"Let me guess... you're only here because you want to the join the College? That's all folks come here for."\n`,
-    '"Welcome to the Fronzen Hearth! If you need anything, talk to me or to my wife Astrid. We have warm beds and quality mead!". Baelin smiles.\n',
-    '"Need a room? We have warm beds and nice mead!". Baelin smiles.\n',
-    `"Need a room? Talk to me or my wife Astrid, and we'll set you up!"\n`,
+    `"Oh, you're a fancy one. You're a bard, aren't you? Here to play for tips?"\n`,
+    '"Welcome to the Singing Siren! If you need anything, talk to me. We have warm beds and quality mead!". Toli smiles.\n',
+    '"Need a room? We have warm beds and nice mead!". Toli smiles.\n',
   ];
 
   if (race.includes("orsimer") || race.includes("orc")) {
@@ -70,27 +69,24 @@ const parseRace = (character) => {
   } if (race.includes("altmer") || race.includes("high elf")) {
     race = 'Altmer/High Elf';
     possibleLines.push(
-      '"What do you want here, elf?"\n',
-      '"Another elf? Your kind is not welcome here."\n',
-      `"You may stay, but I'm watching you, damn elf. One false movement and I'll have you thrown in the Sea of Ghosts!"\n`,
-      `"Good, an Altmer. Now I'm happy.". He speech seems sarcastic.\n`
+      '"Greetings, elf. Need a room?"\n',
+      `"Good, an Altmer. Now I'm happy.". His speech seems sarcastic.\n`
     );
   } else if (race.includes("dunmer") || race.includes("dark elf")) {
     race = 'Dunmer/Dark Elf';
     possibleLines.push(
       '"What do you want here, elf?"\n',
       '"Another elf? Your kind is not welcome here."\n',
-      `"You may stay, but I'm watching you, damn elf. One false movement and I'll have you thrown in the Sea of Ghosts!"\n`,
+      `"You may stay, but I'm watching you, damn elf. One false movement and I'll have you thrown in the Karth River!"\n`,
       `"What do you want here? Is your kind trying to take over Skyrim? Now a damn Dunmer is Empress!". You notice disdain in his voice.\n`
     );
   } else if (race.includes("bosmer") || race.includes("wood elf")) {
     race = 'Bosmer/Wood Elf';
     possibleLines.push(
-      '"What do you want here, elf?"\n',
-      '"Another elf? Your kind is not welcome here."\n',
-      `"You may stay, but I'm watching you, damn elf. One false movement and I'll have you thrown in the Sea of Ghosts!"\n`,
+      '"Greetings, elf. Need a room?"\n',
       `"Are you... a Bosmer? I've never seen one in real life. You ain't gonna eat me, right?". He seems frightened.\n`,
-      `"You're a Bosmer? Is it true that you eat people's flesh?". He seems frightened.\n`
+      `"You're a Bosmer? Is it true that you eat people's flesh?". He seems frightened.\n`,
+      `"Oh, a Bosmer? Here! Have this herbal tea, on the house!". He chuckles. "I'm just joking. Please don't eat me.", he says with a nervous laugh.\n`
     );
   } else if (race == 'nord') {
     possibleLines.push(
@@ -98,12 +94,12 @@ const parseRace = (character) => {
       `"You must be cold, friend. Here, have a mug of mead on the house.". He hands you a mug of mead.\n`
     );
   } else if (race == 'breton') {
-    `"Oh, a midget. How can I help you, friend?", Baelin laughs.\n`,
-      `"A Breton in these parts? Are you lost, friend?"\n`
+    `"Oh, a midget. How can I help you, friend?", Toli laughs.\n`,
+    `"A Breton! Here to visit the beautiful city of Solitude? Welcome!"\n`
   } else if (race == 'imperial') {
     possibleLines.push(
-      `"An Imperial in these parts? Are you lost, friend?"\n`,
-      `"An Imperial? It's a long way from Cyrodiil, friend. Need a bed to rest?"\n`
+      `"Hello, friend. Here in Solitude we'll make you feel home! We have the best Cyrodilic branch in Skyrim!"\n`,
+      `"An Imperial? It's a long way from Cyrodiil, friend. Need a bed to rest?"\n`,
     );
   } else if (race == 'khajiit') {
     possibleLines.push(
@@ -117,15 +113,15 @@ const parseRace = (character) => {
     );
   } else if (race == 'redguard') {
     possibleLines.push(
-      `"Good day, friend. Keeping well? It's a long way from Hammerfell. Enjoy your stay in Winterhold."\n`,
+      `"Good day, friend. Keeping well? Enjoy your stay in Solitude. Talk to me if you need anything."\n`,
       `"A Redguard? You're good people. Strong and foolhardy like us Nords, not a bunrch of milk-drinkers like these damned elves."\n`
     );
   } else {
     possibleLines.push(
       `"Oh, you're a weird one, aren't you?". He laughs. "What race are you, ${character.gender == 'male' ? 'lad' : 'lass'}?"`,
-      `"Oh, you're a weird one. What race are you? Doesn't matter, my family and I don't judge. What do you need, friend?". Baelin smiles.\n`,
-      `"Oh... hello...". Baelin looks at you and raises his eyebrow. He's clearly confused because you don't look like any known race. "Do... you... need something?"\n`
-      `"Oh... you're on of those... people.". Baelin looks at you and raises his eyebrow. He's clearly confused because you don't look like any known race. "Do you... need something?"\n`
+      `"Oh, you're a weird one. What race are you? Doesn't matter, my family and I don't judge. What do you need, friend?". Toli smiles.\n`,
+      `"Oh... hello...". Toli looks at you and raises his eyebrow. He's clearly confused because you don't look like any known race. "Do... you... need something?"\n`
+      `"Oh... you're on of those... people.". Toli looks at you and raises his eyebrow. He's clearly confused because you don't look like any known race. "Do you... need something?"\n`
     );
   }
 
@@ -390,7 +386,7 @@ function setupNamelist() {
   "Artreyu","Artur","Arun","Arvid","Arvida","Arving","Arvo","Arwen","Arwin","Aryen","Aryion","Aryon","Aryus",
   "Arzamark","Asa","Asaf","Aschar","Asfrid","Asgard","Asger","Asgerd","Asgrim","Ash","Ashan","Ashane","Ashburton",
   "Ashcar","Ashdown","Ashgaroth","Ashley","Ashlyn","Ashne'e","Ashnici","Ashur","Asiria","Askew","Askold","Aslak","Aslan",
-  "Asleif","Aslior","Asperon","Asta","Astar","Astinus","Astnid","Astnild","Astoiphe","Astra","Astraea","Astran","Astrid",
+  "Asleif","Aslior","Asperon","Asta","Astar","Astinus","Astnid","Astnild","Astoiphe","Astra","Astraea","Astran","Sigrid",
   "Astrin","Atazra","Athabasca","Athana","Athol","Atiaran","Atli","Atmeh","Atreyu","Atropos","Atticus","Attor","Atul",
   "Aturin","Atyre","Aubrey","Aud","Audrey","Audrianna","Audric","August","Augustus","Aule","Aulius","Aun","Aura",
   "Aurian","Auril","Aurion","Aurora","Avall","Avarath","Avascaen","Avedar","Aveole","Avery","Avon","Avril","Axel",

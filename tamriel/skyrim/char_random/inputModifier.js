@@ -4,36 +4,17 @@ const modifier = (text) => {
   const lowered = modifiedText.toLowerCase();
 
   if (!state.init && info.actionCount < 1) {
-    grabAllBrackets(modifiedText);
-    state.character = {
-      name: state.placeholders[0],
-      gender: state.placeholders[1],
-      race: state.placeholders[2],
-      age: state.placeholders[3],
-      personality: state.placeholders[4].replace(/,/g, '/'),
-      class: 'Mage',
-      eyes: {
-        eyeColor: state.placeholders[5]
-      },
-      hair: {
-        hairStyle: state.placeholders[6],
-        hairColor: state.placeholders[7],
-      },
-      appearance: {
-        height: state.placeholders[8].replace('cm', '').replace('centimeters', ''),
-        weight: state.placeholders[9].replace('kg', '').replace('kilos', ''),
-        features: state.placeholders[10].replace(/,/g, '/')
-      },
-      story: state.placeholders[11]
-    };
-
-    addToInventory('Apprentice Mage Robes', 1);
-    equipItem('Apprentice Mage Robes');
-
     getInventory();
+    generateCharacter();
+
     state.init = true;
     state.shouldStop = false;
-    modifiedText = modifiedText.replace(BRACKETS, '') + parseRace(state.character);
+    modifiedText = text
+      + ` ${state.character.name}, and you are a ${state.character.gender} ${state.character.race} ${state.character.class}. You are ${state.character.age} years old, and your personality traits are: ${state.character.personality}. You eyes are ${state.character.eyes.eyeColor}, and your hair is of the style ${state.character.hair.hairStyle} and of color ${state.character.hair.hairColor}. You are ${state.character.appearance.height} centimeters tall, and you weight ${state.character.appearance.weight} kg. Your physical features are: ${state.character.appearance.features}.\n\nYour story is: ${state.character.story}\n\n---------------------------------------\n\n`
+      + state.character.storyStart
+        .replace('YOUR_NAME', state.character.name)
+        .replace('PLAYER_GENDER', state.character.gender)
+        .replace('PLAYER_RACE', state.character.race);
   }
 
   if (lowered.includes('inventory')) {

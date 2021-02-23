@@ -11,7 +11,7 @@ const modifier = (text) => {
       race: state.placeholders[2],
       age: state.placeholders[3],
       personality: state.placeholders[4].replace(/,/g, '/'),
-      class: 'Mage',
+      class: 'Bard',
       eyes: {
         eyeColor: state.placeholders[5]
       },
@@ -27,13 +27,30 @@ const modifier = (text) => {
       story: state.placeholders[11]
     };
 
-    addToInventory('Apprentice Mage Robes', 1);
-    equipItem('Apprentice Mage Robes');
+    addToInventory('Brown jerkin', 1);
+    addToInventory('Wooden lute', 1);
+    equipItem('Brown jerkin');
 
     getInventory();
     state.init = true;
     state.shouldStop = false;
     modifiedText = modifiedText.replace(BRACKETS, '') + parseRace(state.character);
+  }
+
+  if (!state.showDC) {
+    state.showDC = false;
+  }
+
+  if (lowered.includes("/showdc")) {
+    if (state.showDC) {
+      state.showDC = false;
+      state.message = "Turned DC display off.";
+    } else {
+      state.showDC = true;
+      state.message = "Turned DC display on.";
+    }
+
+    stopInput = true;
   }
 
   if (lowered.includes('inventory')) {

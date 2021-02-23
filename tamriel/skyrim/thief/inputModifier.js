@@ -1,7 +1,7 @@
 const modifier = (text) => {
   let stop = false;
-  let modifiedText = text;
-  const lowered = text.toLowerCase();
+  let modifiedText = nameReplace(text);
+  const lowered = modifiedText.toLowerCase();
 
   if (!state.init && info.actionCount < 1) {
     grabAllBrackets(modifiedText);
@@ -11,7 +11,7 @@ const modifier = (text) => {
       race: state.placeholders[2],
       age: state.placeholders[3],
       personality: state.placeholders[4].replace(/,/g, '/'),
-      class: 'Mage',
+      class: 'Thief',
       eyes: {
         eyeColor: state.placeholders[5]
       },
@@ -27,13 +27,14 @@ const modifier = (text) => {
       story: state.placeholders[11]
     };
 
-    addToInventory('Apprentice Mage Robes', 1);
-    equipItem('Apprentice Mage Robes');
+    addToInventory('Rusty Iron Dagger', 1);
+    addToInventory('Leather Tights', 1);
+    equipItem('Rusty Iron Dagger');
+    equipItem('Leather Tights');
 
     getInventory();
     state.init = true;
     state.shouldStop = false;
-    state.memory.authorsNote = 'Describe the narrative in a very detailed way. Dragons do not exist, only in myth and legends. The way a person speaks depends on their social status or class.';
     modifiedText = modifiedText.replace(BRACKETS, '') + parseRace(state.character);
   }
 

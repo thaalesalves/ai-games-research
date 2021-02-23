@@ -15,8 +15,51 @@ const WEAPONS = [
   'sword', 'knife', 'spear', 'hammer', 'axe', 'battleaxe', 'sledgehammer', 'longsword',
 ];
 
-const CLOTHING = [
-  'rags', 'armor', 'dress', 'kilt', 'skirt', 'jerkin', 'shirt', 'clothes', 'robes', 'leathers', 'hooded', 'cuirass', 'chainmail'
+const RANDOM_CHARACTERS = [
+  {
+    name: `Rolff Stone-Fist`,
+    gender: `male`,
+    race: `Nord`,
+    age: '17',
+    personality: 'strong,tough,intimidating,muscular,assertive',
+    class: 'peasant',
+    eyes: {
+      eyeColor: 'light brown'
+    },
+    hair: {
+      hairStyle: 'short and messy',
+      hairColor: 'light blond'
+    },
+    appearance: {
+      height: '187',
+      weight: '90',
+      features: 'tall,muscular,tall,broad,long square jaw,wide brow,short beard,strong face'
+    },
+    story: `Rolff lived a tough life in Dawnstar. His father, Dondir, was a miner like his father and his father before him. Rolff himself works everyday in the ice-cold mine. He is strong and muscular, but he gets little payment. Every day he sees the merchants from the nearby town load their carts with loads of gold and silver taken from the mine, while he and his friends are left to dig for iron and copper. One day, Rolff looks around and sees the miners with their families. His friends have a hard time making ends meet while the merchants in town have fancy clothes and big houses. Rolff becomes angry. He's working everyday with his hands while they do nothing but load their carts with the day's loot. He decides he's going to become a miner, and that he's going to be rich and famous one day. He wants to find worthy foes and to be rich and famous.`,
+    storyStart: `You look around. Your friends are working their backs off in the mine, just like you. You know their families, and they're good people. You feel for them, as you all struggle to make ends meet. You have to do something about that.`
+  },
+  {
+    name: `Pasha Antine`,
+    gender: `female`,
+    race: `Dunmer`,
+    age: `25`,
+    personality: `very intimidating`,
+    class: `peasant`,
+    eyes: {
+      eyeColor: `dark brown`
+    },
+    hair: {
+      hairStyle: `long hair`,
+      hairColor: `black`
+    },
+    appearance: {
+      height: `182`,
+      weight: `75`,
+      features: `beautiful,tall,striking,intimidating,`
+    },
+    story: `Pasha grew up in the town of Runilda, a small town with rich mines. As a child she worked in the mines with her mother and father. As she grew older she begun to resent the fact that she had to work while her male friends went out and partied. She became rebellious and started to hang out with a rough crowd. One day when returning home from the mines, Pasha and her father got into an argument about her future. She wants to amass a fortune so she can afford to buy a ship and sail to the isle of Solstheim.`,
+    storyStart: `You are at your home. You've worked the mine your entire life, just like your parents. But you want more. You want to see the world, to set sail and go abroad. You want adventure. Your father doesn not approve of your dream, and you get in an argument with him.\n"Pasha, you need to think about life. You can't go around traveling, this is no life for someone like you. Where will get money to stay alive?", you father asks. He seems angry with your ideals.`
+  }
 ];
 
 /*
@@ -26,6 +69,24 @@ const CLOTHING = [
 **
 **
 **/
+
+/**
+ * Function that generates random characters
+ *  
+ */
+const generateCharacter = () => {
+  state.character = RANDOM_CHARACTERS[Math.floor(Math.random() * RANDOM_CHARACTERS.length)];
+  worldEntries.push({
+    id: (Math.random() * (0.120 - 0.0200) + 0.0200).toString(),
+    keys: `${state.character.name},you`,
+    isNotHidden: true,
+    entry: state.character.name + ':['
+      + `RACE<${state.character.name}>:${state.character.race};`
+      + `APPEARANCE<${state.character.name}>:${state.character.appearance.features}/eyes<${state.character.eyes.eyeColor}>/hair<${state.character.hair.hairStyle}&${state.character.hair.hairColor}/height<${state.character.appearance.height} centimeters>/weight<${state.character.appearance.weight} kilos>>;`
+      + `SUMM<${state.character.name}>:${state.character.story}/${state.character.personality};`
+      + ']'
+  });
+}
 
 /**
  * Bracket handler by Gnurro.
@@ -43,104 +104,6 @@ const grabAllBrackets = (text) => {
   }
 
   console.log(state.placeholders);
-}
-
-/**
- * Function that parses the character's race when they're created. This determines Dagur's behavior towards the player.
- * 
- * @param {string} race
- * @param {string} gender
- */
-const parseRace = (character) => {
-
-  let race = character.race.toLowerCase();
-  let possibleLines = [
-    `"Let me guess... you're only here because you want to the join the College? That's all folks come here for."\n`,
-    '"Welcome to the Fronzen Hearth! If you need anything, talk to me or to my wife Astrid. We have warm beds and quality mead!". Baelin smiles.\n',
-    '"Need a room? We have warm beds and nice mead!". Baelin smiles.\n',
-    `"Need a room? Talk to me or my wife Astrid, and we'll set you up!"\n`,
-  ];
-
-  if (race.includes("orsimer") || race.includes("orc")) {
-    race = 'Orsimer/Orc';
-    possibleLines.push(
-      `"Oh, great. An Orc. Don't bash into my stuff, freak.". You notice disdain in his voice.\n`,
-      `"An Orc? Damn brutes. If you so much break a cup, I'll have the guards kick you from the city.". You notice disdain in his voice.\n`
-    );
-  } if (race.includes("altmer") || race.includes("high elf")) {
-    race = 'Altmer/High Elf';
-    possibleLines.push(
-      '"What do you want here, elf?"\n',
-      '"Another elf? Your kind is not welcome here."\n',
-      `"You may stay, but I'm watching you, damn elf. One false movement and I'll have you thrown in the Sea of Ghosts!"\n`,
-      `"Good, an Altmer. Now I'm happy.". He speech seems sarcastic.\n`
-    );
-  } else if (race.includes("dunmer") || race.includes("dark elf")) {
-    race = 'Dunmer/Dark Elf';
-    possibleLines.push(
-      '"What do you want here, elf?"\n',
-      '"Another elf? Your kind is not welcome here."\n',
-      `"You may stay, but I'm watching you, damn elf. One false movement and I'll have you thrown in the Sea of Ghosts!"\n`,
-      `"What do you want here? Is your kind trying to take over Skyrim? Now a damn Dunmer is Empress!". You notice disdain in his voice.\n`
-    );
-  } else if (race.includes("bosmer") || race.includes("wood elf")) {
-    race = 'Bosmer/Wood Elf';
-    possibleLines.push(
-      '"What do you want here, elf?"\n',
-      '"Another elf? Your kind is not welcome here."\n',
-      `"You may stay, but I'm watching you, damn elf. One false movement and I'll have you thrown in the Sea of Ghosts!"\n`,
-      `"Are you... a Bosmer? I've never seen one in real life. You ain't gonna eat me, right?". He seems frightened.\n`,
-      `"You're a Bosmer? Is it true that you eat people's flesh?". He seems frightened.\n`
-    );
-  } else if (race == 'nord') {
-    possibleLines.push(
-      `"Welcome, friend! How can I help a ${character.gender == 'male' ? 'brother' : 'sister'} Nord?"\n`,
-      `"You must be cold, friend. Here, have a mug of mead on the house.". He hands you a mug of mead.\n`
-    );
-  } else if (race == 'breton') {
-    `"Oh, a midget. How can I help you, friend?", Baelin laughs.\n`,
-      `"A Breton in these parts? Are you lost, friend?"\n`
-  } else if (race == 'imperial') {
-    possibleLines.push(
-      `"An Imperial in these parts? Are you lost, friend?"\n`,
-      `"An Imperial? It's a long way from Cyrodiil, friend. Need a bed to rest?"\n`
-    );
-  } else if (race == 'khajiit') {
-    possibleLines.push(
-      `"Here, kitty kitty kitty.". He laughs out loud. "I'm just joking, friend. What do you need?"\n`,
-      `"Oh, a cat on two legs. Don't leave fur in our stuff. We're a hygienic bunch."\n`
-    );
-  } else if (race == 'argonian') {
-    possibleLines.push(
-      `"Good day, lizard. How may I help you?"\n`,
-      `"A lizard? Nasty.". He seems disgusted at you.\n`
-    );
-  } else if (race == 'redguard') {
-    possibleLines.push(
-      `"Good day, friend. Keeping well? It's a long way from Hammerfell. Enjoy your stay in Winterhold."\n`,
-      `"A Redguard? You're good people. Strong and foolhardy like us Nords, not a bunrch of milk-drinkers like these damned elves."\n`
-    );
-  } else {
-    possibleLines.push(
-      `"Oh, you're a weird one, aren't you?". He laughs. "What race are you, ${character.gender == 'male' ? 'lad' : 'lass'}?"`,
-      `"Oh, you're a weird one. What race are you? Doesn't matter, my family and I don't judge. What do you need, friend?". Baelin smiles.\n`,
-      `"Oh... hello...". Baelin looks at you and raises his eyebrow. He's clearly confused because you don't look like any known race. "Do... you... need something?"\n`
-      `"Oh... you're on of those... people.". Baelin looks at you and raises his eyebrow. He's clearly confused because you don't look like any known race. "Do you... need something?"\n`
-    );
-  }
-
-  worldEntries.push({
-    id: (Math.random() * (0.120 - 0.0200) + 0.0200).toString(),
-    keys: `${character.name}`,
-    isNotHidden: true,
-    entry: character.name + ':['
-      + `RACE<${character.name}>:${race};`
-      + `APPEARANCE<${character.name}>:${character.appearance.features}/eyes<${character.eyes.eyeColor}>/hair<${character.hair.hairStyle}&${character.hair.hairColor}/height<${character.appearance.height} centimeters>/weight<${character.appearance.weight} kilos>>;`
-      + `SUMM<${character.name}>:${character.story}/${character.personality};`
-      + ']'
-  });
-
-  return possibleLines[Math.floor(Math.random() * possibleLines.length)];
 }
 
 /**
