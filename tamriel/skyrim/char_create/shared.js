@@ -272,7 +272,7 @@ const equipItem = (itemName) => {
   let item = findItemInInventory(itemNameLowerCase);
   if (typeof item != 'undefined') {
     if (item.type != 'weapon' && item.type != 'clothing') {
-      return `\nThis item is not equippable.`;
+      return `\n${capitalize(itemNameLowerCase)} is not an equippable item.`;
     }
 
     const wiRegex = new RegExp(`(?<=WORN<${state.character.name}>:)(.*)(?=;)`);

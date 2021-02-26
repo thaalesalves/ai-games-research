@@ -4,7 +4,11 @@ const BRACKETED = /\[(.*?)\]/g;
 const BRACKETS = /\[|\]/g;
 const PUNCTUATION_REMOVE = /[^\w\s]/gi;
 const WEAPONS = [
-  'sword', 'knife', 'spear', 'hammer', 'axe', 'battleaxe', 'sledgehammer', 'longsword',
+  'sword', 'knife', 'spear', 'hammer', 'axe', 'battleaxe', 'sledgehammer', 'longsword', 'bow'
+];
+
+const CLOTHING = [
+  'rags', 'armor', 'dress', 'kilt', 'skirt', 'jerkin', 'shirt', 'clothes', 'robes', 'leathers', 'hooded', 'cuirass', 'chainmail'
 ];
 
 const RANDOM_CHARACTERS = [
@@ -201,7 +205,7 @@ const equipItem = (itemName) => {
   let item = findItemInInventory(itemNameLowerCase);
   if (typeof item != 'undefined') {
     if (item.type != 'weapon' && item.type != 'clothing') {
-      return `\nThis item is not equippable.`;
+      return `\n${capitalize(itemNameLowerCase)} is not an equippable item.`;
     }
 
     const wiRegex = new RegExp(`(?<=WORN<${state.character.name}>:)(.*)(?=;)`);
