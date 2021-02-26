@@ -59,26 +59,36 @@ const modifier = (text) => {
 
     if (cmd.includes('invCheck')) {
       state.shouldStop = true;
-      modifiedText = `\n> You check your inventory${checkInventory()}`;
+      modifiedText = `\n> You check your inventory.${checkInventory()}`;
       console.log(getInventory());
     } else if (cmd.includes('invAdd')) {
       state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
-      const itemQuantity = parseInt(params.replace(DIGIT_REGEX, '').trim());
+      const itemQuantity = Number.isNaN(parseInt(params.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(params.replace(DIGIT_REGEX, '').trim());
 
-      modifiedText = `\n> You add an item to your inventory${addToInventory(itemName, itemQuantity)}`;
+      if (itemQuantity >= 1) {
+        modifiedText = `\n> You add ${itemQuantity} ${itemName} to your inventory.${addToInventory(itemName, itemQuantity)}`;
+      } else {
+        modifiedText = `\n> You cannot add less than 1 unit of an item to your inventory.`;
+      }
+
       console.log(getInventory());
     } else if (cmd.includes('invRemove')) {
       state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
       const itemQuantity = parseInt(params.replace(DIGIT_REGEX, '').trim());
 
-      modifiedText = `\n> You remove an item from your inventory${removeFromInventory(itemName, itemQuantity)}`;
+      if (itemQuantity >= 1) {
+        modifiedText = `\n> You remove ${itemQuantity} ${itemName} from your inventory.${removeFromInventory(itemName, itemQuantity)}`;
+      } else {
+        modifiedText = `\n> You cannot remove less than 1 unit of an item from your inventory.`;
+      }
+
       console.log(getInventory());
     } else if (cmd.includes('invEquip')) {
       state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
-      modifiedText = `\n> You equip an item from your inventory${equipItem(itemName)}`;
+      modifiedText = `\n> You equip ${itemName}.${equipItem(itemName)}`;
       console.log(getInventory());
     }
   }

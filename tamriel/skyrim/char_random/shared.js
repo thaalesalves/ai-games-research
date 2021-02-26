@@ -1,11 +1,3 @@
-/*
-**
-**
-** VARIABLE DECLARATIONS 
-**
-**
-**/
-
 const LETTER_REGEX = /[0-9]/g;
 const DIGIT_REGEX = /\D/g;
 const BRACKETED = /\[(.*?)\]/g;
@@ -62,30 +54,26 @@ const RANDOM_CHARACTERS = [
   }
 ];
 
-/*
-**
-**
-** FUNCTION DECLARATIONS
-**
-**
-**/
-
 /**
  * Function that generates random characters
  *  
  */
 const generateCharacter = () => {
   state.character = RANDOM_CHARACTERS[Math.floor(Math.random() * RANDOM_CHARACTERS.length)];
-  worldEntries.push({
-    id: (Math.random() * (0.120 - 0.0200) + 0.0200).toString(),
+  playerWorldInfo = {
     keys: `${state.character.name},you`,
-    isNotHidden: true,
+    hidden: false,
     entry: state.character.name + ':['
       + `RACE<${state.character.name}>:${state.character.race};`
-      + `APPEARANCE<${state.character.name}>:${state.character.appearance.features}/eyes<${state.character.eyes.eyeColor}>/hair<${state.character.hair.hairStyle}&${state.character.hair.hairColor}/height<${state.character.appearance.height} centimeters>/weight<${state.character.appearance.weight} kilos>>;`
-      + `SUMM<${state.character.name}>:${state.character.story}/${state.character.personality};`
+      + `DESC<${state.character.name}>:${state.character.appearance.features}/eyes<${state.character.eyes.eyeColor}>/hair<${state.character.hair.hairStyle}&${state.character.hair.hairColor}/height<${state.character.appearance.height} centimeters>/weight<${state.character.appearance.weight} kilos>>;`
+      + `SUMM<${state.character.name}>:${state.character.story};`
+      + `MIND<${state.character.name}>:${state.character.personality};`
+      + `WORN<${state.character.name}>:naked;`
       + ']'
-  });
+  };
+
+  addWorldEntry(playerWorldInfo.keys, playerWorldInfo.entry, false);
+  state.character.worldInfoIndex = worldEntries.findIndex(wi => wi.keys.includes(state.character.name));
 }
 
 /**
@@ -152,7 +140,7 @@ const checkInventory = () => {
 
   if (getInventory().length > 0) {
     let items = Object.keys(getInventory()).map((k) => {
-      return getInventory()[k].name;
+      return `${getInventory()[k].name} (${getInventory()[k].quantity}x)`;
     }).join(', ');
 
     let itemsWorn = Object.keys(getInventory().filter((item) => {
@@ -209,17 +197,19 @@ const addToInventory = (itemName, itemQuantity) => {
  * @param {string} itemName 
  */
 const equipItem = (itemName) => {
-  let item = findItemInInventory(itemName);
+  const itemNameLowerCase = itemName.toLowerCase();
+  let item = findItemInInventory(itemNameLowerCase);
   if (typeof item != 'undefined') {
     if (item.type != 'weapon' && item.type != 'clothing') {
       return `\nThis item is not equippable.`;
     }
 
-    let oldItem = getInventory().find(oldItem => {
-      return oldItem.status == 'worn' && oldItem.type == item.type;
-    });
-
+    const wiRegex = new RegExp(`(?<=WORN<${state.character.name}>:)(.*)(?=;)`);
+    let playerWorldInfo = getPlayerWi();
+    let itemsWorn = playerWorldInfo.entry.match(wiRegex)[0];
+    let oldItem = getInventory().find(oldItem => oldItem.status == 'worn' && oldItem.type == item.type);
     if (typeof oldItem != 'undefined') {
+      itemsWorn.replace(oldItem.name.toLowerCase(), '');
       console.log(`Removing worn status from ${oldItem.name}.`);
       oldItem.status = 'in inventory';
       state.memory.context.replace(` The player is ${oldItem.type == 'weapon' ? 'wielding' : 'wearing'} ${oldItem.name}. `, '');
@@ -228,10 +218,24 @@ const equipItem = (itemName) => {
     console.log(`Removing worn status from ${item.name}.`);
     item.status = 'worn';
     state.memory.context += ` The player is ${item.type == 'weapon' ? 'wielding' : 'wearing'} ${item.name}. `;
+    itemsWorn = Object.keys(getInventory().filter((item) => {
+      return item.status == 'worn';
+    })).map((k) => {
+      return getInventory()[k].name;
+    }).join('/');
+
+    playerWorldInfo.entry = playerWorldInfo.entry.replace(wiRegex, itemsWorn);
+    updateWorldEntry(
+      state.character.worldInfoIndex,
+      playerWorldInfo.keys,
+      playerWorldInfo.entry,
+      false
+    );
+    
     return `\nYou are now ${item.type == 'weapon' ? 'wielding' : 'wearing'} ${item.name}.`;
   }
 
-  return `\nYou do not have \"${itemName}\" in your inventory.`;
+  return `\nYou do not have \"${itemNameLowerCase}\" in your inventory.`;
 }
 
 /**
@@ -248,13 +252,13 @@ const getType = (itemName) => {
   return checker(itemName);
 }
 
-/**
- * 
- * 
- * NAME TREATMENT
- * 
- * 
- */
+/**************************************************************************
+***************************************************************************
+***************************************************************************
+*********************** FUNCTIONS MADE BY OTHER DEVS **********************
+***************************************************************************
+***************************************************************************
+**************************************************************************/
 // List the names you wish to replace with random ones in this const.
 const BADNAMES = ['Ackerson','Alison','Annah','Anu','Arat','Arrorn','Ashton','Azajaja','Big Red',
 'Brot','Brother Gray','Bucklesberg','Captain Dario','Captain Eckard','Captain Hayes','Captain Ian','Captain Illam','Carn',

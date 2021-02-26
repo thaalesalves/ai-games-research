@@ -163,9 +163,6 @@ const parseRace = (character) => {
         `"Oh... you're on of those... people.". Isekaid looks at you and raises his eyebrow. He's clearly confused because you don't look like any known race. "Do you... need something?"\n`
     );
   }
-
-  const wiRegex = new RegExp(`(?<=RACE<${character.name}>:)(.*)(?=;)`);
-  getPlayerWi().entry.replace(wiRegex, race);
 }
 
 /**
@@ -330,8 +327,6 @@ const getType = (itemName) => {
 
   return checker(itemNameLowerCase);
 }
-
-
 
 /**************************************************************************
 ***************************************************************************
