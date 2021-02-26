@@ -2,7 +2,7 @@ const modifier = (text) => {
   let stop = false;
   let modifiedText = nameReplace(text);
   const lowered = modifiedText.toLowerCase();
-  const commandMatcher = text.match(/\n? ?(?:> You |> You say "|):(\w+?)( [\w ]+)?[".]?\n?$/i)
+  const commandMatcher = text.match(/\n? ?(?:> You |> You say "|)\/(\w+?)( [\w ]+)?[".]?\n?$/i)
 
   if (!state.init && info.actionCount < 1) {
     grabAllBrackets(modifiedText);
@@ -57,25 +57,25 @@ const modifier = (text) => {
     const params = commandMatcher[2] ? commandMatcher[2].trim() : '';
     console.log(params);
 
-    if (cmd.includes('inv_check')) {
+    if (cmd.includes('invCheck')) {
       state.shouldStop = true;
       modifiedText = `\n> You check your inventory${checkInventory()}`;
       console.log(getInventory());
-    } else if (cmd.includes('inv_add')) {
+    } else if (cmd.includes('invAdd')) {
       state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
       const itemQuantity = parseInt(params.replace(DIGIT_REGEX, '').trim());
 
       modifiedText = `\n> You add an item to your inventory${addToInventory(itemName, itemQuantity)}`;
       console.log(getInventory());
-    } else if (cmd.includes('inv_remove')) {
+    } else if (cmd.includes('invRemove')) {
       state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
       const itemQuantity = parseInt(params.replace(DIGIT_REGEX, '').trim());
 
       modifiedText = `\n> You remove an item from your inventory${removeFromInventory(itemName, itemQuantity)}`;
       console.log(getInventory());
-    } else if (cmd.includes('equip')) {
+    } else if (cmd.includes('invEquip')) {
       state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
       modifiedText = `\n> You equip an item from your inventory${equipItem(itemName)}`;
