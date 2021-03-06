@@ -55,7 +55,7 @@ const RANDOM_CHARACTERS = [
       features: `beautiful,tall,striking,intimidating,`
     },
     story: `Pasha grew up in the town of Runilda, a small town with rich mines. As a child she worked in the mines with her mother and father. As she grew older she begun to resent the fact that she had to work while her male friends went out and partied. She became rebellious and started to hang out with a rough crowd. One day when returning home from the mines, Pasha and her father got into an argument about her future.`,
-    storyStart: `You are at your home. You've worked the mine your entire life, just like your parents. But you want more. You want to see the world, to set sail and go abroad. You want adventure. Your father doesn't not approve of your dream, and you get in an argument with him.\n"Pasha, you need to think about life. You can't go around traveling, this is no life for someone like you. Where will you get money to stay alive?", you father asks. He seems angry with your ideals.`,
+    storyStart: `You are at your home. You've worked the mine your entire life, just like your parents. But you want more. You want to see the world, to set sail and go abroad. You want adventure. Your father does not approve of your dream, and you get in an argument with him.\n"Pasha, you need to think about life. You can't go around traveling, this is no life for someone like you. Where will you get money to stay alive?", you father asks. He seems angry with your ideals.`,
     worn: `loose green breeches/brown leather boots/white shirt/red scarf worn as a mask/brown leather apron/brown leather hood`
   },
   {
