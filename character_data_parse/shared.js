@@ -26,21 +26,11 @@ const grabAllBrackets = (text) => {
  * @param {string} race
  * @param {string} gender
  */
-const parseRace = (character) => {
+const parseRace = () => {
 
+  let character = state.character;
   let race = character.race.toLowerCase();
   let possibleLines = [];
-
-  worldEntries.push({
-    id: (Math.random() * (0.120 - 0.0200) + 0.0200).toString(),
-    keys: `${character.name}`,
-    isNotHidden: true,
-    entry: character.name + ':['
-      + `RACE<${character.name}>:${raceAlt};`
-      + `APPEARANCE<${character.name}>:${character.appearance.features}/eyes<${character.eyes.eyeColor}>/hair<${character.hair.hairStyle}&${character.hair.hairColor}/height<${character.appearance.height} centimeters>/weight<${character.appearance.weight} kilos>>;`
-      + `SUMM<${character.name}>:${character.story}/${character.personality};`
-      + ']'
-  });
 
   if (race == "elf") {
     possibleLines.push(...[
