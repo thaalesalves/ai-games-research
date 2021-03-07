@@ -55,7 +55,7 @@ const checkInventory = () => {
 
   if (getInventory().length > 0) {
     let items = Object.keys(getInventory()).map((k) => {
-      return getInventory()[k].name;
+      return `${getInventory()[k].name} (${getInventory()[k].quantity}x)`;
     }).join(', ');
 
     let itemsWorn = Object.keys(getInventory().filter((item) => {
@@ -112,17 +112,19 @@ const addToInventory = (itemName, itemQuantity) => {
  * @param {string} itemName 
  */
 const equipItem = (itemName) => {
-  let item = findItemInInventory(itemName);
+  const itemNameLowerCase = itemName.toLowerCase();
+  let item = findItemInInventory(itemNameLowerCase);
   if (typeof item != 'undefined') {
     if (item.type != 'weapon' && item.type != 'clothing') {
-      return `\nThis item is not equippable.`;
+      return `\n${capitalize(itemNameLowerCase)} is not an equippable item.`;
     }
 
-    let oldItem = getInventory().find(oldItem => {
-      return oldItem.status == 'worn' && oldItem.type == item.type;
-    });
-
+    const wiRegex = new RegExp(`(?<=WORN<${state.character.name}>:)(.*)(?=;)`);
+    let playerWorldInfo = getPlayerWi();
+    let itemsWorn = playerWorldInfo.entry.match(wiRegex)[0];
+    let oldItem = getInventory().find(oldItem => oldItem.status == 'worn' && oldItem.type == item.type);
     if (typeof oldItem != 'undefined') {
+      itemsWorn.replace(oldItem.name.toLowerCase(), '');
       console.log(`Removing worn status from ${oldItem.name}.`);
       oldItem.status = 'in inventory';
       state.memory.context.replace(` The player is ${oldItem.type == 'weapon' ? 'wielding' : 'wearing'} ${oldItem.name}. `, '');
@@ -131,10 +133,22 @@ const equipItem = (itemName) => {
     console.log(`Removing worn status from ${item.name}.`);
     item.status = 'worn';
     state.memory.context += ` The player is ${item.type == 'weapon' ? 'wielding' : 'wearing'} ${item.name}. `;
+    itemsWorn = Object.keys(getInventory().filter((item) => {
+      return item.status == 'worn';
+    })).map((k) => {
+      return getInventory()[k].name;
+    }).join('/');
+
+    playerWorldInfo.entry = playerWorldInfo.entry.replace(wiRegex, itemsWorn);
+    updateWorldEntry(
+      state.character.worldInfoIndex,
+      playerWorldInfo.keys,
+      playerWorldInfo.entry,
+      false
+    );
+
     return `\nYou are now ${item.type == 'weapon' ? 'wielding' : 'wearing'} ${item.name}.`;
   }
-
-  return `\nYou do not have \"${itemName}\" in your inventory.`;
 }
 
 /**
