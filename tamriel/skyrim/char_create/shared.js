@@ -4,11 +4,11 @@ const BRACKETED = /\[(.*?)\]/g;
 const BRACKETS = /\[|\]/g;
 const PUNCTUATION_REMOVE = /[^\w\s]/gi;
 const WEAPONS = [
-  'sword', 'knife', 'spear', 'hammer', 'axe', 'battleaxe', 'sledgehammer', 'longsword', 'bow'
+  'sword', 'knife', 'spear', 'hammer', 'axe', 'battleaxe', 'sledgehammer', 'longsword', 'bow', 'pickaxe'
 ];
 
 const CLOTHING = [
-  'rags', 'armor', 'dress', 'kilt', 'skirt', 'jerkin', 'shirt', 'clothes', 'robes', 'leathers', 'hooded', 'cuirass', 'chainmail'
+  'rags', 'armor', 'dress', 'kilt', 'skirt', 'jerkin', 'shirt', 'clothes', 'robes', 'leathers', 'hooded', 'cuirass', 'chainmail', 'gauntlets', 'vambraces'
 ];
 
 let possibleLines = [
@@ -159,8 +159,8 @@ const parseRace = (character) => {
     possibleLines.push(
       `"Oh, you're a weird one, aren't you?". He laughs. "What race are you, ${character.gender == 'male' ? 'lad' : 'lass'}?"`,
       `"Oh, you're a weird one. What race are you? Doesn't matter, my family and I don't judge. What do you need, friend?". Isekaid smiles.\n`,
-      `"Oh... hello...". Isekaid looks at you and raises his eyebrow. He's clearly confused because you don't look like any known race. "Do... you... need something?"\n`
-        `"Oh... you're on of those... people.". Isekaid looks at you and raises his eyebrow. He's clearly confused because you don't look like any known race. "Do you... need something?"\n`
+      `"Oh... hello...". Isekaid looks at you and raises his eyebrow. He's clearly confused because you don't look like any known race. "Do... you... need something?"\n`,
+      `"Oh... you're on of those... people.". Isekaid looks at you and raises his eyebrow. He's clearly confused because you don't look like any known race. "Do you... need something?"\n`
     );
   }
 }
@@ -276,7 +276,7 @@ const equipItem = (itemName) => {
     }
 
     const wiRegex = new RegExp(`(?<=WORN<${state.character.name}>:)(.*)(?=;)`);
-    let playerWorldInfo = getPlayerWi();
+    let playerWorldInfo = worldEntries[state.character.worldInfoIndex];
     let itemsWorn = playerWorldInfo.entry.match(wiRegex)[0];
     let oldItem = getInventory().find(oldItem => oldItem.status == 'worn' && oldItem.type == item.type);
     if (typeof oldItem != 'undefined') {
@@ -302,15 +302,11 @@ const equipItem = (itemName) => {
       playerWorldInfo.entry,
       false
     );
-    
+
     return `\nYou are now ${item.type == 'weapon' ? 'wielding' : 'wearing'} ${item.name}.`;
   }
 
   return `\nYou do not have \"${itemNameLowerCase}\" in your inventory.`;
-}
-
-const getPlayerWi = () => {
-  return worldEntries.find(wi => wi.keys.includes(state.character.name));
 }
 
 /**
@@ -354,6 +350,413 @@ const grabAllBrackets = (text) => {
   }
 
   console.log(state.placeholders);
+}
+
+/**
+ * Encounters by Gnurro.
+ * 
+ * Makes random encounters possible in-game
+ */
+ encounterDB = {
+  /** Fight encounters */
+  wolfAttack: {
+    encounterID: 'wolfAttack',
+    triggers: ["(spot|see|find).*wol(f|ves).*", '(walk|run|stroll|rid(e|ing)).*(woods|road(|s)*)', "enter.*(cave|warren|thicket).*"],
+    chance: 80,
+    duration: 5,
+    messageString: `Wolf attack!`,
+    contextNotes: ['You are being attacked by a wolf!', 'A wolf is attacking you!'],
+    endTriggers: ["(kill|scare).*(wol(f|ves))"],
+    textNotes: [
+      `You hear howling, not far from where you are. The howling gets closer, and you start to feel uneasy. You look around, trying to find where it's coming from, and when you turn around. It's a wolf!`
+    ],
+    outputLock: true,
+    inputLock: false,
+    branches: [
+      {
+        branchID: 'packWolfAttack',
+        branchChance: 50,
+        branchTextNotes: [
+          `You hear howling, not far from where you are. The howling gets closer, and now it sounds like more than one. You look around, trying to find where it's coming from, and then you see it. It's a pack of wolves!`
+        ],
+      }
+    ]
+  },
+  bearAttack: {
+    encounterID: 'bearAttack',
+    triggers: ["(spot|see|find).*bear(|s).*", '(walk|run|stroll|rid(e|ing)).*(woods|road(|s)*)', "enter.*(cave|warren|thicket).*"],
+    chance: 50,
+    duration: 5,
+    messageString: 'Bear attack',
+    contextNotes: ['You are being attacked by a bear!', 'A bear is attacking you!'],
+    endTriggers: ["(kill|scare).*bear(|s)"],
+    textNotes: [
+      `You hear some growling. It's definetely a bear. You hear it getting close, and you start to feel uneasy. When you look to your right, you see it. It's a bear!`
+    ],
+    outputLock: true,
+    inputLock: false,
+    branches: [
+      {
+        branchID: 'packBearAttack',
+        branchChance: 10,
+        branchTextNotes: [
+          `You hear some growling. It's definetely a bear. But it doesn't sound like just one. It's uncommon for bears to attack in groups, but you seem to haven been chosen. It's a sleuth of bears!`
+        ],
+      }
+    ]
+  },
+  sabreCatAttack: {
+    encounterID: 'sabreCatAttack',
+    triggers: ["(spot|see|find).*sabre cat(|s).*", '(walk|run|stroll|rid(e|ing)).*(woods|road(|s)*)', "enter.*(cave|warren|thicket).*"],
+    chance: 50,
+    duration: 5,
+    messageString: 'Sabre cat attack!',
+    contextNotes: ['You are being attacked by a sabre cat!', 'A sabre cat is attacking you!'],
+    endTriggers: ["(kill|scare).*sabre cat(|s)"],
+    textNotes: [
+      `You hear some roaring, but you can't tell what animal it is. But it sounds angry... and hungry. You hear it getting close, and you start to feel uneasy. When you turn around... it's a sabre cat!`
+    ],
+    outputLock: true,
+    inputLock: false,
+    branches: [
+      {
+        branchID: 'packSabreCatAttack',
+        branchChance: 10,
+        branchTextNotes: [`You hear some roaring... and it sounds like there's more than one animal tracking. You start to feel uneasy, as you're sure you're about to be attacked. When you turn arround... it's a pack of sabre cats!`],
+      }
+    ]
+  },
+  trollAttack: {
+    encounterID: 'trollAttack',
+    triggers: ["(spot|see|find).*troll(|s).*", '(walk|run|stroll|rid(e|ing)).*(woods|road(|s)*)', "enter.*(cave|warren|thicket).*"],
+    chance: 20,
+    duration: 5,
+    messageString: 'Troll attack!',
+    contextNotes: ['You are being attacked by a troll!', 'A troll is attacking you!'],
+    endTriggers: ["(kill|scare).*troll(|s)"],
+    textNotes: [
+      `You hear some growling and roaring. You can't tell what kind of creature is making this horrendous sound, but it's close. And getting closer. It's approaches you, and you turn to look at it. It's a troll!`
+    ],
+    outputLock: true,
+    inputLock: false,
+    branches: [
+      {
+        branchID: 'packTrollAttack',
+        branchChance: 5,
+        branchTextNotes: [
+          `You hear some growling and roaring. It sounds like more than one creature, and they're getting closer... when you think of looking around, they show themselves. Two trolls are attacking you!`
+        ],
+      }
+    ]
+  },
+
+  /** Weather */
+  weather: {
+    encounterID: 'weather',
+    chance: 50,
+    inputLock: true,
+    memoryAdd: {
+      memoryText: 'The weather has changed!',
+      memoryLocation: 'top',
+      memoryLingerDuration: 5
+    },
+    cooldown: 10,
+    duration: 0,
+    branches: [
+      {
+        branchID: 'weatherSnowStorm',
+        branchChance: 5,
+        branchChained: ['snowStorm']
+      },
+      {
+        branchID: 'weatherBeautifulNight',
+        branchChance: 50,
+        branchChained: ['beautifulNight']
+      }
+    ]
+  },
+  snowStorm: {
+    inputLock: true,
+    encounterID: 'snowStorm',
+    messageString: 'A snow storm! Be careful! It will last for 10 actions!',
+    contextNotes: [
+      'A snow storm is here! Protect yourself or you\'ll freeze to death!'
+    ],
+    textNotes: [
+      `The air starts to feel cold all of a sudden, and a freezing breeze touches you. You start shaking from the cold, and the wind gets faster. You can't see anything, as it's all white. You're caught in a snow storm!`
+    ],
+    duration: 10,
+    cooldown: 50
+  },
+  beautifulNight: {
+    inputLock: true,
+    encounterID: 'beautifulNight',
+    messageString: 'It\'s a beautiful night!',
+    contextNotes: [
+      'It\'s a beautiful night!'
+    ],
+    textNotes: [
+      `You look up. The night sky is amazing! You can see the stars bright in the distance, and the aurora is shimmering in the sky like an ethereal snake. The night is bright because of the beautiful lights in the sky, and you just can't stop looking at them. It's too beautiful.`,
+    ],
+    duration: 10,
+    cooldown: 50,
+  },
+
+  /** Random events */
+  rebellion: {
+    encounterID: 'rebellion',
+    chance: 5,
+    memoryAdd: {
+      memoryText: `A rebellion is happening!`,
+      memoryLocation: "top",
+      memoryLingerDuration: 20
+    },
+    cooldown: 40,
+    duration: 0,
+    chained: ['whiterunRebellion', 'riftenRebellion',]
+  },
+  whiterunRebellion: {
+    encounterID: 'whiterunRebellion',
+    memoryAdd: {
+      memoryText: `The citizens of Whiterun are not in agreement with Jarl Yolanda's debauchery and parties. She seems to be partying all the time at the expense of the people's taxes!`,
+      memoryLocation: "top",
+      memoryLingerDuration: 20
+    },
+    textNotes: [
+      `You hear rumors of a rebellion in Whiterun. The citizens of the city are not in agreement with Jarl Yolanda's debauchery and parties. She seems to be partying all the time at the expense of the people's taxes!`,
+    ],
+    cooldown: 40,
+    duration: 0,
+  },
+  riftenRebellion: {
+    encounterID: 'riftenRebellion',
+    memoryAdd: {
+      memoryText: `The citizens of Riften are revolting against Jarl Erikur for his negligence towards people's safaty! The Thieves Guild is growing, and people are getting mugged and robbed all the time, and the guards do nothing!`,
+      memoryLocation: "top",
+      memoryLingerDuration: 20
+    },
+    textNotes: [
+      `You hear rumors of a rebellion in Riften. The citizens are revolting against Jarl Erikur for his negligence towards people's safaty! The Thieves Guild is growing, and people are getting mugged and robbed all the time, and the guards do nothing!`,
+    ],
+    cooldown: 40,
+    duration: 0,
+  }
+}
+
+// word list stuff like gauntlet script:
+encounterWordLists = {
+  /* Remove this line (and the one below) to enable the example word lists
+  charClass:["mage","fighter","valkyrie"],
+  pattern:["sprinkles", "dots", "lines"],
+  color:["red","blue","green","yellow","orange"],
+  amount:["many","few","all of them"]
+   */ // Remove this line (and the one above) to enable the example word lists
+}
+
+// WI data imports:
+for (WIentry of worldInfo) {
+  // encounters from WI:
+  // these will be lower priority then the hardcoded ones above!
+  if (WIentry.keys.includes('!encounterDef')) {
+    encounterDefFromWI = JSON.parse(WIentry.entry)
+    console.log(`Found WI encounterDef for '${encounterDefFromWI.encounterID}', adding it to the DB!`)
+    encounterDB[encounterDefFromWI.encounterID] = encounterDefFromWI
+  }
+  // word lists from WI:
+  if (WIentry.keys.includes('!encounterWordListsFull')) {
+    encounterWordListsFromWI = JSON.parse(WIentry.entry)
+    console.log(`Found full WI encounterWordLists entry, adding them to the DB!`)
+    for (encounterSingleWordList in encounterWordListsFromWI) {
+      encounterWordLists[encounterSingleWordList] = Object.values(encounterWordListsFromWI[encounterSingleWordList])
+    }
+  }
+  if (WIentry.keys.includes('!encounterWordListSingle')) {
+    encounterWordListSingleFromWI = JSON.parse(WIentry.entry)
+    console.log(`Found WI encounterWordList, adding it to the DB!`)
+    encounterWordLists[Object.keys(encounterWordListSingleFromWI)[0]] = Object.values(encounterWordListSingleFromWI)
+  }
+}
+
+
+// encounter functions: (DON'T MESS WITH THESE!)
+function updateCurrentEncounter(encounterUpcoming) { // sets or clears currentEncounter; if argument empty, clears current encounter
+  // limiting encounter recurrence:
+  if (state.currentEncounter) {
+    if (state.currentEncounter.recurrenceLimit) {
+      if (!state.limitedEncounters) {
+        state.limitedEncounters = []
+        state.limitedEncounters.push([state.currentEncounter.encounterID, state.currentEncounter.recurrenceLimit - 1])
+      } else {
+        for (limiter of state.limitedEncounters) {
+          if (limiter[0] == state.currentEncounter.encounterID) {
+            console.log(`'${state.currentEncounter.encounterID}' recurrence already has a limit.`)
+            if (limiter[1] > 0) {
+              limiter[1] = limiter[1] - 1
+            }
+          } else {
+            state.limitedEncounters.push([state.currentEncounter.encounterID, state.currentEncounter.recurrenceLimit - 1])
+          }
+        }
+      }
+    }
+    if (state.currentEncounter.cooldown) {
+      if (!state.cooldownEncounters) {
+        state.cooldownEncounters = []
+      }
+      state.cooldownEncounters.push([state.currentEncounter.encounterID, state.currentEncounter.cooldown])
+    }
+  }
+  if (encounterUpcoming) {
+    console.log(`Setting current encounter to '${encounterUpcoming}'.`)
+    state.currentEncounter = encounterDB[encounterUpcoming]
+    // random initial values handling:
+    randomizables = ['duration', 'activationDelay', 'cooldown']
+    for (encounterValue of randomizables) {
+      if (typeof (state.currentEncounter[encounterValue]) !== 'undefined') {
+        if (typeof (state.currentEncounter[encounterValue]) !== 'number' && state.currentEncounter[encounterValue].length == 2) {
+          console.log(`${encounterUpcoming} has random ${encounterValue}: ${state.currentEncounter[encounterValue]}`)
+          state.currentEncounter[encounterValue] = getRndInteger(state.currentEncounter[encounterValue][0], state.currentEncounter[encounterValue][1])
+          console.log(`${encounterUpcoming} random ${encounterValue} set to ${state.currentEncounter[encounterValue]}`)
+        }
+      }
+    }
+  } else {
+    console.log("Clearing current encounter.")
+    delete state.currentEncounter
+  }
+}
+
+function updateCurrentEffects() { // 'activates' currentEncounter; or clears encounter effects if there is no active encounter
+  if (state.currentEncounter) {
+    if (state.currentEncounter.messageString) {
+      state.message = state.currentEncounter.messageString
+    }
+    if (state.currentEncounter.contextNotes) {
+      state.encounterNote = getRndFromList(state.currentEncounter.contextNotes)
+    }
+    if (state.currentEncounter.displayStatNotes) {
+      displayStatsUpdate(getRndFromList(state.currentEncounter.displayStatNotes))
+    }
+  } else {
+    delete state.message
+    delete state.encounterNote
+  }
+}
+
+function fillPlaceholders(placeHolderString) {
+  curPlaceholderMatches = placeHolderString.match(/\{(.*?)\}/g)
+  if (curPlaceholderMatches) {
+    console.log(`Matched placeholders: ${curPlaceholderMatches}`)
+    for (placeholder of curPlaceholderMatches) {
+      console.log(`Current placeholder: ${placeholder}`)
+      if (placeholder[1] == '*') {
+        console.log(`Current placeholder ${placeholder} contains a *, checking temporary word lists...`)
+        placeholder = placeholder.replace(/(\*|{|})/gi, '')
+        if (typeof (tempWordLists) == 'undefined') {
+          tempWordLists = {}
+        }
+        if (!tempWordLists[placeholder] || tempWordLists[placeholder].length == 0) {
+          console.log(`${placeholder} temporary wordlist is either non-existant or empty! Getting a new one.`)
+          tempWordLists[placeholder] = JSON.parse(JSON.stringify(encounterWordLists[placeholder]))
+        }
+        console.log(`Current temporary word lists:${tempWordLists}`)
+        for (insertTag in tempWordLists) {
+          if (placeholder.includes(insertTag)) {
+            console.log(`Found fitting placeholder tag in temporary list: ${insertTag}`)
+            pickedInsert = getRndFromList(tempWordLists[insertTag])
+            console.log(`Randomly picked placeholder insert from temporary list: ${pickedInsert}`)
+            insertRegEx = new RegExp(`{\\*${insertTag}}`,)
+            placeHolderString = placeHolderString.replace(insertRegEx, pickedInsert)
+            tempWordLists[placeholder].splice(tempWordLists[placeholder].indexOf(pickedInsert), 1)
+          }
+        }
+      } else {
+        for (insertTag in encounterWordLists) {
+          if (placeholder.includes(insertTag)) {
+            console.log(`Found fitting placeholder tag: ${insertTag}`)
+            pickedInsert = getRndFromList(encounterWordLists[insertTag])
+            console.log(`Randomly picked placeholder insert: ${pickedInsert}`)
+            insertRegEx = new RegExp(`{${insertTag}}`,)
+            placeHolderString = placeHolderString.replace(insertRegEx, pickedInsert)
+          }
+        }
+      }
+    }
+    delete tempWordLists
+  }
+  return (placeHolderString)
+}
+
+// misc helper functions:
+// get random
+function getRndInteger(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min
+}
+
+// list-picker, dynamically handles weighted lists
+function getRndFromList(list) {
+  if (list[0].length == 2) {
+    console.log(`${list} looks like a weighted list, doing that!`)
+    return (getRndFromListWeighted(list))
+  } else {
+    console.log(`${list} looks like a plain list, simply picking from it!`)
+    return (list[getRndInteger(0, list.length)])
+  }
+}
+
+// list picker for lists with weighted items:
+// currently works kinda like oldschool D&D encounter lists
+function getRndFromListWeighted(weightedList) {
+  cutOff = getRndInteger(1, 100)
+  console.log(`Picking from weighted list, cutoff: ${cutOff}`)
+  for (item of weightedList) {
+    console.log(`'${item[0]}' threshold: ${item[1]}.`)
+    if (cutOff <= item[1]) {
+      console.log(`'${item[0]}' cutoff below threshold, picking it!`)
+      return item[0]
+      break
+    }
+  }
+}
+
+// displayStats handling:
+function displayStatsUpdate([inKey, inValue, inColor]) {
+  // if key already exists, update; else push new entry; if no value given, removes displayStat entry matching key, if it exists
+  if (!state.displayStats) {
+    state.displayStats = []
+  }
+  let displayStatUpdated = false
+  for (displayStat of state.displayStats) {
+    console.log(`Checking ${displayStat.key} displayStats entry...`)
+    let curDisplayStatIndex = state.displayStats.indexOf(displayStat)
+    if (displayStat.key == inKey) {
+      console.log(`Found ${inKey} displayStats entry: ${state.displayStats[curDisplayStatIndex].key}, ${state.displayStats[curDisplayStatIndex].value}, ${state.displayStats[curDisplayStatIndex].color}, updating!`)
+      if (inValue) {
+        if (typeof (inValue) == 'string') {
+          inValue = fillPlaceholders(inValue)
+          console.log(`Value to update displayStat entry inputted: '${inValue}', updating.`)
+          state.displayStats[curDisplayStatIndex].value = inValue
+        } else {
+          console.log(`Value to update displayStat entry inputted: '${inValue}', updating.`)
+          state.displayStats[curDisplayStatIndex].value = inValue
+        }
+      } else {
+        console.log(`No value to update displayStat inputted, removing entry.`)
+        state.displayStats.splice(curDisplayStatIndex, 1)
+        displayStatUpdated = true
+        break
+      }
+      if (inColor) {
+        state.displayStats[curDisplayStatIndex].color = fillPlaceholders(inColor)
+      }
+      displayStatUpdated = true
+      break
+    }
+  }
+  if (!displayStatUpdated) {
+    console.log(`No ${inKey} displayStats entry found, adding it!`)
+    state.displayStats.push({ 'key': inKey, 'value': inValue, 'color': inColor })
+  }
 }
 
 /**

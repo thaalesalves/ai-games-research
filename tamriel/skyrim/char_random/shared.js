@@ -4,11 +4,11 @@ const BRACKETED = /\[(.*?)\]/g;
 const BRACKETS = /\[|\]/g;
 const PUNCTUATION_REMOVE = /[^\w\s]/gi;
 const WEAPONS = [
-  'sword', 'knife', 'spear', 'hammer', 'axe', 'battleaxe', 'sledgehammer', 'longsword', 'bow'
+  'sword', 'knife', 'spear', 'hammer', 'axe', 'battleaxe', 'sledgehammer', 'longsword', 'bow', 'pickaxe'
 ];
 
 const CLOTHING = [
-  'rags', 'armor', 'dress', 'kilt', 'skirt', 'jerkin', 'shirt', 'clothes', 'robes', 'leathers', 'hooded', 'cuirass', 'chainmail'
+  'rags', 'armor', 'dress', 'kilt', 'skirt', 'jerkin', 'shirt', 'clothes', 'robes', 'leathers', 'hooded', 'cuirass', 'chainmail', 'gauntlets', 'vambraces'
 ];
 
 const RANDOM_CHARACTERS = [
@@ -17,7 +17,7 @@ const RANDOM_CHARACTERS = [
     gender: `male`,
     race: `Nord`,
     age: '17',
-    personality: 'strong,tough,intimidating,muscular,assertive',
+    personality: 'strong, tough, intimidating, muscular, assertive',
     class: 'peasant',
     eyes: {
       eyeColor: 'light brown'
@@ -29,11 +29,12 @@ const RANDOM_CHARACTERS = [
     appearance: {
       height: '187',
       weight: '90',
-      features: 'tall,muscular,tall,broad,long square jaw,wide brow,short beard,strong face'
+      features: 'tall, muscular, tall, broad, long square jaw, wide brow, short beard, strong face'
     },
     story: `Rolff lived a tough life in Dawnstar. His father, Dondir, was a miner like his father and his father before him. Rolff himself works everyday in the ice-cold mine. He is strong and muscular, but he gets little payment. Every day he sees the merchants from the nearby town load their carts with loads of gold and silver taken from the mine, while he and his friends are left to dig for iron and copper. One day, Rolff looks around and sees the miners with their families. His friends have a hard time making ends meet while the merchants in town have fancy clothes and big houses. Rolff becomes angry. He's working everyday with his hands while they do nothing but load their carts with the day's loot. He decides he's going to become a miner, and that he's going to be rich and famous one day. He wants to find worthy foes and to be rich and famous.`,
     storyStart: `You look around. Your friends are working their backs off in the mine, just like you. You know their families, and they're good people. You feel for them, as you all struggle to make ends meet. You have to do something about that.`,
-    worn: `loose green breeches/whiteshirt/green cloth hood/green cloth mask`
+    worn: `loose green breeches and white shirt`,
+    weapon: 'pickaxe'
   },
   {
     name: `Pasha Antine`,
@@ -52,18 +53,19 @@ const RANDOM_CHARACTERS = [
     appearance: {
       height: `182`,
       weight: `75`,
-      features: `beautiful,tall,striking,intimidating,`
+      features: `beautiful, tall, striking, intimidating,`
     },
     story: `Pasha grew up in the town of Runilda, a small town with rich mines. As a child she worked in the mines with her mother and father. As she grew older she begun to resent the fact that she had to work while her male friends went out and partied. She became rebellious and started to hang out with a rough crowd. One day when returning home from the mines, Pasha and her father got into an argument about her future.`,
     storyStart: `You are at your home. You've worked the mine your entire life, just like your parents. But you want more. You want to see the world, to set sail and go abroad. You want adventure. Your father does not approve of your dream, and you get in an argument with him.\n"Pasha, you need to think about life. You can't go around traveling, this is no life for someone like you. Where will you get money to stay alive?", you father asks. He seems angry with your ideals.`,
-    worn: `loose green breeches/brown leather boots/white shirt/red scarf worn as a mask/brown leather apron/brown leather hood`
+    worn: `loose green breeches and white shirt`,
+    weapon: 'pickaxe'
   },
   {
     name: `Sirilias`,
     gender: `male`,
     race: `Imperial`,
     age: `32`,
-    personality: `brave/kind/loyal/strong/protective`,
+    personality: `brave, kind, loyal, strong, protective`,
     class: `sailor`,
     eyes: {
       eyeColor: `blue`
@@ -75,34 +77,84 @@ const RANDOM_CHARACTERS = [
     appearance: {
       height: `185`,
       weight: `79`,
-      features: `curly brown hair/blue eyes/tall/muscular/strong jaw/prominent chin`
+      features: `curly brown hair, blue eyes, tall, muscular, strong jaw, prominent chin`
     },
     story: `Sirilias was born in Anvil, Cyrodiil. He grew up in a small house near the city walls. He would play with the other children from Anvil, running around the alleys and streets. When he was older he became a sailor, and eventually his ship landed in Skyrim. He fought against Nord bandits, but was captured and put into prison. He managed to escape, and now he is lost in the forests of Falkreath.`,
     storyStart: `You are in the middle of the woods, and you're lost. You don't know how to get to civilization, and the bandits that imprisioned you are looking for you. You have a shiv, and that's all you can use to defend yourself. The woods of Skyrim are known to be home to wolves, sabre cats and bears.`,
-    worn: `rags/broken handcuffs/shiv`
+    worn: `rags`,
+    weapon: `shiv`
   },
   {
     name: `Ryana`,
     gender: `female`,
     race: `Imperial`,
     age: `26`,
-    personality: `calm/quiet/friendly/loyal`,
+    personality: `calm, quiet, friendly, loyal`,
     class: `warrior`,
     eyes: {
       eyeColor: `green`
     },
     hair: {
-      hairStyle: `long/straight`,
+      hairStyle: `long, straight`,
       hairColor: `brown`
     },
     appearance: {
       height: `170`,
       weight: `60`,
-      features: `birthmark shaped like a raven on her right shoulder/calloused and scarred hands/oval face`
+      features: `birthmark shaped like a raven on her right shoulder, calloused and scarred hands, oval face`
     },
     story: `As a child, Ryana was inseparable from her best friend, an Imperial boy who lived in her village. The two played all day, until they were called to serve the Emperor. When they were teenagers, the Empire sent them to fight the Nords. The boys were killed in battle, but Ryana survived. She was captured and became a prisoner of the Nords. One day, a lone Imperial wandered into her cell. It was her friend from childhood, Sirilias. He had also survived the battle, and had been captured by the Nords. He had also lost his fellow soldiers. The two reconciled and plotted their escape. They managed to steal a key from a guard, and released the other prisoners. They fought off the guards and ran into the wilderness. They wandered in the cold until they reached safety. They escaped, but Sirilias did not survive. She is now lost in the woods of Falkreath.`,
     storyStart: `You are in the middle of the woods, and you're lost. You don't know how to get to civilization, and the bandits that imprisioned you are looking for you. You have a shiv, and that's all you can use to defend yourself. The woods of Skyrim are known to be home to wolves, sabre cats and bears.`,
-    worn: `rags/broken handcuffs/shiv`
+    worn: `rags`,
+    weapon: `shiv`
+  },
+  {
+    name: `Torel Forgewood`,
+    gender: `male`,
+    race: `Nord`,
+    age: `26`,
+    personality: `self-centered, arrogant, dishonorable, insolent, ruthless`,
+    class: `warrior`,
+    eyes: {
+      eyeColor: `steely blue`
+    },
+    hair: {
+      hairStyle: `long, straight`,
+      hairColor: `dark blonde`
+    },
+    appearance: {
+      height: `180`,
+      weight: `90`,
+      features: `strong chin and jawline, strong and muscular, tanned skin`
+    },
+    story: `Torel was born in Riften to Masha Forgewood and an unknown father. Masha was an adventurer before she had him, but returned to Riften after her last expedition went wrong. She never mentioned what happened to him. She was too poor to actually raise a child after her life of adventures, so she had to give him away to the New Home orphanage, where he spent his first 10 years. One day, a group of mercenaries slaughtered most people in the orphanage, and recruited the kids that were alive. He's now 20 years old, and has been working with the mercenaries for the last 10.`,
+    storyStart: `You are at your mercenary corp's base, in the woods of Falkreath. Talagar, the leader of the mercenary, comes to you with a mission. A noble has hired you to escort him from the Pale Pass to Solitude. Talagar approaches you and says:`,
+    worn: `steel cuirass over his fur tunic and steel greaves and fur and leather boots and leather and steel gauntlets`,
+    weapon: `long steel sword`
+  },
+  {
+    name: `Tulla Jenssen`,
+    gender: `female`,
+    race: `Nord`,
+    age: `23`,
+    personality: `brave, courageous, foolhardy, unpredictable`,
+    class: `warrior`,
+    eyes: {
+      eyeColor: `blue`
+    },
+    hair: {
+      hairStyle: `long`,
+      hairColor: `blonde`
+    },
+    appearance: {
+      height: `180`,
+      weight: `75`,
+      features: `tall, muscular, strong, big breasts and butts`
+    },
+    story: `Tulla was born and raised in Riften. She has always lived a happy life there, but her father has been pressuring her to marry a man she doesn't love. Her father wants her to marry for money so he can live a comfortable life after retiring from his job. Her father has a good job, so he can easily afford to retire comfortably in his fifties or sixties. Tulla doesn't want to marry for money, she wants to marry for love. She is in love with the son of a poor blacksmith, her childhood friend. Her father Garret, however, refuses to let her marry him.`,
+    storyStart: `You get in an argument with your father. You tell him that you will run away from home if he doesn't let you marry the blacksmith. He's furious with you, and threatens to disown you if you don't obey his demands. Defiant, you pack up your things and leave your family house. You make your way to the blacksmith's house, as you know your beloved will be working there. However, when you arrive at the blacksmith's house, the place is dark and abandoned. You panic and break into tears.`,
+    worn: `fine silk dress with a long coat`,
+    weapon: `wooden long bow`
   }
 ];
 
@@ -113,19 +165,25 @@ const RANDOM_CHARACTERS = [
 const generateCharacter = () => {
   state.character = RANDOM_CHARACTERS[Math.floor(Math.random() * RANDOM_CHARACTERS.length)];
   playerWorldInfo = {
-    keys: `${state.character.name},you`,
+    keys: `${state.character.name}, you`,
     hidden: false,
-    entry: state.character.name + ':['
-      + `RACE<${state.character.name}>:${state.character.race};`
-      + `DESC<${state.character.name}>:${state.character.appearance.features}/eyes<${state.character.eyes.eyeColor}>/hair<${state.character.hair.hairStyle}&${state.character.hair.hairColor}/height<${state.character.appearance.height} centimeters>/weight<${state.character.appearance.weight} kilos>>;`
-      + `SUMM<${state.character.name}>:${state.character.story};`
-      + `MIND<${state.character.name}>:${state.character.personality};`
-      + `WORN<${state.character.name}>:${state.character.worn};`
+    entry: ' You:['
+      + ` NAME: ${state.character.name};`
+      + ` RACE: ${state.character.race};`
+      + ` DESC: ${state.character.appearance.features}/ eyes< ${state.character.eyes.eyeColor}>/ hair< ${state.character.hair.hairStyle}& ${state.character.hair.hairColor}/ height< ${state.character.appearance.height} centimeters>/ weight< ${state.character.appearance.weight} kilos>>;`
+      + ` SUMM: ${state.character.story};`
+      + ` MIND: ${state.character.personality};`
+      + ` WORN: nothing;`
       + ']'
   };
 
   addWorldEntry(playerWorldInfo.keys, playerWorldInfo.entry, false);
   state.character.worldInfoIndex = worldEntries.findIndex(wi => wi.keys.includes(state.character.name));
+
+  addToInventory(state.character.worn, 1);
+  addToInventory(state.character.weapon, 1);
+  equipItem(state.character.worn);
+  equipItem(state.character.weapon);
 }
 
 /**
@@ -238,8 +296,8 @@ const equipItem = (itemName) => {
       return `\n${capitalize(itemNameLowerCase)} is not an equippable item.`;
     }
 
-    const wiRegex = new RegExp(`(?<=WORN<${state.character.name}>:)(.*)(?=;)`);
-    let playerWorldInfo = getPlayerWi();
+    const wiRegex = new RegExp(`(?<=WORN:)(.*)(?=;)`);
+    let playerWorldInfo = worldEntries[state.character.worldInfoIndex];
     let itemsWorn = playerWorldInfo.entry.match(wiRegex)[0];
     let oldItem = getInventory().find(oldItem => oldItem.status == 'worn' && oldItem.type == item.type);
     if (typeof oldItem != 'undefined') {
@@ -325,6 +383,7 @@ encounterDB = {
     encounterID: 'wolfAttack',
     triggers: ["(spot|see|find).*wol(f|ves).*", '(walk|run|stroll|rid(e|ing)).*(woods|road(|s)*)', "enter.*(cave|warren|thicket).*"],
     chance: 80,
+    duration: 5,
     messageString: `Wolf attack!`,
     contextNotes: ['You are being attacked by a wolf!', 'A wolf is attacking you!'],
     endTriggers: ["(kill|scare).*(wol(f|ves))"],
@@ -347,6 +406,7 @@ encounterDB = {
     encounterID: 'bearAttack',
     triggers: ["(spot|see|find).*bear(|s).*", '(walk|run|stroll|rid(e|ing)).*(woods|road(|s)*)', "enter.*(cave|warren|thicket).*"],
     chance: 50,
+    duration: 5,
     messageString: 'Bear attack',
     contextNotes: ['You are being attacked by a bear!', 'A bear is attacking you!'],
     endTriggers: ["(kill|scare).*bear(|s)"],
@@ -369,6 +429,7 @@ encounterDB = {
     encounterID: 'sabreCatAttack',
     triggers: ["(spot|see|find).*sabre cat(|s).*", '(walk|run|stroll|rid(e|ing)).*(woods|road(|s)*)', "enter.*(cave|warren|thicket).*"],
     chance: 50,
+    duration: 5,
     messageString: 'Sabre cat attack!',
     contextNotes: ['You are being attacked by a sabre cat!', 'A sabre cat is attacking you!'],
     endTriggers: ["(kill|scare).*sabre cat(|s)"],
@@ -389,6 +450,7 @@ encounterDB = {
     encounterID: 'trollAttack',
     triggers: ["(spot|see|find).*troll(|s).*", '(walk|run|stroll|rid(e|ing)).*(woods|road(|s)*)', "enter.*(cave|warren|thicket).*"],
     chance: 20,
+    duration: 5,
     messageString: 'Troll attack!',
     contextNotes: ['You are being attacked by a troll!', 'A troll is attacking you!'],
     endTriggers: ["(kill|scare).*troll(|s)"],
@@ -409,69 +471,95 @@ encounterDB = {
   },
 
   /** Weather */
+  weather: {
+    encounterID: 'weather',
+    chance: 50,
+    inputLock: true,
+    memoryAdd: {
+      memoryText: 'The weather has changed!',
+      memoryLocation: 'top',
+      memoryLingerDuration: 5
+    },
+    cooldown: 10,
+    duration: 0,
+    branches: [
+      {
+        branchID: 'weatherSnowStorm',
+        branchChance: 5,
+        branchChained: ['snowStorm']
+      },
+      {
+        branchID: 'weatherBeautifulNight',
+        branchChance: 50,
+        branchChained: ['beautifulNight']
+      }
+    ]
+  },
   snowStorm: {
+    inputLock: true,
     encounterID: 'snowStorm',
-    chance: 5,
-    messageString: 'Snow storm!',
+    messageString: 'A snow storm! Be careful! It will last for 10 actions!',
     contextNotes: [
       'A snow storm is here! Protect yourself or you\'ll freeze to death!'
     ],
-    outputLock: true,
-    inputLock: true,
     textNotes: [
       `The air starts to feel cold all of a sudden, and a freezing breeze touches you. You start shaking from the cold, and the wind gets faster. You can't see anything, as it's all white. You're caught in a snow storm!`
     ],
-    duration: 10
+    duration: 10,
+    cooldown: 50
   },
   beautifulNight: {
+    inputLock: true,
     encounterID: 'beautifulNight',
-    chance: 50,
     messageString: 'It\'s a beautiful night!',
     contextNotes: [
       'It\'s a beautiful night!'
     ],
-    outputLock: true,
-    inputLock: true,
+    textNotes: [
+      `You look up. The night sky is amazing! You can see the stars bright in the distance, and the aurora is shimmering in the sky like an ethereal snake. The night is bright because of the beautiful lights in the sky, and you just can't stop looking at them. It's too beautiful.`,
+    ],
     duration: 10,
-    branches: [
-      {
-        branchID: 'aurora',
-        branchChance: 50,
-        branchTextNotes: [
-          `You look up. The night sky is amazing! You can see the stars bright in the distance, and the aurora is shimmering in the sky like an ethereal snake. The night is bright because of the beautiful lights in the sky, and you just can't stop looking at them. It's too beautiful.`
-        ]
-      }
-    ]
+    cooldown: 50,
   },
 
   /** Random events */
   rebellion: {
     encounterID: 'rebellion',
-    chance: 2,
-    triggers: ['.*(y|Y)ou.*(T|t)alk.*'],
-    messageString: 'A rebellion is happening!',
-    contextNotes: [
-      'World event: a rebellion is happening!'
+    chance: 5,
+    memoryAdd: {
+      memoryText: `A rebellion is happening!`,
+      memoryLocation: "top",
+      memoryLingerDuration: 20
+    },
+    cooldown: 40,
+    duration: 0,
+    chained: ['whiterunRebellion', 'riftenRebellion',]
+  },
+  whiterunRebellion: {
+    encounterID: 'whiterunRebellion',
+    memoryAdd: {
+      memoryText: `The citizens of Whiterun are not in agreement with Jarl Yolanda's debauchery and parties. She seems to be partying all the time at the expense of the people's taxes!`,
+      memoryLocation: "top",
+      memoryLingerDuration: 20
+    },
+    textNotes: [
+      `You hear rumors of a rebellion in Whiterun. The citizens of the city are not in agreement with Jarl Yolanda's debauchery and parties. She seems to be partying all the time at the expense of the people's taxes!`,
     ],
-    outputLock: true,
-    inputLock: true,
-    duration: 20,
-    branches: [
-      {
-        branchID: 'whiterunRebellion',
-        branchChance: 2,
-        branchTextNotes: [
-          `You hear rumors of a rebellion in Whiterun. The citizens of the city are not in agreement with Jarl Yolanda's debauchery and parties. She seems to be partying all the time at the expense of the people's taxes!`,
-        ]
-      },
-      {
-        branchID: 'riftenRebellion',
-        branchChance: 2,
-        branchTextNotes: [
-          `You hear rumors of a rebellion in Riften. The citizens are revolting against Jarl Erikur for his negligence towards people's safaty! The Thieves Guild is growing, and people are getting mugged and robbed all the time, and the guards do nothing!`,
-        ]
-      }
-    ]
+    cooldown: 40,
+    duration: 0,
+  },
+  riftenRebellion: {
+    encounterID: 'riftenRebellion',
+    memoryAdd: {
+      memoryText: `The citizens of Riften are revolting against Jarl Erikur for his negligence towards people's safaty! The Thieves Guild is growing, and people are getting mugged and robbed all the time, and the guards do nothing!`,
+      memoryLocation: "top",
+      memoryLingerDuration: 20
+    },
+    textNotes: [
+      `You hear rumors of a rebellion in Riften. The citizens are revolting against Jarl Erikur for his negligence towards people's safaty! The Thieves Guild is growing, and people are getting mugged and robbed all the time, and the guards do nothing!`,
+    ],
+    cooldown: 40,
+    duration: 0,
   }
 }
 
