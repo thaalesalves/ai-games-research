@@ -8,7 +8,7 @@ const WEAPONS = [
 ];
 
 const CLOTHING = [
-  'rags', 'armor', 'dress', 'kilt', 'skirt', 'jerkin', 'shirt', 'clothes', 'robes', 'leathers', 'hooded', 'cuirass', 'chainmail', 'gauntlets', 'vambraces'
+  'rags', 'armor', 'dress', 'kilt', 'skirt', 'jerkin', 'shirt', 'clothes', 'robes', 'leathers', 'hooded', 'cuirass', 'chainmail', 'gauntlets', 'vambraces', 'tights'
 ];
 
 const RANDOM_CHARACTERS = [
@@ -472,9 +472,9 @@ encounterDB = {
 
   /** Weather */
   weather: {
+    outputLock: true,
     encounterID: 'weather',
     chance: 50,
-    inputLock: true,
     memoryAdd: {
       memoryText: 'The weather has changed!',
       memoryLocation: 'top',
@@ -496,7 +496,7 @@ encounterDB = {
     ]
   },
   snowStorm: {
-    inputLock: true,
+    outputLock: true,
     encounterID: 'snowStorm',
     messageString: 'A snow storm! Be careful! It will last for 10 actions!',
     contextNotes: [
@@ -509,7 +509,7 @@ encounterDB = {
     cooldown: 50
   },
   beautifulNight: {
-    inputLock: true,
+    outputLock: true,
     encounterID: 'beautifulNight',
     messageString: 'It\'s a beautiful night!',
     contextNotes: [
@@ -526,6 +526,7 @@ encounterDB = {
   rebellion: {
     encounterID: 'rebellion',
     chance: 5,
+    messageString: `A rebellion is happening!`,
     memoryAdd: {
       memoryText: `A rebellion is happening!`,
       memoryLocation: "top",
@@ -537,6 +538,7 @@ encounterDB = {
   },
   whiterunRebellion: {
     encounterID: 'whiterunRebellion',
+    messageString: `The citizens of Whiterun are rebelling against the Jarl!`,
     memoryAdd: {
       memoryText: `The citizens of Whiterun are not in agreement with Jarl Yolanda's debauchery and parties. She seems to be partying all the time at the expense of the people's taxes!`,
       memoryLocation: "top",
@@ -550,13 +552,14 @@ encounterDB = {
   },
   riftenRebellion: {
     encounterID: 'riftenRebellion',
+    messageString: `The citizens of Riften are rebelling against the Jarl!`,
     memoryAdd: {
       memoryText: `The citizens of Riften are revolting against Jarl Erikur for his negligence towards people's safaty! The Thieves Guild is growing, and people are getting mugged and robbed all the time, and the guards do nothing!`,
       memoryLocation: "top",
       memoryLingerDuration: 20
     },
     textNotes: [
-      `You hear rumors of a rebellion in Riften. The citizens are revolting against Jarl Erikur for his negligence towards people's safaty! The Thieves Guild is growing, and people are getting mugged and robbed all the time, and the guards do nothing!`,
+      `You hear rumors of a rebellion in Riften. The citizens are revolting against Jarl Erikur for his negligence towards people's safety! The Thieves Guild is growing, and people are getting mugged and robbed all the time, and the guards do nothing!`,
     ],
     cooldown: 40,
     duration: 0,
