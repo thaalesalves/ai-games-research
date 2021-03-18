@@ -671,7 +671,7 @@ encounterDB = {
       'People are brawling at the tavern!'
     ],
     textNotes: [
-      `Two guys are yelling at each other, they seem angry. One of them gets up from his chair and just punches the other one in the face. The man who got punched screams something unintelligible and charges at the other one. THey're in a serious brawl.`,
+      `Two guys are yelling at each other, they seem angry. One of them gets up from his chair and just punches the other one in the face. The man who got punched screams something unintelligible and charges at the other one. They're in a serious brawl.`,
     ],
     duration: 10,
     cooldown: 20,
