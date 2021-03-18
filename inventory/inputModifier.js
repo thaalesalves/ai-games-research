@@ -30,12 +30,14 @@ const modifier = (text) => {
 
     playerWorldInfo = {
       keys: `${state.character.name},you`,
-      entry: state.character.name + ':['
-        + `RACE:${state.character.race};`
-        + `DESC:${state.character.appearance.features}/eyes<${state.character.eyes.eyeColor}>/hair<${state.character.hair.hairStyle}&${state.character.hair.hairColor}/height<${state.character.appearance.height} centimeters>/weight<${state.character.appearance.weight} kilos>>;`
-        + `SUMM:${state.character.story};`
-        + `MIND:${state.character.personality};`
-        + `WORN:naked;`
+      hidden: false,
+      entry: ' You:['
+        + ` NAME: ${state.character.name};`
+        + ` DESC: age< ${state.character.age}>/ race< ${state.character.race}>/${state.character.appearance.features}/ eyes< ${state.character.eyes.eyeColor}>/ hair< ${state.character.hair.hairStyle}& ${state.character.hair.hairColor}/${state.character.appearance.height}cm& ${state.character.appearance.weight}kg>;`
+        + ` SUMM: ${state.character.story};`
+        + ` MIND: ${state.character.personality};`
+        + ` WORN: nothing;`
+        + ` INV: nothing;`
         + ']'
     };
 
@@ -44,7 +46,7 @@ const modifier = (text) => {
     addToInventory('Commoner clothes', 1);
     equipItem('Commoner clothes');
     equipItem('Rusty Sword');
-    
+
     state.init = true;
     state.shouldStop = false;
     addWorldEntry(playerWorldInfo.keys, playerWorldInfo.entry, false);
@@ -55,16 +57,20 @@ const modifier = (text) => {
   }
 
   if (commandMatcher) {
+    console.log(`Command detected`);
     console.log(commandMatcher);
     const cmd = commandMatcher[1];
     const params = commandMatcher[2] ? commandMatcher[2].trim() : '';
     console.log(params);
 
     if (cmd.includes('invCheck')) {
+      console.log(`Begin inventory check.`);
       state.shouldStop = true;
       modifiedText = `\n> You check your inventory.${checkInventory()}`;
       console.log(getInventory());
+      console.log(`End inventory check.`);
     } else if (cmd.includes('invAdd')) {
+      console.log(`Begin inventory add.`);
       state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
       const itemQuantity = Number.isNaN(parseInt(params.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(params.replace(DIGIT_REGEX, '').trim());
@@ -76,10 +82,12 @@ const modifier = (text) => {
       }
 
       console.log(getInventory());
+      console.log(`End inventory add.`);
     } else if (cmd.includes('invRemove')) {
+      console.log(`Begin inventory remove.`);
       state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
-      const itemQuantity = parseInt(params.replace(DIGIT_REGEX, '').trim());
+      const itemQuantity = Number.isNaN(parseInt(params.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(params.replace(DIGIT_REGEX, '').trim());
 
       if (itemQuantity >= 1) {
         modifiedText = `\n> You remove ${itemQuantity} ${itemName} from your inventory.${removeFromInventory(itemName, itemQuantity)}`;
@@ -88,11 +96,19 @@ const modifier = (text) => {
       }
 
       console.log(getInventory());
+      console.log(`End inventory remove.`);
     } else if (cmd.includes('invEquip')) {
+      console.log(`Begin inventory equip.`);
       state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
       modifiedText = `\n> You equip ${itemName}.${equipItem(itemName)}`;
       console.log(getInventory());
+      console.log(`End inventory equip.`);
+    } else if (cmd.includes('invDebugWi')) {
+      console.log(`Begin inventory debug.`);
+      state.shouldStop = true;
+      modifiedText = `\n> Your inventory and player WI have been debugged. New player WI saved at index ${state.character.worldInfoIndex}.`;
+      console.log(`End inventory debug.`);
     }
   }
 
