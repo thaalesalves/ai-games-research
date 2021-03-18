@@ -29,15 +29,15 @@ const modifier = (text) => {
     };
 
     playerWorldInfo = {
-      keys: `${state.character.name}, you`,
+      keys: `${state.character.name},you`,
       hidden: false,
       entry: ' You:['
         + ` NAME: ${state.character.name};`
-        + ` RACE: ${state.character.race};`
-        + ` DESC: ${state.character.appearance.features}/ eyes< ${state.character.eyes.eyeColor}>/ hair< ${state.character.hair.hairStyle}& ${state.character.hair.hairColor}/ height< ${state.character.appearance.height} centimeters>/ weight< ${state.character.appearance.weight} kilos>>;`
+        + ` DESC: age< ${state.character.age}>/ race< ${state.character.race}>/${state.character.appearance.features}/ eyes< ${state.character.eyes.eyeColor}>/ hair< ${state.character.hair.hairStyle}& ${state.character.hair.hairColor}/${state.character.appearance.height}cm& ${state.character.appearance.weight}kg>;`
         + ` SUMM: ${state.character.story};`
         + ` MIND: ${state.character.personality};`
         + ` WORN: nothing;`
+        + ` INV: nothing;`
         + ']'
     };
 
@@ -77,7 +77,7 @@ const modifier = (text) => {
     } else if (cmd.includes('invRemove')) {
       state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
-      const itemQuantity = parseInt(params.replace(DIGIT_REGEX, '').trim());
+      const itemQuantity = Number.isNaN(parseInt(params.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(params.replace(DIGIT_REGEX, '').trim());
 
       if (itemQuantity >= 1) {
         modifiedText = `\n> You remove ${itemQuantity} ${itemName} from your inventory.${removeFromInventory(itemName, itemQuantity)}`;
@@ -91,6 +91,9 @@ const modifier = (text) => {
       const itemName = params.replace(LETTER_REGEX, '').trim();
       modifiedText = `\n> You equip ${itemName}.${equipItem(itemName)}`;
       console.log(getInventory());
+    } else if (cmd.includes('invDebugWi')) {
+      state.shouldStop = true;
+      modifiedText += `\n> Your inventory and player WI have been debugged. New player WI saved at index ${state.character.worldInfoIndex}`;
     }
   }
 

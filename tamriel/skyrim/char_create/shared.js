@@ -201,6 +201,7 @@ const removeFromInventory = (itemName, itemQuantity) => {
 
   let index = getInventory().indexOf(item);
   getInventory().splice(index, 1);
+  updateInventory();
   return `\nYou have removed all ${loweredName} from your inventory.`;
 }
 
@@ -259,7 +260,28 @@ const addToInventory = (itemName, itemQuantity) => {
     item.quantity = item.quantity + itemQuantity;
   }
 
+  updateInventory();
   return `\nYou have added ${itemQuantity} ${loweredName} to your inventory.`;
+}
+
+/**
+ * Updates the player's inventory and corrects the WI
+ */
+const updateInventory = () => {
+  const wiRegex = new RegExp(`(?<=INV: )(.*)(?=;)`);
+  let playerWorldInfo = worldEntries[state.character.worldInfoIndex];
+  let itemsInInventory = playerWorldInfo.entry.match(wiRegex)[0];
+  itemsInInventory = getInventory().map((k) => {
+    return `${k.name}< quantity: ${k.quantity}>`;
+  }).join('/ ');
+
+  playerWorldInfo.entry = playerWorldInfo.entry.replace(wiRegex, itemsInInventory);
+  updateWorldEntry(
+    state.character.worldInfoIndex,
+    playerWorldInfo.keys,
+    playerWorldInfo.entry,
+    false
+  );
 }
 
 /**
@@ -275,7 +297,7 @@ const equipItem = (itemName) => {
       return `\n${capitalize(itemNameLowerCase)} is not an equippable item.`;
     }
 
-    const wiRegex = new RegExp(`(?<=WORN:)(.*)(?=;)`);
+    const wiRegex = new RegExp(`(?<=WORN: )(.*)(?=; )`);
     let playerWorldInfo = worldEntries[state.character.worldInfoIndex];
     let itemsWorn = playerWorldInfo.entry.match(wiRegex)[0];
     let oldItem = getInventory().find(oldItem => oldItem.status == 'worn' && oldItem.type == item.type);
@@ -293,7 +315,7 @@ const equipItem = (itemName) => {
       return item.status == 'worn';
     })).map((k) => {
       return getInventory()[k].name;
-    }).join('/');
+    }).join('/ ');
 
     playerWorldInfo.entry = playerWorldInfo.entry.replace(wiRegex, itemsWorn);
     updateWorldEntry(
@@ -307,6 +329,42 @@ const equipItem = (itemName) => {
   }
 
   return `\nYou do not have \"${itemNameLowerCase}\" in your inventory.`;
+}
+
+/**
+ * Debugs your inventory and corrects the player's WI in case it fails
+ */
+const debugInventory = () => {
+  state.character.worldInfoIndex = worldEntries.findIndex(wi => wi.keys.includes(state.character.name));
+  let playerWorldInfo = worldEntries[state.character.worldInfoIndex];
+  const wornRegex = new RegExp(`(?<=WORN: )(.*)(?=; )`);
+  const invRegex = new RegExp(`(?<=INV: )(.*)(?=;)`);
+
+  let itemsWorn = playerWorldInfo.entry.match(wornRegex)[0];
+  let itemsInInventory = playerWorldInfo.entry.match(invRegex)[0];
+
+  itemsWorn = Object.keys(getInventory().filter((item) => {
+    return item.status == 'worn';
+  })).map((k) => {
+    return getInventory()[k].name;
+  }).join('/ ');
+
+  itemsInInventory = getInventory().map((k) => {
+    return `${k.name}< quantity: ${k.quantity}>`;
+  }).join('/ ');
+
+  playerWorldInfo.entry = playerWorldInfo.entry.replace(wornRegex, itemsWorn);
+  playerWorldInfo.entry = playerWorldInfo.entry.replace(invRegex, itemsInInventory);
+
+  updateWorldEntry(
+    state.character.worldInfoIndex,
+    playerWorldInfo.keys,
+    playerWorldInfo.entry,
+    false
+  );
+
+  console.log("Fixed player WI with inventory's items.");
+  console.log(`Player's WI saved at index ${state.character.worldInfoIndex}.`);
 }
 
 /**
@@ -357,7 +415,7 @@ const grabAllBrackets = (text) => {
  * 
  * Makes random encounters possible in-game
  */
- encounterDB = {
+encounterDB = {
   /** Fight encounters */
   wolfAttack: {
     encounterID: 'wolfAttack',
@@ -452,7 +510,7 @@ const grabAllBrackets = (text) => {
 
   /** Weather */
   weather: {
-    outputLock: true,
+    inputLock: true,
     encounterID: 'weather',
     chance: 50,
     memoryAdd: {
@@ -464,19 +522,25 @@ const grabAllBrackets = (text) => {
     duration: 0,
     branches: [
       {
+        branchTriggers: [
+          '.*(snow(|ing)|road|out(doors|side)|freezing|cold).*'
+        ],
         branchID: 'weatherSnowStorm',
         branchChance: 5,
         branchChained: ['snowStorm']
       },
       {
+        branchTriggers: [
+          '.*(road|out(doors|side)|night).*'
+        ],
         branchID: 'weatherBeautifulNight',
-        branchChance: 50,
+        branchChance: 15,
         branchChained: ['beautifulNight']
       }
     ]
   },
   snowStorm: {
-    outputLock: true,
+    inputLock: true,
     encounterID: 'snowStorm',
     messageString: 'A snow storm! Be careful! It will last for 10 actions!',
     contextNotes: [
@@ -489,7 +553,7 @@ const grabAllBrackets = (text) => {
     cooldown: 50
   },
   beautifulNight: {
-    outputLock: true,
+    inputLock: true,
     encounterID: 'beautifulNight',
     messageString: 'It\'s a beautiful night!',
     contextNotes: [
@@ -504,45 +568,93 @@ const grabAllBrackets = (text) => {
 
   /** Random events */
   rebellion: {
+    outputLock: true,
     encounterID: 'rebellion',
-    chance: 5,
+    chance: 1,
     messageString: `A rebellion is happening!`,
     memoryAdd: {
       memoryText: `A rebellion is happening!`,
       memoryLocation: "top",
-      memoryLingerDuration: 20
+      memoryLingerDuration: 10
     },
-    cooldown: 40,
+    cooldown: 20,
     duration: 0,
     chained: ['whiterunRebellion', 'riftenRebellion',]
   },
   whiterunRebellion: {
+    outputLock: true,
     encounterID: 'whiterunRebellion',
     messageString: `The citizens of Whiterun are rebelling against the Jarl!`,
     memoryAdd: {
       memoryText: `The citizens of Whiterun are not in agreement with Jarl Yolanda's debauchery and parties. She seems to be partying all the time at the expense of the people's taxes!`,
       memoryLocation: "top",
-      memoryLingerDuration: 20
+      memoryLingerDuration: 10
     },
     textNotes: [
       `You hear rumors of a rebellion in Whiterun. The citizens of the city are not in agreement with Jarl Yolanda's debauchery and parties. She seems to be partying all the time at the expense of the people's taxes!`,
     ],
-    cooldown: 40,
+    cooldown: 20,
     duration: 0,
   },
   riftenRebellion: {
+    outputLock: true,
     encounterID: 'riftenRebellion',
     messageString: `The citizens of Riften are rebelling against the Jarl!`,
     memoryAdd: {
       memoryText: `The citizens of Riften are revolting against Jarl Erikur for his negligence towards people's safaty! The Thieves Guild is growing, and people are getting mugged and robbed all the time, and the guards do nothing!`,
       memoryLocation: "top",
-      memoryLingerDuration: 20
+      memoryLingerDuration: 10
     },
     textNotes: [
       `You hear rumors of a rebellion in Riften. The citizens are revolting against Jarl Erikur for his negligence towards people's safety! The Thieves Guild is growing, and people are getting mugged and robbed all the time, and the guards do nothing!`,
     ],
-    cooldown: 40,
+    cooldown: 20,
     duration: 0,
+  },
+  tavernBrawl: {
+    encounterID: 'tavernBrawl',
+    triggers: [
+      '.*(bar|pub|tavern|inn|brawl(|ing|er(|s))).*'
+    ],
+    chance: 10,
+    cooldown: 10,
+    duration: 5,
+    branches: [
+      {
+        branchID: 'brawlWithYouBranch',
+        branchChance: 5,
+        branchChained: ['brawlWithYou']
+      },
+      {
+        branchID: 'brawlWithBrawlersBranch',
+        branchChance: 5,
+        branchChained: ['brawlWithBrawlers']
+      }
+    ]
+  },
+  brawlWithYouBranch: {
+    encounterID: 'brawlWithYouBranch',
+    messageString: 'Someone challanged you to a brawl!',
+    contextNotes: [
+      `You're brawling with someone!`
+    ],
+    textNotes: [
+      `A random drunk man starts screaming at you for some reason. He's so drunk you can't really understand what he says. He charges at you, and punches you in the face.`,
+    ],
+    duration: 10,
+    cooldown: 20,
+  },
+  brawlWithBrawlers: {
+    encounterID: 'brawlWithBrawlers',
+    messageString: 'There are people brawling at the tavern!',
+    contextNotes: [
+      'People are brawling at the tavern!'
+    ],
+    textNotes: [
+      `Two guys are yelling at each other, they seem angry. One of them gets up from his chair and just punches the other one in the face. The man who got punched screams something unintelligible and charges at the other one. THey're in a serious brawl.`,
+    ],
+    duration: 10,
+    cooldown: 20,
   }
 }
 
