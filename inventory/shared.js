@@ -1,5 +1,7 @@
 const LETTER_REGEX = /[0-9]/g;
 const DIGIT_REGEX = /\D/g;
+const BRACKETED = /\[(.*?)\]/g;
+const BRACKETS = /\[|\]/g;
 const PUNCTUATION_REMOVE = /[^\w\s]/gi;
 const WEAPONS = [
   'sword', 'knife', 'spear', 'hammer', 'axe', 'battleaxe', 'sledgehammer', 'longsword', 'bow', 'pickaxe'
@@ -248,4 +250,24 @@ const getType = (itemName) => {
   }
 
   return checker(itemName);
+}
+
+/**
+ * Bracket handler by Gnurro.
+ * 
+ * Removes backets from input text to handle them as placeholders
+ * 
+ * @param {string} text
+ */
+ const grabAllBrackets = (text) => {
+  for (entry of text.match(BRACKETED)) {
+    entry = entry.replace(BRACKETS, '');
+    if (!state.placeholders) {
+      state.placeholders = new Array();
+    }
+
+    state.placeholders.push(entry);
+  }
+
+  console.log(state.placeholders);
 }
