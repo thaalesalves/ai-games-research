@@ -5,7 +5,6 @@ const modifier = (text) => {
   const commandMatcher = text.match(/\n? ?(?:> You |> You say "|)\/(\w+?)( [\w ]+)?[".]?\n?$/i)
 
   if (!state.init && info.actionCount < 1) {
-    grabAllBrackets(modifiedText);
     playerWorldInfo = {
       keys: `you`,
       hidden: false,
