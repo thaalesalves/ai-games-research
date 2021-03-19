@@ -25,7 +25,7 @@ const capitalize = (string) => {
  * @param {string} itemName 
  */
 const findItemInInventory = (itemName) => {
-  console.log(`START findItemInInventory(): Looking for item "${item.name}" in player's inventory.`);
+  console.log(`START findItemInInventory(): Looking for item "${itemName}" in player's inventory.`);
   let loweredName = itemName.toLowerCase().replace(PUNCTUATION_REMOVE, '');
   return getInventory().find(item => {
     console.log(`END findItemInInventory(): Item "${item.name}" found. Returning it.`);
@@ -140,7 +140,7 @@ const equipItem = (itemName) => {
     }
 
     const wiRegex = new RegExp(`(?<=WORN: )(.*)(?=;)`);
-    let playerWorldInfo = worldEntries[state.character.worldInfoIndex];
+    let playerWorldInfo = worldEntries[state.worldInfoIndex];
     let itemsWorn = playerWorldInfo.entry.match(wiRegex)[0];
     let oldItem = getInventory().find(oldItem => oldItem.status == 'worn' && oldItem.type == item.type);
     if (typeof oldItem != 'undefined') {
@@ -161,7 +161,7 @@ const equipItem = (itemName) => {
 
     playerWorldInfo.entry = playerWorldInfo.entry.replace(wiRegex, itemsWorn);
     updateWorldEntry(
-      state.character.worldInfoIndex,
+      state.worldInfoIndex,
       playerWorldInfo.keys,
       playerWorldInfo.entry,
       false
@@ -180,8 +180,8 @@ const equipItem = (itemName) => {
  */
 const debugInventory = () => {
   console.log(`START debugInventory(): debugging player's inventory`);
-  state.character.worldInfoIndex = worldEntries.findIndex(wi => wi.keys.includes(state.character.name));
-  let playerWorldInfo = worldEntries[state.character.worldInfoIndex];
+  state.worldInfoIndex = worldEntries.findIndex(wi => wi.keys.includes('you'));
+  let playerWorldInfo = worldEntries[state.worldInfoIndex];
   const wornRegex = new RegExp(`(?<=WORN: )(.*)(?=;)`);
   const invRegex = new RegExp(`(?<=INV: )(.*)(?=;)`);
 
@@ -204,14 +204,14 @@ const debugInventory = () => {
   playerWorldInfo.entry = playerWorldInfo.entry.replace(invRegex, itemsInInventory);
 
   updateWorldEntry(
-    state.character.worldInfoIndex,
+    state.worldInfoIndex,
     playerWorldInfo.keys,
     playerWorldInfo.entry,
     false
   );
 
   console.log("Fixed player WI with inventory's items.");
-  console.log(`END debugInventory(): Player's WI saved at index ${state.character.worldInfoIndex}.`);
+  console.log(`END debugInventory(): Player's WI saved at index ${state.worldInfoIndex}.`);
 }
 
 /**
@@ -220,7 +220,7 @@ const debugInventory = () => {
 const updateInventory = () => {
   console.log(`START updateInventory(): updating player's inventory and WI with current items`);
   const wiRegex = new RegExp(`(?<=INV: )(.*)(?=;)`);
-  let playerWorldInfo = worldEntries[state.character.worldInfoIndex];
+  let playerWorldInfo = worldEntries[state.worldInfoIndex];
   let itemsInInventory = playerWorldInfo.entry.match(wiRegex)[0];
   itemsInInventory = getInventory().map((k) => {
     console.log(`Sorting inventory items and quantities into player WI`);
@@ -229,7 +229,7 @@ const updateInventory = () => {
 
   playerWorldInfo.entry = playerWorldInfo.entry.replace(wiRegex, itemsInInventory);
   updateWorldEntry(
-    state.character.worldInfoIndex,
+    state.worldInfoIndex,
     playerWorldInfo.keys,
     playerWorldInfo.entry,
     false

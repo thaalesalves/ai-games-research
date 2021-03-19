@@ -6,51 +6,25 @@ const modifier = (text) => {
 
   if (!state.init && info.actionCount < 1) {
     grabAllBrackets(modifiedText);
-    state.character = {
-      name: state.placeholders[0],
-      gender: state.placeholders[1],
-      race: state.placeholders[2],
-      class: state.placeholders[3],
-      age: state.placeholders[4],
-      personality: state.placeholders[5].replace(/,/g, '/'),
-      eyes: {
-        eyeColor: state.placeholders[6]
-      },
-      hair: {
-        hairStyle: state.placeholders[7],
-        hairColor: state.placeholders[8],
-      },
-      appearance: {
-        height: state.placeholders[9].replace('cm', '').replace('centimeters', ''),
-        weight: state.placeholders[10].replace('kg', '').replace('kilos', ''),
-        features: state.placeholders[11].replace(/,/g, '/')
-      },
-      story: state.placeholders[12]
-    };
-
     playerWorldInfo = {
-      keys: `${state.character.name},you`,
+      keys: `you`,
       hidden: false,
       entry: ' You:['
-        + ` NAME: ${state.character.name};`
-        + ` DESC: age< ${state.character.age}>/ race< ${state.character.race}>/${state.character.appearance.features}/ eyes< ${state.character.eyes.eyeColor}>/ hair< ${state.character.hair.hairStyle}& ${state.character.hair.hairColor}/${state.character.appearance.height}cm& ${state.character.appearance.weight}kg>;`
-        + ` SUMM: ${state.character.story};`
-        + ` MIND: ${state.character.personality};`
         + ` WORN: nothing;`
         + ` INV: nothing;`
         + ']'
     };
+
+    state.init = true;
+    state.shouldStop = false;
+    addWorldEntry(playerWorldInfo.keys, playerWorldInfo.entry, false);
+    state.worldInfoIndex = worldEntries.findIndex(wi => wi.keys.includes('you'));
 
     getInventory();
     addToInventory('Rusty Sword', 1);
     addToInventory('Commoner clothes', 1);
     equipItem('Commoner clothes');
     equipItem('Rusty Sword');
-
-    state.init = true;
-    state.shouldStop = false;
-    addWorldEntry(playerWorldInfo.keys, playerWorldInfo.entry, false);
-    state.character.worldInfoIndex = worldEntries.findIndex(wi => wi.keys.includes(state.character.name));
 
     state.init = true;
     modifiedText = modifiedText.replace(BRACKETS, '');
@@ -107,7 +81,7 @@ const modifier = (text) => {
     } else if (cmd.includes('invDebugWi')) {
       console.log(`Begin inventory debug.`);
       state.shouldStop = true;
-      modifiedText = `\n> Your inventory and player WI have been debugged. New player WI saved at index ${state.character.worldInfoIndex}.`;
+      modifiedText = `\n> Your inventory and player WI have been debugged. New player WI saved at index ${state.worldInfoIndex}.`;
       console.log(`End inventory debug.`);
     }
   }
