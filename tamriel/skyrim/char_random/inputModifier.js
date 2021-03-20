@@ -27,7 +27,6 @@ const modifier = (text) => {
     if (cmd.includes('invCheck')) {
       state.shouldStop = true;
       modifiedText = `\n> You check your inventory.${checkInventory()}`;
-      console.log(getInventory());
     } else if (cmd.includes('invAdd')) {
       state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
@@ -38,8 +37,6 @@ const modifier = (text) => {
       } else {
         modifiedText = `\n> You cannot add less than 1 unit of an item to your inventory.`;
       }
-
-      console.log(getInventory());
     } else if (cmd.includes('invRemove')) {
       state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
@@ -50,13 +47,10 @@ const modifier = (text) => {
       } else {
         modifiedText = `\n> You cannot remove less than 1 unit of an item from your inventory.`;
       }
-
-      console.log(getInventory());
     } else if (cmd.includes('invEquip')) {
       state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
       modifiedText = `\n> You equip ${itemName}.${equipItem(itemName)}`;
-      console.log(getInventory());
     } else if (cmd.includes('invDebugWi')) {
       state.shouldStop = true;
       modifiedText += `\n> Your inventory and player WI have been debugged. New player WI saved at index ${state.character.worldInfoIndex}`;

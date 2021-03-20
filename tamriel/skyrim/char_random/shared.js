@@ -3,6 +3,10 @@ const DIGIT_REGEX = /\D/g;
 const BRACKETED = /\[(.*?)\]/g;
 const BRACKETS = /\[|\]/g;
 const PUNCTUATION_REMOVE = /[^\w\s]/gi;
+const WORN_REGEX = new RegExp(`(?<=WORN: )(.*)(?=; )`);
+const INVENTORY_REGEX = new RegExp(`(?<=INV: )(.*)(?=;)`);
+
+
 const WEAPONS = [
   'sword', 'knife', 'spear', 'hammer', 'axe', 'battleaxe', 'sledgehammer', 'longsword', 'bow', 'pickaxe'
 ];
@@ -200,10 +204,19 @@ const capitalize = (string) => {
  * @param {string} itemName 
  */
 const findItemInInventory = (itemName) => {
+  console.log(`START findItemInInventory(): Looking for item "${itemName}" in player's inventory.`);
   let loweredName = itemName.toLowerCase().replace(PUNCTUATION_REMOVE, '');
-  return getInventory().find(item => {
+  let itemFound = getInventory().find((item) => {
     return item.name == loweredName;
   });
+
+  if (typeof itemFound != 'undefined') {
+    console.log(`END findItemInInventory(): Item "${itemName}" found. Returning it.`);
+    return itemFound;
+  }
+
+  console.log(`END findItemInInventory(): Item "${itemName}" not found in inventory.`);
+  return undefined;
 }
 
 /**
@@ -213,16 +226,18 @@ const findItemInInventory = (itemName) => {
  * @param {integer} itemQuantity 
  */
 const removeFromInventory = (itemName, itemQuantity) => {
+  console.log(`START removeFromInventory(): Removing ${itemQuantity} instances of "${itemName}" from player's inventory.`);
   let loweredName = itemName.toLowerCase().replace(PUNCTUATION_REMOVE, '');
   let item = findItemInInventory(loweredName);
   if (!(item.quantity == itemQuantity) && (item.quantity > 1 && item.quantity >= itemQuantity)) {
+    console.log(`END removeFromInventory(): Found ${item.quantity} instances of "${itemName}" in player's inventory. Removing ${itemQuantity} instances of it.`);
     item.quantity -= itemQuantity;
     return `\nYou have removed ${itemQuantity} ${loweredName} from your inventory.`;
   }
 
+  console.log(`END removeFromInventory(): Found ${item.quantity} instances of "${itemName}" in player's inventory. Removing ${itemQuantity} instances of it.`);
   let index = getInventory().indexOf(item);
   getInventory().splice(index, 1);
-  updateInventory();
   return `\nYou have removed all ${loweredName} from your inventory.`;
 }
 
@@ -231,20 +246,15 @@ const removeFromInventory = (itemName, itemQuantity) => {
  */
 const checkInventory = () => {
 
+  console.log(`START checkInventory(): Checking player's inventory.`);
   if (getInventory().length > 0) {
-    let items = Object.keys(getInventory()).map((k) => {
-      return `${getInventory()[k].name} (${getInventory()[k].quantity}x)`;
-    }).join(', ');
-
-    let itemsWorn = Object.keys(getInventory().filter((item) => {
-      return item.status == 'worn';
-    })).map((k) => {
-      return getInventory()[k].name;
-    }).join(', ');
-
+    let items = getInventory().map((item) => item.name).join(', ');
+    let itemsWorn = getInventory().filter((item) => item.status == 'worn').map((item) => item.name).join(', ');
+    console.log(`END checkInventory(): Player's inventory contains: ${items}.`);
     return `\nYour inventory contains: ${items}. Items equipped: ${itemsWorn}.`;
   }
 
+  console.log(`END checkInventory(): Player's inventory is empty.`);
   return `\nYour inventory is empty.`;
 }
 
@@ -252,10 +262,13 @@ const checkInventory = () => {
  * Returns player's inventory. If the array in undefined, define it
  */
 const getInventory = () => {
+  console.log(`START getInventory(): verifying player's inventory.`);
   if (typeof state.inventory == 'undefined') {
+    console.log(`INSIDE getInventory(): Inventory array is undefined. Declaring it with an empty array.`);
     state.inventory = [];
   }
 
+  console.log(`END getInventory(): player's inventory exists. Returning its contents.`);
   return state.inventory;
 }
 
@@ -266,9 +279,11 @@ const getInventory = () => {
  */
 const addToInventory = (itemName, itemQuantity) => {
 
+  console.log(`START addToInventory(): adding ${itemQuantity} instances of "${itemName}" to player's inventory.`);
   let loweredName = itemName.toLowerCase().replace(PUNCTUATION_REMOVE, '');
   let item = findItemInInventory(loweredName);
   if (typeof item == 'undefined') {
+    console.log(`INSIDE addToInventory(): Player has no other instances of this item in their inventory. Adding these.`);
     item = {
       name: loweredName,
       quantity: itemQuantity,
@@ -278,31 +293,12 @@ const addToInventory = (itemName, itemQuantity) => {
 
     state.inventory.push(item);
   } else {
+    console.log(`INSIDE addToInventory(): Player already has other instances of this item in their inventory. Incrementing the quantity by ${itemQuantity}.`);
     item.quantity = item.quantity + itemQuantity;
   }
 
-  updateInventory();
+  console.log(`END addToInventory(): ${itemQuantity} instances of "${itemName}" added to player's inventory.`);
   return `\nYou have added ${itemQuantity} ${loweredName} to your inventory.`;
-}
-
-/**
- * Updates the player's inventory and corrects the WI
- */
- const updateInventory = () => {
-  const wiRegex = new RegExp(`(?<=INV: )(.*)(?=;)`);
-  let playerWorldInfo = worldEntries[state.character.worldInfoIndex];
-  let itemsInInventory = playerWorldInfo.entry.match(wiRegex)[0];
-  itemsInInventory = getInventory().map((k) => {
-    return `${k.name}< quantity: ${k.quantity}>`;
-  }).join('/ ');
-
-  playerWorldInfo.entry = playerWorldInfo.entry.replace(wiRegex, itemsInInventory);
-  updateWorldEntry(
-    state.character.worldInfoIndex,
-    playerWorldInfo.keys,
-    playerWorldInfo.entry,
-    false
-  );
 }
 
 /**
@@ -311,81 +307,111 @@ const addToInventory = (itemName, itemQuantity) => {
  * @param {string} itemName 
  */
 const equipItem = (itemName) => {
+  console.log(`START equipItem(): equipping ${itemName}`);
   const itemNameLowerCase = itemName.toLowerCase();
-  let item = findItemInInventory(itemNameLowerCase);
-  if (typeof item != 'undefined') {
-    if (item.type != 'weapon' && item.type != 'clothing') {
+  let itemToBeEquipped = findItemInInventory(itemNameLowerCase);
+  if (typeof itemToBeEquipped != 'undefined') {
+    const itemToBeEquippedIndex = state.inventory.findIndex(x => x.name == itemToBeEquipped.name);
+    console.log(`INSIDE equipItem(): ${itemName} exists in player's inventory`);
+    if (itemToBeEquipped.type != 'weapon' && itemToBeEquipped.type != 'clothing') {
+      console.log(`END equipItem(): item is not equippable.`);
       return `\n${capitalize(itemNameLowerCase)} is not an equippable item.`;
     }
 
-    const wiRegex = new RegExp(`(?<=WORN: )(.*)(?=;)`);
-    let playerWorldInfo = worldEntries[state.character.worldInfoIndex];
-    let itemsWorn = playerWorldInfo.entry.match(wiRegex)[0];
-    let oldItem = getInventory().find(oldItem => oldItem.status == 'worn' && oldItem.type == item.type);
+    let playerWorldInfo = worldEntries.find(x => x.keys.includes('you'));
+    let itemsWorn = playerWorldInfo.entry.match(WORN_REGEX)[0];
+    let oldItem = getInventory().find(oldItem => oldItem.status == 'worn' && oldItem.type == itemToBeEquipped.type);
     if (typeof oldItem != 'undefined') {
+      const oldItemIndex = state.inventory.findIndex(x => x.name == oldItem.name);
+      console.log(`INSIDE equipItem(): Player has another item of the same type equipped. Unequipping old item.`);
       itemsWorn.replace(oldItem.name.toLowerCase(), '');
-      console.log(`Removing worn status from ${oldItem.name}.`);
+      console.log(`INSIDE equipItem(): Removing worn status from ${oldItem.name}.`);
       oldItem.status = 'in inventory';
-      state.memory.context.replace(` The player is ${oldItem.type == 'weapon' ? 'wielding' : 'wearing'} ${oldItem.name}. `, '');
+      state.inventory[oldItemIndex] = oldItem;
     }
 
-    console.log(`Removing worn status from ${item.name}.`);
-    item.status = 'worn';
-    state.memory.context += ` The player is ${item.type == 'weapon' ? 'wielding' : 'wearing'} ${item.name}. `;
-    itemsWorn = Object.keys(getInventory().filter((item) => {
-      return item.status == 'worn';
-    })).map((k) => {
-      return getInventory()[k].name;
-    }).join('/ ');
+    itemToBeEquipped.status = 'worn';
+    state.inventory[itemToBeEquippedIndex] = itemToBeEquipped;
+    itemsWorn = getInventory().filter((x) => x.status == 'worn')
+      .map((k) => {
+        console.log(`INSIDE equipItem(): worn item found in inventory -> ${k.name}`);
+        return k.name;
+      }).join('/ ');
 
-    playerWorldInfo.entry = playerWorldInfo.entry.replace(wiRegex, itemsWorn);
+    console.log(`INSIDE equipItem(): finished building new WORN string -> ${itemsWorn}`);
+    playerWorldInfo.entry = playerWorldInfo.entry.replace(WORN_REGEX, itemsWorn);
     updateWorldEntry(
-      state.character.worldInfoIndex,
+      state.worldInfoIndex,
       playerWorldInfo.keys,
       playerWorldInfo.entry,
       false
     );
 
-    return `\nYou are now ${item.type == 'weapon' ? 'wielding' : 'wearing'} ${item.name}.`;
+    console.log(`END equipItem(): ${itemToBeEquipped.name} has been equipped.`);
+    return `\nYou are now ${itemToBeEquipped.type == 'weapon' ? 'wielding' : 'wearing'} ${itemToBeEquipped.name}.`;
   }
 
-  return `\nYou do not have \"${itemNameLowerCase}\" in your inventory.`;
+  console.log(`END equipItem(): Player does not have "${itemNameLowerCase}" in their inventory.`);
+  return `\nYou do not have "${itemNameLowerCase}" in your inventory.`;
 }
 
 /**
  * Debugs your inventory and corrects the player's WI in case it fails
  */
- const debugInventory = () => {
-  state.character.worldInfoIndex = worldEntries.findIndex(wi => wi.keys.includes(state.character.name));
-  let playerWorldInfo = worldEntries[state.character.worldInfoIndex];
-  const wornRegex = new RegExp(`(?<=WORN: )(.*)(?=;)`);
-  const invRegex = new RegExp(`(?<=INV: )(.*)(?=;)`);
+const debugInventory = () => {
+  console.log(`START debugInventory(): debugging player's inventory`);
+  state.worldInfoIndex = worldEntries.findIndex(wi => wi.keys.includes('you'));
+  let playerWorldInfo = worldEntries.find(x => x.keys.includes('you'));
 
-  let itemsWorn = playerWorldInfo.entry.match(wornRegex)[0];
-  let itemsInInventory = playerWorldInfo.entry.match(invRegex)[0];
+  let itemsWorn = playerWorldInfo.entry.match(WORN_REGEX)[0];
+  let itemsInInventory = playerWorldInfo.entry.match(INVENTORY_REGEX)[0];
 
-  itemsWorn = Object.keys(getInventory().filter((item) => {
-    return item.status == 'worn';
-  })).map((k) => {
-    return getInventory()[k].name;
-  }).join('/ ');
+  itemsWorn = getInventory().filter((x) => x.status == 'worn')
+    .map((k) => {
+      console.log(`INSIDE debugInventory(): Updating player WI with worn items`);
+      return k.name;
+    }).join('/ ');
 
   itemsInInventory = getInventory().map((k) => {
+    console.log(`INSIDE debugInventory(): Updating player WI with inventory items`);
     return `${k.name}< quantity: ${k.quantity}>`;
   }).join('/ ');
 
-  playerWorldInfo.entry = playerWorldInfo.entry.replace(wornRegex, itemsWorn);
-  playerWorldInfo.entry = playerWorldInfo.entry.replace(invRegex, itemsInInventory);
+  playerWorldInfo.entry = playerWorldInfo.entry.replace(WORN_REGEX, itemsWorn);
+  playerWorldInfo.entry = playerWorldInfo.entry.replace(INVENTORY_REGEX, itemsInInventory);
 
   updateWorldEntry(
-    state.character.worldInfoIndex,
+    state.worldInfoIndex,
     playerWorldInfo.keys,
     playerWorldInfo.entry,
     false
   );
 
-  console.log("Fixed player WI with inventory's items.");
-  console.log(`Player's WI saved at index ${state.character.worldInfoIndex}.`);
+  console.log("INSIDE debugInventory(): Fixed player WI with inventory's items.");
+  console.log(`END debugInventory(): Player's WI saved at index ${state.worldInfoIndex}.`);
+}
+
+/**
+ * Updates the player's inventory and corrects the WI
+ */
+const updateInventory = () => {
+  console.log(`START updateInventory(): updating player's inventory and WI with current items`);
+  let playerWorldInfo = worldEntries.find(x => x.keys.includes('you'));
+  let itemsInInventory = playerWorldInfo.entry.match(INVENTORY_REGEX)[0];
+  itemsInInventory = getInventory().map((k) => {
+    console.log(`INSIDE updateInventory(): Sorting inventory items and quantities into player WI`);
+    return `${k.name}< quantity: ${k.quantity}>`;
+  }).join('/ ');
+
+  playerWorldInfo.entry = playerWorldInfo.entry.replace(INVENTORY_REGEX, itemsInInventory);
+  updateWorldEntry(
+    state.worldInfoIndex,
+    playerWorldInfo.keys,
+    playerWorldInfo.entry,
+    false
+  );
+
+  console.log(`END updateInventory(): updated player's inventory and WI with current items`);
 }
 
 /**

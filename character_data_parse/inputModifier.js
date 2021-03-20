@@ -10,7 +10,7 @@ const modifier = (text) => {
       race: state.placeholders[2],
       class: state.placeholders[3],
       age: state.placeholders[4],
-      personality: state.placeholders[5].replace(/,/g, '/'),
+      personality: state.placeholders[5].replace(/,/g, '/ '),
       eyes: {
         eyeColor: state.placeholders[6]
       },
@@ -21,20 +21,19 @@ const modifier = (text) => {
       appearance: {
         height: state.placeholders[9].replace('cm', '').replace('centimeters', ''),
         weight: state.placeholders[10].replace('kg', '').replace('kilos', ''),
-        features: state.placeholders[11].replace(/,/g, '/')
+        features: state.placeholders[11].replace(/,/g, '/ ')
       },
       story: state.placeholders[12]
     };
 
     playerWorldInfo = {
-      keys: `${state.character.name},you`,
+      keys: `you`,
       hidden: false,
-      entry: state.character.name + ':['
-        + `RACE<${state.character.name}>:${state.character.race};`
-        + `DESC<${state.character.name}>:${state.character.appearance.features}/eyes<${state.character.eyes.eyeColor}>/hair<${state.character.hair.hairStyle}&${state.character.hair.hairColor}/height<${state.character.appearance.height} centimeters>/weight<${state.character.appearance.weight} kilos>>;`
-        + `SUMM<${state.character.name}>:${state.character.story};`
-        + `MIND<${state.character.name}>:${state.character.personality};`
-        + `WORN<${state.character.name}>:naked;`
+      entry: ' You:['
+        + ` NAME: ${state.character.name};`
+        + ` DESC: age< ${state.character.age}>/ race< ${state.character.race}>/${state.character.appearance.features}/ eyes< ${state.character.eyes.eyeColor}>/ hair< ${state.character.hair.hairStyle}& ${state.character.hair.hairColor}/${state.character.appearance.height}cm& ${state.character.appearance.weight}kg>;`
+        + ` SUMM: ${state.character.story};`
+        + ` MIND: ${state.character.personality};`
         + ']'
     };
 
