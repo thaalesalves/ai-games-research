@@ -25,9 +25,12 @@ const modifier = (text) => {
     console.log(params);
 
     if (cmd.includes('invCheck')) {
+      console.log(`Begin inventory check.`);
       state.shouldStop = true;
       modifiedText = `\n> You check your inventory.${checkInventory()}`;
+      console.log(`End inventory check.`);
     } else if (cmd.includes('invAdd')) {
+      console.log(`Begin inventory add.`);
       state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
       const itemQuantity = Number.isNaN(parseInt(params.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(params.replace(DIGIT_REGEX, '').trim());
@@ -37,7 +40,10 @@ const modifier = (text) => {
       } else {
         modifiedText = `\n> You cannot add less than 1 unit of an item to your inventory.`;
       }
+
+      console.log(`End inventory add.`);
     } else if (cmd.includes('invRemove')) {
+      console.log(`Begin inventory remove.`);
       state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
       const itemQuantity = Number.isNaN(parseInt(params.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(params.replace(DIGIT_REGEX, '').trim());
@@ -47,13 +53,18 @@ const modifier = (text) => {
       } else {
         modifiedText = `\n> You cannot remove less than 1 unit of an item from your inventory.`;
       }
+      console.log(`End inventory remove.`);
     } else if (cmd.includes('invEquip')) {
+      console.log(`Begin inventory equip.`);
       state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
       modifiedText = `\n> You equip ${itemName}.${equipItem(itemName)}`;
+      console.log(`End inventory equip.`);
     } else if (cmd.includes('invDebugWi')) {
+      console.log(`Begin inventory debug.`);
       state.shouldStop = true;
       modifiedText += `\n> Your inventory and player WI have been debugged. New player WI saved at index ${state.character.worldInfoIndex}`;
+      console.log(`End inventory debug.`);
     }
   }
 

@@ -26,7 +26,6 @@ const modifier = (text) => {
     equipItem('Rusty Sword');
 
     state.init = true;
-    modifiedText = modifiedText.replace(BRACKETS, '');
   }
 
   if (commandMatcher) {
@@ -40,7 +39,6 @@ const modifier = (text) => {
       console.log(`Begin inventory check.`);
       state.shouldStop = true;
       modifiedText = `\n> You check your inventory.${checkInventory()}`;
-      console.log(getInventory());
       console.log(`End inventory check.`);
     } else if (cmd.includes('invAdd')) {
       console.log(`Begin inventory add.`);
@@ -54,7 +52,6 @@ const modifier = (text) => {
         modifiedText = `\n> You cannot add less than 1 unit of an item to your inventory.`;
       }
 
-      console.log(getInventory());
       console.log(`End inventory add.`);
     } else if (cmd.includes('invRemove')) {
       console.log(`Begin inventory remove.`);
@@ -68,14 +65,12 @@ const modifier = (text) => {
         modifiedText = `\n> You cannot remove less than 1 unit of an item from your inventory.`;
       }
 
-      console.log(getInventory());
       console.log(`End inventory remove.`);
     } else if (cmd.includes('invEquip')) {
       console.log(`Begin inventory equip.`);
       state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
       modifiedText = `\n> You equip ${itemName}.${equipItem(itemName)}`;
-      console.log(getInventory());
       console.log(`End inventory equip.`);
     } else if (cmd.includes('invDebugWi')) {
       console.log(`Begin inventory debug.`);

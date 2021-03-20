@@ -181,7 +181,7 @@ const capitalize = (string) => {
  * Finds an item in the player's inventory
  * @param {string} itemName 
  */
- const findItemInInventory = (itemName) => {
+const findItemInInventory = (itemName) => {
   console.log(`START findItemInInventory(): Looking for item "${itemName}" in player's inventory.`);
   let loweredName = itemName.toLowerCase().replace(PUNCTUATION_REMOVE, '');
   let itemFound = getInventory().find((item) => {
@@ -213,9 +213,10 @@ const removeFromInventory = (itemName, itemQuantity) => {
     return `\nYou have removed ${itemQuantity} ${loweredName} from your inventory.`;
   }
 
-  console.log(`END removeFromInventory(): Found ${item.quantity} instances of "${itemName}" in player's inventory. Removing ${itemQuantity} instances of it.`);
   let index = getInventory().indexOf(item);
   getInventory().splice(index, 1);
+  updateInventory();
+  console.log(`END removeFromInventory(): Found ${item.quantity} instances of "${itemName}" in player's inventory. Removing ${itemQuantity} instances of it.`);
   return `\nYou have removed all ${loweredName} from your inventory.`;
 }
 
@@ -275,6 +276,7 @@ const addToInventory = (itemName, itemQuantity) => {
     item.quantity = item.quantity + itemQuantity;
   }
 
+  updateInventory();
   console.log(`END addToInventory(): ${itemQuantity} instances of "${itemName}" added to player's inventory.`);
   return `\nYou have added ${itemQuantity} ${loweredName} to your inventory.`;
 }
