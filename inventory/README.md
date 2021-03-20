@@ -44,3 +44,9 @@ Debugging inventory
 /invDebugWi
 > Your inventory and player WI have been debugged. New player WI saved at index 52
 ```
+
+## Future ideas for this framework (still need to be studied, they won't be available for some time, if at all)
+* Better item categorization (for now it's a simple array that sorts weapons, clothing and misc)
+* A crafting system linked to inventory items (such as alchemy, enchating and smithing)
+* Chests and homebase containers (suggested by birb)
+* Other ideas? Open an issue with suggestions! o/
