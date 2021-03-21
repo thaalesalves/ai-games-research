@@ -1,0 +1,104 @@
+[
+  {
+    "id": "0.3364947531043463",
+    "keys": "skyrim, province of skyrim, land of the nords, home of the nords",
+    "entry": " Skyrim:[ CLIMATE< Skyrim>: snowy and freezing to the north/ temperate and warm to the south/ tundras to the west/ deep woods to the south/ grasslands in the center/ temperate to the east; GEOGRAPHY< Skyrim>: mountainous/ full of valleys/ rivers/ forests/ woods/ wildlife; DESC< Skyrim>: The current ruler& high king of skyrim is Vrage. Homeland of the nords/ province of the empire/ high king is the title of the ruler/ solitude is the capital city/ is divided into nine holds/ each hold is governed by a jarl/ jarl is the ruler of a hold.]",
+    "hidden": false
+  },
+  {
+    "id": "0.4958877490012459",
+    "keys": "Whiterun Hold",
+    "entry": " Whiterun Hold:[ CLIMATE< Whiterun Hold>: temperate/ warm; GEOGRAPHY< Whiterun Hold>: grassy tundras/ white river/ open fields; DESC< Whiterun Hold>: The current ruler& jarl of whiterun is Yolanda. Whiterun Hold is the centermost hold of Skyrim/ being located right in the middle of the province. It borders the Rift/ the Pale/ Falkreath and Hjaalmarch. It is home to the ancient town of Rorikstead/ as well as the small town of Riverwood. The city of Whiterun is the capital of the hold/and is known as the economic capital of Skyrim due to its proximity to the Cyrodiil border.]",
+    "hidden": false
+  },
+  {
+    "id": "0.8858901310060372",
+    "keys": "Whiterun,Whiterun City,City of Whiterun",
+    "entry": " Whiterun:[ CLIMATE< Whiterun>: temperate/ warm; GEOGRAPHY< Whiterun>: on top of a hill/ big city; DESC< Whiterun>: The current ruler& jarl of whiterun is Yolanda. Whiterun is one of the richest cities in Skyrim/ and one of the oldest. It is located in the Whiterun Hold/ and is known for Jorrvaskr and the Skyforge/ both locations being known from ancient times/ in the Merethic Era when Ysgramor himself arrived in Tamriel. It is also known for Dragonsreach/ the city castle and Jarl's palace. Dragonsreach was built to trap dragons/ and there is the skull of a dragon on top the Jarl's throne. The city is divided into three districts: the Plains District/ where commerce is located/as well as the inn and the market square. The Winds District/ where houses and the temple are located/ as well as the entrance to Jorrvaskr and the Skyforge. The Cloud District/ where Dragonsreach is located.]",
+    "hidden": false
+  },
+  {
+    "id": "0.5565239795951209",
+    "keys": "the rift,rift hold",
+    "entry": " The Rift:[ CLIMATE< The Rift>: temperate/ warm/ sunny; GEOGRAPHY< The Rift>: temperate woods/ grasslands/ mountainous; DESC< The Rift>: The current ruler& jarl of the Rift is Argo. The rift is a beautiful place/ a warm place/ mountainous/ home to lake honrich/ the capital of the rift is riften/ yellow and beautiful trees/ beautiful lake/ beautiful sights/ jerall mountains to the south/ velothi mountains to the east/ borders morrowind to the east/ borders cyrodiil to the south.]",
+    "hidden": false
+  },
+  {
+    "id": "0.29560338203552283",
+    "keys": "riften,city of riften",
+    "entry": " Riften:[ CLIMATE< Riften>: temperate/ warm/ sunny; GEOGRAPHY< Riften>: temperate woods/ grasslands/ mountainous/ fishing port at lake honrich; DESC< Riften>: The current ruler& jarl of Riften is Argo. Riften is a beautiful fishing city/ a big city/ capital of the rift/ capital of the rift hold/ the mad mammoth is the local inn/ the mad mammoth is the local tavern/ the city is dedicated to the goddess mara/ the temple of mara is located in riften.]",
+    "hidden": false
+  },
+  {
+    "id": "0.7557881723928688",
+    "keys": "winterhold, city of winterhold, winter hold",
+    "entry": " Winterhold:[ CLIMATE< Winterhold>: polar/ cold/ freezing/ snowy; GEOGRAPHY< Winterhold>: rocky/ mountainous/ frozen mountains/ coastal; DESC< Winterhold>: The current ruler& jarl of Winterhold is Ungvid. Winterhold is a cold place/ full of mountains/ home to the college of winterhold/ fronzen hearth is the local inn/ frozen hearth is the local tavern/ sea of ghosts to the north/ jarl is the title of the ruler.]",
+    "hidden": false
+  },
+  {
+    "id": "0.465198479866984165",
+    "keys": "Falkreath,Falkreath Hold",
+    "entry": " Falkreath:[  CLIMATE< Falkreath>: temperate/ sunny/ rainy/ rainforest climate;  GEOGRAPHY< Falkreath>: Falkreath lies in the southern forests of Skyrim, on a strategic crossroad in the middle of its respective hold and the provincial border towards Hammerfell's wilder country, the Dragon's Teeth Mountains, and with Cyrodiil through the Pale Pass in the Jerall Mountains. Home of Skyrim's famous Pine Forest, Falkreath Hold is covered in a fine mist that makes the land seem without season. It borders the Skyrim holds of Whiterun, the Reach and the Rift.; DESC< Falkreath>: Uror is the current Jarl of Falkreath. It is a city that is heavily reliant to the lumber industry, due to the abundance of resources around them.; ]",
+    "hidden": false
+  },
+  {
+    "id": "0.65374578856786794567456437",
+    "keys": "the reach",
+    "entry": " The Reach:[  CLIMATE< The Reach>: temperate/ sunny/ warm/ hot;  GEOGRAPHY< The Reach>: Near the southwestern corner, the capital Markarth, formerly a Dwemer stronghold, emerges from the living rock of the Druadach Mountains, which transition into the Jerall Mountains near the hold's southeast corner. The Karth River begins in the southern region and drains the mountains, running like a deep gouge through the middle of the hold called the Karth River Canyon. The peaks of the Druadach range lie to the west of it, and high bluffs typically rise on the east leading to grassland and tundra;  DESC< The Reach>: Bolgeir is the current Jarl of the Reach. The Reach is the westernmost hold of Skyrim, bordering the provinces of Cyrodiil, Hammerfell and High Rock. It is a vast tundra made of grasslands, and is famous because the Karth River begins here before passing through Haafingar and connecting to the See of Ghosts in the north. The native people of the Reach are known as Reachmen.;]",
+    "hidden": false
+  },
+  {
+    "id": "0.48569468597795675",
+    "keys": "markarth,city of stone,markarth side",
+    "entry": " Markarth:[  CLIMATE< Markarth>: temperate/ sunny/ warm/ hot;  GEOGRAPHY< Markarth>: Nestled in the river valley of the Druadach Mountains. It is unique in that the city's layout is intricately built into the mountain of Karthmad, dividing the city into two districts. The northern end, Dryside has streets that ascend above each other with well-refined homes, below the main square and marketplace where the populace tend to congregate. The city's southern end is the Riverside, the basin populated by the lower-class and the bustling silver mines. These districts meet each other at either end of the city, at the main gates on the east side, while on the west side, they ascend high towards the top of the crag and at Understone Keep, which contains the Mournful Throne, the seat of power in the Reach.; DESC< Markarth>: Bolgeir is the current Jarl of Markarh. Markarth is one of the nine major cities in the province of Skyrim, found in the river valley of the Reach. Known colloquially as the City of Stone, it is a former Dwarven city built through a large stone crag, intricately designed around the cliffs and waterfalls from the environment. Since the region is poor farmland, Markarth is mainly a mining-town that has a vast influx of silver veins in the mountain. The city is the focal point of power throughout the region. It is often disputed over between the Reachmen and the Nords.;]",
+    "hidden": false
+  },
+  {
+    "id": "0.984516878451",
+    "keys": "the pale",
+    "entry": "The Pale:[  CLIMATE< The Pale>: cold& snowy/ freezing;  GEOGRAPHY< The Pale>: It stretches from the center of Skyrim all the way to its Northern Coast. Dominated by ice fields and glacial deposits, especially along its northern shore, some scattered ragged peaks, snow-covered ground, and little sunshine means most of the Nords congregate at the city of Dawnstar, a popular port and mining town.The Pale lacks waterways, save for Lake Yorgrim, located in the southeastern corner of the Hold.;  DESC< The Pale>: Dagny is the current Jarl of the Pale. The Pale, named for the pallid Tundra and pigmentation of its Nord inhabitants, is one of the four oldest Holds in Skyrim. The harsh environment here makes life a chore rather than a joy, and the shape of the Hold has led some to refer to it as “the old boot.”;]",
+    "hidden": false
+  },
+  {
+    "id": "0.1654984165468746878945123546854745311234",
+    "keys": "dawnstar",
+    "entry": " Dawnstar:[  CLIMATE< Dawnstar>: cold& snowy/ freezing;  GEOGRAPHY< Dawnstar>: The city has two mines, Iron-Breaker Mine and Quicksilver Mine, which supply iron and quicksilver respectively. It is home to many fishermen and is an important port.;  DESC< Dawnstar>: Dagny is the current Jarl of Dawnstar. Dawnstar is a settlement on the northern coast of Skyrim, and the hold capital of the Pale. t was once a garrison town, which served as an exile post due to the cold harsh climate and notorious gales. The settlement seemingly got its name due to its reputation for greeting the sun as it begins its journey.;]",
+    "hidden": false
+  },
+  {
+    "id": "0.465167984",
+    "keys": "Hjaalmarch",
+    "entry": " Hjaalmarch:[  CLIMATE< Hjaalmarch>: temperate/ warm/ hot;  GEOGRAPHY< Hjaalmarch>: Roughly half the hold consists of the Drajkmyr marsh, although some farms dot the tundra. The region is veined with waterways that empty into the Sea of Ghosts, and the Skyborn Range further isolates the area from the east and southern border. Hjaalmarch is home to the Karth delta where the mighty Karth River and the smaller River Hjaal empty into the Sea of Ghosts through a variety of intricate channels.  The Deathbell flower is known to be abundant throughout the swamps.;  DESC< Hjaalmarch>: Thora is the current Jarl of Hjaalmarch. Hjaalmarch, or Hjaalmarch Hold, is a lowland coastal hold in Skyrim. Morthal is the capital and the only settlement in the hold. Combined with the fog that surrounds the marshes and the creatures that stalk the land (Wispmothers purportedly originated here), Hjaalmarch is considered one of the more mysterious holds in Skyrim. Many ruins dot the hold, including the legendary Labyrinthian.;]",
+    "hidden": false
+  },
+  {
+    "id": "0.65849879/84541",
+    "keys": "morthal",
+    "entry": " Morthal:[  CLIMATE< Morthal>: temperate/ warm/ hot;  GEOGRAPHY< Morthal>: swamps, rivers, marsh;  DESC< Morthal>: Thora is the current Jarl of Morthal. Morthal, supposedly named after the great Nord hero Morihaus, is the capital of Hjaalmarch, although it is a fairly small, humble town of little economic or strategic importance besides its small lumber mill. The town's symbol is a green triskelion.;]",
+    "hidden": false
+  },
+  {
+    "id": "0.97894615",
+    "keys": "eastmarch",
+    "entry": " Eastmarch:[  CLIMATE< Eastmarch>: freezing cold in the north/ temperate and warm in the south near the water springs;  GEOGRAPHY< Eastmarch>: Darkwater River winds north from Lake Geir into this treacherous hot spot, where it meets the White River which then drains into the Sea of Ghosts as it passes Windhelm. The Skyrim part of the Velothi mountains are in Eastmarch.  Windhelm is the only sizable city in the otherwise rural province due to the expansive hot springs which dominate the hold.;  DESC< Eastmarch>: Atmor is the current Jarl of Eastmarch. Eastmarch is the eastern hold of Skyrim, and one of the four known collectively as the Old Holds. As its name suggests, it lies against the province's eastern border, close to the Dunmeth Pass, the only passage to and from Morrowind in the area due to the high and rugged Velothi Mountains.;]",
+    "hidden": false
+  },
+  {
+    "id": "0.587486516",
+    "keys": "windhelm",
+    "entry": " Windhelm:[  CLIMATE< Windhelm>: cold/ freezing/ snowy;  GEOGRAPHY< Windhelm>: city build from stone, its entrance bridge above the White River;  DESC< Windhelm>: Atmor is the current Jarl of Windhelm. Windhelm is a city in northeastern Skyrim, close to the border with Morrowind, and is the only substantial city in the Hold of Eastmarch. It is not only the oldest city in Skyrim, but is the oldest continuously inhabited human settlement in Tamriel.Windhelm was once the capital of the First Empire of the Nords and the old palace of the Ysgramor dynasty, the Palace of the Kings, still stands in the center of the city.;]",
+    "hidden": false
+  },
+  {
+    "id": "0.5297422967695256",
+    "keys": "Haafingar,haafingar hold",
+    "entry": "Haafingar:[CLIMATE<Haafingar>:temperate and warm and sunny to the south/cold to and frozen to the north;GEOGRAPHY<Haafingar>:mountainous/karth river cuts the hold and goes out in the sea of ghosts to the north/kilkreath mountain/druadach mountains;DESC<Haafingar>:haafingar is currently the imperial seat in skyrim/solitude is the capital city of haafingar/solitude is the capital of skyrim/dragon bridge is a settlement south of solitude/the kilkreath temple is a temple dedicated to the daedric prince meridia/kilkreath temple has a huge statue of meridia/kilkreath temple is south of solitude/haafingar borders high rock to the west.]",
+    "hidden": false
+  },
+  {
+    "id": "0.059520193664433174",
+    "keys": "solitude,city of solitude",
+    "entry": "Solitude:[CLIMATE<Solitude>:temperate and warm and sunny to the south/cold to and frozen to the north;GEOGRAPHY<Solitude>:mountainous/karth river cuts the hold and goes out in the sea of ghosts to the north/kilkreath mountain/druadach mountains;DESC<Solitude>:solitude is a big city/solitude is the capital of skyrim/solitude has a huge keep called castle dour/solitude has the biggest temple in skyrim that is dedicated to the nine divines/the seat of the king in solitude is the blue palace/solitude is located on top of a huge stone arch/solitude port is the most important port in skyrim and goes out to the sea of ghosts/the east empire company headquarters in skyrim is located in solitude.]",
+    "hidden": false
+  }
+]

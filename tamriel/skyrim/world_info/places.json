@@ -1,0 +1,26 @@
+[
+  {
+    "id": "0.818803105546712",
+    "keys": "riften inn,riften tavern,mad mammoth",
+    "entry": "The Mad Mammoth:[TYPE<The Mad Mammoth>:inn/bar/pub/tavern;OWNER<The Mad Mammoth>:andkvar;INHABITANTS<The Mad Mammoth>:Andkvar/Narca/Bujela/Freyte/Torbndir;LOCATION<The Mad Mammoth>:Riften;CITY<The Mad Mammoth>:Riften;DESC<The Mad Mammoth>:the mad mammoth is the local inn and tavern in riften/it is owned by andkvar/has rooms for rent/there are 10 rooms/there's a big fireplace in the center of the hall/andkvar lives here/narca lives here/bujela lives here/freyte lives here/torbndir lives here/five people live here;EXIT<The Mad Mammoth>:one exit goes out to riften in the market square/one exit goes to riften in the entrance bridge.]",
+    "hidden": false
+  },
+  {
+    "id": "0.8251141022498825",
+    "keys": "winterhold inn, frozen hearth, winterhold tavern",
+    "entry": "The Frozen Hearth:[TYPE<The Frozen Hearth>:inn/bar/pub/tavern;OWNER<The Frozen Hearth>:Bjormar;INHABITANTS<The Frozen Hearth>:Bjormar/Astrid/Aengvir/Balor;LOCATION<The Frozen Hearth>:Winterhold;CITY<The Frozen Hearth>:Winterhold;DESC<The Frozen Hearth>:the frozen hearth is the local inn and tavern in winterhold/it is owned by Bjormar/it has rooms for rent/there are 10 rooms/there's a big fireplace in the center of the hall/balor lives here/Bjormar owns the place/astrid lives here/aengvir lives here/there are four people here/balor lives here;EXIT<The Frozen Hearth>:exit that goes out to the city of winterhold.]",
+    "hidden": false
+  },
+  {
+    "id": "0.3548538694560268",
+    "keys": "bloated goat, whiterun inn, whiterun tavern",
+    "entry": "The Bloated Goat:[TYPE<The Bloated Goat>:inn/bar/pub/tavern;OWNER<The Bloated Goat>:Isekaid;INHABITANTS<The Bloated Goat>:Isekaid/Sigrid;LOCATION<The Bloated Goat>:whiterun/city of whiterun;CITY<The Bloated Goat>:whiterun/city of whiterun;DESC<The Bloated Goat>:The Bloated Goat is the inn and tavern in the city of Whiterun/owned by Isekaid and his wife Sigrid. They both live at the inn/in their private room in the ground floor. The inn is a two story building with 10 rooms for rent.;EXIT<The Bloated Goat>:One main exit goes out to the Whiterun market square/located in the Plains District..]",
+    "hidden": false
+  },
+  {
+    "id": "0.13879806616371204",
+    "keys": "temple of kyne",
+    "entry": "Temple of Kyne:[TYPE<Temple of Kyne>:temple/church/cathedral;INHABITANTS<Temple of Kyne>:Irene/Mauricius/Nonnata;LOCATION<Temple of Kyne>:whiterun/city of whiterun;CITY<Temple of Kyne>:whiterun/city of whiterun;DESC<Temple of Kyne>:Temple dedicated to Kyne/the goddess of wind and air. It's the main temple to Kyne in Skyrim/located in the Winds District.;EXIT<Temple of Kyne>:One main exit goes out to the Whiterun tree square/located in the Winds District.]",
+    "hidden": false
+  }
+]
