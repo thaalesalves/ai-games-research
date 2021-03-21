@@ -1,5 +1,11 @@
 [
   {
+    "id": "0.9765384539248597",
+    "keys": "Katariah,Empress of Cyrodill,Empress of Tamriel,the Empress,the Emperor,Emperor of Tamriel,the Emperor",
+    "entry": "[  Katariah description:< name ≡ Katariah / Empress Katariah/ Katariah Ra'athim>/< age ≡ 38y>/< ♀>/<race ≡ Dunmer>. Katariah appearance:< body ≡ 170cm_height/ 40kg_weight/ slim/ slender/ hair< long& black>/ red eyes/ dark grey skin>. Katariah mental:< just/ smart/ clever/ fair/ happy/ calm>.  Katariah moniker:< Empress& Emperor of Cyrodiil& Tamriel>.  Katariah traits:< just/ smart/ clever/ fair/ happy>.  Katariah speech:< harsh& sweet& calm voice>.]",
+    "hidden": false
+  },
+  {
     "id": "0.745118808720757",
     "keys": "Ungvid,Jarl of Winterhold,Ruler of Winterhold",
     "entry": "[ Ungvid description:< name ≡ Ungvid / Jarl Ungvid>/< age  ≡ 62y>/< ♂>/<race ≡ Nord>. Ungvid appearance:< body ≡ 179cm_height/ 65kg_weight/ slim/ slender/ full beard/ long hair/ dark blonde hair>. Ungvid mental:< stubborn/ serious/ arrogant/ prepotent/ pretentious>. Ungvid moniker:< Ruler of Winterhold>. Ungvid traits:< arrogant/ pretentious/ stubborn>. Ungvid speech:< harsh& deep voice>.]",
@@ -27,12 +33,6 @@
     "id": "0.456758676983456345758",
     "keys": "Uror,Ruler of Falkreath,Jarl of Falkreath",
     "entry": "[    Uror description:< name ≡ Uror / Jarl Uror/< age ≡ 55y>/< ♂>/<race ≡ Nord>.   Uror appearance:< body ≡ 180cm_height/ 75kg_weight/ tall/ muscular body/ red beard and hair>.   Uror mental:< courageous/ brave/ good humored/ optimistic/ intelligent/ talkative/ stubborn>.    Uror moniker:< Ruler of Falkreath>.    Uror traits:< courageous/ brave/ good humored>.    Uror speech:< deep voice& thick nord accent>.]",
-    "hidden": false
-  },
-  {
-    "id": "0.9765384539248597",
-    "keys": "Katariah,Empress of Cyrodill,Empress of Tamriel,the Empress,the Emperor,Emperor of Tamriel,the Emperor",
-    "entry": "[  Katariah description:< name ≡ Katariah / Empress Katariah/ Katariah Ra'athim>/< age ≡ 38y>/< ♀>/<race ≡ Dunmer>. Katariah appearance:< body ≡ 170cm_height/ 40kg_weight/ slim/ slender/ hair< long& black>/ red eyes/ dark grey skin>. Katariah mental:< just/ smart/ clever/ fair/ happy/ calm>.  Katariah moniker:< Empress& Emperor of Cyrodiil& Tamriel>.  Katariah traits:< just/ smart/ clever/ fair/ happy>.  Katariah speech:< harsh& sweet& calm voice>.]",
     "hidden": false
   },
   {
