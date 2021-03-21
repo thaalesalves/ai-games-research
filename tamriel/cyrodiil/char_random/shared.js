@@ -17,7 +17,7 @@ const CLOTHING = [
 
 const RANDOM_CHARACTERS = [
   {
-    name: `Hrissa`,
+    name: `Hrissia`,
     gender: `female`,
     race: `Imperial`,
     age: '28',
@@ -222,12 +222,6 @@ const equipItem = (itemName) => {
 
     console.log(`INSIDE equipItem(): finished building new WORN string -> ${itemsWorn}`);
     playerWorldInfo.entry = playerWorldInfo.entry.replace(WORN_REGEX, itemsWorn);
-    updateWorldEntry(
-      state.worldInfoIndex,
-      playerWorldInfo.keys,
-      playerWorldInfo.entry,
-      false
-    );
 
     console.log(`END equipItem(): ${itemToBeEquipped.name} has been equipped.`);
     return `\nYou are now ${itemToBeEquipped.type == 'weapon' ? 'wielding' : 'wearing'} ${itemToBeEquipped.name}.`;
@@ -262,13 +256,6 @@ const debugInventory = () => {
   playerWorldInfo.entry = playerWorldInfo.entry.replace(WORN_REGEX, itemsWorn);
   playerWorldInfo.entry = playerWorldInfo.entry.replace(INVENTORY_REGEX, itemsInInventory);
 
-  updateWorldEntry(
-    state.worldInfoIndex,
-    playerWorldInfo.keys,
-    playerWorldInfo.entry,
-    false
-  );
-
   console.log("INSIDE debugInventory(): Fixed player WI with inventory's items.");
   console.log(`END debugInventory(): Player's WI saved at index ${state.worldInfoIndex}.`);
 }
@@ -286,13 +273,6 @@ const updateInventory = () => {
   }).join('/ ');
 
   playerWorldInfo.entry = playerWorldInfo.entry.replace(INVENTORY_REGEX, itemsInInventory);
-  updateWorldEntry(
-    state.worldInfoIndex,
-    playerWorldInfo.keys,
-    playerWorldInfo.entry,
-    false
-  );
-
   console.log(`END updateInventory(): updated player's inventory and WI with current items`);
 }
 
