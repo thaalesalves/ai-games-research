@@ -16,6 +16,30 @@ const CLOTHING = [
 ];
 
 const RANDOM_CHARACTERS = [
+  {
+    name: `Hrissa`,
+    gender: `female`,
+    race: `Imperial`,
+    age: '28',
+    personality: 'mean, cantankerous, violent, cruel, mean, hates almost everyone she meets',
+    class: 'bandit',
+    eyes: {
+      eyeColor: 'blue'
+    },
+    hair: {
+      hairStyle: 'long',
+      hairColor: 'blonde'
+    },
+    appearance: {
+      height: '185',
+      weight: '67',
+      features: 'muscular body, long blonde hair, blue eyes, tall, skinny'
+    },
+    story: `Hrissia was born into a poor family who owned a general store located in the city of Anvil. As a little girl, Hrissia had no friends and the other children would bully her daily. Her parents would always tell her that jealousy was the reason why other children didn't like her. Hrissia grew bitter and alienated from others as she grew older. At the age of eight, she was caught stealing a fruit from a stand and was almost taken to court. Hrissia never returned to school after that. Since her family was too poor to send her to a better school, Hrissia never learned how to read or write. At the age of fifteen, Hrissia began involving herself in thievery to earn a living. Five years later, she moved to Kvatch where there were more opportunities for a young rogue. There she met a man named Karstark. The two fell in love and had a sexual relationship. They lived together for three years until Hrissia discovered Karstark was making plans to murder her and steal all her belongings. One night, while sleeping, Hrissia killed him with his own dagger. It was then, for the first time in her life, Hrissia felt powerful and in control. She decided to leave Kvatch and become a bandit.`,
+    storyStart: `You are at your base with your fellow bandits. Your base is located in the Blackwoods, in the Nibenese Plains, just east of the city of Leyawiin. You're relaxing drinking a mug of red ale and eating some pork when a fellow bandit, an Orc by the name of Grog gro-Murak, approaches you.\n"Hrissia, I heard some noble suckers from Skingrad are coming down the road on their way to Leyawiin. Let's mug them, come with me.", Grog gro-Murak says.`,
+    worn: `steel armor and steel shield`,
+    weapon: 'steel sword'
+  }
 ];
 
 /**
