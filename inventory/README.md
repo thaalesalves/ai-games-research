@@ -47,6 +47,7 @@ Debugging inventory
 
 ## Future ideas for this framework (still need to be studied, they won't be available for some time, if at all)
 * Better item categorization (for now it's a simple array that sorts weapons, clothing and misc)
+* Item removal after use (for some item types, at least)
 * A crafting system linked to inventory items (such as alchemy, enchating and smithing)
 * Chests and homebase containers (suggested by birb)
 * Other ideas? Open an issue with suggestions! o/
