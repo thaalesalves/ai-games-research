@@ -1,0 +1,56 @@
+[
+  {
+    "id": "3.1",
+    "keys": "Whiterun Hold#[t=9l=2f=2]",
+    "entry": "Whiterun Hold:[DESC:hold_region<central_skyrim>;Whiterun Hold.CLIM:temperate_to_warm;GEOGR:grasslands hills&white_river;CULTURE:<nord&wooden_constructions&symbol_horse>;RUL:jarl<Yolanda>;Whiterun Hold.FEATURES:grasslands&hills fertile&farmland small_towns&big_city_capital:<Whiterun>.]",
+    "hidden": false
+  },
+  {
+    "id": "3.2",
+    "keys": "(|the) rift#[t=9l=2f=2]",
+    "entry": "The Rift:[DESC:hold_region<southeaster_skyrim>;The Rift.CLIM:temperate_to_warm;GEOGR:lush_forests&yellow_red_trees lake_honrich&port;CULTURE:<nord&wooden_constructions thieves&corruption fishing&symbol_cross_swords>;RUL:jarl<Argo>;The Rift.FEATURES:lush_forests&yellow_red_trees fertile&farmland small_towns&big_city_capital:<Riften>.]",
+    "hidden": false
+  },
+  {
+    "id": "3.3",
+    "keys": "(winter( |)hold hold)#[t=9l=2f=2]",
+    "entry": "Winterhold Hold:[DESC:hold_region<northeastern_skyrim>;Winterhold Hold.CLIM:cold&snowy&freezing;GEOGR:mountainous&snowy hills&cliffs;CULTURE:<nord&wooden_constructions magic_college&fishing&symbol_crown>;RUL:jarl<Ungvid>;Winterhold Hold.FEATURES:azura_giant_statue&college_winterhold&port_city sea_of_ghosts&aurora_at_night big_city_capital:<Winterhold>.]",
+    "hidden": false
+  },
+  {
+    "id": "3.4",
+    "keys": "(falkreath)#[t=9l=2f=2]",
+    "entry": "Falkreath Hold:[DESC:hold_region<southern_skyrim>;Falkreath.CLIM:warm&sunny;GEOGR:rainforest&lush_woods wildlife&lakes;CULTURE:<nord&wooden_constructions hunting&fishing&symbol_deer>;RUL:jarl<Uror>;Falkreath.FEATURES:hunting&fishing lake_ilinalta&brittleshin_pass big_city_capital:<Falkreath>.]",
+    "hidden": false
+  },
+  {
+    "id": "3.5",
+    "keys": "the reach#[t=9l=2f=2]",
+    "entry": "The Reach:[DESC:hold_region<western_skyrim>;The Reach.CLIM:warm&stormy;GEOGR:grasslands&waterfall&karth_river;CULTURE:<nord&stone_dwemer_constructions silver_mining&fishing&symbol_horns>;RUL:jarl<Bolgeir>;The Reach.FEATURES:stone_city&dwemer_architecture city_inside_of_mountain&cidhna_mine big_city_capital:<Markarth>.]",
+    "hidden": false
+  },
+  {
+    "id": "3.6",
+    "keys": "the pale#[t=9l=2f=2]",
+    "entry": "The Pale:[DESC:hold_region<northern_skyrim>;The Pale.CLIM:cold&snowy;GEOGR:grasslands&waterfall&karth_river;CULTURE:<nord&wooden_constructions fishing&port_city& symbol_wind_star>;RUL:jarl<Dagny>;The Pale.FEATURES:iron_mining&quicksilver_mining snowy&cold&frozen port_city&sea_of_ghosts big_city_capital:<Dawnstar>.]",
+    "hidden": false
+  },
+  {
+    "id": "3.7",
+    "keys": "Hjaalmarch#[t=9l=2f=2]",
+    "entry": "Hjaalmarch:[DESC:hold_region<northern_skyrim>;Hjaalmarch.CLIM:warm&hot;GEOGR:swamps&bogs river&grassland;CULTURE:<nord&wooden_constructions mining&hunting&symbol_triskelion>;RUL:jarl<Thora>;Hjaalmarch.FEATURES:mining&hunting swamp&warm hjaal_river&karth_river big_city_capital:<Morthal>.]",
+    "hidden": false
+  },
+  {
+    "id": "3.8",
+    "keys": "eastmarch#[t=9l=2f=2]",
+    "entry": "Eastmarch:[DESC:hold_region<eastern_skyrim>;Eastmarch.CLIM:snowy&freezing<north> temperate_to_warm<south>;GEOGR:hot_water_springs<south> cliff&mountain windy snowy<north>&white_river;CULTURE:<nord&wooden_constructions fishing&sea_trading port_city&smithing>;RUL:jarl<Atmor>;Eastmarch.FEATURES:frozen_water&palace_of_kings_made_of_stone oldes_city_skyrim&historical_capital_skyrim big_city_capital:<Windhelm>.]",
+    "hidden": false
+  },
+  {
+    "id": "3.9",
+    "keys": "Haafingar#[t=9l=2f=2]",
+    "entry": "Haafingar:[DESC:hold_region<northwestern_skyrim>;Haafingar.CLIM:snowy&freezing<north> warm<south>;GEOGR:karth_river&sea_of_ghosts mountain&farmland&fertile&mills;CULTURE:<nord&brick_constructions economical_power&capital_city fishing&sea_trading port_city&arts>;RUL:jarl_king<Vrage>;Haafingar.FEATURES:kilkreath_temple_meridia&town_of_dragon_bridge karth_river&sea_of_ghosts&port big_city_capital:<Solitude>.]",
+    "hidden": false
+  }
+]

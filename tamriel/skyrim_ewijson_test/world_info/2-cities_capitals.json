@@ -1,0 +1,62 @@
+[
+  {
+    "id": "2.1",
+    "keys": "(white( |)run)#[t=9l=2f=2]",
+    "entry": "Whiterun:[DESC:city<central_skyrim>;Whiterun.CLIM:temperate_to_warm;CULTURE:<nord&wooden_constructions&symbol_horse>;RUL:jarl<Yolanda>;Whiterun.FEATURES:top_of_hill&white_river&grasslands_around.]",
+    "hidden": false
+  },
+  {
+    "id": "2.2",
+    "keys": "riften#[t=9l=2f=2]",
+    "entry": "Riften:[DESC:city<southeaster_skyrim>;Riften.CLIM:temperate_to_warm;CULTURE:<nord&wooden_constructions thieves&corruption fishing&symbol_cross_swords>;RUL:jarl<Argo>;Riften.FEATURES:port_city&lake_honrich thieves_guild&temple_of_mara.]",
+    "hidden": false
+  },
+  {
+    "id": "2.3",
+    "keys": "(winter( |)hold)#[t=9l=2f=2]",
+    "entry": "Winterhold:[DESC:city<northeastern_skyrim>;Winterhold.CLIM:cold&snowy&freezing;CULTURE:<nord&wooden_constructions magic_college&fishing&symbol_crown>;RUL:jarl<Ungvid>;Winterhold.FEATURES:college_winterhold&port_city sea_of_ghosts&aurora_at_night.]",
+    "hidden": false
+  },
+  {
+    "id": "2.4",
+    "keys": "Falkreath#[t=9l=2f=2]",
+    "entry": "Falkreath:[DESC:city<southern_skyrim>;Falkreath.CLIM:warm&sunny;CULTURE:<nord&wooden_constructions hunting&fishing&symbol_deer>;RUL:jarl<Uror>;Falkreath.FEATURES:hunting&fishing.]",
+    "hidden": false
+  },
+  {
+    "id": "2.5",
+    "keys": "markarth|city of stone#[t=9l=2f=2]",
+    "entry": "Markarth:[DESC:city<western_skyrim>;Markarth.CLIM:warm&stormy;CULTURE:<nord&stone_dwemer_constructions silver_mining&fishing&symbol_horns>;RUL:jarl<Bolgeir>;Markarth.FEATURES:stone_city&dwemer_architecture city_inside_of_mountain&cidhna_mine.]",
+    "hidden": false
+  },
+  {
+    "id": "2.6",
+    "keys": "dawnstar#[t=9l=2f=2]",
+    "entry": "Dawnstar:[DESC:city<northern_skyrim>;Dawnstar.CLIM:cold&snowy;CULTURE:<nord&wooden_constructions fishing&port_city&mining symbol_wind_star>;RUL:jarl<Dagny>;Dawnstar.FEATURES:iron_mining&quicksilver_mining snowy&cold&frozen port_city&sea_of_ghosts.]",
+    "hidden": false
+  },
+  {
+    "id": "2.7",
+    "keys": "morthal#[t=9l=2f=2]",
+    "entry": "Morthal:[DESC:city<northern_skyrim>;Morthal.CLIM:warm&hot;CULTURE:<nord&wooden_constructions mining&hunting&symbol_triskelion>;RUL:jarl<Thora>;Morthal.FEATURES:mining&hunting swamp&warm.]",
+    "hidden": false
+  },
+  {
+    "id": "2.8",
+    "keys": "windhelm#[t=9l=2f=2]",
+    "entry": "Windhelm:[DESC:city<eastern_skyrim>;Windhelm.CLIM:snowy&freezing<north> temperate_to_warm<south>;CULTURE:<nord&wooden_constructions fishing&sea_trading port_city&smithing>;RUL:jarl<Atmor>;Windhelm.FEATURES:frozen_water&palace_of_kings_made_of_stone oldes_city_skyrim&historical_capital_skyrim.]",
+    "hidden": false
+  },
+  {
+    "id": "2.9",
+    "keys": "solitude#[t=9l=2f=2]",
+    "entry": "Solitude:[DESC:city<northwestern_skyrim>;Solitude.CLIM:snowy&freezing<north> warm<south>;Solitude.CULTURE:<nord&brick_constructions economical_power&capital_city fishing&sea_trading port_city&arts>;RUL:jarl_king<Vrage>;Solitude.FEATURES:bards_college&antiquarian_circle port_city east_empire_company&built_top_stone_arch capital_city_skyrim&rich_city.]",
+    "hidden": false
+  },
+  {
+    "id": "2.10",
+    "keys": "snow( |)hawk#[t=9l=2f=2]",
+    "entry": "",
+    "hidden": false
+  }
+]
