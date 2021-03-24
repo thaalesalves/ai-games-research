@@ -2,61 +2,79 @@
   {
     "id": "2.1",
     "keys": "(white( |)run)#[t=9l=2f=2]",
-    "entry": "Whiterun:[DESC:city<central_skyrim>;Whiterun.CLIM:temperate_to_warm;CULTURE:<nord&wooden_constructions&symbol_horse>;RUL:jarl<Yolanda>;Whiterun.FEATURES:top_of_hill&white_river&grasslands_around.]",
+    "entry": "[ Whiterun description:< city state in eastern skyrim>/< hold≡ Whiterun>/< kingdom≡ eastern skyrim>. Whiterun climate:< warm& breeze>. Whiterun culture:< economical power& hunting& smithing>. Whiterun ruler:< jarl≡ Yolanda>/< palace≡ Dragonsreach>. Whiterun features:< built on top of hill& dragonsreach& jorrvaskr& temple of kynareth& capital city of Whiterun>.]",
     "hidden": false
   },
   {
     "id": "2.2",
     "keys": "riften#[t=9l=2f=2]",
-    "entry": "Riften:[DESC:city<southeaster_skyrim>;Riften.CLIM:temperate_to_warm;CULTURE:<nord&wooden_constructions thieves&corruption fishing&symbol_cross_swords>;RUL:jarl<Argo>;Riften.FEATURES:port_city&lake_honrich thieves_guild&temple_of_mara.]",
+    "entry": "[ Riften description:< city state in eastern skyrim>/< hold≡ Haafingar>/< kingdom≡ eastern skyrim>/<rival city≡ Windhelm>. Riften climate:< warm& breeze>. Riften culture:< hunting& fishing& corruption& capital city>. Riften ruler:< king≡ Argo>/ <palace≡ Mistveil Keep>. Riften features:< built next to honrich lake& capital city of the rift>.]",
     "hidden": false
   },
   {
     "id": "2.3",
     "keys": "(winter( |)hold)#[t=9l=2f=2]",
-    "entry": "Winterhold:[DESC:city<northeastern_skyrim>;Winterhold.CLIM:cold&snowy&freezing;CULTURE:<nord&wooden_constructions magic_college&fishing&symbol_crown>;RUL:jarl<Ungvid>;Winterhold.FEATURES:college_winterhold&port_city sea_of_ghosts&aurora_at_night.]",
+    "entry": "[ Winterhold description:< city state in eastern skyrim>/< hold≡ Winterhold>/< kingdom≡ eastern skyrim>/<rival city≡ Windhelm>. Winterhold climate:< snowy&freezing>. Winterhold culture:< nord& magic& fishing& sea trading>. Winterhold ruler:< jarl≡ Ungvid>. Winterhold features:< college of winterhold& port city& capital city of winterhold>.]",
     "hidden": false
   },
   {
     "id": "2.4",
     "keys": "Falkreath#[t=9l=2f=2]",
-    "entry": "Falkreath:[DESC:city<southern_skyrim>;Falkreath.CLIM:warm&sunny;CULTURE:<nord&wooden_constructions hunting&fishing&symbol_deer>;RUL:jarl<Uror>;Falkreath.FEATURES:hunting&fishing.]",
+    "entry": "[ Falkreath description:< city state in southern skyrim>/< hold≡ Falkreath>/< kingdom≡ Falkreath>. Falkreath climate:< warm& breeze>. Falkreath culture:< fishing& hunting& leatherwork& pelts>. Falkreath ruler:< king≡ Uror>. Falkreath features:< city in the middle of the woods& border with Cyrodiil& capital city of Falkreath>.]",
     "hidden": false
   },
   {
     "id": "2.5",
     "keys": "markarth|city of stone#[t=9l=2f=2]",
-    "entry": "Markarth:[DESC:city<western_skyrim>;Markarth.CLIM:warm&stormy;CULTURE:<nord&stone_dwemer_constructions silver_mining&fishing&symbol_horns>;RUL:jarl<Bolgeir>;Markarth.FEATURES:stone_city&dwemer_architecture city_inside_of_mountain&cidhna_mine.]",
+    "entry": "[ Markarth description:< city state in western skyrim>/< hold≡ The Reach>/< kingdom≡ The Reach>. Markarth climate:< warm& hot& breeze>. Markarth culture:< reachmen culture& ruled by an Ard& capital city>. Markarth ruler:< Ard≡ Dorach>/ <palace≡ Understone Keep>. Markarth features:< built inside of a mountain& dwemer stone and brass architecture& capital city of the reach>.]",
     "hidden": false
   },
   {
     "id": "2.6",
-    "keys": "dawnstar#[t=9l=2f=2]",
-    "entry": "Dawnstar:[DESC:city<northern_skyrim>;Dawnstar.CLIM:cold&snowy;CULTURE:<nord&wooden_constructions fishing&port_city&mining symbol_wind_star>;RUL:jarl<Dagny>;Dawnstar.FEATURES:iron_mining&quicksilver_mining snowy&cold&frozen port_city&sea_of_ghosts.]",
+    "keys": "markarth|city of stone#[t=10l=2f=2]",
+    "entry": "[ Markarth culture:< silver mining& fishing& hunting>. Markarth features:< temple of hircine& silver mine& smithing]",
     "hidden": false
   },
   {
     "id": "2.7",
-    "keys": "morthal#[t=9l=2f=2]",
-    "entry": "Morthal:[DESC:city<northern_skyrim>;Morthal.CLIM:warm&hot;CULTURE:<nord&wooden_constructions mining&hunting&symbol_triskelion>;RUL:jarl<Thora>;Morthal.FEATURES:mining&hunting swamp&warm.]",
+    "keys": "dawnstar#[t=9l=2f=2]",
+    "entry": "[ Dawnstar description:< city state in western skyrim>/< hold≡ The Pale>/< kingdom≡ western skyrim>/<rival city≡ Whiterun& Winterhold>. Dawnstar climate:< snowy&freezing>. Dawnstar culture:< fishing& hunting& capital city>. Dawnstar ruler:< queen≡ Dagny>. Dawnstar features:< wooden houses& port city& sea trading& capital city of the pale>.]",
     "hidden": false
   },
   {
     "id": "2.8",
-    "keys": "windhelm#[t=9l=2f=2]",
-    "entry": "Windhelm:[DESC:city<eastern_skyrim>;Windhelm.CLIM:snowy&freezing<north> temperate_to_warm<south>;CULTURE:<nord&wooden_constructions fishing&sea_trading port_city&smithing>;RUL:jarl<Atmor>;Windhelm.FEATURES:frozen_water&palace_of_kings_made_of_stone oldes_city_skyrim&historical_capital_skyrim.]",
+    "keys": "morthal#[t=9l=2f=2]",
+    "entry": "[ Morthal description:< city state in eastern skyrim>/< hold≡ Hjaalmarch>/< kingdom≡ western skyrim>/<rival city≡ Dawnstar>. Morthal climate:< warm& hot>. Morthal geography:< swamp& marsh>. Morthal culture:< nord& capital city>. Morthal ruler:< king≡ Thora>. Morthal features:< capital city of Hjaalmarch& swamps>.]",
     "hidden": false
   },
   {
     "id": "2.9",
-    "keys": "solitude#[t=9l=2f=2]",
-    "entry": "Solitude:[DESC:city<northwestern_skyrim>;Solitude.CLIM:snowy&freezing<north> warm<south>;Solitude.CULTURE:<nord&brick_constructions economical_power&capital_city fishing&sea_trading port_city&arts>;RUL:jarl_king<Vrage>;Solitude.FEATURES:bards_college&antiquarian_circle port_city east_empire_company&built_top_stone_arch capital_city_skyrim&rich_city.]",
+    "keys": "windhelm#[t=9l=2f=2]",
+    "entry": "[ Windhelm description:< city state in eastern skyrim>/< hold≡ Eastmarch>/< kingdom≡ eastern skyrim>/< rival city≡ Riften& Winterhold>. Windhelm climate:< north≡ snowy& freezing>/< south≡ temperate& warm>. Windhelm culture:< nord& wooden constructions& sea trading& capital city>. Windhelm ruler:< king≡ Atmor>/< palace≡ Palace of Kings>. Windhelm features:< palace made of stone& hardwood houses& capital city of eastern skyrim>.]",
     "hidden": false
   },
   {
     "id": "2.10",
-    "keys": "snow( |)hawk#[t=9l=2f=2]",
-    "entry": "",
+    "keys": "windhelm#[t=10l=2f=2]",
+    "entry": "[ Windhelm features:< big inn made of stone& temple of talos& fighting arena>. Windhelm culture:< port city& smithing& fishing>.]",
+    "hidden": false
+  },
+  {
+    "id": "2.11",
+    "keys": "solitude#[t=9l=2f=2]",
+    "entry": "[ Solitude description:< city state in western skyrim>/< hold≡ Haafingar>/< kingdom≡ western skyrim>/<rival city≡ Snowhawk>. Solitude climate:< north≡ snowy&freezing>/< south≡ warm>. Solitide culture:< economical power&capital city>. Solitude ruler:< king≡ Vrage>/ < palace≡ Blue Palace>. Solitude features:< built on top of stone arch& capital city of western skyrim>.]",
+    "hidden": false
+  },
+  {
+    "id": "2.12",
+    "keys": "solitude#[t=10l=2f=2]",
+    "entry": "[ Solitude features:< bards college& antiquarian circle& east empire company& rich city& castle dour& blue palace>. Solitude culture:< nord& brick constructions>/< fishing&sea trading& port city& arts>.]",
+    "hidden": false
+  },
+  {
+    "id": "2.13",
+    "keys": "(snow( |)hawk)#[t=9l=2f=2]",
+    "entry": "[ Snowhawk description:< city state in western skyrim>/< hold≡ Hjaalmarch>/< kingdom≡ Snowhawk>/<rival city≡ Solitude>. Snowhawk climate:< warm& hot>. Snowhawk geography:< swamp& marsh>. Snowhawk ruler:< king≡ Arnbjorn>. Snowhawk features:< capital city of Snowhawk& rivals with Solitude>.]",
     "hidden": false
   }
 ]
