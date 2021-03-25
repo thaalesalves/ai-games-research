@@ -2,55 +2,109 @@
   {
     "id": "3.1",
     "keys": "Whiterun Hold#[t=9l=2f=2]",
-    "entry": "Whiterun Hold:[DESC:hold_region<central_skyrim>;Whiterun Hold.CLIM:temperate_to_warm;GEOGR:grasslands hills&white_river;CULTURE:<nord&wooden_constructions&symbol_horse>;RUL:jarl<Yolanda>;Whiterun Hold.FEATURES:grasslands&hills fertile&farmland small_towns&big_city_capital:<Whiterun>.]",
+    "entry": "[ Whiterun Hold description:< hold in eastern skyrim>/< capital city≡ Whiterun>/< kingdom≡ eastern skyrim>.  Whiterun Hold climate:< warm& breeze>. Whiterun Hold geography:< farmland& fertile& grasslands& open fields& white river>. Whiterun Hold ruler:< jarl≡ Yolanda>.]",
     "hidden": false
   },
   {
     "id": "3.2",
-    "keys": "(|the) rift#[t=9l=2f=2]",
-    "entry": "The Rift:[DESC:hold_region<southeaster_skyrim>;The Rift.CLIM:temperate_to_warm;GEOGR:lush_forests&yellow_red_trees lake_honrich&port;CULTURE:<nord&wooden_constructions thieves&corruption fishing&symbol_cross_swords>;RUL:jarl<Argo>;The Rift.FEATURES:lush_forests&yellow_red_trees fertile&farmland small_towns&big_city_capital:<Riften>.]",
+    "keys": "Whiterun Hold#[t=10l=2f=2]",
+    "entry": "[ Whiterun Hold culture:< nord& wooden houses& farms>. Whiterun Hold features:< white river& giants& mammoths>. Whiterun Hold towns:< Riverwood& Honeywood& Black Moor>.]",
     "hidden": false
   },
   {
     "id": "3.3",
-    "keys": "(winter( |)hold hold)#[t=9l=2f=2]",
-    "entry": "Winterhold Hold:[DESC:hold_region<northeastern_skyrim>;Winterhold Hold.CLIM:cold&snowy&freezing;GEOGR:mountainous&snowy hills&cliffs;CULTURE:<nord&wooden_constructions magic_college&fishing&symbol_crown>;RUL:jarl<Ungvid>;Winterhold Hold.FEATURES:azura_giant_statue&college_winterhold&port_city sea_of_ghosts&aurora_at_night big_city_capital:<Winterhold>.]",
+    "keys": "(|the) rift#[t=9l=2f=2]",
+    "entry": "[ The Rift description:< hold in southeastern skyrim>/< capital city≡ Riften>/< kingdom≡ eastern skyrim>. The Rift climate:< warm& breeze>. The Rift geography:< farmland& Lake Honrich& fishing& fertile& mountainous& Snow Throat>. The Rift ruler:< jarl≡ Argo>.]",
     "hidden": false
   },
   {
     "id": "3.4",
-    "keys": "(falkreath)#[t=9l=2f=2]",
-    "entry": "Falkreath Hold:[DESC:hold_region<southern_skyrim>;Falkreath.CLIM:warm&sunny;GEOGR:rainforest&lush_woods wildlife&lakes;CULTURE:<nord&wooden_constructions hunting&fishing&symbol_deer>;RUL:jarl<Uror>;Falkreath.FEATURES:hunting&fishing lake_ilinalta&brittleshin_pass big_city_capital:<Falkreath>.]",
+    "keys": "(|the) rift#[t=10l=2f=2]",
+    "entry": "[ The Rift culture:< nord& farm& fishing& hunting& mills>. The Rift features:< Lake Honrich& bears& wolves& deer>. The Rift towns:< Shor's Stone& Sunguard& Vernim Wood& Ivarstead& Greenwall>.]",
     "hidden": false
   },
   {
     "id": "3.5",
-    "keys": "the reach#[t=9l=2f=2]",
-    "entry": "The Reach:[DESC:hold_region<western_skyrim>;The Reach.CLIM:warm&stormy;GEOGR:grasslands&waterfall&karth_river;CULTURE:<nord&stone_dwemer_constructions silver_mining&fishing&symbol_horns>;RUL:jarl<Bolgeir>;The Reach.FEATURES:stone_city&dwemer_architecture city_inside_of_mountain&cidhna_mine big_city_capital:<Markarth>.]",
+    "keys": "(winter( |)hold hold)#[t=9l=2f=2]",
+    "entry": "[ Winterhold Hold description:< hold in northeastern skyrim>/< capital city≡ Winterhold>/< kingdom≡ eastern skyrim>. Winterhold Hold climate:< cold& snowy& freezing>. Winterhold Hold geography:< mountainous& snowy hills& cliffs>. Winterhold Hold ruler:< jarl≡ Ungvid>.]",
     "hidden": false
   },
   {
     "id": "3.6",
-    "keys": "the pale#[t=9l=2f=2]",
-    "entry": "The Pale:[DESC:hold_region<northern_skyrim>;The Pale.CLIM:cold&snowy;GEOGR:grasslands&waterfall&karth_river;CULTURE:<nord&wooden_constructions fishing&port_city& symbol_wind_star>;RUL:jarl<Dagny>;The Pale.FEATURES:iron_mining&quicksilver_mining snowy&cold&frozen port_city&sea_of_ghosts big_city_capital:<Dawnstar>.]",
+    "keys": "(winter( |)hold hold)#[t=10l=2f=2]",
+    "entry": "[ Winterhold Hold culture:< nord& wooden houses& magic>. Winterhold Hold features:< college of winterhold& horker& ice wolf& polar bear>.]",
     "hidden": false
   },
   {
     "id": "3.7",
-    "keys": "Hjaalmarch#[t=9l=2f=2]",
-    "entry": "Hjaalmarch:[DESC:hold_region<northern_skyrim>;Hjaalmarch.CLIM:warm&hot;GEOGR:swamps&bogs river&grassland;CULTURE:<nord&wooden_constructions mining&hunting&symbol_triskelion>;RUL:jarl<Thora>;Hjaalmarch.FEATURES:mining&hunting swamp&warm hjaal_river&karth_river big_city_capital:<Morthal>.]",
+    "keys": "(falkreath)#[t=9l=2f=2]",
+    "entry": "[ Falkreath Hold description:< hold in southern skyrim>/< capital city≡ Falkreath>/< kingdom≡ Falkreath>. Falkreath Hold climate:< warm& breeze>. Falkreath Hold geography:< rainforest& Lake Ilinalta& White River& mountainous& lush woods>. Falkreath Hold ruler:< king≡ Uror>.]",
     "hidden": false
   },
   {
     "id": "3.8",
-    "keys": "eastmarch#[t=9l=2f=2]",
-    "entry": "Eastmarch:[DESC:hold_region<eastern_skyrim>;Eastmarch.CLIM:snowy&freezing<north> temperate_to_warm<south>;GEOGR:hot_water_springs<south> cliff&mountain windy snowy<north>&white_river;CULTURE:<nord&wooden_constructions fishing&sea_trading port_city&smithing>;RUL:jarl<Atmor>;Eastmarch.FEATURES:frozen_water&palace_of_kings_made_of_stone oldes_city_skyrim&historical_capital_skyrim big_city_capital:<Windhelm>.]",
+    "keys": "(falkreath)#[t=10l=2f=2]",
+    "entry": "[ Falkreath Hold culture:< nord& fishing& hunting& lumber& leatherwork& pelts>. Falkreath Hold features:< fishing& lumber& Lake Ilinalta& White River& wolves& bears& sabre cat>. Falkreath Hold towns:< Helgen& Oakwood& Neugrad>.]",
     "hidden": false
   },
   {
     "id": "3.9",
+    "keys": "the reach#[t=9l=2f=2]",
+    "entry": "[ The Reach description:< reachmen culture& hold in western skyrim& ruled by an Ard>/< capital city≡ Markarth>/< kingdom≡ The Reach>. The Reach climate:< warm& hot& breeze>. The Reach geography:< mountainous& grasslands& Karth River>. The Reach ruler:< Ard≡ Dorach>/ <palace≡ Understone Keep>.]",
+    "hidden": false
+  },
+  {
+    "id": "3.10",
+    "keys": "the reach#[t=10l=2f=2]",
+    "entry": "[ The Reach culture:< ruled by an Ard& reachmen& wooden houses& mining>. The Reach features:< Karth River& Sky Haven Temple& silver mines& fishing>. The Reach towns:< Karthwasten& Hroldan& Amber Guard>.]",
+    "hidden": false
+  },
+  {
+    "id": "3.11",
+    "keys": "the pale#[t=9l=2f=2]",
+    "entry": "[ The Pale description:< hold in northern skyrim& part of the kingdom of Eastern Skyrim>/< capital city≡ Dawnstar>/< kingdom≡ Eastern Skyrim>. The Pale climate:< cold& snowy>. The Pale geography:< grasslands& waterfall& mountainous>. The Pale ruler:< jarl≡ Dagny>.]",
+    "hidden": false
+  },
+  {
+    "id": "3.12",
+    "keys": "the pale#[t=10l=2f=2]",
+    "entry": "[ The Pale culture:<nord& wooden constructions& fishing& port city>. The Pale features:< iron mining& quicksilver mining>. The Pale towns:< Dunpar>.]",
+    "hidden": false
+  },
+  {
+    "id": "3.13",
+    "keys": "Hjaalmarch#[t=9l=2f=2]",
+    "entry": "[ Hjaalmarch description:< hold in northwestern Skyrim& part of the kingdom of Western Skyrim>/< capital city≡ Morthal>/< kingdom≡ Western Skyrim>. Hjaalmarch climate:< warm& hot>. Hjaalmarch geography:< marsh& swamp& Hjaal River& Karth River>. Hjaalmarch ruler:< jarl≡ Thora>.]",
+    "hidden": false
+  },
+  {
+    "id": "3.14",
+    "keys": "Hjaalmarch#[t=10l=2f=2]",
+    "entry": "[ Hjaalmarch culture:< nord& wooden constructions& mining& hunting>. Hjaalmarch features:< mining& hunting& swamp& Hjaal River& Karth River>. Hjaalmarch towns:< Heljarchen& Stonehills& Dunstad>.]",
+    "hidden": false
+  },
+  {
+    "id": "3.15",
+    "keys": "eastmarch#[t=9l=2f=2]",
+    "entry": "[ Eastmarch description:< hold in Eastern Skyrim>/< capital city≡ Windhelm>/< kingdom≡ Eastern Skyrim>. Eastmarch climate:< north≡ snowy& freezing>/< south≡ temperate& warm>. Eastmarch geography:< White River>/< north≡ cliff& mountain& windy& snowy>/< south≡ hot water springs>. Eastmarch ruler:< king≡ Atmor>/< palace≡ Palace of Kings>.]",
+    "hidden": false
+  },
+  {
+    "id": "3.16",
+    "keys": "eastmarch#[t=10l=2f=2]",
+    "entry": "[ Eastmarch culture:< nord& fishing& port city& smithing>. Eastmarch features:< frozen water& hot water springs& White River>. Eastmarch towns:< Pargran& Kynesgrove>.]",
+    "hidden": false
+  },
+  {
+    "id": "3.17",
     "keys": "Haafingar#[t=9l=2f=2]",
-    "entry": "Haafingar:[DESC:hold_region<northwestern_skyrim>;Haafingar.CLIM:snowy&freezing<north> warm<south>;GEOGR:karth_river&sea_of_ghosts mountain&farmland&fertile&mills;CULTURE:<nord&brick_constructions economical_power&capital_city fishing&sea_trading port_city&arts>;RUL:jarl_king<Vrage>;Haafingar.FEATURES:kilkreath_temple_meridia&town_of_dragon_bridge karth_river&sea_of_ghosts&port big_city_capital:<Solitude>.]",
+    "entry": "[ Haafingar description:< hold in Western Skyrim>/< capital city≡ Solitude>/< kingdom≡ Western Skyrim>. Haafingar climate:< north≡ snowy& freezing>/< south≡ warm>. Haafingar geography:< Karth River& Sea of Ghosts& mountain& farmland& fertile& mills>. Haafingar ruler:< king≡ Vrage>.]",
+    "hidden": false
+  },
+  {
+    "id": "3.18",
+    "keys": "Haafingar#[t=10l=2f=2]",
+    "entry": "[ Haafingar culture:< nord& fishing& sea trading& port& arts>. Haafingar features:< Karth River& Kilkreath Temple& wolves& trolls& bears>. Haafingar towns:< Dragon Bridge>.]",
     "hidden": false
   }
 ]
