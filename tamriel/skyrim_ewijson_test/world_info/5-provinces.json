@@ -1,79 +1,79 @@
 [
   {
     "id": "5.1",
-    "keys": "skyrim#[t=10l=2f=2]",
+    "keys": "skyrim#[t=5l=2f=2]",
     "entry": "<< Skyrim home the nords, northern province of the empire, vrage current king>>>>\n<< Skyrim harsh cold snowy north, temperate warm south, grasslands west, deep lush woods south>>>>\n<< Skyrim mountainous many valleys forests wildlife rivers woods lakes>>>>\n<< Skyrim divided nine holds, each hold ruled by jarl>>>>",
     "hidden": false
   },
   {
     "id": "5.2",
-    "keys": "(cyrodi(|i)l)#[t=10l=2f=2]",
+    "keys": "(cyrodi(|i)l)#[t=5l=2f=2]",
     "entry": "<< Cyrodiil capital empire center continent known as Heartlands land of the Imperials>>>>\n<< Cyrodiil north snowy freezing, south east west lush forests green grasslands>>>>",
     "hidden": false
   },
   {
     "id": "5.3",
-    "keys": "(cyrodi(|i)l)#[t=12l=1f=2]",
+    "keys": "(cyrodi(|i)l)#[t=6l=1f=2]",
     "entry": "<< Cyrodiil White-Gold tower Imperial City capital of Cyrodiil>>>>\n<< Cyrodiil west called Colovia, east called Nibenay>>>>",
     "hidden": false
   },
   {
     "id": "5.4",
-    "keys": "(argonia|black marsh)#[t=10l=2f=2]",
+    "keys": "(argonia|black marsh)#[t=5l=2f=2]",
     "entry": "<< Argonia dense swampland land of the argonians also called Black Marsh>>>>\n<< Argonia natives do not like the name Black Marsh, located southeast Tamriel>>>>\n<< Argonia poisonous lands to non-argonians>>>>",
     "hidden": false
   },
   {
     "id": "5.5",
-    "keys": "high rock#[t=10l=2f=2]",
+    "keys": "high rock#[t=5l=2f=2]",
     "entry": "<< High Rock northwestern province empire, land of the bretons>>>>\n<< High Rock feudal kingdoms city-states, good trade, rich art music classy people>>>>\n<< High Rock monarchy kings counts dukes, bretons worship the nine divines>>>>",
     "hidden": false
   },
   {
     "id": "5.6",
-    "keys": "high rock#[t=12l=1f=2]",
+    "keys": "high rock#[t=6l=1f=2]",
     "entry": "<< High Rock regions illiac bay& glenumbra& stormhaven& wrothgar& rivenspire& bangkorai>>>>\n<< High rock wrothgar freezing cold, bangkorai glenumbra illiac bay warm hot weather nice beaches>>>>\n<< High Rock rivenspire moors dead trees dry land, stormhaven lush green forests Direnni Tower green trees>>>>",
     "hidden": false
   },
   {
     "id": "5.7",
-    "keys": "hammerfell#[t=10l=2f=2]",
+    "keys": "hammerfell#[t=5l=2f=2]",
     "entry": "<< Hammerfell west Tamriel, home of the redguards, vast deserts warm hot weather>>>>\n<< Hammerfell great ports big trade cities illiac bay many pirates sea life important ports>>>>\n<< Hammerfell six regions alik'r desert bangkorai craglorn sunforge hew's bane khefrem>>>>\n<< Hammerfell two islands stros m'kai and the chain>>>>",
     "hidden": false
   },
   {
     "id": "5.8",
-    "keys": "(summerset( isle(s|)|))#[t=10l=2f=2]",
+    "keys": "(summerset( isle(s|)|))#[t=5l=2f=2]",
     "entry": "<< Summerset province southwest Tamriel, home of the altmer>>>>\n<< Summerset beautiful place good weather colorfour lush forests>>>>\n<< Summerset magic strong Crystal Tower, Alinor capital great city>>>>\n<< Summerset two islands called summerset and auridon>>>>",
     "hidden": false
   },
   {
     "id": "5.9",
-    "keys": "valenwood#[t=10l=2f=2]",
+    "keys": "valenwood#[t=5l=2f=2]",
     "entry": "<< Valenwood southwest Tamriel dense lush forest the green pact, home of the bosmer>>>>\n<< Valenwood migratory live trees, varied fauna many animals>>>>\n<< Valenwood four regions grahtwood& malabal tor& reaper's march& greenshade>>>>",
     "hidden": false
   },
   {
     "id": "5.10",
-    "keys": "(morrowind|resdayn)#[t=10l=2f=2]",
+    "keys": "(morrowind|resdayn)#[t=5l=2f=2]",
     "entry": "<< Morrowind eastern province empire, land of the dunmer>>>>\n<< Morrowind large island Vvardenfell in middle, large mainland, borders skyrim& cyrodiil& argonia>>>>\n<< Morrowind ashen lands volcanoes molten lava near vvardenfell, lush green forests south and west>>>>",
     "hidden": false
   },
   {
     "id": "5.11",
-    "keys": "(morrowind|resdayn)#[t=12l=1f=2]",
+    "keys": "(morrowind|resdayn)#[t=6l=1f=2]",
     "entry": "<< Morrowind divided regions bal foyen& deshaan& vvardenfell& stonefalls& soltheim>>>>\n<< Morrowind worship the tribunal, tribunal also called almsivi or triune>>>>\n<< Morrowind tribunal consist vivec& almalexia& sotha sil, three living gods>>>>",
     "hidden": false
   },
   {
     "id": "5.12",
-    "keys": "((confederation of |)elsweyr)#[t=10l=2f=2]",
+    "keys": "((confederation of |)elsweyr)#[t=5l=3f=2S=2]",
     "entry": "<< Elsweyr south province, home of the khajiit>>>>\n<< Elsweyr two regions anequina in north& pellitine in south>>>>\n<< Elsweyr kingdom capital rimmen, mane spiritual leader city of torval>>>>",
     "hidden": false
   },
   {
     "id": "5.13",
-    "keys": "((confederation of |)elsweyr)#[t=10l=2f=2]",
+    "keys": "((confederation of |)elsweyr)#[t=5l=3f=2S=2]",
     "entry": "<< Elsweyr anequina lush forests& sandy canyons, capital rimmen>>>>\n<< Elsweyr pellitine jungles rainforests, capital torval, torval seat of mane>>>>",
     "hidden": false
   }

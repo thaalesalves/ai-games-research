@@ -1,139 +1,139 @@
 [
   {
     "id": "4.1",
-    "keys": "Honeywood#[t=9l=2f=2]",
-    "entry": "",
+    "keys": "Honeywood#[t=5l=5f=2S=2]",
+    "entry": "[ Honeywood description:< Honeywood small village& few people>/< hold≡ Whiterun>/< kingdom≡ Western Skyrim>. Honeywood climate:< warm& breeze>. Honeywood culture:< nord& small village& ancient nord pantheon>. Honeywood features:< small lake in center& small houses wooden hay>/< people are not self-aware>.]",
     "hidden": false
   },
   {
     "id": "4.2",
-    "keys": "Dragon Bridge#[t=9l=2f=2]",
-    "entry": "",
+    "keys": "Dragon Bridge#[t=5l=5f=2S=2]",
+    "entry": "[ Dragon Bridge description:< has this name because of the bridge with a statue of a dragon in each end>/< hold≡ Haafingar>/< kingdom≡ Western Skyrim>. Dragon Bridge summary:< small town& few people& part of Haafingar hold& part of Kingdom of Western Skyrim& border with The Reach& town in the banks of Karth River>. Dragon Bridge climate:< warm& breeze>. Dragon Bridge culture:< nord& fishing& hunting>. Dragon Bridge features:< bridge with a statue of a dragon in each end>/< small wooden houses& tavern& blacksmith>/< is in the border of Haafingar and The Reach>.]",
     "hidden": false
   },
   {
     "id": "4.3",
-    "keys": "Ivarstead#[t=9l=2f=2]",
-    "entry": "",
+    "keys": "(Ivar(| )stead)#[t=5l=5f=2S=2]",
+    "entry": "[ Ivarstead description:< small town in the eastern base of the Snow Throat mountain>/< hold≡ The Rift>/< kingdom≡ Eastern Skyrim>. Ivarstead summary:< few people& farming& fertile& fishing& hunting& milling>. Ivarstead climate:< warm& breeze>. Ivarstead culture:< nord& farming& hunting& sheep>. Ivarstead features:< the famous 7000 steps of the Snow Throat mountain begin here& well visit town& inn& tavern>.]",
     "hidden": false
   },
   {
     "id": "4.4",
-    "keys": "Rorikstead#[t=9l=2f=2]",
-    "entry": "",
+    "keys": "(Rorik(| )stead)#[t=5l=5f=2S=2]",
+    "entry": "[ Rorikstead description:< small town& western plains of Whiterun Hold>/< hold≡ Whiterun>/< kingdom≡ Western Skyrim>. Rorikstead summary:< farmland& fertile& hunting& sheep& goat& cattle>/< part of the Kingdom of Western Skyrim>. Rorikstead climate:< warm& breeze& hot>. Rorikstead culture:< nord& farming& ancient nord pantheon>. Rorikstead features:< inn& tavern& friendly giants live near the town>.]",
     "hidden": false
   },
   {
     "id": "4.5",
-    "keys": "Heljarchen#[t=9l=2f=2]",
-    "entry": "",
+    "keys": "(Hel(j|)archen)#[t=5l=5f=2S=2]",
+    "entry": "[ Heljarchen description:< name≡ Heljarchen& Helarchen>/< small town& border of The Pale and Whiterun Hold& just north of the City of Whiterun>/< hold≡ The Pale>/< kingdom≡ Eastern Skyrim>. Heljarchen summary:< hunting& goats& sheep& between the warm and the cold parts of Skyrim>. Heljarchen climate:< cold& breeze>. Heljarchen culture:< nord& imperial divines religion& herding>. Heljarchen features:< small town& few people& inn& tavern>.]",
     "hidden": false
   },
   {
     "id": "4.6",
-    "keys": "Kynesgrove#[t=9l=2f=2]",
-    "entry": "",
+    "keys": "Kyne(s|'s )grove#[t=5l=5f=2S=2]",
+    "entry": "[ Kynesgrove description:< name≡ Kynesgrove& Kyne's Grove>/< small town& just south of Windhelm>/< hold≡ Eastmarch>/< kingdom≡ Eastern Skyrim>. Kynesgrove summary:< hunting& goats& sheep& fishing>. Kynesgrove climate:< cold& snowy& breeze>. Kynesgrove culture:< nord& ancient nord religion& wooden houses>. Kynesgrove features:< mill& cattle& White River& inn& tavern>.]",
     "hidden": false
   },
   {
     "id": "4.7",
-    "keys": "Shor's Stone#[t=9l=2f=2]",
-    "entry": "",
+    "keys": "Shor's Stone#[t=5l=5f=2S=2]",
+    "entry": "Shor's Stone:[DESC:Shor's Stone is a small town in the Rift named after ancient Nordic god Shor, the leader of the Nord Pantheon;Shor's Stone.SUMM:named after god Shor/relies on hunting, milling, blacksmith;EXIT:<S⇒Riften>,<N⇒Kynesgrove>;Shor's Stone.CULTURE:nord/ancient nord religion;FEATURES:wooden houses/few people/blacksmith/mill/cattle;]",
     "hidden": false
   },
   {
     "id": "4.8",
-    "keys": "Riverwood#[t=9l=2f=2]",
+    "keys": "(River(| )wood)#[t=5l=5f=2S=2]",
     "entry": "",
     "hidden": false
   },
   {
     "id": "4.9",
-    "keys": "Helgen#[t=9l=2f=2]",
+    "keys": "Helgen#[t=5l=5f=2S=2]",
     "entry": "",
     "hidden": false
   },
   {
     "id": "4.11",
-    "keys": "Karthwasten#[t=9l=2f=2]",
+    "keys": "Karthwasten#[t=5l=5f=2S=2]",
     "entry": "",
     "hidden": false
   },
   {
     "id": "4.11",
-    "keys": "Oakwood#[t=9l=2f=2]",
+    "keys": "Oakwood#[t=5l=5f=2S=2]",
     "entry": "",
     "hidden": false
   },
   {
     "id": "4.12",
-    "keys": "Sunguard#[t=9l=2f=2]",
+    "keys": "Sunguard#[t=5l=5f=2S=2]",
     "entry": "",
     "hidden": false
   },
   {
     "id": "4.13",
-    "keys": "Stone( H|h)ills#[t=9l=2f=2]",
+    "keys": "Stone( H|h)ills#[t=5l=5f=2S=2]",
     "entry": "",
     "hidden": false
   },
   {
     "id": "4.14",
-    "keys": "Vernim Wood#[t=9l=2f=2]",
+    "keys": "Vernim Wood#[t=5l=5f=2S=2]",
     "entry": "",
     "hidden": false
   },
   {
     "id": "4.15",
-    "keys": "Greenwall#[t=9l=2f=2]",
+    "keys": "Greenwall#[t=5l=5f=2S=2]",
     "entry": "",
     "hidden": false
   },
   {
     "id": "4.16",
-    "keys": "Black Moor#[t=9l=2f=2]",
+    "keys": "Black Moor#[t=5l=5f=2S=2]",
     "entry": "",
     "hidden": false
   },
   {
     "id": "4.17",
-    "keys": "Sunguard#[t=9l=2f=2]",
+    "keys": "Sunguard#[t=5l=5f=2S=2]",
     "entry": "",
     "hidden": false
   },
   {
     "id": "4.18",
-    "keys": "Neugrad#[t=9l=2f=2]",
+    "keys": "Neugrad#[t=5l=5f=2S=2]",
     "entry": "",
     "hidden": false
   },
   {
     "id": "4.19",
-    "keys": "Hroldan#[t=9l=2f=2]",
+    "keys": "Hroldan#[t=5l=5f=2S=2]",
     "entry": "",
     "hidden": false
   },
   {
     "id": "4.20",
-    "keys": "Amber Guard#[t=9l=2f=2]",
+    "keys": "Amber Guard#[t=5l=5f=2S=2S=2]",
     "entry": "",
     "hidden": false
   },
   {
     "id": "4.21",
-    "keys": "Dunpar#[t=9l=2f=2]",
+    "keys": "Dunpar#[t=5l=5f=2S=2]",
     "entry": "",
     "hidden": false
   },
   {
     "id": "4.22",
-    "keys": "Dunstad#[t=9l=2f=2]",
+    "keys": "Dunstad#[t=5l=5f=2S=2]",
     "entry": "",
     "hidden": false
   },
   {
     "id": "4.23",
-    "keys": "Pargran#[t=9l=2f=2]",
+    "keys": "Pargran#[t=5l=5f=2S=2]",
     "entry": "",
     "hidden": false
   }
