@@ -1,8 +1,32 @@
 const LETTER_REGEX = /[0-9]/g;
 const DIGIT_REGEX = /\D/g;
 const PUNCTUATION_REMOVE = /[^\w\s]/gi;
+const WEAPON_REGEX = new RegExp(/(crossbow|bow)/i);
 const WORN_REGEX = new RegExp(`(?<=WORN: )(.*)(?=; )`);
 const INVENTORY_REGEX = new RegExp(`(?<=INV: )(.*)(?=;)`);
+
+const SHOOTING_WEAPONS = [
+  {
+    name: 'bow',
+    ammo: 'arrow',
+    text: [
+      `You aim your bow at your opponent, and let exactly one arrow go. The arrow goes out swiftly, and`,
+      `You shoot one arrow at your oponent, and`,
+      `You're determined to kill your foe, and so you aim your bow at them, hoping to get a clear shot in their throat`,
+      `You shoot your bow aiming at your opponent's face. Your arrow goes out swiftly and`,
+      `You release the string of your bow, and the arrow goes out fast as wind.`
+    ]
+  },
+  {
+    name: 'crossbow',
+    ammo: 'bolt',
+    text: [
+      `You quickly put a bolt in your crossbow, and aim it at your opponent. You pull the trigger and`,
+      `You aim your crossbow at your opponent, and the bolt goes fast as wind. The bolt`,
+      `You shoot your cross bow aiming at your opponent's throat. The bolt goes out fast as wind and`
+    ]
+  }
+];
 
 const WEAPONS = [
   'sword', 'knife', 'spear', 'hammer', 'axe', 'battleaxe', 'sledgehammer', 'longsword', 'bow', 'pickaxe'
@@ -10,6 +34,14 @@ const WEAPONS = [
 
 const CLOTHING = [
   'rags', 'armor', 'dress', 'kilt', 'skirt', 'jerkin', 'shirt', 'clothes', 'robes', 'leathers', 'hooded', 'cuirass', 'chainmail', 'gauntlets', 'vambraces', 'tights'
+];
+
+const AMMO = [
+  'arrow', 'bullet'
+];
+
+const AMMO_PLURAL = [
+  'arrows', 'bullets'
 ];
 
 /**
@@ -25,7 +57,7 @@ const capitalize = (string) => {
  * Finds an item in the player's inventory
  * @param {string} itemName 
  */
- const findItemInInventory = (itemName) => {
+const findItemInInventory = (itemName) => {
   console.log(`START findItemInInventory(): Looking for item "${itemName}" in player's inventory.`);
   let loweredName = itemName.toLowerCase().replace(PUNCTUATION_REMOVE, '');
   let itemFound = getInventory().find((item) => {
@@ -49,9 +81,12 @@ const capitalize = (string) => {
  */
 const removeFromInventory = (itemName, itemQuantity) => {
   console.log(`START removeFromInventory(): Removing ${itemQuantity} instances of "${itemName}" from player's inventory.`);
-  let loweredName = itemName.toLowerCase().replace(PUNCTUATION_REMOVE, '');
+  let loweredName = singularize(itemName.toLowerCase().replace(PUNCTUATION_REMOVE, ''));
   let item = findItemInInventory(loweredName);
-  if (!(item.quantity == itemQuantity) && (item.quantity > 1 && item.quantity >= itemQuantity)) {
+  if (typeof item == 'undefined') {
+    console.log(`END removeFromInventory(): Did not find ${itemName} in player's inventory.`);
+    return `\nYou do not have ${itemName} in your inventory.`;
+  } else if (!(item.quantity == itemQuantity) && (item.quantity > 1 && item.quantity >= itemQuantity)) {
     console.log(`END removeFromInventory(): Found ${item.quantity} instances of "${itemName}" in player's inventory. Removing ${itemQuantity} instances of it.`);
     item.quantity -= itemQuantity;
     return `\nYou have removed ${itemQuantity} ${loweredName} from your inventory.`;
@@ -60,7 +95,7 @@ const removeFromInventory = (itemName, itemQuantity) => {
   let index = getInventory().indexOf(item);
   getInventory().splice(index, 1);
   updateInventory();
-  console.log(`END removeFromInventory(): Found ${item.quantity} instances of "${itemName}" in player's inventory. Removing ${itemQuantity} instances of it.`);
+  console.log(`END removeFromInventory(): Removed all instances of ${itemName} from player's inventory.`);
   return `\nYou have removed all ${loweredName} from your inventory.`;
 }
 
@@ -103,7 +138,7 @@ const getInventory = () => {
 const addToInventory = (itemName, itemQuantity) => {
 
   console.log(`START addToInventory(): adding ${itemQuantity} instances of "${itemName}" to player's inventory.`);
-  let loweredName = itemName.toLowerCase().replace(PUNCTUATION_REMOVE, '');
+  let loweredName = singularize(itemName.toLowerCase().replace(PUNCTUATION_REMOVE, ''));
   let item = findItemInInventory(loweredName);
   if (typeof item == 'undefined') {
     console.log(`INSIDE addToInventory(): Player has no other instances of this item in their inventory. Adding these.`);
@@ -137,7 +172,7 @@ const equipItem = (itemName) => {
   if (typeof itemToBeEquipped != 'undefined') {
     const itemToBeEquippedIndex = state.inventory.findIndex(x => x.name == itemToBeEquipped.name);
     console.log(`INSIDE equipItem(): ${itemName} exists in player's inventory`);
-    if (itemToBeEquipped.type != 'weapon' && itemToBeEquipped.type != 'clothing') {
+    if (itemToBeEquipped.type != 'weapon' && itemToBeEquipped.type != 'clothing' && itemToBeEquipped.type != 'ammo') {
       console.log(`END equipItem(): item is not equippable.`);
       return `\n${capitalize(itemNameLowerCase)} is not an equippable item.`;
     }
@@ -166,11 +201,51 @@ const equipItem = (itemName) => {
     playerWorldInfo.entry = playerWorldInfo.entry.replace(WORN_REGEX, itemsWorn);
 
     console.log(`END equipItem(): ${itemToBeEquipped.name} has been equipped.`);
-    return `\nYou are now ${itemToBeEquipped.type == 'weapon' ? 'wielding' : 'wearing'} ${itemToBeEquipped.name}.`;
+    return `\nYou are now equipping ${itemToBeEquipped.name}.`;
   }
 
   console.log(`END equipItem(): Player does not have "${itemNameLowerCase}" in their inventory.`);
   return `\nYou do not have "${itemNameLowerCase}" in your inventory.`;
+}
+
+/**
+ * Returns items currently equipped by the player
+ */
+const getWeaponEquipped = () => {
+  console.log(`START getWeaponEquipped(): Looking for equipped weapons.`);
+  const weaponEquipped = getInventory().find(weapon => weapon.status == 'worn' && weapon.type == 'weapon');
+  if (typeof weaponEquipped != 'undefined') {
+    console.log(`END getWeaponEquipped(): Player is equipping ${weaponEquipped.name}.`);
+    return weaponEquipped.name;
+  }
+
+  console.log(`END getWeaponEquipped(): Player doesn't have any weapon equipped.`);
+  return `You don't have any weapon equipped.`;
+}
+
+/**
+ * Verifies if player has ammo
+ *
+ * @param {string} itemName 
+ */
+const getAmmo = (itemName) => {
+  console.log(`START getAmmo(): Looking for ammo item: ${itemName}.`);
+  return getInventory().find(item => {
+    console.log(`INSIDE getAmmo(): looking up items in inventory. Current item: ${item.name}`);
+    if (item.type == 'ammo' && (itemName.includes(item.name) || item.name.includes(itemName))) {
+      if (item.status != 'worn') {
+        equipItem(item.name);
+        state.message = `You weren't equipping your ammo! You are now. `;
+      }
+
+      console.log(`INSIDE getAmmo(): found "${item.name}", which has correct type.`);
+      item.quantity -= 1;
+      return true;
+    }
+
+    console.log(`INSIDE getAmmo(): did not find any items with correct type.`);
+    return false;
+  });
 }
 
 /**
@@ -226,8 +301,67 @@ const updateInventory = () => {
 const getType = (itemName) => {
   const checker = (input) => {
     return WEAPONS.some(word => input.toLowerCase().includes(word.toLowerCase())) ? 'weapon' :
-      CLOTHING.some(word => input.toLowerCase().includes(word.toLowerCase())) ? 'clothing' : 'misc';
+      CLOTHING.some(word => input.toLowerCase().includes(word.toLowerCase())) ? 'clothing' :
+        AMMO_PLURAL.some(word => input.toLowerCase().includes(word.toLowerCase())) ? 'ammo' :
+          AMMO.some(word => input.toLowerCase().includes(word.toLowerCase())) ? 'ammo' : 'misc';
   }
 
   return checker(itemName);
+}
+
+/**
+ * Singularizes a parameter
+ */
+const singularize = (itemName) => {
+  const checker = (input) => {
+    return AMMO_PLURAL.some(word => input.toLowerCase().includes(word.toLowerCase())) ? itemName.replace(/s$/, '') : itemName;
+  }
+
+  return checker(itemName);
+}
+
+/**
+ * Finds shooting weapon based on parameter
+ * 
+ * @param {string} action
+ */
+const findShootingWeapon = (action) => {
+  console.log(`BEGIN findShootingWeapon(): getting shooting weapon from regex. Input action: "${action}"`);
+  const weaponInput = SHOOTING_WEAPONS.find(i => action.match(WEAPON_REGEX)[0] == i.name);
+  console.log(`INSIDE findShootingWeapon(): extracted weapon name from regex: "${weaponInput.name}". Weapon uses "${weaponInput.ammo}" for ammo.`);
+  let weaponReturn = undefined;
+  getInventory().some(w => {
+    console.log(`INSIDE findShootingWeapon(): Verifying equipped weapon. Looking for something that matches weaponInput: "${weaponInput.name}". Current iteration: ${w.name}.`);
+    if ((typeof weaponInput != 'undefined') && weaponInput.name.toLowerCase().trim().includes(w.name.toLowerCase().trim())) {
+      console.log(`INSIDE findShootingWeapon(): Found weapon extracted from input in player's inventory.`);
+      if (w.status != 'worn') {
+        console.log(`INSIDE findShootingWeapon(): ${w.name} is not equipped. Equipping item.`);
+        equipItem(w.name);
+        state.message = `You are now equipping your ${w.name} and ${weaponInput.ammo} for ammo. `;
+      }
+
+      console.log(`END findShootingWeapon(): ${weaponInput.name} matches item in inventory.`);
+      weaponReturn = weaponInput;
+      return true;
+    } else if (typeof weaponInput == 'undefined') {
+      console.log(`INSIDE findShootingWeapon(): weaponInput is undefined. Searching inventory for item that matches a shooting weapon.`);
+      let currentMatch = SHOOTING_WEAPONS.find(i => w.name.match(WEAPON_REGEX)[0] == i.name);
+      if (typeof currentMatch != 'undefined') {
+        if (w.status != 'worn') {
+          console.log(`INSIDE findShootingWeapon(): ${w.name} is not equipped. Equipping item.`);
+          equipItem(w.name);
+          state.message = `You are now equipping your ${w.name} and ${currentMatch.ammo} for ammo. `;
+        }
+
+        console.log(`END findShootingWeapon(): ${w.name} is a shooting weapon, returning this item.`);
+        weaponReturn = currentMatch;
+        return true;
+      }
+    }
+
+    console.log(`END findShootingWeapon(): did not find matching shooting weapon in player's inventory.`);
+    return false;
+  });
+
+  return weaponReturn;
 }
