@@ -2,7 +2,6 @@ const modifier = (text) => {
   state.shouldStop = false;
   let stop = false;
   let modifiedText = text;
-  let disableHardcoreMode = true;
   const lowered = text.toLowerCase();
   const commandMatcher = text.match(/\n? ?(?:> You |> You say "|)\/(\w+?)( [\w ]+)?[".]?\n?$/i);
   const actionMatcher = text.match(/\n? ?(?:> You |> You say "|)(\w+?)( [\w ]+)?[".]?\n?$/i);
@@ -19,6 +18,7 @@ const modifier = (text) => {
 
     state.init = true;
     state.shouldStop = false;
+    state.disableHardcoreMode = true;
     addWorldEntry(playerWorldInfo.keys, playerWorldInfo.entry, false);
     state.worldInfoIndex = worldEntries.findIndex(wi => wi.keys.includes('you'));
 
@@ -27,8 +27,6 @@ const modifier = (text) => {
     addToInventory('Commoner clothes', 1);
     equipItem('Commoner clothes');
     equipItem('Rusty Sword');
-
-    state.init = true;
   }
 
   if (commandMatcher) {
@@ -85,6 +83,18 @@ const modifier = (text) => {
       state.message = `Your inventory and player WI have been debugged.`;
       modifiedText = '';
       console.log(`End inventory debug.`);
+    } else if (cmd.includes('invHardcoreMode')) {
+      console.log(`Begin toggle hardcore mode.`);
+      if (params == 'enable') {
+        state.disableHardcoreMode = false;
+      } else {
+        state.disableHardcoreMode = true;
+      }
+
+      state.shouldStop = true;
+      state.message = `You have ${state.disableHardcoreMode ? 'disabled' : 'enabled'} hardcore mode.`;
+      modifiedText = '';
+      console.log(`End toggle hardcore mode.`);
     }
   } else if (actionMatcher) {
     console.log(`Action detected.`);
@@ -98,18 +108,18 @@ const modifier = (text) => {
       if (typeof shootingWeapon != 'undefined') {
         console.log(`Action: shooting a "${shootingWeapon.name}". Looking for ammo: "${shootingWeapon.ammo}".`);
         if (getAmmo(shootingWeapon.ammo)) {
-          modifiedText += `${shootingWeapon.text[Math.floor(Math.random() * shootingWeapon.text.length)]}`;
+          modifiedText += `${shootingWeapon.succesfulOutcome[Math.floor(Math.random() * shootingWeapon.succesfulOutcome.length)]}`;
         } else {
-          state.shouldStop = disableHardcoreMode;
+          state.shouldStop = state.disableHardcoreMode;
           if (state.shouldStop) {
             modifiedText = '';
             state.message = `You don't have any ${shootingWeapon.ammo}s for your ${shootingWeapon.name}. Try a different action.`;
           } else {
-            modifiedText += `You don't have any ${shootingWeapon.ammo}s for your ${shootingWeapon.name}.`;
+            modifiedText += `${shootingWeapon.noAmmoOutcome[Math.floor(Math.random() * shootingWeapon.noAmmoOutcome.length)]}`;
           }
         }
       } else {
-        state.shouldStop = disableHardcoreMode;
+        state.shouldStop = state.disableHardcoreMode;
         if (state.shouldStop) {
           modifiedText = '';
           state.message = `You don't have this weapon in your inventory. Try a different action.`;
