@@ -36,13 +36,13 @@ const modifier = (text) => {
     const cmd = commandMatcher[1];
     const params = commandMatcher[2] ? commandMatcher[2].trim() : '';
 
-    if (cmd.includes('invCheck')) {
+    if (cmd == 'invCheck') {
       console.log(`Begin inventory check.`);
       state.shouldStop = true;
       state.message = `${checkInventory()}`;
       modifiedText = '';
       console.log(`End inventory check.`);
-    } else if (cmd.includes('invAdd')) {
+    } else if (cmd == 'invAdd') {
       console.log(`Begin inventory add.`);
       state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
@@ -56,7 +56,7 @@ const modifier = (text) => {
 
       modifiedText = '';
       console.log(`End inventory add.`);
-    } else if (cmd.includes('invRemove')) {
+    } else if (cmd == 'invRemove') {
       console.log(`Begin inventory remove.`);
       state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
@@ -70,20 +70,21 @@ const modifier = (text) => {
 
       modifiedText = '';
       console.log(`End inventory remove.`);
-    } else if (cmd.includes('invEquip')) {
+    } else if (cmd == 'invEquip') {
       console.log(`Begin inventory equip.`);
       state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
       state.message = `${equipItem(itemName)}`;
       modifiedText = '';
       console.log(`End inventory equip.`);
-    } else if (cmd.includes('invDebugWi')) {
+    } else if (cmd == 'invDebugWi') {
       console.log(`Begin inventory debug.`);
+      debugInventory();
       state.shouldStop = true;
       state.message = `Your inventory and player WI have been debugged.`;
       modifiedText = '';
       console.log(`End inventory debug.`);
-    } else if (cmd.includes('invHardcoreMode')) {
+    } else if (cmd == 'invHardcoreMode') {
       console.log(`Begin toggle hardcore mode.`);
       if (params == 'enable') {
         state.disableHardcoreMode = false;
