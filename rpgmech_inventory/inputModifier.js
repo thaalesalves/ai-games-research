@@ -1,44 +1,15 @@
 const modifier = (text) => {
   state.shouldStop = false;
   let stop = false;
+  let stopBot = false;
   let modifiedText = nameReplace(text);
   const lowered = modifiedText.toLowerCase();
   const commandMatcher = modifiedText.match(/\n? ?(?:> You |> You say "|)\/(\w+?)( [\w ]+)?[".]?\n?$/i);
   const actionMatcher = modifiedText.match(/\n? ?(?:> You |> You say "|)(\w+?)( [\w ]+)?[".]?\n?$/i);
 
   if (info.actionCount < 1 || !state.init) {
-    grabAllBrackets(modifiedText);
-
-    state.stats = {
-      stats:{
-        Strength:{level: 0, cost:1},
-        Dexterity:{level: 0, cost:1},
-        Constitution:{level: 0, cost:1},
-        Intelligence:{level: 0, cost:1},
-        Wisdom:{level: 0, cost:1},
-        Charisma:{level: 0, cost:1},
-      },
-      statPoints:5}
-
-    // state.stats = {
-    //   stats: {
-    //     strength: { level: 0, cost: 1 },
-    //     agility: { level: 0, cost: 1 },
-    //     constitution: { level: 0, cost: 1 },
-    //     intelligence: { level: 0, cost: 1 },
-    //     wisdom: { level: 0, cost: 1 },
-    //     personality: { level: 0, cost: 1 },
-    //     willpower: { level: 0, cost: 1 }
-    //   },
-    //   statPoints: 5
-    // };
-
-    state.skillPoints = 10;
-    state.disableRandomSkill = true;
-    state.XP = 0;
-    state.charFeats = ['flatchest'];
     state.init = true;
-
+    grabAllBrackets(modifiedText);
     state.character = {
       name: state.placeholders[0],
       gender: state.placeholders[1],
@@ -82,18 +53,6 @@ const modifier = (text) => {
     state.disableHardcoreMode = true;
     modifiedText = modifiedText.replace(BRACKETS, '') + generatePrompt();
     delete state.placeholders;
-
-    state.skills = {};
-    for (curSkillID of state.charClass) {
-      console.log("current ID checked: " + curSkillID)
-      for (skillDef in skillDB) {
-        console.log("current skillDB skilldef: " + skillDef)
-        if (skillDef === curSkillID) {
-          console.log(skillDB[skillDef].menuString)
-          state.skills[skillDB[skillDef].menuString] = 0
-        }
-      }
-    }
   }
 
   if (commandMatcher) {
@@ -169,7 +128,7 @@ const modifier = (text) => {
       modifiedText = '';
       console.log(`End toggle hardcore mode.`);
     } else if (cmd == 'r') {
-      delete state.init;
+      delete state.RPGstate.init;
       state.message = "Init reset done.";
     } else if (cmd == 'showdc') {
       if (state.showDC === true) {
@@ -217,33 +176,89 @@ const modifier = (text) => {
     }
   }
 
-  if (!state.showDC) {
-    state.showDC = true
+  /*********************/
+  /* RPGMech by Gnurro */
+  /*********************/
+  if (!state.RPGstate.init) {
+    RPGmechsLog(`Initializing menus...`)
+    if (!state.stats) {
+      state.stats = { stats: {} }
+    }
+
+    for (let statID in statConfig.statList) {
+      if (!statConfig.statList[statID].ignoreForMenu == true) {
+        state.stats.stats[statConfig.statList[statID].name] = { level: statConfig.starting.level, cost: statConfig.starting.cost }
+        RPGmechsLog(`Added '${statID}' stat to stats menu as '${statConfig.statList[statID].name}'.`)
+      } else {
+        RPGmechsLog(`Ignored '${statID}' stat for stats menu adding.`)
+      }
+
+    }
+
+    state.stats.statPoints = statConfig.starting.points
+    state.skills = {}
+
+    sheetSkillLoop:
+    for (let curSkillID of charSheet.skills) {
+      RPGmechsLog(`Trying to add '${curSkillID}' skill from character sheet to menu.`)
+      for (let skillDef in skillDB) {
+        if (skillDef === curSkillID) {
+          RPGmechsLog(`Found fitting skill definition '${skillDef}' matching '${curSkillID}' in skillDB.`)
+          state.skills[skillDB[skillDef].menuString] = skillConfig.starting.level
+          RPGmechsLog(`Added '${skillDB[skillDef].menuString}' to skills menu.`)
+          continue sheetSkillLoop
+        }
+      }
+
+      RPGmechsLog(`ERROR: Couldn't find fitting skill definition for '${curSkillID}' in skillDB!`)
+    }
+
+    state.skillPoints = skillConfig.starting.points
+    state.disableRandomSkill = skillConfig.forbidRandom
+    state.RPGstate.XP = 0
+    state.RPGstate.init = true
   }
 
-  for (att in state.stats["stats"]) {
-    if (state.stats["stats"][att]["level"] >= 4) {
-      console.log(att + " over 3, setting cost to 2");
-      state.stats["stats"][att]["cost"] = 2;
+  if (statConfig.raise) {
+    for (let stat in state.stats.stats) {
+      for (let curRaise of statConfig.raise) {
+        if (state.stats.stats[stat].level >= curRaise.threshold) {
+          state.stats.stats[stat]["cost"] = 2
+        } else {
+          RPGmechsLog(`Raising stat costs: Level of '${stat}' below threshold.`)
+        }
+      }
+    }
+  }
+
+  state.RPGstate = RPGstate
+
+  if (statConfig?.locking) {
+    for (let trigger of statConfig.locking.lockTriggers) {
+      let curRegEx = new RegExp(trigger, 'gi')
+      if (modifiedText.match(curRegEx)) {
+        RPGmechsLog(`Found '${trigger}' locking trigger, locking inputBot!`)
+        stopBot = true
+      }
     }
   }
 
   for (let skill in state.skills) {
-    let skillMod = state.skills[skill];
+    let skillMod = state.skills[skill]
     for (let skillDef in skillDB) {
       if (skillDB[skillDef].menuString === skill) {
-        for (triggerStr of skillDB[skillDef].triggers) {
-          triggerRegEx = new RegExp(triggerStr, "gi");
-          caughtTrigger = modifiedText.match(triggerRegEx);
+        for (let triggerStr of skillDB[skillDef].triggers) {
+          let triggerRegEx = new RegExp(triggerStr, "gi")
+          let caughtTrigger = text.match(triggerRegEx)
           if (caughtTrigger) {
-            console.log(`Caught ${caughtTrigger}!`);
-            if (!state.chkSitBonus) {
-              state.chkSitBonus = 0;
+            RPGmechsLog(`Caught '${caughtTrigger}' of '${skillDB[skillDef].menuString}'!`)
+            if (!state.RPGstate.chkSkillBonus) {
+              state.RPGstate.chkSkillBonus = 0
             }
 
-            if (skillMod > state.chkSitBonus) {
-              state.chkSitBonus = skillMod;
-              state.chkSitSkill = skillDef;
+            if (skillMod > state.RPGstate.chkSkillBonus) {
+              state.RPGstate.chkSkillBonus = skillMod
+              state.RPGstate.chkSitSkill = skillDB[skillDef]
             }
           }
         }
@@ -251,8 +266,8 @@ const modifier = (text) => {
     }
   }
 
-  if (!stop && info.actionCount > 1) {
-    state.inputBot = 'BIGinputDCattributeBot5' //'ElderScrollsInputDCAttributeBot';
+  if (!stopInput && info.actionCount > 1 && !stopBot) {
+    state.inputBot = statConfig.inputBot
   }
 
   return { text: modifiedText, stop: stop };

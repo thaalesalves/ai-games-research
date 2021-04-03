@@ -5,212 +5,134 @@ const modifier = (text) => {
     stop = true;
   }
 
-  if (state.XP >= 100) {
-    state.XP -= 100;
-    state.stats["statPoints"] += 1;
-    state.skillPoints += 10;
-    state.displayStats.push({ key: '\nLevel up', value: 'Points added!', color: 'yellow' });
-  }
-
-  if (state.stats["statPoints"] > 0 || state.skillPoints > 0) {
-    state.displayStats = [{ key: 'You have unspent points! Open the menus to the right', value: '--->', color: 'red' }];
-    state.displayStats.push({ key: '\nXP', value: state.XP, color: 'green' });
+  /*********************/
+  /* RPGMech by Gnurro */
+  /*********************/
+  if (state.RPGstate.XP >= 100) {
+    state.RPGstate.XP -= 100
+    state.stats.statPoints += 1
+    state.skillPoints += 10
+    displayStatsUpdate(['Level up', 'Points added!', 'yellow'])
   } else {
-    state.displayStats = [{ key: 'XP', value: state.XP, color: 'green' }];
+    displayStatsUpdate(['Level up', ''])
   }
 
-  intMod = state.stats["stats"]["Intelligence"]["level"]
-  chaMod = state.stats["stats"]["Charisma"]["level"]
-  wisMod = state.stats["stats"]["Wisdom"]["level"]
-  strMod = state.stats["stats"]["Strength"]["level"]
-  dexMod = state.stats["stats"]["Dexterity"]["level"]
-  conMod = state.stats["stats"]["Constitution"]["level"]
-  // strMod = state.stats["stats"]["Strength"]["level"];
-  // aglMod = state.stats["stats"]["Agility"]["level"];
-  // conMod = state.stats["stats"]["Constitution"]["level"];
-  // intMod = state.stats["stats"]["Intelligence"]["level"];
-  // wisMod = state.stats["stats"]["Wisdom"]["level"];
-  // perMod = state.stats["stats"]["Personality"]["level"];
-  // wprMod = state.stats["stats"]["Willpower"]["level"];
+  if (state.stats.statPoints > 0 || state.skillPoints > 0) {
+    displayStatsUpdate(['You have unspent points! Open the menus to the right', '--->', 'red'])
+  } else {
+    displayStatsUpdate(['You have unspent points! Open the menus to the right'])
+  }
+
+  if (miscConfig.showXP) {
+    displayStatsUpdate(['XP', state.RPGstate.XP, 'green'])
+  }
 
   if (info.actionCount > 1 && state.inputBot) {
-    console.log(info?.inputEvaluation);
+    RPGmechsLog(info?.inputEvaluation)
+    let botOutput = info?.inputEvaluation
 
-    chkAtt = info?.inputEvaluation["Attribute"];
-    chkDC = info?.inputEvaluation["DC"];
-    chkCuz = info?.inputEvaluation["reason"];
+    chkStat = info?.inputEvaluation[statConfig.botOutputs.stat]
+    chkDC = info?.inputEvaluation[statConfig.botOutputs.dc]
+    chkCuz = info?.inputEvaluation[statConfig.botOutputs.cuz]
 
-    console.log(`CHKATT VALUE IS: ${chkAtt}`);
+    if (chkStat == null) {
+      chkStat = 'unknown'
+    } else if (!typeof (statConfig.statList[chkStat]) === 'undefined') {
+      RPGmechsLog(`DCbot got creative and said this is ${chkStat}, but that isn't a configured stat - setting it to 'unknown' for processing.`)
+      chkStat = 'unknown'
+    }
 
-    delete state.inputBot;
+    if (chkDC == null) {
+      chkDC = 0
+    }
 
-    chkXP = chkDC / 5;
-
-    if (state.showDC) {
-      state.message = statList[chkAtt].icon + " DC " + chkDC + ": " + chkCuz;
+    delete state.inputBot
+    let chkXP = chkDC / 5
+    if (state.RPGstate?.showDC) {
+      state.message = `${miscConfig.messageStatIcon ? statConfig.statList[chkStat.toLowerCase()].icon : statConfig.statList[chkStat.toLowerCase()].name} DC${chkDC}: ${chkCuz}`
     } else {
-      state.message = chkCuz;
+      state.message = chkCuz
     }
 
-    if (chkAtt != null) {
-      if (chkAtt.includes("Any")) { // bot sometimes gives that one; just take it as 'too generic'
-        chkCurAtt = 0 // so it gets no attribute bonus
-        chkAttPosAdj = "good" // this is the crucial bit for generation, but since the bot said it's generic...
-        chkAttNegAdj = "bad" // ...AI is told generic things below
-      }
-      if (chkAtt.includes("Intelligence")) { // when the bot comes up with an attribute...
-        chkCurAtt = intMod // ...assign the appropriate attribute modifier...
-        chkAttPosAdj = "smart" // ...and use a fitting positive word...
-        chkAttNegAdj = "dumb" // ...or negative word to let the AI know for generation below
-      }
-      // same as above, for all attributes:
-      if (chkAtt.includes("Wisdom")) {
-        chkCurAtt = wisMod
-        chkAttPosAdj = "wise"
-        chkAttNegAdj = "oblivious"
-      }
-      if (chkAtt.includes("Charisma")) {
-        chkCurAtt = chaMod
-        chkAttPosAdj = "charming"
-        chkAttNegAdj = "annoying"
-      }
-      if (chkAtt.includes("Strength")) {
-        chkCurAtt = strMod
-        chkAttPosAdj = "strong"
-        chkAttNegAdj = "weak"
-      }
-      if (chkAtt.includes("Dexterity")) {
-        chkCurAtt = dexMod
-        chkAttPosAdj = "nimble"
-        chkAttNegAdj = "clumsy"
-      }
-      if (chkAtt.includes("Constitution")) {
-        chkCurAtt = conMod
-        chkAttPosAdj = "tough"
-        chkAttNegAdj = "scrawny"
-      }
-      // if (chkAtt.includes("Any")) {
-      //   chkCurAtt = 0;
-      //   chkAttPosAdj = "good";
-      //   chkAttNegAdj = "bad";
-      // } else if (chkAtt.includes("Strength")) {
-      //   chkCurAtt = strMod;
-      //   chkAttPosAdj = "strong";
-      //   chkAttNegAdj = "weak";
-      // } else if (chkAtt.includes("Agility")) {
-      //   chkCurAtt = aglMod;
-      //   chkAttPosAdj = "agile";
-      //   chkAttNegAdj = "stiff";
-      // } else if (chkAtt.includes("Constitution")) {
-      //   chkCurAtt = conMod;
-      //   chkAttPosAdj = "nimble";
-      //   chkAttNegAdj = "clumsy";
-      // } else if (chkAtt.includes("Intelligence")) {
-      //   chkCurAtt = intMod;
-      //   chkAttPosAdj = "smart";
-      //   chkAttNegAdj = "dumb";
-      // } else if (chkAtt.includes("Wisdom")) {
-      //   chkCurAtt = wisMod;
-      //   chkAttPosAdj = "wise";
-      //   chkAttNegAdj = "oblivious";
-      // } else if (chkAtt.includes("Personality")) {
-      //   chkCurAtt = perMod;
-      //   chkAttPosAdj = "agile";
-      //   chkAttNegAdj = "stiff";
-      // } else if (chkAtt.includes("Willpower")) {
-      //   chkCurAtt = wpr;
-      //   chkAttPosAdj = "agile";
-      //   chkAttNegAdj = "stiff";
-      // }
-
-      if (typeof (state.chkSitBonus) !== 'undefined') {
-        chkCurSit = chkCurAtt + state.chkSitBonus;
-        for (let skillDef in skillDB) {
-          if (skillDef === state.chkSitSkill) {
-            console.log("found skillDef for current skill:" + skillDef)
-            if (skillDB[skillDef].overrideAtt === true) {
-              overrideAtt = true;
-              chkSkillPosStr = skillDB[skillDef].results['positive'];
-              chkSkillNegStr = skillDB[skillDef].results['negative'];
-            }
-            if (skillDB[skillDef].overrideAtt === false) {
-              overrideAtt = false;
-              chkSkillPosStr = skillDB[skillDef].results['positive'];
-              chkSkillNegStr = skillDB[skillDef].results['negative'];
-            }
-          }
+    checkBit:
+    if (chkStat != null) {
+      if (!chkStat === 'unknown') {
+        RPGmechsLog(`DCbot came up with 'unknown' stat.`)
+        chkStatLvl = state.stats.stats[chkStat].level
+        if (statConfig?.locking?.lockArbitraryChecks === true) {
+          RPGmechsLog(`Stopping check routine due to 'unknown' stat.`)
+          break checkBit
         }
-
       } else {
-        chkCurSit = chkCurAtt;
+        RPGmechsLog(`${chkStat} found, setting mod to ${state.stats.stats[chkStat].level}.`)
+        chkStatLvl = state.stats.stats[chkStat].level
       }
 
-      for (feat of state.charFeats) {
-        console.log(feat);
+      chkStatPosAdj = statConfig.statList[chkStat.toLowerCase()].successAdjective
+      chkStatNegAdj = statConfig.statList[chkStat.toLowerCase()].failAdjective
+
+      if (typeof (state.RPGstate?.chkSkillBonus) !== 'undefined') {
+        chkSitBonus = chkStatLvl + state.RPGstate.chkSkillBonus
+      } else {
+        chkSitBonus = chkStatLvl
       }
 
-      roll = getRndInteger(1, 20);
-      chkModRoll = roll + chkCurSit
+      let roll = getRndInteger(statConfig.rolling.checkRollRange[0], statConfig.rolling.checkRollRange[1])
+      let chkModRoll = roll + chkSitBonus
       if (chkModRoll >= chkDC) {
-        chkResult = "Success!";
-        if (typeof (chkSkillPosStr) !== 'undefined') {
-          if (overrideAtt == true) {
-            resultContextString = `[${chkSkillPosStr}]`;
-          }
-          if (overrideAtt == false) {
-            resultContextString = `[You are ${chkAttPosAdj} enough for that right now, and ${chkSkillPosStr}.]`;
+        chkMessageResult = miscConfig.successMessage
+        if (typeof (state.RPGstate?.chkSitSkill?.results?.positive) !== 'undefined') {
+          if (state.RPGstate?.chkSitSkill?.overrideAtt === true) {
+            resultContextString = `[${state.RPGstate.chkSitSkill.results.positive}]`
+          } else {
+            resultContextString = `[You are ${chkStatPosAdj} enough for that right now, and ${state.RPGstate.chkSitSkill.results.positive}.]`
           }
         } else {
-          resultContextString = `[You are ${chkAttPosAdj} enough for that right now.]`;
+          resultContextString = `[You are ${chkStatPosAdj} enough for that right now.]`
         }
-        state.XP += chkXP;
+        state.RPGstate.XP += chkXP
       } else {
-        chkResult = "Fail!";
-        if (typeof (chkSkillNegStr) !== 'undefined') {
-          if (overrideAtt == true) {
-            resultContextString = `[${chkSkillNegStr}]`;
-          }
-          if (overrideAtt == false) {
-            resultContextString = `[You are too ${chkAttNegAdj} for that right now, and ${chkSkillNegStr}.]`;
+        chkMessageResult = miscConfig.failMessage
+        if (typeof (state.RPGstate?.chkSitSkill?.results?.negative) !== 'undefined') {
+          if (state.RPGstate?.chkSitSkill?.overrideAtt === true) {
+            resultContextString = `[${state.RPGstate.chkSitSkill.results.negative}]`
+          } else {
+            resultContextString = `[You are too ${chkStatNegAdj} for that right now, and ${state.RPGstate.chkSitSkill.results.negative}.]`
           }
         } else {
-          resultContextString = `[You are too ${chkAttNegAdj} for that right now.]`;
+          resultContextString = `[You are too ${chkStatNegAdj} for that right now.]`
         }
+
         if (chkXP > 1) {
-          chkXP = Math.floor(chkXP / 2);
+          chkXP = Math.floor(chkXP / 2)
         }
-        state.XP += chkXP;
+        state.RPGstate.XP += chkXP
       }
 
-      state.displayStats = [{ key: 'XP', value: state.XP, color: 'green' }];
-
+      displayStatsUpdate(['XP', state.RPGstate.XP, 'green'])
       if (info.actionCount >= 2) {
-        state.message += ` ${chkAtt} roll: ${chkModRoll} (${roll}${makeModString(chkCurAtt)}${makeModString(state.chkSitBonus)}), ${chkResult} XP gained: ${chkXP}`;
+        state.message += `${chkStat} roll: ${chkModRoll} (${roll}${makeModString(chkStatLvl)}${makeModString(state.RPGstate.chkSkillBonus)}), ${chkMessageResult} XP gained: ${chkXP}`
       }
 
-      if (typeof (state.chkSitBonus) !== 'undefined') {
-        delete state.chkSitBonus;
-        delete state.chkSitSkill;
+      if (typeof (state.RPGstate?.chkSkillBonus) !== 'undefined') {
+        delete state.RPGstate.chkSkillBonus
+        delete state.RPGstate.chkSitSkill
       }
-    }
-
-    for (feat of state.charFeats) {
-      console.log(feat);
     }
   }
 
-  const contextMemory = info.memoryLength ? text.slice(0, info.memoryLength) : '';
-  const context = info.memoryLength ? text.slice(info.memoryLength + 1) : text;
-  const lines = context.split("\n");
+  const contextMemory = info.memoryLength ? text.slice(0, info.memoryLength) : ''
+  const context = info.memoryLength ? text.slice(info.memoryLength + 1) : text
+  const lines = context.split("\n")
 
   if (typeof (resultContextString) !== 'undefined') {
-    lines.splice(-1, 0, resultContextString);
-    delete resultContextString;
+    lines.splice(-1, 0, resultContextString)
+    delete resultContextString
   }
 
-  const combinedLines = lines.join("\n").slice(-(info.maxChars - info.memoryLength));
-  var finalText = [contextMemory, combinedLines].join("");
-  return { text: finalText };
+  const combinedLines = lines.join("\n").slice(-(info.maxChars - info.memoryLength))
+  var finalText = [contextMemory, combinedLines].join("")
+  return { text: finalText }
 }
 
 modifier(text);

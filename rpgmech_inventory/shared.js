@@ -592,86 +592,162 @@ const classDB = {
   }
 };
 
-/**
- * Gets the stat list for the players' characters
- */
-const statList = {
-  intelligence: {
-    name: "Intelligence",
-    tag: "INT",
-    icon: "🧠"
+statConfig = {
+  inputBot: "BIGinputDCattributeBot5",
+  botOutputs: {
+    stat: `Attribute`,
+    dc: `DC`,
+    cuz: `reason`,
   },
-  wisdom: {
-    name: "Wisdom",
-    tag: "WIS",
-    icon: "🤔"
+  rolling: {
+    checkRollRange: [1, 20],
   },
-  charisma: {
-    name: "Charisma",
-    tag: "CHA",
-    icon: "😎"
+  //statList: {
+  // unknown: {
+  //   name: "Unknown",
+  //   tag: "UNK",
+  //   icon: "???",
+  //   successAdjective: "good",
+  //   failAdjective: "bad",
+  //   ignoreForMenu: true
+  // },
+  //   strength: {
+  //     name: "Strength",
+  //     tag: "STR",
+  //     icon: "💪",
+  //     successAdjective: "strong",
+  //     failAdjective: "weak",
+  //     ignoreForMenu: true
+  //   },
+  //   agility: {
+  //     name: "Agility",
+  //     tag: "AGL",
+  //     icon: "🏃‍♂️",
+  //     successAdjective: "agile",
+  //     failAdjective: "stiff",
+  //     ignoreForMenu: true
+  //   },
+  //   constitution: {
+  //     name: "Constitution",
+  //     tag: "CON",
+  //     icon: "🦵",
+  //     successAdjective: "nimble",
+  //     failAdjective: "clumsy",
+  //     ignoreForMenu: true
+  //   },
+  //   intelligence: {
+  //     name: "Intelligence",
+  //     tag: "INT",
+  //     icon: "🧠",
+  //     successAdjective: "smart",
+  //     failAdjective: "dumb",
+  //     ignoreForMenu: true
+  //   },
+  //   wisdom: {
+  //     name: "Wisdom",
+  //     tag: "WIS",
+  //     icon: "🦉",
+  //     successAdjective: "wise",
+  //     failAdjective: "oblivious",
+  //     ignoreForMenu: true
+  //   },
+  //   personality: {
+  //     name: "Personality",
+  //     tag: "PER",
+  //     icon: "😎",
+  //     successAdjective: "cool",
+  //     failAdjective: "annoying",
+  //     ignoreForMenu: true
+  //   },
+  //   willpower: {
+  //     name: "Willpower",
+  //     tag: "WPR",
+  //     icon: "🔥",
+  //     successAdjective: "sheer",
+  //     failAdjective: "thick-headed",
+  //     ignoreForMenu: true
+  //   }
+  // },
+  statList: {
+    unknown: {
+      name: "Unknown",
+      tag: "UNK",
+      icon: "???",
+      successAdjective: "good",
+      failAdjective: "bad",
+      ignoreForMenu: true
+    },
+    intelligence: {
+      name: "Intelligence",
+      tag: "INT",
+      icon: "🧠",
+      successAdjective: "smart",
+      failAdjective: "dumb",
+    },
+    wisdom: {
+      name: "Wisdom",
+      tag: "WIS",
+      icon: "🤔",
+      successAdjective: "wise",
+      failAdjective: "oblivious",
+    },
+    charisma: {
+      name: "Charisma",
+      tag: "CHA",
+      icon: "😎",
+      successAdjective: "impressive",
+      failAdjective: "annoying",
+    },
+    strength: {
+      name: "Strength",
+      tag: "STR",
+      icon: "💪",
+      successAdjective: "strong",
+      failAdjective: "weak",
+    },
+    dexterity: {
+      name: "Dexterity",
+      tag: "DEX",
+      icon: "💃",
+      successAdjective: "nimble",
+      failAdjective: "clumsy",
+    },
+    constitution: {
+      name: "Constitution",
+      tag: "CON",
+      icon: "😣",
+      successAdjective: "tough",
+      failAdjective: "scrawny",
+    },
   },
-  strength: {
-    name: "Strength",
-    tag: "STR",
-    icon: "💪"
+  starting: {
+    level: 0,
+    points: 5,
+    cost: 1,
   },
-  dexterity: {
-    name: "Dexterity",
-    tag: "DEX",
-    icon: "💃"
+  raise: [
+    { threshold: 4, newCost: 2 },
+    { threshold: 9, newCost: 3 },
+  ],
+  locking: {
+    lockTriggers: [`walk`, `breathe`],
+    lockArbitraryChecks: true
+  }
+}
+
+const skillConfig = {
+  starting: {
+    points: 10,
+    level: 0,
   },
-  constitution: {
-    name: "Constitution",
-    tag: "CON",
-    icon: "😣"
-  },
-};
-//const statList = {
-//   strength: {
-//     name: "Strength",
-//     tag: "STR",
-//     icon: "💪"
-//   },
-//   agility: {
-//     name: "Agility",
-//     tag: "AGL",
-//     icon: "🏃‍♂️"
-//   },
-//   constitution: {
-//     name: "Constitution",
-//     tag: "CON",
-//     icon: "🦵"
-//   },
-//   intelligence: {
-//     name: "Intelligence",
-//     tag: "INT",
-//     icon: "🧠"
-//   },
-//   wisdom: {
-//     name: "Wisdom",
-//     tag: "WIS",
-//     icon: "🦉"
-//   },
-//   personality: {
-//     name: "Personality",
-//     tag: "PER",
-//     icon: "😎"
-//   },
-//   willpower: {
-//     name: "Willpower",
-//     tag: "WPR",
-//     icon: "🔥"
-//   }
-// };
+  forbidRandom: true
+}
 
 /**
  * Stuff that does context notes independent of skill use or checks and prolly sth for checks as well
  * @returns object with feats
  */
-function featDB() {
-  return {};
-}
+const featDB = {}
 
 /**
  * Misc helper function that gets random number
@@ -698,7 +774,6 @@ function getRndFromList(list) {
  * @returns 
  */
 function makeModString(int) {
-  let string = '';
   if (Number.isInteger(int)) {
     if (int >= 0) {
       string = "+" + int;
@@ -711,6 +786,84 @@ function makeModString(int) {
   return (string);
 }
 
+function inputTypeCheck(inputText) {
+  let doTriggered = inputText.match(/> You /gi)
+  let sayTriggered = inputText.match(/> You (say|ask)/gi)
+  let greaterTriggered = inputText.match(/> /gi)
+
+  if (sayTriggered) {
+    RPGmechsLog("'> You say' in input - [say] triggered!")
+    return (`say`)
+  } else if (doTriggered) {
+    RPGmechsLog("'> You' in input - [do] triggered!")
+    return (`do`)
+  } else if (greaterTriggered) {
+    RPGmechsLog("'>' in input - [>story] triggered!")
+    return (`greater`)
+  } else {
+    RPGmechsLog("No '>' or '> You' in input - [story] triggered!")
+    return (`story`)
+  }
+}
+
+function RPGmechsLog(msg) {
+  if (state.RPGstate.doLog) {
+    console.log(msg)
+  }
+}
+
+function capFirstLetter(string) {
+  return (string.charAt(0).toUpperCase() + string.slice(1))
+}
+
+function displayStatsUpdate([inKey, inValue, inColor]) {
+  if (!state.displayStats) {
+    state.displayStats = []
+  }
+
+  let displayStatUpdated = false
+  for (let displayStat of state.displayStats) {
+    RPGmechsLog(`Checking '${displayStat.key}' displayStats entry...`)
+    let curDisplayStatIndex = state.displayStats.indexOf(displayStat)
+    if (displayStat.key === inKey || displayStat.key === '\n' + inKey) {
+      RPGmechsLog(`Found '${inKey}' displayStats entry: ${state.displayStats[curDisplayStatIndex].key}, ${state.displayStats[curDisplayStatIndex].value}, ${state.displayStats[curDisplayStatIndex].color}, updating!`)
+      if (inValue) {
+        if (typeof (inValue) == 'string') {
+          RPGmechsLog(`Value to update displayStat entry inputted: '${inValue}', updating.`)
+          state.displayStats[curDisplayStatIndex].value = inValue
+        } else {
+          RPGmechsLog(`Value to update displayStat entry inputted: '${inValue}', updating.`)
+          state.displayStats[curDisplayStatIndex].value = inValue
+        }
+      } else {
+        RPGmechsLog(`No value to update displayStat inputted, removing entry.`)
+        state.displayStats.splice(curDisplayStatIndex, 1)
+        displayStatUpdated = true
+        break
+      }
+
+      if (inColor) {
+        state.displayStats[curDisplayStatIndex].color = inColor
+      }
+
+      displayStatUpdated = true
+      break
+    }
+  }
+
+  if (displayStatUpdated === false && inValue?.length > 0) {
+    RPGmechsLog(`No ${inKey} displayStats entry found, adding it!`)
+    if (state.displayStats.length > 0) {
+      inKey = '\n' + inKey
+    }
+
+    state.displayStats.push({ 'key': inKey, 'value': inValue, 'color': inColor })
+  }
+}
+
+/********************************/
+/*** Zaltys' name synthesizer ***/
+/********************************/
 BADNAMES = ['Ackerson', 'Alison', 'Annah', 'Anu', 'Arat', 'Arrorn', 'Ashton', 'Azajaja', 'Big Red',
   'Brot', 'Brother Gray', 'Bucklesberg', 'Captain Dario', 'Captain Eckard', 'Captain Hayes', 'Captain Ian', 'Captain Illam', 'Carn',
   'Castus', 'Cloudpeak', 'Count Gray', 'Count Grey', 'Dark Order', 'David', 'Delantium', 'Delerg', 'Dendrin', 'Derg',
