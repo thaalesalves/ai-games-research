@@ -131,11 +131,11 @@ const modifier = (text) => {
       delete state.RPGstate.init;
       state.message = "Init reset done.";
     } else if (cmd == 'showdc') {
-      if (state.showDC === true) {
-        state.showDC = false;
+      if (state.RPGstate.showDC === true) {
+        state.RPGstate.showDC = false;
         state.message = "Turned DC display off.";
       } else {
-        state.showDC = true;
+        state.RPGstate.showDC = true;
         state.message = "Turned DC display on.";
       }
     } else {
