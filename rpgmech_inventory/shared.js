@@ -418,6 +418,22 @@ function grabBracket(index) {
   return (text.match(BRACKETED)[index].replace(BRACKETS, ''))
 }
 
+const introBracketConfig = {
+  brackets: [
+    "name",
+    "class",
+    "petType",
+    "petName"
+  ]
+}
+
+const miscConfig = {
+  successMessage: `Success!`,
+  failMessage: `Fail!`,
+  messageStatIcon: true,
+  showXP: true,
+}
+
 /**
  * Gets the skill list for the players' characters
  */
@@ -730,7 +746,7 @@ statConfig = {
     { threshold: 9, newCost: 3 },
   ],
   locking: {
-    lockTriggers: [`walk`, `breathe`],
+    lockTriggers: [`walk`, `breathe`, 'ask', 'say', 'head', 'run', 'go', 'shout', 'yell', 'question', 'follow'],
     lockArbitraryChecks: true
   }
 }

@@ -5,29 +5,35 @@ const modifier = (text) => {
   let modifiedText = nameReplace(text);
   const lowered = modifiedText.toLowerCase();
   const commandMatcher = modifiedText.match(/\n? ?(?:> You |> You say "|)\/(\w+?)( [\w ]+)?[".]?\n?$/i);
-  const actionMatcher = modifiedText.match(/\n? ?(?:> You |> You say "|)(\w+?)( [\w ]+)?[".]?\n?$/i);
+  const actionMatcher = modifiedText.match(/\n? ?(?:> You |> You say ")(\w+?)( [\w ]+)?[".]?\n?$/i);
 
   if (info.actionCount < 1 || !state.init) {
+    RPGstate = {};
+    state.RPGstate = {};
+    state.RPGstate.init = false;
     state.init = true;
+
     grabAllBrackets(modifiedText);
     state.character = {
-      name: state.placeholders[0],
-      gender: state.placeholders[1],
-      race: state.placeholders[2],
-      class: state.placeholders[3],
-      age: state.placeholders[4],
-      personality: state.placeholders[5].replace(/,/g, '/ '),
+      name: state.placeholders[0].trim(),
+      gender: state.placeholders[1].trim(),
+      race: state.placeholders[2].trim(),
+      class: state.placeholders[3].trim(),
+      age: state.placeholders[4].trim(),
+      personality: state.placeholders[5].trim().replace(/,/g, '/ '),
+      stats: [],
+      skills: classDB[state.placeholders[3].trim().toLowerCase()].skills,
       eyes: {
-        eyeColor: state.placeholders[6]
+        eyeColor: state.placeholders[6].trim()
       },
       hair: {
-        hairStyle: state.placeholders[7],
-        hairColor: state.placeholders[8],
+        hairStyle: state.placeholders[7].trim(),
+        hairColor: state.placeholders[8].trim(),
       },
       appearance: {
-        height: state.placeholders[9].replace('cm', '').replace('centimeters', ''),
-        weight: state.placeholders[10].replace('kg', '').replace('kilos', ''),
-        features: state.placeholders[11].replace(/,/g, '/ ')
+        height: state.placeholders[9].trim().replace('cm', '').replace('centimeters', ''),
+        weight: state.placeholders[10].trim().replace('kg', '').replace('kilos', ''),
+        features: state.placeholders[11].trim().replace(/,/g, '/ ')
       }
     };
 
@@ -45,6 +51,22 @@ const modifier = (text) => {
 
     addWorldEntry(playerWorldInfo.keys, playerWorldInfo.entry, false);
     state.character.worldInfoIndex = worldEntries.findIndex(wi => wi.keys.includes(state.character.name));
+
+    charSheet = {
+      name: state.character.name,
+      class: state.character.class,
+      stats: state.character.stats,
+      skills: state.character.skills
+    }
+
+    for (let bracket in introBracketConfig.brackets) {
+      charSheet[introBracketConfig.brackets[bracket]] = grabBracket(bracket)
+    }
+
+    RPGmechsLog(`Read character information from intro prompt:`)
+    RPGmechsLog(charSheet)
+
+    RPGstate.charSheet = charSheet
 
     getInventory();
     parseRace(state.character);
@@ -128,7 +150,7 @@ const modifier = (text) => {
       modifiedText = '';
       console.log(`End toggle hardcore mode.`);
     } else if (cmd == 'r') {
-      delete state.RPGstate.init;
+      state.RPGstate.init = false;
       state.message = "Init reset done.";
     } else if (cmd == 'showdc') {
       if (state.RPGstate.showDC === true) {
@@ -182,9 +204,11 @@ const modifier = (text) => {
   if (!state.RPGstate.init) {
     RPGmechsLog(`Initializing menus...`)
     if (!state.stats) {
+      RPGmechsLog(`Initializing stats object`)
       state.stats = { stats: {} }
     }
 
+    RPGmechsLog(`Stats object is initialized`)
     for (let statID in statConfig.statList) {
       if (!statConfig.statList[statID].ignoreForMenu == true) {
         state.stats.stats[statConfig.statList[statID].name] = { level: statConfig.starting.level, cost: statConfig.starting.cost }
@@ -192,7 +216,6 @@ const modifier = (text) => {
       } else {
         RPGmechsLog(`Ignored '${statID}' stat for stats menu adding.`)
       }
-
     }
 
     state.stats.statPoints = statConfig.starting.points
@@ -231,7 +254,7 @@ const modifier = (text) => {
     }
   }
 
-  state.RPGstate = RPGstate
+  // state.RPGstate = RPGstate
 
   if (statConfig?.locking) {
     for (let trigger of statConfig.locking.lockTriggers) {
@@ -266,7 +289,7 @@ const modifier = (text) => {
     }
   }
 
-  if (!stopInput && info.actionCount > 1 && !stopBot) {
+  if (!stop && info.actionCount > 1 && !stopBot) {
     state.inputBot = statConfig.inputBot
   }
 

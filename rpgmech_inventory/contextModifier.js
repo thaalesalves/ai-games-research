@@ -30,6 +30,11 @@ const modifier = (text) => {
   if (info.actionCount > 1 && state.inputBot) {
     RPGmechsLog(info?.inputEvaluation)
     let botOutput = info?.inputEvaluation
+    RPGmechsLog(botOutput)
+
+    RPGmechsLog(`chkStat: ${chkStat}`)
+    RPGmechsLog(`chkDC: ${chkDC}`)
+    RPGmechsLog(`chkCuz: ${chkCuz}`)
 
     chkStat = info?.inputEvaluation[statConfig.botOutputs.stat]
     chkDC = info?.inputEvaluation[statConfig.botOutputs.dc]
@@ -56,7 +61,9 @@ const modifier = (text) => {
 
     checkBit:
     if (chkStat != null) {
+      console.log(`I'm in line 59 of context mod. chkStat: ${chkStat}`)
       if (!chkStat === 'unknown') {
+        console.log(`I'm in line 60 of context mod. chkStat equals unknown`)
         RPGmechsLog(`DCbot came up with 'unknown' stat.`)
         chkStatLvl = state.stats.stats[chkStat].level
         if (statConfig?.locking?.lockArbitraryChecks === true) {
@@ -64,6 +71,7 @@ const modifier = (text) => {
           break checkBit
         }
       } else {
+        console.log(`I'm in line 69 of context mod. chkStat does not equal unknown`)
         RPGmechsLog(`${chkStat} found, setting mod to ${state.stats.stats[chkStat].level}.`)
         chkStatLvl = state.stats.stats[chkStat].level
       }
