@@ -9,7 +9,7 @@ const modifier = (text) => {
     const shotAgain = lowered.match(SHOOT_AGAIN);
     const ammoUsed = lowered.match(AMMO_REGEX);
     if (ammoUsed && shotAgain) {
-      Inventory.removeFromInventory(ammoUsed[0], 1);
+      removeFromInventory(ammoUsed[0], 1);
     }
 
     state.inputAction = '';

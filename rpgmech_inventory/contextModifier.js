@@ -47,7 +47,7 @@ const modifier = (text) => {
     chkXP = chkDC / 5;
 
     if (state.showDC) {
-      state.message = RpgMechanics.statList()[chkAtt.toLowerCase()].icon + " DC " + chkDC + ": " + chkCuz;
+      state.message = statList[chkAtt].icon + " DC " + chkDC + ": " + chkCuz;
     } else {
       state.message = chkCuz;
     }
@@ -125,18 +125,18 @@ const modifier = (text) => {
 
       if (typeof (state.chkSitBonus) !== 'undefined') {
         chkCurSit = chkCurAtt + state.chkSitBonus;
-        for (let skillDef in RpgMechanics.skillList()) {
+        for (let skillDef in skillDB) {
           if (skillDef === state.chkSitSkill) {
             console.log("found skillDef for current skill:" + skillDef)
-            if (RpgMechanics.skillList()[skillDef].overrideAtt === true) {
+            if (skillDB[skillDef].overrideAtt === true) {
               overrideAtt = true;
-              chkSkillPosStr = RpgMechanics.skillList()[skillDef].results['positive'];
-              chkSkillNegStr = RpgMechanics.skillList()[skillDef].results['negative'];
+              chkSkillPosStr = skillDB[skillDef].results['positive'];
+              chkSkillNegStr = skillDB[skillDef].results['negative'];
             }
-            if (RpgMechanics.skillList()[skillDef].overrideAtt === false) {
+            if (skillDB[skillDef].overrideAtt === false) {
               overrideAtt = false;
-              chkSkillPosStr = RpgMechanics.skillList()[skillDef].results['positive'];
-              chkSkillNegStr = RpgMechanics.skillList()[skillDef].results['negative'];
+              chkSkillPosStr = skillDB[skillDef].results['positive'];
+              chkSkillNegStr = skillDB[skillDef].results['negative'];
             }
           }
         }
@@ -149,7 +149,7 @@ const modifier = (text) => {
         console.log(feat);
       }
 
-      roll = RpgMechanics.getRndInteger(1, 20);
+      roll = getRndInteger(1, 20);
       chkModRoll = roll + chkCurSit
       if (chkModRoll >= chkDC) {
         chkResult = "Success!";
@@ -185,7 +185,7 @@ const modifier = (text) => {
       state.displayStats = [{ key: 'XP', value: state.XP, color: 'green' }];
 
       if (info.actionCount >= 2) {
-        state.message += ` ${chkAtt} roll: ${chkModRoll} (${roll}${RpgMechanics.makeModString(chkCurAtt)}${RpgMechanics.makeModString(state.chkSitBonus)}), ${chkResult} XP gained: ${chkXP}`;
+        state.message += ` ${chkAtt} roll: ${chkModRoll} (${roll}${makeModString(chkCurAtt)}${makeModString(state.chkSitBonus)}), ${chkResult} XP gained: ${chkXP}`;
       }
 
       if (typeof (state.chkSitBonus) !== 'undefined') {

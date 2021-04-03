@@ -1,13 +1,13 @@
 const modifier = (text) => {
   state.shouldStop = false;
   let stop = false;
-  let modifiedText = text;
-  const lowered = text.toLowerCase();
-  const commandMatcher = text.match(/\n? ?(?:> You |> You say "|)\/(\w+?)( [\w ]+)?[".]?\n?$/i);
-  const actionMatcher = text.match(/\n? ?(?:> You |> You say "|)(\w+?)( [\w ]+)?[".]?\n?$/i);
+  let modifiedText = nameReplace(text);
+  const lowered = modifiedText.toLowerCase();
+  const commandMatcher = modifiedText.match(/\n? ?(?:> You |> You say "|)\/(\w+?)( [\w ]+)?[".]?\n?$/i);
+  const actionMatcher = modifiedText.match(/\n? ?(?:> You |> You say "|)(\w+?)( [\w ]+)?[".]?\n?$/i);
 
   if (info.actionCount < 1 || !state.init) {
-    BracketHandler.grabAllBrackets(modifiedText);
+    grabAllBrackets(modifiedText);
 
     state.stats = {
       stats:{
@@ -75,22 +75,22 @@ const modifier = (text) => {
     addWorldEntry(playerWorldInfo.keys, playerWorldInfo.entry, false);
     state.character.worldInfoIndex = worldEntries.findIndex(wi => wi.keys.includes(state.character.name));
 
-    Inventory.getInventory();
-    CharacterDataParser.parseRace(state.character);
-    CharacterDataParser.parseClass(state.character);
+    getInventory();
+    parseRace(state.character);
+    parseClass(state.character);
     state.shouldStop = false;
     state.disableHardcoreMode = true;
-    modifiedText = modifiedText.replace(BracketHandler.BRACKETS, '') + CharacterDataParser.generatePrompt();
+    modifiedText = modifiedText.replace(BRACKETS, '') + generatePrompt();
     delete state.placeholders;
 
     state.skills = {};
     for (curSkillID of state.charClass) {
       console.log("current ID checked: " + curSkillID)
-      for (skillDef in RpgMechanics.skillList()) {
+      for (skillDef in skillDB) {
         console.log("current skillDB skilldef: " + skillDef)
         if (skillDef === curSkillID) {
-          console.log(RpgMechanics.skillList()[skillDef].menuString)
-          state.skills[RpgMechanics.skillList()[skillDef].menuString] = 0
+          console.log(skillDB[skillDef].menuString)
+          state.skills[skillDB[skillDef].menuString] = 0
         }
       }
     }
@@ -108,17 +108,17 @@ const modifier = (text) => {
     if (cmd == 'invCheck') {
       console.log(`Begin inventory check.`);
       state.shouldStop = true;
-      state.message = `${Inventory.checkInventory()}`;
+      state.message = `${checkInventory()}`;
       modifiedText = '';
       console.log(`End inventory check.`);
     } else if (cmd == 'invAdd') {
       console.log(`Begin inventory add.`);
       state.shouldStop = true;
-      const itemName = params.replace(Inventory.LETTER_REGEX, '').trim();
-      const itemQuantity = Number.isNaN(parseInt(params.replace(Inventory.DIGIT_REGEX, '').trim())) ? 1 : parseInt(params.replace(Inventory.DIGIT_REGEX, '').trim());
+      const itemName = params.replace(LETTER_REGEX, '').trim();
+      const itemQuantity = Number.isNaN(parseInt(params.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(params.replace(DIGIT_REGEX, '').trim());
 
       if (itemQuantity >= 1) {
-        state.message = `${Inventory.addToInventory(itemName, itemQuantity)}`;
+        state.message = `${addToInventory(itemName, itemQuantity)}`;
       } else {
         state.message = `You cannot add less than 1 unit of an item to your inventory.`;
       }
@@ -129,10 +129,10 @@ const modifier = (text) => {
       console.log(`Begin inventory remove.`);
       state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
-      const itemQuantity = Number.isNaN(parseInt(params.replace(Inventory.DIGIT_REGEX, '').trim())) ? 1 : parseInt(params.replace(Inventory.DIGIT_REGEX, '').trim());
+      const itemQuantity = Number.isNaN(parseInt(params.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(params.replace(DIGIT_REGEX, '').trim());
 
       if (itemQuantity >= 1) {
-        state.message = `${Inventory.removeFromInventory(itemName, itemQuantity)}`;
+        state.message = `${removeFromInventory(itemName, itemQuantity)}`;
       } else {
         state.message = `You cannot remove less than 1 unit of an item from your inventory.`;
       }
@@ -142,13 +142,13 @@ const modifier = (text) => {
     } else if (cmd == 'invEquip') {
       console.log(`Begin inventory equip.`);
       state.shouldStop = true;
-      const itemName = params.replace(Inventory.LETTER_REGEX, '').trim();
-      state.message = `${Inventory.equipItem(itemName)}`;
+      const itemName = params.replace(LETTER_REGEX, '').trim();
+      state.message = `${equipItem(itemName)}`;
       modifiedText = '';
       console.log(`End inventory equip.`);
     } else if (cmd == 'invDebugWi') {
       console.log(`Begin inventory debug.`);
-      Inventory.debugInventory();
+      debugInventory();
       state.shouldStop = true;
       state.message = `Your inventory and player WI have been debugged.`;
       modifiedText = '';
@@ -189,11 +189,11 @@ const modifier = (text) => {
     const params = actionMatcher[2] ? actionMatcher[2].trim() : '';
     if (state.inputAction == 'shoot') {
       console.log(`Action: begin shooting weapon.`);
-      const shootingWeapon = Inventory.findShootingWeapon(params);
+      const shootingWeapon = findShootingWeapon(params);
       console.log(`findShootingWeapon() return: ${shootingWeapon}`);
       if (typeof shootingWeapon != 'undefined') {
         console.log(`Action: shooting a "${shootingWeapon.name}". Looking for ammo: "${shootingWeapon.ammo}".`);
-        if (Inventory.getAmmo(shootingWeapon.ammo)) {
+        if (getAmmo(shootingWeapon.ammo)) {
           modifiedText += `${shootingWeapon.succesfulOutcome[Math.floor(Math.random() * shootingWeapon.succesfulOutcome.length)]}`;
         } else {
           state.shouldStop = state.disableHardcoreMode;
@@ -230,11 +230,11 @@ const modifier = (text) => {
 
   for (let skill in state.skills) {
     let skillMod = state.skills[skill];
-    for (let skillDef in RpgMechanics.skillList()) {
-      if (RpgMechanics.skillList()[skillDef].menuString === skill) {
-        for (triggerStr of RpgMechanics.skillList()[skillDef].triggers) {
+    for (let skillDef in skillDB) {
+      if (skillDB[skillDef].menuString === skill) {
+        for (triggerStr of skillDB[skillDef].triggers) {
           triggerRegEx = new RegExp(triggerStr, "gi");
-          caughtTrigger = text.match(triggerRegEx);
+          caughtTrigger = modifiedText.match(triggerRegEx);
           if (caughtTrigger) {
             console.log(`Caught ${caughtTrigger}!`);
             if (!state.chkSitBonus) {
