@@ -3,7 +3,7 @@ const modifier = (text) => {
   let stop = false;
   let modifiedText = text;
   const lowered = text.toLowerCase();
-  const commandMatcher = text.match(/\n? ?(?:> You |> You say "|)\/(\w+?)( [\w ]+)?[".]?\n?$/i);
+  const commandMatcher = modifiedText.match(/\n? ?(?:> You |> You say "|)\/(.+?)["]?[.]?\n?$/i);
   const actionMatcher = text.match(/\n? ?(?:> You |> You say "|)(\w+?)( [\w ]+)?[".]?\n?$/i);
 
   if (!state.init && info.actionCount < 1) {

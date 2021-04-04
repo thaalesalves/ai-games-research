@@ -2,7 +2,7 @@ const modifier = (text) => {
   let stop = false;
   let modifiedText = nameReplace(text);
   const lowered = modifiedText.toLowerCase();
-  const commandMatcher = text.match(/\n? ?(?:> You |> You say "|)\/(\w+?)( [\w ]+)?[".]?\n?$/i)
+  const commandMatcher = modifiedText.match(/\n? ?(?:> You |> You say "|)\/(.+?)["]?[.]?\n?$/i);
 
   if (!state.init && info.actionCount < 1) {
     grabAllBrackets(modifiedText);
