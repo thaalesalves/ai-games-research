@@ -33,8 +33,8 @@ const modifier = (text) => {
         hairColor: state.placeholders[8].trim(),
       },
       appearance: {
-        height: state.placeholders[9].trim().replace('cm', '').replace('centimeters', ''),
-        weight: state.placeholders[10].trim().replace('kg', '').replace('kilos', ''),
+        height: state.placeholders[9].replace(DIGIT_REGEX, ''),
+        weight: state.placeholders[10].replace(DIGIT_REGEX, ''),
         features: state.placeholders[11].trim().replace(/,/g, '/')
       }
     };

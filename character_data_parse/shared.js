@@ -1,5 +1,6 @@
 const BRACKETED = /\[(.*?)\]/g;
 const BRACKETS = /\[|\]/g;
+const DIGIT_REGEX = /\D/g;
 
 /**
  * Bracket handler by Gnurro.
