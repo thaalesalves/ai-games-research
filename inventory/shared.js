@@ -5,8 +5,8 @@ const LETTER_REGEX = /[0-9]/g;
 const DIGIT_REGEX = /\D/g;
 const PUNCTUATION_REMOVE = /[^\w\s]/gi;
 const WEAPON_REGEX = new RegExp(/(crossbow|bow)/i);
-const WORN_REGEX = new RegExp(`(?<=WORN: )(.*)(?=; )`);
-const INVENTORY_REGEX = new RegExp(`(?<=INV: )(.*)(?=;)`);
+const WORN_REGEX = new RegExp(`(?<=WORN:)(.*)(?=;)`);
+const INVENTORY_REGEX = new RegExp(`(?<=INV:)(.*)(?=.)`);
 
 const SHOOTING_WEAPONS = [
   {
@@ -211,7 +211,7 @@ const equipItem = (itemName) => {
       .map((k) => {
         console.log(`INSIDE equipItem(): worn item found in inventory -> ${k.name}`);
         return k.name;
-      }).join('/ ');
+      }).join('/');
 
     console.log(`INSIDE equipItem(): finished building new WORN string -> ${itemsWorn}`);
     playerWorldInfo.entry = playerWorldInfo.entry.replace(WORN_REGEX, itemsWorn);
@@ -279,12 +279,12 @@ const debugInventory = () => {
     .map((k) => {
       console.log(`INSIDE debugInventory(): Updating player WI with worn items`);
       return k.name;
-    }).join('/ ');
+    }).join('/');
 
   itemsInInventory = getInventory().map((k) => {
     console.log(`INSIDE debugInventory(): Updating player WI with inventory items`);
     return `${k.name}< quantity: ${k.quantity}>`;
-  }).join('/ ');
+  }).join('/');
 
   playerWorldInfo.entry = playerWorldInfo.entry.replace(WORN_REGEX, itemsWorn);
   playerWorldInfo.entry = playerWorldInfo.entry.replace(INVENTORY_REGEX, itemsInInventory);
@@ -302,8 +302,8 @@ const updateInventory = () => {
   let itemsInInventory = playerWorldInfo.entry.match(INVENTORY_REGEX)[0];
   itemsInInventory = getInventory().map((k) => {
     console.log(`INSIDE updateInventory(): Sorting inventory items and quantities into player WI`);
-    return `${k.name}< quantity: ${k.quantity}>`;
-  }).join('/ ');
+    return `${k.name}<quantity:${k.quantity}>`;
+  }).join('/');
 
   playerWorldInfo.entry = playerWorldInfo.entry.replace(INVENTORY_REGEX, itemsInInventory);
   console.log(`END updateInventory(): updated player's inventory and WI with current items`);

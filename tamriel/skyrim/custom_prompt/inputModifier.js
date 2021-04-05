@@ -12,7 +12,7 @@ const modifier = (text) => {
       race: state.placeholders[2],
       class: state.placeholders[3],
       age: state.placeholders[4],
-      personality: state.placeholders[5].replace(/,/g, '/ '),
+      personality: state.placeholders[5].replace(/,/g, '/'),
       eyes: {
         eyeColor: state.placeholders[6]
       },
@@ -23,7 +23,7 @@ const modifier = (text) => {
       appearance: {
         height: state.placeholders[9].replace('cm', '').replace('centimeters', ''),
         weight: state.placeholders[10].replace('kg', '').replace('kilos', ''),
-        features: state.placeholders[11].replace(/,/g, '/ ')
+        features: state.placeholders[11].replace(/,/g, '/')
       },
       story: state.placeholders[12]
     };

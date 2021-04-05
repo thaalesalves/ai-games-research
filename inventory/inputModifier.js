@@ -10,9 +10,9 @@ const modifier = (text) => {
     playerWorldInfo = {
       keys: `you`,
       hidden: false,
-      entry: ' You:['
-        + ` WORN: nothing;`
-        + ` INV: nothing;`
+      entry: 'You:['
+        + `WORN:nothing;`
+        + `INV:nothing.`
         + ']'
     };
 

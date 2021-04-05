@@ -230,7 +230,7 @@ const equipItem = (itemName) => {
       .map((k) => {
         console.log(`INSIDE equipItem(): worn item found in inventory -> ${k.name}`);
         return k.name;
-      }).join('/ ');
+      }).join('/');
 
     console.log(`INSIDE equipItem(): finished building new WORN string -> ${itemsWorn}`);
     playerWorldInfo.entry = playerWorldInfo.entry.replace(WORN_REGEX, itemsWorn);
@@ -258,12 +258,12 @@ const debugInventory = () => {
     .map((k) => {
       console.log(`INSIDE debugInventory(): Updating player WI with worn items`);
       return k.name;
-    }).join('/ ');
+    }).join('/');
 
   itemsInInventory = getInventory().map((k) => {
     console.log(`INSIDE debugInventory(): Updating player WI with inventory items`);
     return `${k.name}< quantity: ${k.quantity}>`;
-  }).join('/ ');
+  }).join('/');
 
   playerWorldInfo.entry = playerWorldInfo.entry.replace(WORN_REGEX, itemsWorn);
   playerWorldInfo.entry = playerWorldInfo.entry.replace(INVENTORY_REGEX, itemsInInventory);
@@ -282,7 +282,7 @@ const updateInventory = () => {
   itemsInInventory = getInventory().map((k) => {
     console.log(`INSIDE updateInventory(): Sorting inventory items and quantities into player WI`);
     return `${k.name}< quantity: ${k.quantity}>`;
-  }).join('/ ');
+  }).join('/');
 
   playerWorldInfo.entry = playerWorldInfo.entry.replace(INVENTORY_REGEX, itemsInInventory);
   console.log(`END updateInventory(): updated player's inventory and WI with current items`);
