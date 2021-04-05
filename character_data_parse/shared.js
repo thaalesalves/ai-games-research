@@ -8,7 +8,7 @@ const DIGIT_REGEX = /\D/g;
  * 
  * Removes backets from input text to handle them as placeholders
  */
-const grabAllBrackets = (text) => {
+function grabAllBrackets(text) {
   for (entry of text.match(BRACKETED)) {
     entry = entry.replace(BRACKETS, '');
     if (!state.placeholders) {
@@ -27,7 +27,7 @@ const grabAllBrackets = (text) => {
  * @param {string} race
  * @param {string} gender
  */
-const parseRace = () => {
+function parseRace() {
 
   let character = state.character;
   let race = character.race.toLowerCase();
@@ -54,6 +54,16 @@ const parseRace = () => {
  * 
  * @param {string} string 
  */
-const capitalize = (string) => {
+function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
+/**
+ * Limits player details provided in prompt to only three items
+ * 
+ * @param {string} text 
+ */
+function limitCharacterDetails(text) {
+  console.log(`START limitCharacterDetails(): parsing character details: ${text}`);
+  return text.replace(/, /g, ',').split(',').slice(0, 3).join('/').trim();
 }

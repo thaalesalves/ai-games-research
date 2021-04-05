@@ -5,35 +5,34 @@ const modifier = (text) => {
   if (!state.init && info.actionCount < 1) {
     grabAllBrackets(modifiedText);
     state.character = {
-      name: state.placeholders[0],
-      gender: state.placeholders[1],
-      race: state.placeholders[2],
-      class: state.placeholders[3],
-      age: state.placeholders[4],
-      personality: state.placeholders[5].replace(/,/g, '/'),
+      name: state.placeholders[0].trim(),
+      gender: state.placeholders[1].trim(),
+      race: state.placeholders[2].trim(),
+      class: state.placeholders[3].trim(),
+      age: state.placeholders[4].trim(),
+      personality: limitCharacterDetails(state.placeholders[5]),
       eyes: {
-        eyeColor: state.placeholders[6]
+        eyeColor: state.placeholders[6].trim()
       },
       hair: {
-        hairStyle: state.placeholders[7],
-        hairColor: state.placeholders[8],
+        hairStyle: state.placeholders[7].trim(),
+        hairColor: state.placeholders[8].trim(),
       },
       appearance: {
         height: state.placeholders[9].replace(DIGIT_REGEX, ''),
         weight: state.placeholders[10].replace(DIGIT_REGEX, ''),
-        features: state.placeholders[11].replace(/,/g, '/')
-      },
-      story: state.placeholders[12]
+        features: limitCharacterDetails(state.placeholders[11])
+      }
     };
 
     playerWorldInfo = {
       keys: `you`,
       hidden: false,
-      entry: ' You:['
-        + ` NAME: ${state.character.name};`
-        + ` DESC: age< ${state.character.age}>/ race< ${state.character.race}>/${state.character.appearance.features}/ eyes< ${state.character.eyes.eyeColor}>/ hair< ${state.character.hair.hairStyle}& ${state.character.hair.hairColor}/${state.character.appearance.height}cm& ${state.character.appearance.weight}kg>;`
-        + ` SUMM: ${state.character.story};`
-        + ` MIND: ${state.character.personality};`
+      entry: 'You:['
+        + `NAME:${state.character.name}; `
+        + `SUMM:age<${state.character.age}>/race<${state.character.race}>/${state.character.appearance.height}cm&${state.character.appearance.weight}kg; `
+        + `APPE<You>:${state.character.appearance.features}/eyes<${state.character.eyes.eyeColor}>/hair<${state.character.hair.hairStyle}&${state.character.hair.hairColor}>; `
+        + `MIND:${state.character.personality}.`
         + ']'
     };
 
