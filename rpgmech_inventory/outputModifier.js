@@ -2,7 +2,7 @@ const SHOOT_AGAIN = new RegExp(/(?:(another|more) arrow(s|)|shoot bow( again|)|y
 const AMMO_REGEX = new RegExp(/(?:(arrow(s|)|bullet(s|)))/i);
 
 const modifier = (text) => {
-  let modifiedText = text;
+  let modifiedText = nameReplace(text);
   const lowered = text.toLowerCase();
 
   if (state.inputAction == 'shoot') {
