@@ -26,7 +26,7 @@ const modifier = (text) => {
     };
 
     playerWorldInfo = {
-      keys: `you`,
+      keys: `${state.character.name},you`,
       hidden: false,
       entry: 'You:['
         + `NAME:${state.character.name}; `
