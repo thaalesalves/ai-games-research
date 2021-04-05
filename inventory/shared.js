@@ -65,7 +65,7 @@ const AMMO_PLURAL = [
  * 
  * @param {string} string 
  */
-const capitalize = (string) => {
+function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
@@ -73,7 +73,7 @@ const capitalize = (string) => {
  * Finds an item in the player's inventory
  * @param {string} itemName 
  */
-const findItemInInventory = (itemName) => {
+function findItemInInventory(itemName) {
   console.log(`START findItemInInventory(): Looking for item "${itemName}" in player's inventory.`);
   let loweredName = itemName.toLowerCase().replace(PUNCTUATION_REMOVE, '');
   let itemFound = getInventory().find((item) => {
@@ -95,7 +95,7 @@ const findItemInInventory = (itemName) => {
  * @param {string} itemName 
  * @param {integer} itemQuantity 
  */
-const removeFromInventory = (itemName, itemQuantity) => {
+function removeFromInventory(itemName, itemQuantity) {
   console.log(`START removeFromInventory(): Removing ${itemQuantity} instances of "${itemName}" from player's inventory.`);
   let loweredName = singularize(itemName.toLowerCase().replace(PUNCTUATION_REMOVE, ''));
   let item = findItemInInventory(loweredName);
@@ -118,7 +118,7 @@ const removeFromInventory = (itemName, itemQuantity) => {
 /**
  * Checks player's inventory and returns what's inside
  */
-const checkInventory = () => {
+function checkInventory() {
 
   console.log(`START checkInventory(): Checking player's inventory.`);
   if (getInventory().length > 0) {
@@ -135,7 +135,7 @@ const checkInventory = () => {
 /**
  * Returns player's inventory. If the array in undefined, define it
  */
-const getInventory = () => {
+function getInventory() {
   console.log(`START getInventory(): verifying player's inventory.`);
   if (typeof state.inventory == 'undefined') {
     console.log(`INSIDE getInventory(): Inventory array is undefined. Declaring it with an empty array.`);
@@ -151,7 +151,7 @@ const getInventory = () => {
  * @param {string} itemName 
  * @param {integer} itemQuantity 
  */
-const addToInventory = (itemName, itemQuantity) => {
+function addToInventory(itemName, itemQuantity) {
 
   console.log(`START addToInventory(): adding ${itemQuantity} instances of "${itemName}" to player's inventory.`);
   let loweredName = singularize(itemName.toLowerCase().replace(PUNCTUATION_REMOVE, ''));
@@ -181,7 +181,7 @@ const addToInventory = (itemName, itemQuantity) => {
  * 
  * @param {string} itemName 
  */
-const equipItem = (itemName) => {
+function equipItem(itemName) {
   console.log(`START equipItem(): equipping ${itemName}`);
   const itemNameLowerCase = itemName.toLowerCase();
   let itemToBeEquipped = findItemInInventory(itemNameLowerCase);
@@ -227,7 +227,7 @@ const equipItem = (itemName) => {
 /**
  * Returns items currently equipped by the player
  */
-const getWeaponEquipped = () => {
+function getWeaponEquipped() {
   console.log(`START getWeaponEquipped(): Looking for equipped weapons.`);
   const weaponEquipped = getInventory().find(weapon => weapon.status == 'worn' && weapon.type == 'weapon');
   if (typeof weaponEquipped != 'undefined') {
@@ -244,7 +244,7 @@ const getWeaponEquipped = () => {
  *
  * @param {string} itemName 
  */
-const getAmmo = (itemName) => {
+function getAmmo(itemName) {
   console.log(`START getAmmo(): Looking for ammo item: ${itemName}.`);
   return getInventory().find(item => {
     console.log(`INSIDE getAmmo(): looking up items in inventory. Current item: ${item.name}`);
@@ -267,7 +267,7 @@ const getAmmo = (itemName) => {
 /**
  * Debugs your inventory and corrects the player's WI in case it fails
  */
-const debugInventory = () => {
+function debugInventory() {
   console.log(`START debugInventory(): debugging player's inventory`);
   state.worldInfoIndex = worldEntries.findIndex(wi => wi.keys.includes('you'));
   let playerWorldInfo = worldEntries.find(x => x.keys.includes('you'));
@@ -296,7 +296,7 @@ const debugInventory = () => {
 /**
  * Updates the player's inventory and corrects the WI
  */
-const updateInventory = () => {
+function updateInventory() {
   console.log(`START updateInventory(): updating player's inventory and WI with current items`);
   let playerWorldInfo = worldEntries.find(x => x.keys.includes('you'));
   let itemsInInventory = playerWorldInfo.entry.match(INVENTORY_REGEX)[0];
@@ -314,7 +314,7 @@ const updateInventory = () => {
  * 
  * @param {string} itemType
  */
-const getType = (itemName) => {
+function getType(itemName) {
   const checker = (input) => {
     return WEAPONS.some(word => input.toLowerCase().includes(word.toLowerCase())) ? 'weapon' :
       CLOTHING.some(word => input.toLowerCase().includes(word.toLowerCase())) ? 'clothing' :
@@ -328,7 +328,7 @@ const getType = (itemName) => {
 /**
  * Singularizes a parameter
  */
-const singularize = (itemName) => {
+function singularize(itemName) {
   const checker = (input) => {
     return AMMO_PLURAL.some(word => input.toLowerCase().includes(word.toLowerCase())) ? itemName.replace(/s$/, '') : itemName;
   }
@@ -341,7 +341,7 @@ const singularize = (itemName) => {
  * 
  * @param {string} action
  */
-const findShootingWeapon = (action) => {
+function findShootingWeapon(action) {
   console.log(`BEGIN findShootingWeapon(): getting shooting weapon from regex. Input action: "${action}"`);
   const weaponInput = SHOOTING_WEAPONS.find(i => (action.match(WEAPON_REGEX) != null) && (action.match(WEAPON_REGEX)[0] == i.name));
   let weaponReturn = undefined;
@@ -364,7 +364,7 @@ const findShootingWeapon = (action) => {
           return w.name.match(WEAPON_REGEX)[0] == i.name;
         }
       });
-      
+
       if (typeof currentMatch != 'undefined') {
         if (w.status != 'worn') {
           console.log(`INSIDE findShootingWeapon(): ${w.name} is not equipped. Equipping item.`);
