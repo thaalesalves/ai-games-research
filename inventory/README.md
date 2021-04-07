@@ -9,45 +9,44 @@ This is a list of commands that are available in the script. Note that the comma
 * `/invRemove <item-name> <number>`: if empty, `number` defaults to 1. Removes an item from your inventory.
 * `/invEquip <item-name>`: equips an item if you have at least one instance of it in your inventory.
 * `/invDebugWi`: reloads player WI and fixes it with the current inventory and equipped items. Use this command if you run into issues with the player WI not being found (or `undefined`).
+* `/invHardcoreMode`: toggles hardcore mode. With hardcore mode enabled, the AI goes nuts when you try to use a weapon you don't have ammo for. With it disabled, a friendly message appears letting you know you don't have enough ammo, but the AI has no output.
 
 ### Usage with examples
 Adding an iron sword to the inventory
 ```
 /invAdd iron sword 1
-> You add 1 iron sword to your inventory.
 You have added 1 iron sword to your inventory.
 ```
 
 Removing the only iron sword in the inventory
 ```
 /invRemove iron sword 1
-> You remove 1 iron sword from your inventory.
 You have removed all iron sword from your inventory.
 ```
 
 If there are more than 1 of the item in the inventory
 ```
 /invRemove iron sword 1
-> You remove 1 iron sword from your inventory.
 You have removed 1 iron sword from your inventory.
 ```
 
 Checking inventory
 ```
 /invCheck
-> You check your inventory.
 Your inventory contains: wooden bow (1x), leather tights (1x). Items equipped: wooden bow, leather tights.
 ```
 
 Debugging inventory
 ```
 /invDebugWi
-> Your inventory and player WI have been debugged. New player WI saved at index 52
+Your inventory and player WI have been debugged.
 ```
 
 ## Future ideas for this framework (still need to be studied, they won't be available for some time, if at all)
-* Better item categorization (for now it's a simple array that sorts weapons, clothing and misc)
+* Integration with Gnurro's RPGMech - being worked on!
+* Ammunition tracking - being worked on!
 * Item removal after use (for some item types, at least)
+* Better item categorization (for now it's a simple array that sorts weapons, clothing, ammo and misc)
 * A crafting system linked to inventory items (such as alchemy, enchating and smithing)
 * Chests and homebase containers (suggested by birb)
 * Other ideas? Open an issue with suggestions! o/
