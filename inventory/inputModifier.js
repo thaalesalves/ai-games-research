@@ -95,8 +95,10 @@ const modifier = (text) => {
     console.log(`Action detected.`);
     console.log(actionMatcher);
     state.inputAction = actionMatcher[1].trim();
+    const shootingAction = /((shoot|aim)(ing|))/gi;
+    const genericAttackAction = /((attack|charg(e|ing)|aim)(ing|))/gi;
     const params = actionMatcher[2] ? actionMatcher[2].trim() : '';
-    if (state.inputAction == 'shoot') {
+    if (state.inputAction.match(shootingAction)) {
       console.log(`Action: begin shooting weapon.`);
       const shootingWeapon = findShootingWeapon(params);
       console.log(`findShootingWeapon() return: ${shootingWeapon}`);
@@ -123,6 +125,14 @@ const modifier = (text) => {
         }
       }
       console.log('Action: end shooting weapon.');
+    } else if (state.inputAction.match(genericAttackAction)) {
+      console.log(`Action: general attack.`);
+      const equippedWeapon = getWeaponEquipped();
+      if (!equippedWeapon.name.match(SHOOTING_WEAPON_REGEX)) {
+
+      } else {
+        console.log(`Action: shooting a "${equippedWeapon.name}". Looking for ammo: "${equippedWeapon.ammo}".`);
+      }
     }
   }
 

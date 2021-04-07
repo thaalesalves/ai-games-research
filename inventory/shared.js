@@ -1,7 +1,7 @@
 const LETTER_REGEX = /[0-9]/g;
 const DIGIT_REGEX = /\D/g;
 const PUNCTUATION_REMOVE = /[^\w\s]/gi;
-const WEAPON_REGEX = new RegExp(/(crossbow|bow)/i);
+const SHOOTING_WEAPON_REGEX = new RegExp(/(crossbow|bow)/i);
 const WORN_REGEX = new RegExp(`(?<=WORN:)(.*)(?=;)`);
 const INVENTORY_REGEX = new RegExp(`(?<=INV:)(.*)(?=.)`);
 
@@ -229,7 +229,7 @@ function getWeaponEquipped() {
   const weaponEquipped = getInventory().find(weapon => weapon.status == 'worn' && weapon.type == 'weapon');
   if (typeof weaponEquipped != 'undefined') {
     console.log(`END getWeaponEquipped(): Player is equipping ${weaponEquipped.name}.`);
-    return weaponEquipped.name;
+    return weaponEquipped;
   }
 
   console.log(`END getWeaponEquipped(): Player doesn't have any weapon equipped.`);
@@ -342,7 +342,7 @@ function singularize(itemName) {
  */
 function findShootingWeapon(action) {
   console.log(`BEGIN findShootingWeapon(): getting shooting weapon from regex. Input action: "${action}"`);
-  const weaponInput = SHOOTING_WEAPONS.find(i => (action.match(WEAPON_REGEX) != null) && (action.match(WEAPON_REGEX)[0] == i.name));
+  const weaponInput = SHOOTING_WEAPONS.find(i => (action.match(SHOOTING_WEAPON_REGEX) != null) && (action.match(SHOOTING_WEAPON_REGEX)[0] == i.name));
   let weaponReturn = undefined;
   getInventory().some(w => {
     if ((typeof weaponInput != 'undefined') && weaponInput.name.toLowerCase().trim().includes(w.name.toLowerCase().trim())) {
@@ -359,8 +359,8 @@ function findShootingWeapon(action) {
     } else if (typeof weaponInput == 'undefined') {
       console.log(`INSIDE findShootingWeapon(): weaponInput is undefined. Searching inventory for item that matches a shooting weapon.`);
       let currentMatch = SHOOTING_WEAPONS.find(i => {
-        if (w.name.match(WEAPON_REGEX) != null) {
-          return w.name.match(WEAPON_REGEX)[0] == i.name;
+        if (w.name.match(SHOOTING_WEAPON_REGEX) != null) {
+          return w.name.match(SHOOTING_WEAPON_REGEX)[0] == i.name;
         }
       });
 
