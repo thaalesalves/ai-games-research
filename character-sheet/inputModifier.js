@@ -30,7 +30,7 @@ const modifier = (text) => {
       hidden: false,
       entry: 'you:['
         + `NAME:${state.character.name}; `
-        + `SUMM:age<${state.character.age}>/race<${state.character.race}>/${state.character.appearance.height}cm&${state.character.appearance.weight}kg; `
+        + `SUMM:age<${state.character.age}y>/race<${state.character.race}>/${state.character.appearance.height}cm&${state.character.appearance.weight}kg; `
         + `APPE<you>:${state.character.appearance.features}/eyes<${state.character.eyes.eyeColor}>/hair<${state.character.hair.hairStyle}&${state.character.hair.hairColor}>; `
         + `MIND:${state.character.personality}.`
         + ']'
