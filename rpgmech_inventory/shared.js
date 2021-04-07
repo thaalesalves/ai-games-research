@@ -840,7 +840,7 @@ const classDB = {
 };
 
 statConfig = {
-  inputBot: "BIGinputDCattributeBot5",
+  inputBot: "ElderScrollsInputDCAttributeBot",
   botOutputs: {
     stat: `Attribute`,
     dc: `DC`,
