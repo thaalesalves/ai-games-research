@@ -1,10 +1,11 @@
-const LETTER_REGEX = /[0-9]/g;
-const DIGIT_REGEX = /\D/g;
 const BRACKETED = /\[(.*?)\]/g;
 const BRACKETS = /\[|\]/g;
+const DIGIT_REGEX = /\D/g;
+const LETTER_REGEX = /[0-9]/g;
 const PUNCTUATION_REMOVE = /[^\w\s]/gi;
-const WORN_REGEX = new RegExp(`(?<=WORN: )(.*)(?=; )`);
-const INVENTORY_REGEX = new RegExp(`(?<=INV: )(.*)(?=;)`);
+const WEAPON_REGEX = new RegExp(/(crossbow|bow)/i);
+const WORN_REGEX = new RegExp(`(?<=WORN:)(.*)(?=;)`);
+const INVENTORY_REGEX = new RegExp(`(?<=INV:)(.*)(?=.)`);
 
 const WEAPONS = [
   'sword', 'knife', 'spear', 'hammer', 'axe', 'battleaxe', 'sledgehammer', 'longsword', 'bow', 'pickaxe'
@@ -175,6 +176,16 @@ const parseRace = (character) => {
  */
 const capitalize = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+/**
+ * Limits player details provided in prompt to only three items
+ * 
+ * @param {string} text 
+ */
+function limitCharacterDetails(text) {
+  console.log(`START limitCharacterDetails(): parsing character details: ${text}`);
+  return text.replace(/, /g, ',').split(',').slice(0, 3).join('/').trim();
 }
 
 /**

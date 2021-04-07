@@ -11,7 +11,7 @@ const modifier = (text) => {
     state.init = true;
     state.shouldStop = false;
     modifiedText = text
-      + ` ${state.character.name}, and you are a ${state.character.gender} ${state.character.race} ${state.character.class}. You are ${state.character.age} years old, and your personality traits are: ${state.character.personality}. You eyes are ${state.character.eyes.eyeColor}, and your hair is of the style ${state.character.hair.hairStyle} and of color ${state.character.hair.hairColor}. You are ${state.character.appearance.height} centimeters tall, and you weight ${state.character.appearance.weight} kg. Your physical features are: ${state.character.appearance.features}.\n\nYour story is: ${state.character.story}\n\n---------------------------------------\n\n`
+      + ` ${state.character.name}, and you are a ${state.character.gender} ${state.character.race} ${state.character.class}. You are ${state.character.age} years old, and your personality traits are: ${state.character.personality}. You eyes are ${state.character.eyes.eyeColor}, and your hair is of the style ${state.character.hair.hairStyle} and of color ${state.character.hair.hairColor}. You are ${state.character.appearance.height} centimeters tall, and you weigh ${state.character.appearance.weight} kg. Your physical features are: ${state.character.appearance.features}.\n\n---------------------------------------\n\n`
       + state.character.storyStart
         .replace('YOUR_NAME', state.character.name)
         .replace('PLAYER_GENDER', state.character.gender)
@@ -19,51 +19,52 @@ const modifier = (text) => {
   }
 
   if (commandMatcher) {
+    console.log(`Command detected`);
     console.log(commandMatcher);
-    const cmd = commandMatcher[1];
-    const params = commandMatcher[2] ? commandMatcher[2].trim() : '';
-    console.log(params);
 
-    if (cmd.includes('invCheck')) {
+    stop = true;
+    modifiedText = '';
+
+    const cmd = commandMatcher[1].split(' ')[0];
+    const params = commandMatcher[1].replace(cmd, '') != null ? commandMatcher[1].replace(cmd, '').trim() : '';
+
+    if (cmd == 'invCheck') {
       console.log(`Begin inventory check.`);
-      state.shouldStop = true;
-      modifiedText = `\n> You check your inventory.${checkInventory()}`;
+      state.message = `${checkInventory()}`;
       console.log(`End inventory check.`);
-    } else if (cmd.includes('invAdd')) {
+    } else if (cmd == 'invAdd') {
       console.log(`Begin inventory add.`);
-      state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
       const itemQuantity = Number.isNaN(parseInt(params.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(params.replace(DIGIT_REGEX, '').trim());
 
       if (itemQuantity >= 1) {
-        modifiedText = `\n> You add ${itemQuantity} ${itemName} to your inventory.${addToInventory(itemName, itemQuantity)}`;
+        state.message = `${addToInventory(itemName, itemQuantity)}`;
       } else {
-        modifiedText = `\n> You cannot add less than 1 unit of an item to your inventory.`;
+        state.message = `You cannot add less than 1 unit of an item to your inventory.`;
       }
 
       console.log(`End inventory add.`);
-    } else if (cmd.includes('invRemove')) {
+    } else if (cmd == 'invRemove') {
       console.log(`Begin inventory remove.`);
-      state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
       const itemQuantity = Number.isNaN(parseInt(params.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(params.replace(DIGIT_REGEX, '').trim());
 
       if (itemQuantity >= 1) {
-        modifiedText = `\n> You remove ${itemQuantity} ${itemName} from your inventory.${removeFromInventory(itemName, itemQuantity)}`;
+        state.message = `${removeFromInventory(itemName, itemQuantity)}`;
       } else {
-        modifiedText = `\n> You cannot remove less than 1 unit of an item from your inventory.`;
+        state.message = `You cannot remove less than 1 unit of an item from your inventory.`;
       }
+
       console.log(`End inventory remove.`);
-    } else if (cmd.includes('invEquip')) {
+    } else if (cmd == 'invEquip') {
       console.log(`Begin inventory equip.`);
-      state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
-      modifiedText = `\n> You equip ${itemName}.${equipItem(itemName)}`;
+      state.message = `${equipItem(itemName)}`;
       console.log(`End inventory equip.`);
-    } else if (cmd.includes('invDebugWi')) {
+    } else if (cmd == 'invDebugWi') {
       console.log(`Begin inventory debug.`);
-      state.shouldStop = true;
-      modifiedText += `\n> Your inventory and player WI have been debugged. New player WI saved at index ${state.character.worldInfoIndex}`;
+      debugInventory();
+      state.message = `Your inventory and player WI have been debugged.`;
       console.log(`End inventory debug.`);
     }
   }

@@ -6,7 +6,6 @@ const PUNCTUATION_REMOVE = /[^\w\s]/gi;
 const WORN_REGEX = new RegExp(`(?<=WORN: )(.*)(?=; )`);
 const INVENTORY_REGEX = new RegExp(`(?<=INV: )(.*)(?=;)`);
 
-
 const WEAPONS = [
   'sword', 'knife', 'spear', 'hammer', 'axe', 'battleaxe', 'sledgehammer', 'longsword', 'bow', 'pickaxe'
 ];
@@ -35,7 +34,6 @@ const RANDOM_CHARACTERS = [
       weight: '67',
       features: 'muscular body, long blonde hair, blue eyes, tall, skinny'
     },
-    story: `Hrissia was born into a poor family who owned a general store located in the city of Anvil. As a little girl, Hrissia had no friends and the other children would bully her daily. Her parents would always tell her that jealousy was the reason why other children didn't like her. Hrissia grew bitter and alienated from others as she grew older. At the age of eight, she was caught stealing a fruit from a stand and was almost taken to court. Hrissia never returned to school after that. Since her family was too poor to send her to a better school, Hrissia never learned how to read or write. At the age of fifteen, Hrissia began involving herself in thievery to earn a living. Five years later, she moved to Kvatch where there were more opportunities for a young rogue. There she met a man named Karstark. The two fell in love and had a sexual relationship. They lived together for three years until Hrissia discovered Karstark was making plans to murder her and steal all her belongings. One night, while sleeping, Hrissia killed him with his own dagger. It was then, for the first time in her life, Hrissia felt powerful and in control. She decided to leave Kvatch and become a bandit.`,
     storyStart: `You are at your base with your fellow bandits. Your base is located in the Blackwoods, in the Nibenese Plains, just east of the city of Leyawiin. You're relaxing drinking a mug of red ale and eating some pork when a fellow bandit, an Orc by the name of Grog gro-Murak, approaches you.\n"Hrissia, I heard some noble suckers from Skingrad are coming down the road on their way to Leyawiin. Let's mug them, come with me.", Grog gro-Murak says.`,
     worn: `steel armor and steel shield`,
     weapon: 'steel sword'
@@ -51,13 +49,13 @@ const generateCharacter = () => {
   playerWorldInfo = {
     keys: `${state.character.name},you`,
     hidden: false,
-    entry: ' You:['
-      + ` NAME: ${state.character.name};`
-      + ` DESC: age< ${state.character.age}>/ race< ${state.character.race}>/${state.character.appearance.features}/ eyes< ${state.character.eyes.eyeColor}>/ hair< ${state.character.hair.hairStyle}& ${state.character.hair.hairColor}/${state.character.appearance.height}cm& ${state.character.appearance.weight}kg>;`
-      + ` SUMM: ${state.character.story};`
-      + ` MIND: ${state.character.personality};`
-      + ` WORN: nothing;`
-      + ` INV: nothing;`
+    entry: 'you:['
+      + `NAME:${state.character.name}; `
+      + `SUMM:age<${state.character.age}>/race<${state.character.race}>/${state.character.appearance.height}cm&${state.character.appearance.weight}kg; `
+      + `APPE<you>:${state.character.appearance.features}/eyes<${state.character.eyes.eyeColor}>/hair<${state.character.hair.hairStyle}&${state.character.hair.hairColor}>; `
+      + `MIND:${state.character.personality}; `
+      + `WORN<you>:nothing; `
+      + `INV<you>:nothing.`
       + ']'
   };
 
@@ -77,6 +75,16 @@ const generateCharacter = () => {
  */
 const capitalize = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+/**
+ * Limits player details provided in prompt to only three items
+ * 
+ * @param {string} text 
+ */
+function limitCharacterDetails(text) {
+  console.log(`START limitCharacterDetails(): parsing character details: ${text}`);
+  return text.replace(/, /g, ',').split(',').slice(0, 3).join('/').trim();
 }
 
 /**
@@ -414,7 +422,7 @@ encounterDB = {
         ],
       }
     ]
-  },  
+  },
 
   /** Random events */
   tavernBrawl: {

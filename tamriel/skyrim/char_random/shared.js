@@ -1,11 +1,11 @@
-const LETTER_REGEX = /[0-9]/g;
-const DIGIT_REGEX = /\D/g;
 const BRACKETED = /\[(.*?)\]/g;
 const BRACKETS = /\[|\]/g;
+const DIGIT_REGEX = /\D/g;
+const LETTER_REGEX = /[0-9]/g;
 const PUNCTUATION_REMOVE = /[^\w\s]/gi;
-const WORN_REGEX = new RegExp(`(?<=WORN: )(.*)(?=; )`);
-const INVENTORY_REGEX = new RegExp(`(?<=INV: )(.*)(?=;)`);
-
+const WEAPON_REGEX = new RegExp(/(crossbow|bow)/i);
+const WORN_REGEX = new RegExp(`(?<=WORN:)(.*)(?=;)`);
+const INVENTORY_REGEX = new RegExp(`(?<=INV:)(.*)(?=.)`);
 
 const WEAPONS = [
   'sword', 'knife', 'spear', 'hammer', 'axe', 'battleaxe', 'sledgehammer', 'longsword', 'bow', 'pickaxe'
@@ -21,7 +21,7 @@ const RANDOM_CHARACTERS = [
     gender: `male`,
     race: `Nord`,
     age: '17',
-    personality: 'strong, tough, intimidating, muscular, assertive',
+    personality: 'strong, tough, intimidating',
     class: 'peasant',
     eyes: {
       eyeColor: 'light brown'
@@ -33,9 +33,8 @@ const RANDOM_CHARACTERS = [
     appearance: {
       height: '187',
       weight: '90',
-      features: 'tall, muscular, tall, broad, long square jaw, wide brow, short beard, strong face'
+      features: 'muscular, long square jaw, short beard'
     },
-    story: `Rolff lived a tough life in Dawnstar. His father, Dondir, was a miner like his father and his father before him. Rolff himself works everyday in the ice-cold mine. He is strong and muscular, but he gets little payment. Every day he sees the merchants from the nearby town load their carts with loads of gold and silver taken from the mine, while he and his friends are left to dig for iron and copper. One day, Rolff looks around and sees the miners with their families. His friends have a hard time making ends meet while the merchants in town have fancy clothes and big houses. Rolff becomes angry. He's working everyday with his hands while they do nothing but load their carts with the day's loot. He decides he's going to become a miner, and that he's going to be rich and famous one day. He wants to find worthy foes and to be rich and famous.`,
     storyStart: `You look around. Your friends are working their backs off in the mine, just like you. You know their families, and they're good people. You feel for them, as you all struggle to make ends meet. You have to do something about that.`,
     worn: `loose green breeches and white shirt`,
     weapon: 'pickaxe'
@@ -57,9 +56,8 @@ const RANDOM_CHARACTERS = [
     appearance: {
       height: `182`,
       weight: `75`,
-      features: `beautiful, tall, striking, intimidating,`
+      features: `beautiful, tall, striking`
     },
-    story: `Pasha grew up in the town of Runilda, a small town with rich mines. As a child she worked in the mines with her mother and father. As she grew older she begun to resent the fact that she had to work while her male friends went out and partied. She became rebellious and started to hang out with a rough crowd. One day when returning home from the mines, Pasha and her father got into an argument about her future.`,
     storyStart: `You are at your home. You've worked the mine your entire life, just like your parents. But you want more. You want to see the world, to set sail and go abroad. You want adventure. Your father does not approve of your dream, and you get in an argument with him.\n"Pasha, you need to think about life. You can't go around traveling, this is no life for someone like you. Where will you get money to stay alive?", you father asks. He seems angry with your ideals.`,
     worn: `loose green breeches and white shirt`,
     weapon: 'pickaxe'
@@ -69,7 +67,7 @@ const RANDOM_CHARACTERS = [
     gender: `male`,
     race: `Imperial`,
     age: `32`,
-    personality: `brave, kind, loyal, strong, protective`,
+    personality: `brave, kind, loyal`,
     class: `sailor`,
     eyes: {
       eyeColor: `blue`
@@ -81,9 +79,8 @@ const RANDOM_CHARACTERS = [
     appearance: {
       height: `185`,
       weight: `79`,
-      features: `curly brown hair, blue eyes, tall, muscular, strong jaw, prominent chin`
+      features: `muscular, strong jaw, prominent chin`
     },
-    story: `Sirilias was born in Anvil, Cyrodiil. He grew up in a small house near the city walls. He would play with the other children from Anvil, running around the alleys and streets. When he was older he became a sailor, and eventually his ship landed in Skyrim. He fought against Nord bandits, but was captured and put into prison. He managed to escape, and now he is lost in the forests of Falkreath.`,
     storyStart: `You are in the middle of the woods, and you're lost. You don't know how to get to civilization, and the bandits that imprisioned you are looking for you. You have a shiv, and that's all you can use to defend yourself. The woods of Skyrim are known to be home to wolves, sabre cats and bears.`,
     worn: `rags`,
     weapon: `shiv`
@@ -99,15 +96,14 @@ const RANDOM_CHARACTERS = [
       eyeColor: `green`
     },
     hair: {
-      hairStyle: `long, straight`,
+      hairStyle: `long and straight`,
       hairColor: `brown`
     },
     appearance: {
       height: `170`,
       weight: `60`,
-      features: `birthmark shaped like a raven on her right shoulder, calloused and scarred hands, oval face`
+      features: `birthmark on right shoulder, calloused and scarred hands, oval face`
     },
-    story: `As a child, Ryana was inseparable from her best friend, an Imperial boy who lived in her village. The two played all day, until they were called to serve the Emperor. When they were teenagers, the Empire sent them to fight the Nords. The boys were killed in battle, but Ryana survived. She was captured and became a prisoner of the Nords. One day, a lone Imperial wandered into her cell. It was her friend from childhood, Sirilias. He had also survived the battle, and had been captured by the Nords. He had also lost his fellow soldiers. The two reconciled and plotted their escape. They managed to steal a key from a guard, and released the other prisoners. They fought off the guards and ran into the wilderness. They wandered in the cold until they reached safety. They escaped, but Sirilias did not survive. She is now lost in the woods of Falkreath.`,
     storyStart: `You are in the middle of the woods, and you're lost. You don't know how to get to civilization, and the bandits that imprisioned you are looking for you. You have a shiv, and that's all you can use to defend yourself. The woods of Skyrim are known to be home to wolves, sabre cats and bears.`,
     worn: `rags`,
     weapon: `shiv`
@@ -117,21 +113,20 @@ const RANDOM_CHARACTERS = [
     gender: `male`,
     race: `Nord`,
     age: `26`,
-    personality: `self-centered, arrogant, dishonorable, insolent, ruthless`,
+    personality: `self-centered,arrogant,dishonorable`,
     class: `warrior`,
     eyes: {
       eyeColor: `steely blue`
     },
     hair: {
-      hairStyle: `long, straight`,
+      hairStyle: `long and straight`,
       hairColor: `dark blonde`
     },
     appearance: {
       height: `180`,
       weight: `90`,
-      features: `strong chin and jawline, strong and muscular, tanned skin`
+      features: `strong chin and jawline,strong and muscular,tanned skin`
     },
-    story: `Torel was born in Riften to Masha Forgewood and an unknown father. Masha was an adventurer before she had him, but returned to Riften after her last expedition went wrong. She never mentioned what happened to him. She was too poor to actually raise a child after her life of adventures, so she had to give him away to the New Home orphanage, where he spent his first 10 years. One day, a group of mercenaries slaughtered most people in the orphanage, and recruited the kids that were alive. He's now 20 years old, and has been working with the mercenaries for the last 10.`,
     storyStart: `You are at your mercenary corp's base, in the woods of Falkreath. Talagar, the leader of the mercenary, comes to you with a mission. A noble has hired you to escort him from the Pale Pass to Solitude. Talagar approaches you and says:`,
     worn: `steel cuirass over his fur tunic and steel greaves and fur and leather boots and leather and steel gauntlets`,
     weapon: `long steel sword`
@@ -141,7 +136,7 @@ const RANDOM_CHARACTERS = [
     gender: `female`,
     race: `Nord`,
     age: `23`,
-    personality: `brave, courageous, foolhardy, unpredictable`,
+    personality: `brave,courageous,foolhardy`,
     class: `warrior`,
     eyes: {
       eyeColor: `blue`
@@ -153,9 +148,8 @@ const RANDOM_CHARACTERS = [
     appearance: {
       height: `180`,
       weight: `75`,
-      features: `tall, muscular, strong, big breasts and butts`
+      features: `tall,muscular,strong`
     },
-    story: `Tulla was born and raised in Riften. She has always lived a happy life there, but her father has been pressuring her to marry a man she doesn't love. Her father wants her to marry for money so he can live a comfortable life after retiring from his job. Her father has a good job, so he can easily afford to retire comfortably in his fifties or sixties. Tulla doesn't want to marry for money, she wants to marry for love. She is in love with the son of a poor blacksmith, her childhood friend. Her father Garret, however, refuses to let her marry him.`,
     storyStart: `You get in an argument with your father. You tell him that you will run away from home if he doesn't let you marry the blacksmith. He's furious with you, and threatens to disown you if you don't obey his demands. Defiant, you pack up your things and leave your family house. You make your way to the blacksmith's house, as you know your beloved will be working there. However, when you arrive at the blacksmith's house, the place is dark and abandoned. You panic and break into tears.`,
     worn: `fine silk dress with a long coat`,
     weapon: `wooden long bow`
@@ -171,13 +165,13 @@ const generateCharacter = () => {
   playerWorldInfo = {
     keys: `${state.character.name},you`,
     hidden: false,
-    entry: ' You:['
-      + ` NAME: ${state.character.name};`
-      + ` DESC: age< ${state.character.age}>/ race< ${state.character.race}>/${state.character.appearance.features}/ eyes< ${state.character.eyes.eyeColor}>/ hair< ${state.character.hair.hairStyle}& ${state.character.hair.hairColor}/${state.character.appearance.height}cm& ${state.character.appearance.weight}kg>;`
-      + ` SUMM: ${state.character.story};`
-      + ` MIND: ${state.character.personality};`
-      + ` WORN: nothing;`
-      + ` INV: nothing;`
+    entry: 'you:['
+      + `NAME:${state.character.name}; `
+      + `SUMM:age<${state.character.age}>/race<${state.character.race}>/${state.character.appearance.height}cm&${state.character.appearance.weight}kg; `
+      + `APPE<you>:${state.character.appearance.features}/eyes<${state.character.eyes.eyeColor}>/hair<${state.character.hair.hairStyle}&${state.character.hair.hairColor}>; `
+      + `MIND:${state.character.personality}; `
+      + `WORN<you>:nothing; `
+      + `INV<you>:nothing.`
       + ']'
   };
 
@@ -197,6 +191,16 @@ const generateCharacter = () => {
  */
 const capitalize = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+/**
+ * Limits player details provided in prompt to only three items
+ * 
+ * @param {string} text 
+ */
+ function limitCharacterDetails(text) {
+  console.log(`START limitCharacterDetails(): parsing character details: ${text}`);
+  return text.replace(/, /g, ',').split(',').slice(0, 3).join('/').trim();
 }
 
 /**

@@ -7,37 +7,36 @@ const modifier = (text) => {
   if (!state.init && info.actionCount < 1) {
     grabAllBrackets(modifiedText);
     state.character = {
-      name: state.placeholders[0],
-      gender: state.placeholders[1],
-      race: state.placeholders[2],
-      class: state.placeholders[3],
-      age: state.placeholders[4],
-      personality: state.placeholders[5].replace(/,/g, '/'),
+      name: state.placeholders[0].trim(),
+      gender: state.placeholders[1].trim(),
+      race: state.placeholders[2].trim(),
+      class: state.placeholders[3].trim(),
+      age: state.placeholders[4].trim(),
+      personality: limitCharacterDetails(state.placeholders[5]),
       eyes: {
-        eyeColor: state.placeholders[6]
+        eyeColor: state.placeholders[6].trim()
       },
       hair: {
-        hairStyle: state.placeholders[7],
-        hairColor: state.placeholders[8],
+        hairStyle: state.placeholders[7].trim(),
+        hairColor: state.placeholders[8].trim(),
       },
       appearance: {
         height: state.placeholders[9].replace(DIGIT_REGEX, ''),
         weight: state.placeholders[10].replace(DIGIT_REGEX, ''),
-        features: state.placeholders[11].replace(/,/g, '/')
-      },
-      story: state.placeholders[12]
+        features: limitCharacterDetails(state.placeholders[11])
+      }
     };
 
     playerWorldInfo = {
       keys: `${state.character.name},you`,
       hidden: false,
-      entry: ' You:['
-        + ` NAME: ${state.character.name};`
-        + ` DESC: age< ${state.character.age}>/ race< ${state.character.race}>/${state.character.appearance.features}/ eyes< ${state.character.eyes.eyeColor}>/ hair< ${state.character.hair.hairStyle}& ${state.character.hair.hairColor}/${state.character.appearance.height}cm& ${state.character.appearance.weight}kg>;`
-        + ` SUMM: ${state.character.story};`
-        + ` MIND: ${state.character.personality};`
-        + ` WORN: nothing;`
-        + ` INV: nothing;`
+      entry: 'you:['
+        + `NAME:${state.character.name}; `
+        + `SUMM:age<${state.character.age}y>/race<${state.character.race}>/${state.character.appearance.height}cm&${state.character.appearance.weight}kg; `
+        + `APPE<you>:${state.character.appearance.features}/eyes<${state.character.eyes.eyeColor}>/hair<${state.character.hair.hairStyle}&${state.character.hair.hairColor}>; `
+        + `MIND:${state.character.personality}; `
+        + `WORN<you>:nothing; `
+        + `INV<you>:nothing.`
         + ']'
     };
 
@@ -50,55 +49,56 @@ const modifier = (text) => {
     state.init = true;
     state.shouldStop = false;
     modifiedText = modifiedText.replace(BRACKETS, '');
+    delete state.placeholders;
   }
 
   if (commandMatcher) {
+    console.log(`Command detected`);
     console.log(commandMatcher);
-    const cmd = commandMatcher[1];
-    const params = commandMatcher[2] ? commandMatcher[2].trim() : '';
-    console.log(params);
 
-    if (cmd.includes('invCheck')) {
+    stop = true;
+    modifiedText = '';
+
+    const cmd = commandMatcher[1].split(' ')[0];
+    const params = commandMatcher[1].replace(cmd, '') != null ? commandMatcher[1].replace(cmd, '').trim() : '';
+
+    if (cmd == 'invCheck') {
       console.log(`Begin inventory check.`);
-      state.shouldStop = true;
-      modifiedText = `\n> You check your inventory.${checkInventory()}`;
-      console.log(getInventory());
+      state.message = `${checkInventory()}`;
       console.log(`End inventory check.`);
-    } else if (cmd.includes('invAdd')) {
+    } else if (cmd == 'invAdd') {
       console.log(`Begin inventory add.`);
-      state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
       const itemQuantity = Number.isNaN(parseInt(params.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(params.replace(DIGIT_REGEX, '').trim());
 
       if (itemQuantity >= 1) {
-        modifiedText = `\n> You add ${itemQuantity} ${itemName} to your inventory.${addToInventory(itemName, itemQuantity)}`;
+        state.message = `${addToInventory(itemName, itemQuantity)}`;
       } else {
-        modifiedText = `\n> You cannot add less than 1 unit of an item to your inventory.`;
+        state.message = `You cannot add less than 1 unit of an item to your inventory.`;
       }
 
       console.log(`End inventory add.`);
-    } else if (cmd.includes('invRemove')) {
+    } else if (cmd == 'invRemove') {
       console.log(`Begin inventory remove.`);
-      state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
       const itemQuantity = Number.isNaN(parseInt(params.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(params.replace(DIGIT_REGEX, '').trim());
 
       if (itemQuantity >= 1) {
-        modifiedText = `\n> You remove ${itemQuantity} ${itemName} from your inventory.${removeFromInventory(itemName, itemQuantity)}`;
+        state.message = `${removeFromInventory(itemName, itemQuantity)}`;
       } else {
-        modifiedText = `\n> You cannot remove less than 1 unit of an item from your inventory.`;
+        state.message = `You cannot remove less than 1 unit of an item from your inventory.`;
       }
+
       console.log(`End inventory remove.`);
-    } else if (cmd.includes('invEquip')) {
+    } else if (cmd == 'invEquip') {
       console.log(`Begin inventory equip.`);
-      state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
-      modifiedText = `\n> You equip ${itemName}.${equipItem(itemName)}`;
+      state.message = `${equipItem(itemName)}`;
       console.log(`End inventory equip.`);
-    } else if (cmd.includes('invDebugWi')) {
+    } else if (cmd == 'invDebugWi') {
       console.log(`Begin inventory debug.`);
-      state.shouldStop = true;
-      modifiedText += `\n> Your inventory and player WI have been debugged. New player WI saved at index ${state.character.worldInfoIndex}`;
+      debugInventory();
+      state.message = `Your inventory and player WI have been debugged.`;
       console.log(`End inventory debug.`);
     }
   }
