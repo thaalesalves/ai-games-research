@@ -5,56 +5,12 @@ const WEAPON_REGEX = new RegExp(/(crossbow|bow)/i);
 const WORN_REGEX = new RegExp(`(?<=WORN:)(.*)(?=;)`);
 const INVENTORY_REGEX = new RegExp(`(?<=INV:)(.*)(?=.)`);
 
-const SHOOTING_WEAPONS = [
-  {
-    name: 'bow',
-    ammo: 'arrow',
-    succesfulOutcome: [
-      `You aim your bow at your opponent, and let exactly one arrow go. The arrow goes out swiftly, and`,
-      `You shoot one arrow at your opponent, and`,
-      `You're determined to kill your foe, and so you aim your bow at them, hoping to get a clear shot in their throat`,
-      `You shoot your bow aiming at your opponent's face. Your arrow goes out swiftly and`,
-      `You release the string of your bow, and the arrow goes out fast as wind.`
-    ],
-    noAmmoOutcome: [
-      "You don't have any arrows for your bow.",
-      "You try to shoot your bow, but when you release the string you realize there is no arrow there. You stand there looking like an idiot.",
-      "You try to shoot your bow, but then realize you don't have any arrows. Your finger gets entangled in the bow's string, and you can't untie it.",
-      "You try to shoot your bow, but then realize you don't have any arrows to do so. The string goes and comes back, and smacks you in the face.",
-      "You realize you don't have any arrows. You throw your bow at your opponent instead.",
-      "When you ready your bow, you realize you don't have any arrows, so you wield it like a sword and charge at your enemy."
-    ]
-  },
-  {
-    name: 'crossbow',
-    ammo: 'bolt',
-    succesfulOutcome: [
-      `You quickly put a bolt in your crossbow, and aim it at your opponent. You pull the trigger and`,
-      `You aim your crossbow at your opponent, and the bolt goes fast as wind. The bolt`,
-      `You shoot your cross bow aiming at your opponent's throat. The bolt goes out fast as wind and`
-    ],
-    noAmmoOutcome: [
-      "You don't have any bolts for your crossbow.",
-      "You try to shoot your crossbow, but you don't have any bolts in it. Its recoil makes you drop it, and you bend down to get it, looking like an idiot.",
-      "You shoot your crossbow, but no bolt comes out of it. That's because you don't have any bolts. You realize how dumb you are and stand there like an idiot."
-    ]
-  }
-];
-
 const WEAPONS = [
   'sword', 'knife', 'spear', 'hammer', 'axe', 'battleaxe', 'sledgehammer', 'longsword', 'bow', 'pickaxe'
 ];
 
 const CLOTHING = [
   'rags', 'armor', 'dress', 'kilt', 'skirt', 'jerkin', 'shirt', 'clothes', 'robes', 'leathers', 'hooded', 'cuirass', 'chainmail', 'gauntlets', 'vambraces', 'tights'
-];
-
-const AMMO = [
-  'arrow', 'bullet'
-];
-
-const AMMO_PLURAL = [
-  'arrows', 'bullets'
 ];
 
 /**
@@ -222,46 +178,6 @@ function equipItem(itemName) {
 }
 
 /**
- * Returns items currently equipped by the player
- */
-function getWeaponEquipped() {
-  console.log(`START getWeaponEquipped(): Looking for equipped weapons.`);
-  const weaponEquipped = getInventory().find(weapon => weapon.status == 'worn' && weapon.type == 'weapon');
-  if (typeof weaponEquipped != 'undefined') {
-    console.log(`END getWeaponEquipped(): Player is equipping ${weaponEquipped.name}.`);
-    return weaponEquipped.name;
-  }
-
-  console.log(`END getWeaponEquipped(): Player doesn't have any weapon equipped.`);
-  return `You don't have any weapon equipped.`;
-}
-
-/**
- * Verifies if player has ammo
- *
- * @param {string} itemName 
- */
-function getAmmo(itemName) {
-  console.log(`START getAmmo(): Looking for ammo item: ${itemName}.`);
-  return getInventory().find(item => {
-    console.log(`INSIDE getAmmo(): looking up items in inventory. Current item: ${item.name}`);
-    if (item.type == 'ammo' && (itemName.includes(item.name) || item.name.includes(itemName))) {
-      if (item.status != 'worn') {
-        equipItem(item.name);
-        state.message = `You weren't equipping your ammo! You are now. `;
-      }
-
-      console.log(`INSIDE getAmmo(): found "${item.name}", which has correct type.`);
-      item.quantity -= 1;
-      return true;
-    }
-
-    console.log(`INSIDE getAmmo(): did not find any items with correct type.`);
-    return false;
-  });
-}
-
-/**
  * Debugs your inventory and corrects the player's WI in case it fails
  */
 function debugInventory() {
@@ -320,66 +236,4 @@ function getType(itemName) {
   }
 
   return checker(itemName);
-}
-
-/**
- * Singularizes a parameter
- * 
- * @param {string} itemName word to be singularized
- */
-function singularize(itemName) {
-  const checker = (input) => {
-    return AMMO_PLURAL.some(word => input.toLowerCase().includes(word.toLowerCase())) ? itemName.replace(/s$/, '') : itemName;
-  }
-
-  return checker(itemName);
-}
-
-/**
- * Finds shooting weapon based on parameter
- * 
- * @param {string} action
- */
-function findShootingWeapon(action) {
-  console.log(`BEGIN findShootingWeapon(): getting shooting weapon from regex. Input action: "${action}"`);
-  const weaponInput = SHOOTING_WEAPONS.find(i => (action.match(WEAPON_REGEX) != null) && (action.match(WEAPON_REGEX)[0] == i.name));
-  let weaponReturn = undefined;
-  getInventory().some(w => {
-    if ((typeof weaponInput != 'undefined') && weaponInput.name.toLowerCase().trim().includes(w.name.toLowerCase().trim())) {
-      console.log(`INSIDE findShootingWeapon(): Input extracted with regex: ${weaponInput.name}. Found weapon extracted from input in player's inventory.`);
-      if (w.status != 'worn') {
-        console.log(`INSIDE findShootingWeapon(): ${w.name} is not equipped. Equipping item.`);
-        equipItem(w.name);
-        state.message = `You are now equipping your ${w.name} and ${weaponInput.ammo} for ammo. `;
-      }
-
-      console.log(`END findShootingWeapon(): ${weaponInput.name} matches item in inventory.`);
-      weaponReturn = weaponInput;
-      return true;
-    } else if (typeof weaponInput == 'undefined') {
-      console.log(`INSIDE findShootingWeapon(): weaponInput is undefined. Searching inventory for item that matches a shooting weapon.`);
-      let currentMatch = SHOOTING_WEAPONS.find(i => {
-        if (w.name.match(WEAPON_REGEX) != null) {
-          return w.name.match(WEAPON_REGEX)[0] == i.name;
-        }
-      });
-
-      if (typeof currentMatch != 'undefined') {
-        if (w.status != 'worn') {
-          console.log(`INSIDE findShootingWeapon(): ${w.name} is not equipped. Equipping item.`);
-          equipItem(w.name);
-          state.message = `You are now equipping your ${w.name} and ${currentMatch.ammo} for ammo. `;
-        }
-
-        console.log(`END findShootingWeapon(): ${w.name} is a shooting weapon, returning this item.`);
-        weaponReturn = currentMatch;
-        return true;
-      }
-    }
-
-    console.log(`END findShootingWeapon(): did not find matching shooting weapon in player's inventory.`);
-    return false;
-  });
-
-  return weaponReturn;
 }
