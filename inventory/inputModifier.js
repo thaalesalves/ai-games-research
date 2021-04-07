@@ -4,15 +4,15 @@ const modifier = (text) => {
   let modifiedText = text;
   const lowered = text.toLowerCase();
   const commandMatcher = modifiedText.match(/\n? ?(?:> You |> You say "|)\/(.+?)["]?[.]?\n?$/i);
-  const actionMatcher = text.match(/\n? ?(?:> You |> You say "|)(\w+?)( [\w ]+)?[".]?\n?$/i);
+  const actionMatcher = modifiedText.match(/\n? ?(?:> You |> You say ")(\w+?)( [\w ]+)?[".]?\n?$/i);
 
   if (!state.init && info.actionCount < 1) {
     playerWorldInfo = {
       keys: `you`,
       hidden: false,
-      entry: 'You:['
-        + `WORN:nothing;`
-        + `INV:nothing.`
+      entry: 'you:['
+        + `WORN<you>:nothing;`
+        + `INV<you>:nothing.`
         + ']'
     };
 
@@ -33,18 +33,18 @@ const modifier = (text) => {
     console.log(`Command detected`);
     console.log(commandMatcher);
 
-    const cmd = commandMatcher[1];
-    const params = commandMatcher[2] ? commandMatcher[2].trim() : '';
+    stop = true;
+    modifiedText = '';
+
+    const cmd = commandMatcher[1].split(' ')[0];
+    const params = commandMatcher[1].replace(cmd, '') != null ? commandMatcher[1].replace(cmd, '').trim() : '';
 
     if (cmd == 'invCheck') {
       console.log(`Begin inventory check.`);
-      state.shouldStop = true;
       state.message = `${checkInventory()}`;
-      modifiedText = '';
       console.log(`End inventory check.`);
     } else if (cmd == 'invAdd') {
       console.log(`Begin inventory add.`);
-      state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
       const itemQuantity = Number.isNaN(parseInt(params.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(params.replace(DIGIT_REGEX, '').trim());
 
@@ -54,11 +54,9 @@ const modifier = (text) => {
         state.message = `You cannot add less than 1 unit of an item to your inventory.`;
       }
 
-      modifiedText = '';
       console.log(`End inventory add.`);
     } else if (cmd == 'invRemove') {
       console.log(`Begin inventory remove.`);
-      state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
       const itemQuantity = Number.isNaN(parseInt(params.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(params.replace(DIGIT_REGEX, '').trim());
 
@@ -68,33 +66,29 @@ const modifier = (text) => {
         state.message = `You cannot remove less than 1 unit of an item from your inventory.`;
       }
 
-      modifiedText = '';
       console.log(`End inventory remove.`);
     } else if (cmd == 'invEquip') {
       console.log(`Begin inventory equip.`);
-      state.shouldStop = true;
       const itemName = params.replace(LETTER_REGEX, '').trim();
       state.message = `${equipItem(itemName)}`;
-      modifiedText = '';
       console.log(`End inventory equip.`);
     } else if (cmd == 'invDebugWi') {
       console.log(`Begin inventory debug.`);
       debugInventory();
-      state.shouldStop = true;
       state.message = `Your inventory and player WI have been debugged.`;
-      modifiedText = '';
       console.log(`End inventory debug.`);
     } else if (cmd == 'invHardcoreMode') {
       console.log(`Begin toggle hardcore mode.`);
       if (params == 'enable') {
         state.disableHardcoreMode = false;
-      } else {
+        state.message = `You have enabled hardcore mode.`;
+      } else if (params == 'disable') {
         state.disableHardcoreMode = true;
+        state.message = `You have disabled hardcore mode.`;
+      } else {
+        state.message = `Invalid command. Use /invHardcodeMode with either "enable" or "disable"`;
       }
 
-      state.shouldStop = true;
-      state.message = `You have ${state.disableHardcoreMode ? 'disabled' : 'enabled'} hardcore mode.`;
-      modifiedText = '';
       console.log(`End toggle hardcore mode.`);
     }
   } else if (actionMatcher) {

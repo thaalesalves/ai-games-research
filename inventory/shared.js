@@ -1,6 +1,3 @@
-/**
- * BEGIN INVENTORY STUFF
- */
 const LETTER_REGEX = /[0-9]/g;
 const DIGIT_REGEX = /\D/g;
 const PUNCTUATION_REMOVE = /[^\w\s]/gi;
@@ -327,6 +324,8 @@ function getType(itemName) {
 
 /**
  * Singularizes a parameter
+ * 
+ * @param {string} itemName word to be singularized
  */
 function singularize(itemName) {
   const checker = (input) => {
@@ -384,6 +383,3 @@ function findShootingWeapon(action) {
 
   return weaponReturn;
 }
-/**
- * END INVENTORY STUFF
- */
