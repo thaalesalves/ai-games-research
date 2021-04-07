@@ -1,0 +1,98 @@
+[
+  {
+    "id": "8.1",
+    "keys": "(nord(s|))#[t=4l=3f=2S=2]",
+    "entry": "<< Nord native to skyrim, tall, blonde, strong>>>>\n<< Nord used to harsh environments, used to cold>>>>\n<< Nord go to sovngarde after death, value strength and courage>>>>",
+    "hidden": false
+  },
+  {
+    "id": "8.2",
+    "keys": "(nord(s|))#[t=4l=3f=2S=2]",
+    "entry": "<< Nord call people they don't like \"milk-drinker\" and \"coward\">>>>\n<< Nord short-tempered hot-headed stubborn dislike magic>>>>",
+    "hidden": false
+  },
+  {
+    "id": "8.3",
+    "keys": "khajiit#[t=4l=3f=2S=2]",
+    "entry": "[ Khajiit description:< speak in third person&& refer to themselves \"this one\">/< natives of Elsweyr>/< seen as thieves by the other races>. Khajiit appearance:< catlike-humanoids>/< furry body& tail& claws& cat ears>. Khajiit speech:< speak in third person&& refer to themselves \"this one\">.]",
+    "hidden": false
+  },
+  {
+    "id": "8.4",
+    "keys": "khajiit#[t=5l=3f=2S=2]",
+    "entry": "[ Khajiit speech:< use \"wafiit\" and \"oviit\" as slur terms& use \"trevan\" as a friendly term>.]",
+    "hidden": false
+  },
+  {
+    "id": "8.5",
+    "keys": "(dunmer|dark el(f|ves))#[t=4l=3f=2S=2]",
+    "entry": "<< Dunmer moniker dark elf native to morrowind>>>>\n<< Dunmer call people who are not dunmer \"n'wah\" if they don't like them, use \"s'wit\" and \"fetcher\" as slur terms>>>>",
+    "hidden": false
+  },
+  {
+    "id": "8.6",
+    "keys": "(dunmer|dark el(f|ves))#[t=5l=3f=2S=2]",
+    "entry": "<< Dunmer call people \"sera\" and \"muthsera\" when they like or respect the people they're talking to>>>>\n<< Dunmer hot-headed dark grey skin red eyes pointy ears>>>>\n<< Dunmer affinity with magic very powerful strong-willed>>>>",
+    "hidden": false
+  },
+  {
+    "id": "8.7",
+    "keys": "(altmer|high el(f|ves))#[t=4l=3f=2S=2]",
+    "entry": "<< Altmer moniker high elf native to summerset isles>>>>\n<< Altmer tall thin golden skin clear eyes brownish hair>>>>\n<< Altmer arrogant pedantic prepotent self-righteous perfectionist>>>>",
+    "hidden": false
+  },
+  {
+    "id": "8.8",
+    "keys": "(altmer|high el(f|ves))#[t=5l=3f=2S=2]",
+    "entry": "<< Altmer call people \"ceruval\" and \"cerum\" when they like or respect the people they're talking to>>>>\n<< Altmer affinity with magic very powerful strong-willed>>>>\n<< Altmer call people who are not dunmer \"ephem\" if they don't like them, use \"ephem\" and \"de'nt\" as slur terms>>>>",
+    "hidden": false
+  },
+  {
+    "id": "8.9",
+    "keys": "(or(c|cs|simer))#[t=4l=3f=2S=2]",
+    "entry": "<< Orsimer moniker orc, have tusks pointy ears brownish-green skin>>>>\n<< Orsimer muscular build violent short-tempered worship malacath>>>>\n<< Orsimer strong stubborn fight-lover tribal primitive>>>>",
+    "hidden": false
+  },
+  {
+    "id": "8.10",
+    "keys": "(bosmer|wood el(f|ves))#[t=4l=3f=2S=2]",
+    "entry": "<< Bosmer moniker wood elf native to valenwood>>>>\n<< Bosmer short pointy ears light-brown or tan skin big eyes sometimes horns>>>>\n<< Bosmer live trees cannot kill trees and vegetation because of green pact can only eat meat>>>>",
+    "hidden": false
+  },
+  {
+    "id": "8.11",
+    "keys": "(bosmer|wood el(f|ves))#[t=5l=3f=2S=2]",
+    "entry": "<< Bosmer in war eat the flesh of enemies ruthless enemies in war>>>>\n<< Bosmer green pact worship y'ffre friend of the woods love animals love vegetation care about environment>>>>",
+    "hidden": false
+  },
+  {
+    "id": "8.12",
+    "keys": "(argonian(s|))#[t=4l=3f=2S=2]",
+    "entry": "<< Argonian native to black marsh lizard-like race scaly>>>>\n<< Argonian worship sithis worship hist hate dunmer enslaved by dunmer>>>>\n<< Argonian other races do not like argonians>>>>",
+    "hidden": false
+  },
+  {
+    "id": "8.13",
+    "keys": "(imperial(s|))#[t=4l=3f=2S=2]",
+    "entry": "<< Imperial native to cyrodiil human race cosmopolitan cultured fair skin>>>>\n<< Imperial human medium height sturdy strong diplomatic>>>>\n<< Imperial main race in empire good with commerce and trade>>>>",
+    "hidden": false
+  },
+  {
+    "id": "8.14",
+    "keys": "(redguard(s|))#[t=4l=3f=2S=2]",
+    "entry": "<< Redguard human native to hammerfell dark brown skin sturdy strong>>>>\n<< Redguard diplomatic but strong in war courageous fearless>>>>\n<< Redguard many pirates illiac bay strong trade with high-rock>>>>",
+    "hidden": false
+  },
+  {
+    "id": "8.15",
+    "keys": "(breton(s|))#[t=4l=3f=2S=2]",
+    "entry": "<< Breton human native to high rock fair skin short stature slightly pointy ears>>>>\n<< Breton mix of human and elf, good with magic good with trade>>>>\n<< Breton highly cultured arts trade many pirates illiac bay>>>>",
+    "hidden": false
+  },
+  {
+    "id": "8.16",
+    "keys": "khajiit#[t=1l=3f=2S=2]",
+    "entry": "Khajiit talk in third person, call themselves \"this one\".",
+    "hidden": false
+  }
+]

@@ -1,0 +1,29 @@
+summary:<
+wearing:<
+gear:<
+appearance:<
+situation:<
+mental:<
+speech:<
+occupation:<
+skills:<
+relationships:<
+
+
+
+
+
+<< Baelin ♂ nord middle-aged fair skin brown eyes short hair always smiling like an idiot>>>>
+<< Baelin keeps repeating the phrase "Mornin'! Nice day for fishing, ain't it?" all the time, never says anything else>>>>
+<< no matter what happens or what people say to him, he only repeats the phrase "Mornin'! Nice day for fishing, ain't it?">>>>
+<< Baelin lives in Honeywood is local fisherman>>>>
+
+
+<< Greg ♂ nord middle-aged fair skin green eyes short nlonde hair, nice good honest>>>>
+<< Greg garlic merchant, always greets the player saying "Hello, adventurer! Welcome to the town of Honeywood!" with his index finger pointing up and smiling>>>>
+<< His greeting is always "Hello, adventurer! Welcome to the town of Honeywood!">>>>
+<< Greg happy gives quests to the player, lives in small stone hut in Honeywood, hates Bodger>>>>
+
+<< Bodger ♂ nord middle-aged fair skin brown balding hair brown eyes, local blacksmith>>>>
+<< Bodger hates Greg, arrogant, self-obsessed, pedantic>>>>
+<< Bodger gives quests to the player, is nice to the player but not to Greg>>>>
