@@ -88,6 +88,7 @@ const modifier = (text) => {
 
     const cmd = commandMatcher[1].split(' ')[0];
     const params = commandMatcher[1].replace(cmd, '') != null ? commandMatcher[1].replace(cmd, '').trim() : '';
+    
     if (cmd == 'toggleMechanics') {
       console.log(`Begin mechanics toggle.`);
       if (state.enableRpg) {
