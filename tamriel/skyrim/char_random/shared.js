@@ -4,8 +4,8 @@ const DIGIT_REGEX = /\D/g;
 const LETTER_REGEX = /[0-9]/g;
 const PUNCTUATION_REMOVE = /[^\w\s]/gi;
 const WEAPON_REGEX = new RegExp(/(crossbow|bow)/i);
-const WORN_REGEX = new RegExp(`(?<=WORN:)(.*)(?=;)`);
-const INVENTORY_REGEX = new RegExp(`(?<=INV:)(.*)(?=.)`);
+const WORN_REGEX = new RegExp(`(?<=WORN<you>:)(.*)(?=;)`);
+const INVENTORY_REGEX = new RegExp(`(?<=INV<you>:)(.*)(?=.)`);
 
 const WEAPONS = [
   'sword', 'knife', 'spear', 'hammer', 'axe', 'battleaxe', 'sledgehammer', 'longsword', 'bow', 'pickaxe'
