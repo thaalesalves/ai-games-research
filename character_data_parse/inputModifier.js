@@ -28,10 +28,10 @@ const modifier = (text) => {
     playerWorldInfo = {
       keys: `${state.character.name},you`,
       hidden: false,
-      entry: 'You:['
+      entry: 'you:['
         + `NAME:${state.character.name}; `
         + `SUMM:age<${state.character.age}>/race<${state.character.race}>/${state.character.appearance.height}cm&${state.character.appearance.weight}kg; `
-        + `APPE<You>:${state.character.appearance.features}/eyes<${state.character.eyes.eyeColor}>/hair<${state.character.hair.hairStyle}&${state.character.hair.hairColor}>; `
+        + `APPE<you>:${state.character.appearance.features}/eyes<${state.character.eyes.eyeColor}>/hair<${state.character.hair.hairStyle}&${state.character.hair.hairColor}>; `
         + `MIND:${state.character.personality}.`
         + ']'
     };
@@ -41,6 +41,7 @@ const modifier = (text) => {
 
     state.init = true;
     modifiedText = modifiedText.replace(BRACKETS, '') + parseRace();
+    delete state.placeholders;
   }
 
   return { text: modifiedText, stop: stop };
