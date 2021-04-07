@@ -1,0 +1,62 @@
+[
+  {
+    "id": "11.1",
+    "keys": "gods, the gods, divines, nine divines",
+    "entry": "The Nine Divines:[TYPE<The Nine Divines>:religion;DESC<The Nine Divines>:the eight divines is the official pantheon of the empire. it worships the eight gods related to creation. these gods are  Akatosh/Arkay/Dibella/Julianos/Kynareth/Mara/Stendarr/Talos/and Zenithar..]",
+    "hidden": false
+  },
+  {
+    "id": "11.2",
+    "keys": "akatosh,alkosh,auriel,auri-el",
+    "entry": "[ Akatosh description:< name ≡ Akatosh/ Alkosh/ Auri-El>/< age ≡ as old as time>/< gender ≡ genderless>.  Akatosh appearance:< body ≡ scaly/ big dragon>.  Akatosh mental:< benevolent& good& cryptic& mystic& insane>.  Akatosh occupation:< god of time/ chief god of the divines/ chief god of the imperial pantheon>.  Akatosh SUMM:< Akatosh is the dragon god of time, and the chief god in the Imperial Pantheon of the Divines. He is an Aedra. He is usually depicted as a dragon, and appears in all Tamrielic religions, though sometimes with different names>.]",
+    "hidden": false
+  },
+  {
+    "id": "11.3",
+    "keys": "Arkay,Ark'ay,Lord of the Wheel of Life",
+    "entry": "Arkay:[TYPE<Arkay>:god;SPHERE<Arkay>:life and death/burials and funerals;DESC<Arkay>:Arkay is the god of burials and funeral rites/and is generally associated with cyclical occasions/such as the seasons and life and death. His priests are staunch opponents of necromancy and all forms of the undead/and are empowered to bestow Arkay's blessings which prevent the forceful misuse of a mortal soul. Thus/any body properly buried by a priest observing the proper rituals is protected by Arkay's Law from being raised as undead.Therefore/necromancers view Arkay as their ultimate enemy/and make covert efforts to undermine his worship throughout Tamriel. Because of this association with/and protection of/mortality/he is sometimes called the Mortals' God..]",
+    "hidden": false
+  },
+  {
+    "id": "11.4",
+    "keys": "Dibella,Passion Dancer,Our Blessed Lady",
+    "entry": "Dibella:[TYPE<Dibella>:god;SPHERE<Dibella>:beauty/love and affection;DESC<Dibella>:Dibella is the Goddess of Beauty/Love/and Affection. She is also acclaimed as the Lady of Love/Beauty/Art/and Music. Dibella is the Queen of Heaven/and is one of the Divines..]",
+    "hidden": false
+  },
+  {
+    "id": "11.5",
+    "keys": "Julianos",
+    "entry": "Julianos:[TYPE<Julianos>:god;SPHERE<Julianos>:wisdom and logic;DESC<Julianos>:Julianos is one of the Divines/governing the realms of literature/law/history/and contradiction. He is usually associated with magic/and thus is often revered by wizards..]",
+    "hidden": false
+  },
+  {
+    "id": "11.6",
+    "keys": "Kynareth ",
+    "entry": "Kynareth :[TYPE<Kynareth >:god;SPHERE<Kynareth >:heavens/the winds/the elements/and the unseen spirits of the air;DESC<Kynareth >:Kynareth is the goddess of the heavens/the winds/the elements/and the unseen spirits of the air. She is a member of the Divines and Patron of sailors and travelers. Kynareth is often invoked for auspicious stars at birth and for good fortune in daily life. In some legends/she is the first to agree to Lorkhan's divine plan to create the mortal plane/and provides the space in the void for its creation. Furthermore/she is associated with rain/a phenomenon that is said not to have occurred before the removal of Lorkhan's divine spark..]",
+    "hidden": false
+  },
+  {
+    "id": "11.7",
+    "keys": "Mara,Mother Mara, Mother Mild",
+    "entry": "Mara:[TYPE<Mara>:god;SPHERE<Mara>:love/fertility/compassion and agriculture;DESC<Mara>:Mara/also known as Mother Mara/Mother Mild/and the Divine Mother/is the Goddess of Love/Fertility/Agriculture/and Compassion. She is also acclaimed as the Mother-Goddess/and is one of the Divines..]",
+    "hidden": false
+  },
+  {
+    "id": "11.8",
+    "keys": "Stendarr",
+    "entry": "Stendarr:[TYPE<Stendarr>:god;SPHERE<Stendarr>:mercy/charity/luck;DESC<Stendarr>:Stendarr/also known as Stendarr the Steadfast/is the God of Mercy/Charity/Well-Earned Luck/and Justice. He is also acclaimed as the God of Compassion/and Righteous Rule by Might and Merciful Forbearance. Stendarr is the Apologist of Men/patron of the Imperial Legion/magistrates/rulers/and knights errant/and one of the Divines..]",
+    "hidden": false
+  },
+  {
+    "id": "11.9",
+    "keys": "Zenithar,Z'en,Provider of our Ease",
+    "entry": "Zenithar:[TYPE<Zenithar>:god;SPHERE<Zenithar>:Work and Commerce;DESC<Zenithar>:Zenithar/the God of Work and Commerce/the Provider of our Ease/is one of the Divines. The Trader God is frequently seen as the same deity as the Bosmeri god Z'en. In the Empire/however/Zenithar is considered a more cultivated god of merchants and middle nobility/being the deity of wealth/labor/commerce and communication..]",
+    "hidden": false
+  },
+  {
+    "id": "11.10",
+    "keys": "Talos,Stormcrown,Ysmir,Dragon of the North",
+    "entry": "Talos:[TYPE<Talos>:god;SPHERE<Talos>:mankind/war/strength;DESC<Talos>:Talos is the most important hero-god of Mankind. In his mortal form/known as Tiber Septim/he conquered all of Tamriel and ushered in the Third Era (and the Third Empire). After death/his spirit ascended to the heavens to become the ninth and youngest divine/under the name given to him by the Nords: Talos. Also called Ysmir/'Dragon of the North'. One of the Nine Divines. Less prominent sects/such as the Talos Cult/have been inspired by his apotheosis..]",
+    "hidden": false
+  }
+]

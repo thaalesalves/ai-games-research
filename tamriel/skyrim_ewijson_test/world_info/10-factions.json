@@ -1,0 +1,32 @@
+[
+  {
+    "id": "10.1",
+    "keys": "bards college,college of bards",
+    "entry": " Bards College: { < The Bards College is an ancient institution dedicated to the formation of the arts>, < It is the most prestigious school of art in Tamriel, and the most ancient>, < It was founded some time in the First Era, during the reign of High King Olaf>, < Most of the best bards and painters in the history of Tamriel have studied here>, < It is a very prestigious academy of art located in the city of Solitude> }",
+    "hidden": false
+  },
+  {
+    "id": "10.2",
+    "keys": "antiquarians circle,antiquarian circle",
+    "entry": " Antiquarians Circle: { < The Antiquarians Circle is the name of the campus of the University of Gwyllim that is dedicated to the study of History, Archaelogy and Paleontology, and is located in the city of Solitude>, < It is one of the most prestigious institutions of education in Tamriel, and many of the most prestigious historians and archaelogists studied at the Antiquarians Circle>, < It is located in the city of Solitude, while the other campi of the Unviersity of Gwyllim are located in Cyrodiil> }",
+    "hidden": false
+  },
+  {
+    "id": "10.3",
+    "keys": "college of winterhold",
+    "entry": "College of Winterhold:[TYPE<College of Winterhold>:guild/university/school/academy/college/guild of mages/college of mages/arcane school/university for learning magic/school of magic;LOCATION<College of Winterhold>:Winterhold;LEADER TITLE<College of Winterhold>:Arch-Mage;VICE LEADER TITLE<College of Winterhold>:Master Wizard;CITY<College of Winterhold>:Winterhold;REGION<College of Winterhold>:Winterhold;DESC<College of Winterhold>:the college of winterhold is a school of magic/the leader of the college has the title of arch-mage/the vice-leader has the title of master wizard/it is a big building in the city of winterhold/it is a big construction/it is a big castle/it is a beautiful construction/the college is thousands of years old/the college was founded by arch-mage shalidor/the college is a famous school of magic.]",
+    "hidden": false
+  },
+  {
+    "id": "10.4",
+    "keys": "Companions",
+    "entry": "[ Companions description:< leader_title ≡ harbinger/ details ≡ The Companions are a group of fighters that date back to the Merethic Era, and were founded by Ysgramor. They're the oldest guild in Tamriel, and their headquarters is Jorrvaskr, in the city of Whiterun. They do contracts for those willing to pay, and also fight for the good and for the honor of Skyrim when need be>. Companions headquarters< Jorrvaskr>. Companions location< The Companions are in the city of Whiterun. Their headquarters is the ancient ship of Ysgramor, called Jorrvaskr>. ]",
+    "hidden": false
+  },
+  {
+    "id": "10.5",
+    "keys": "Thieves Guild",
+    "entry": "",
+    "hidden": false
+  }
+]
