@@ -44,97 +44,49 @@
   {
     "id": "4.8",
     "keys": "(River(| )wood)#[t=5l=5f=2S=2]",
-    "entry": "",
+    "entry": "[ Riverwood description:< name≡ Riverwood>/< small town& border of Whiterun Hold and Falkreath Hold>/< hold≡ Whiterun Hold>/< kingdom≡ Western Skyrim>. Riverwood summary:< hunting& goats& sheep& fishing& smithing& milling>. Riverwood climate:< warm& breeze>. Riverwood culture:< nord& imperial religion& wooden houses>. Riverwood features:< shores of White River& east of Bleak Falls Barrow& west of the Throat of the World>.]",
     "hidden": false
   },
   {
     "id": "4.9",
     "keys": "Helgen#[t=5l=5f=2S=2]",
-    "entry": "",
+    "entry": "[ Helgen description:< name≡ Helgen>/< small town& border of Falkreath Hold and Whiterun Hold>/< hold≡ Falkreath Hold>/< kingdom≡ Western Skyrim>. Helgen summary:< hunting& goats& sheep& smithing& imperial keep>. Helgen climate:< warm& breeze>. Helgen culture:< nord& imperial religion& wooden houses>. Helgen features:< close to the border with Cyrodiil& >.]",
     "hidden": false
   },
   {
     "id": "4.11",
     "keys": "Karthwasten#[t=5l=5f=2S=2]",
-    "entry": "",
-    "hidden": false
-  },
-  {
-    "id": "4.11",
-    "keys": "Oakwood#[t=5l=5f=2S=2]",
-    "entry": "",
+    "entry": "[ Karthwasten description:< name≡ Karthwasten>/< small town in the Reach>/< hold≡ The Reach>. Karthwasten summary:< hunting& fishing& mining>. Karthwasten climate:< warm& breeze>. Karthwasten culture:< reachmen& wooden houses>/< religion≡ Hircine& Namira& Paryite>. Karthwasten features:< near the banks of the Karth River>.]",
     "hidden": false
   },
   {
     "id": "4.12",
-    "keys": "Sunguard#[t=5l=5f=2S=2]",
-    "entry": "",
+    "keys": "Stone( H|h)ills#[t=5l=5f=2S=2]",
+    "entry": "[ Stonehills description:< name≡ Stonehills>/< small community in Hjaalmarch>/< hold≡ Hjaalmarch>/< kingdom≡ Western Skyrim>. Stonehills summary:< hunting& iron mining>. Stonehills climate:< snowy& cold>. Stonehills culture:< nord& wooden houses>/< religion≡ Ancient Nordic Pantheon>. Stonehills features:< iron mine& wolves& sabre cat>.]",
     "hidden": false
   },
   {
     "id": "4.13",
-    "keys": "Stone( H|h)ills#[t=5l=5f=2S=2]",
-    "entry": "",
+    "keys": "Vernim#[t=5l=5f=2S=2]",
+    "entry": "[ Vernim description:< name≡ Vernim>/< small town in the Rift>/< hold≡ The Rift>/< kingdom≡ Eastern Skyrim>. Vernim summary:< hunting& fishing>. Vernim climate:< warm& breeze>. Vernim culture:< nord& small wooden houses>/< religion≡ Ancient Nordic Pantheon>. Vernim features:< bears& wolves& sabre cat>.]",
     "hidden": false
   },
   {
     "id": "4.14",
-    "keys": "Vernim Wood#[t=5l=5f=2S=2]",
-    "entry": "",
-    "hidden": false
-  },
-  {
-    "id": "4.15",
-    "keys": "Greenwall#[t=5l=5f=2S=2]",
-    "entry": "",
+    "keys": "Nimalten#[t=5l=5f=2S=2]",
+    "entry": "[ Nimalten description:< name≡ Nimalten>/< small town>/< hold≡ The Rift>/< kingdom≡ Eastern Skyrim>. Nimalten summary:< ruler≡ Thane Armjor>/< hunting& fishing& smithing>. Nimalten climate:< warm& breeze>. Nimalten culture:< nord& small wooden houses>/< religion≡ Ancient Nordic Pantheon>. Nimalten features:< bears& wolves& sabre cat& deer& close to Treva River& big mansion where Thane Armjor lives>.]",
     "hidden": false
   },
   {
     "id": "4.16",
-    "keys": "Black Moor#[t=5l=5f=2S=2]",
+    "keys": "((Old |)H('|)roldan)#[t=5l=5f=2S=2]",
     "entry": "",
     "hidden": false
   },
   {
     "id": "4.17",
-    "keys": "Sunguard#[t=5l=5f=2S=2]",
-    "entry": "",
-    "hidden": false
-  },
-  {
-    "id": "4.18",
-    "keys": "Neugrad#[t=5l=5f=2S=2]",
-    "entry": "",
-    "hidden": false
-  },
-  {
-    "id": "4.19",
-    "keys": "Hroldan#[t=5l=5f=2S=2]",
-    "entry": "",
-    "hidden": false
-  },
-  {
-    "id": "4.20",
-    "keys": "Amber Guard#[t=5l=5f=2S=2S=2]",
-    "entry": "",
-    "hidden": false
-  },
-  {
-    "id": "4.21",
-    "keys": "Dunpar#[t=5l=5f=2S=2]",
-    "entry": "",
-    "hidden": false
-  },
-  {
-    "id": "4.22",
-    "keys": "Dunstad#[t=5l=5f=2S=2]",
-    "entry": "",
-    "hidden": false
-  },
-  {
-    "id": "4.23",
     "keys": "Pargran#[t=5l=5f=2S=2]",
-    "entry": "",
+    "entry": "[ Pargran description:< name≡ Pargran>/< small town>/< hold≡ Eastmarch>/< kingdom≡ Western Skyrim>. Pargran summary:< hunting& fishing& silver mining>. Pargran climate:< snowy& cold>. Pargran culture:< nord& small wooden houses>/< religion≡ Ancient Nordic Pantheon>. Pargran features:< inn& small houses& simple folk>.]",
     "hidden": false
   }
 ]
