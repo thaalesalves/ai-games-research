@@ -1,0 +1,46 @@
+[
+  {
+    "id": "14.1",
+    "keys": "(you).*(look|examine|inspect||appearance|stare).*#[t=0f=3l=3]",
+    "entry": "<< As you look, you focus on appearance noticing prominent features and details>>>>",
+    "hidden": false
+  },
+  {
+    "id": "14.2",
+    "keys": " #[t=1]",
+    "entry": "<<●>>>>",
+    "hidden": false
+  },
+  {
+    "id": "14.3",
+    "keys": " #[t=3]",
+    "entry": "<<●>>>>",
+    "hidden": false
+  },
+  {
+    "id": "14.4",
+    "keys": " #[t=6]",
+    "entry": "<<●>>>>",
+    "hidden": false
+  },
+  {
+    "id": "14.5",
+    "keys": " #[t=9]",
+    "entry": "<<●>>>>",
+    "hidden": false
+  },
+  {
+    "id": "14.6",
+    "keys": " #[t=12]",
+    "entry": "<<●>>>>",
+    "hidden": false
+  },
+  {
+    "id": "14.7",
+    "keys": " #[t=15]",
+    "entry": "<<●>>>>",
+    "hidden": false
+  }
+]
+
+
