@@ -8,7 +8,7 @@
   {
     "id": "3.2",
     "keys": "Whiterun Hold#[t=6l=3f=2S=2]",
-    "entry": "[ Whiterun Hold culture:< nord& wooden houses& farms>. Whiterun Hold features:< white river& giants& mammoths>. Whiterun Hold towns:< Riverwood& Honeywood& Black Moor>.]",
+    "entry": "[ Whiterun Hold culture:< nord& wooden houses& farms>. Whiterun Hold features:< white river& giants& mammoths>. Whiterun Hold towns:< Riverwood& Honeywood>.]",
     "hidden": false
   },
   {
@@ -20,7 +20,7 @@
   {
     "id": "3.4",
     "keys": "(|the) rift#[t=6l=3f=2S=2]",
-    "entry": "[ The Rift culture:< nord& farm& fishing& hunting& mills>. The Rift features:< Lake Honrich& bears& wolves& deer>. The Rift towns:< Shor's Stone& Sunguard& Vernim Wood& Ivarstead& Greenwall>.]",
+    "entry": "[ The Rift culture:< nord& farm& fishing& hunting& mills>. The Rift features:< Lake Honrich& bears& wolves& deer>. The Rift towns:< Shor's Stone& Vernim& Ivarstead>.]",
     "hidden": false
   },
   {
@@ -44,7 +44,7 @@
   {
     "id": "3.8",
     "keys": "(falkreath)#[t=6l=3f=2S=2]",
-    "entry": "[ Falkreath Hold culture:< nord& fishing& hunting& lumber& leatherwork& pelts>. Falkreath Hold features:< fishing& lumber& Lake Ilinalta& White River& wolves& bears& sabre cat>. Falkreath Hold towns:< Helgen& Oakwood& Neugrad>.]",
+    "entry": "[ Falkreath Hold culture:< nord& fishing& hunting& lumber& leatherwork& pelts>. Falkreath Hold features:< fishing& lumber& Lake Ilinalta& White River& wolves& bears& sabre cat>. Falkreath Hold towns:< Helgen>.]",
     "hidden": false
   },
   {
@@ -56,7 +56,7 @@
   {
     "id": "3.10",
     "keys": "the reach#[t=6l=3f=2S=2]",
-    "entry": "[ The Reach culture:< ruled by an Ard& reachmen& wooden houses& mining>. The Reach features:< Karth River& Sky Haven Temple& silver mines& fishing>. The Reach towns:< Karthwasten& Hroldan& Amber Guard>.]",
+    "entry": "[ The Reach culture:< ruled by an Ard& reachmen& wooden houses& mining>. The Reach features:< Karth River& Sky Haven Temple& silver mines& fishing>. The Reach towns:< Karthwasten& Hroldan>.]",
     "hidden": false
   },
   {
@@ -68,7 +68,7 @@
   {
     "id": "3.12",
     "keys": "the pale#[t=6l=3f=2S=2]",
-    "entry": "[ The Pale culture:<nord& wooden constructions& fishing& port city>. The Pale features:< iron mining& quicksilver mining>. The Pale towns:< Heljarchen& Dunpar>.]",
+    "entry": "[ The Pale culture:<nord& wooden constructions& fishing& port city>. The Pale features:< iron mining& quicksilver mining>. The Pale towns:< Heljarchen>.]",
     "hidden": false
   },
   {
@@ -80,7 +80,7 @@
   {
     "id": "3.14",
     "keys": "Hjaalmarch#[t=6l=3f=2S=2]",
-    "entry": "[ Hjaalmarch culture:< nord& wooden constructions& mining& hunting>. Hjaalmarch features:< mining& hunting& swamp& Hjaal River& Karth River>. Hjaalmarch towns:< Stonehills& Dunstad>.]",
+    "entry": "[ Hjaalmarch culture:< nord& wooden constructions& mining& hunting>. Hjaalmarch features:< mining& hunting& swamp& Hjaal River& Karth River>. Hjaalmarch towns:< Stonehills>.]",
     "hidden": false
   },
   {
