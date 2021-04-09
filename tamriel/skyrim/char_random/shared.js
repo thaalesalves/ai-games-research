@@ -8,11 +8,18 @@ const WORN_REGEX = new RegExp(`(?<=WORN<you>:)(.*)(?=;)`);
 const INVENTORY_REGEX = new RegExp(`(?<=INV<you>:)(.*)(?=.)`);
 
 const WEAPONS = [
-  'sword', 'knife', 'spear', 'hammer', 'axe', 'battleaxe', 'sledgehammer', 'longsword', 'bow', 'pickaxe'
+  "dagger", "knife", "shuriken", "chakhram", "sword", "claymore", "zweihander", "rapier",
+  "epee", "kukri", "trident", "katana", "cutlass", "scimitar", "nodachi", "tanto", "naginata",
+  "spear", "pike", "axe", "halberd", "mace", "flail", "hammer", "pickaxe", "stiletto", "bow"
 ];
 
 const CLOTHING = [
-  'rags', 'armor', 'dress', 'kilt', 'skirt', 'jerkin', 'shirt', 'clothes', 'robes', 'leathers', 'hooded', 'cuirass', 'chainmail', 'gauntlets', 'vambraces', 'tights'
+  "tunic", "breeches", "loincloth", "doublet", "cloak", "robe", "surcoat", "tabard",
+  "trousers", "skirt", "dress", "gown", "socks", "gloves", "top hat", "waistcoat", "kilt",
+  "cummerbund", "bowtie", "necktie", "tuxedo", "kimono", "karate gi", "toe socks", "sarong",
+  "scarf", "legwarmers", "trenchcoat", "jacket", "shorts", "leggings", "blouse", "sweater",
+  "cardigan", "wizard's hat", "feathered hat", "tutu", "rags", "armor", "jerkin", "shirt",
+  "clothes", "leathers", "hood", "cuirass", "chainmail", "gauntlets", "vambraces", "bracers", "tights"
 ];
 
 const RANDOM_CHARACTERS = [
