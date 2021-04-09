@@ -20,109 +20,121 @@
   {
     "id": "7.4",
     "keys": "Lake Ilinalta#[t=5l=5f=2S=2]",
-    "entry": "Lake Ilinalta:{<Lake Ilinalta is a lake in west-central Falkreath Hold, in the middle of Skyrim's pine forest>, <It is the source of the White River, and a notable Skyrim landmark. The town of Helgen was less than a day's ride to the southeast,[2] and the Hold's capital of Falkreath is directly south>, <The Imperial Legion used to have a fort along its shore, until the entire facility mysteriously sank into the water in a single day>, <According to local legend, the place is cursed and travelers are known to go missing>}",
+    "entry": "<< Lake Ilinalta source of White River, located central Falkreath Hold, middle Skyrim's pine forest>>>> << Lake Ilinalta notable Skyrim landmark, life support Falkreath city, important fishing hunting>>>>",
     "hidden": false
   },
   {
     "id": "7.5",
     "keys": "Lake Yorgrim#[t=5l=5f=2S=2]",
-    "entry": "Lake Yorgrim:{<Lake Yorgrim is a lake in the eastern the Pale, to the west of Windhelm. It is the source of River Yorgrim>, <In or around the time of the Dragon War, the dragon Viinturuth was killed and then interred in a burial mound near the shores of the lake>}",
+    "entry": "<< Lake Yogrim source of river with same name, located in eastern Pale, just west of Windhelm>>>> << Lake Yogrim fishing The Pale and Eastmarch beautiful>>>> << Lake Yogrim burial site of dragon Viinturuth, Viinturuth died in the Merethic Era durin Dragon War>>>>",
     "hidden": false
   },
   {
     "id": "7.6",
     "keys": "Darkwater River#[t=5l=5f=2S=2]",
-    "entry": "Darkwater River:{<Darkwater River, or simply the Darkwater, is a river in eastern Skyrim connecting Lake Geir to the White River>, <Lake Geir drains into it at the western end of the Rift. The river flows northeast into Eastmarch, cascading down the famous cliff which divides the two holds>, <After this series of pools and waterfalls, the river bends northwest, and merges with the White River a few miles downstream, south-southwest of Windhelm and west of the famous fetid swamps of Eastmarch>, <The fishing is said to be good. A large tributary flows separately from Lake Geir>, <It passes north through Ivarstead, then curves northeast and creates its own series of waterfalls down the cliff, then connects with Darkwater River in Eastmarch, which then merges shortly after with the White River and terminates>}",
+    "entry": "<< Darkwater River eastern skyrim, connects Lake Geir to White River>>>> << Ends between The Rift and Eastmarch marks the border between the holds>>>> << good fishing important river Eastern Skyrim>>>>",
     "hidden": false
   },
   {
     "id": "7.7",
     "keys": "River Hjaal#[t=5l=5f=2S=2]",
-    "entry": "River Hjaal:{<The River Hjaal is the main river that flows through the center of Hjaalmarch in Skyrim>, <Its headwaters are located in northwestern Whiterun Hold, in the highlands south of Morthal. After dropping down a series of waterfalls and entering Hjaalmarch, the river passes northeast through Morthal>, <Then spreads out and drains into the Karth delta, the marshy area where the River Hjaal and the larger Karth River empty into the icy Sea of Ghosts through a variety of intricate channels>, <Fishermen can collect a wide range of fish from the river>}",
+    "entry": "<< River Hjaal northwestern Skyrim, located in Hjaalmarch>>>> << River Hjaal located in Hjaalmarch, near border with Whiterun, near city of Mortal>>>> << River Hjaal drains into Karth River, ends in Sea of Ghosts, wide range fish>>>>",
     "hidden": false
   },
   {
     "id": "7.8",
     "keys": "River Yorgrim#[t=5l=5f=2S=2]",
-    "entry": "River Yorgrim:{<The River Yorgrim is a short tributary in Skyrim which connects Lake Yorgrim to the White River>, <It flows east out of the eponymous lake in the Pale and enters Eastmarch, dropping through a series of waterfalls and rapids until it merges with the White River near the entrance to Windhelm>}",
+    "entry": "<< River Yogrim is short tributary, connects Lake Yogrim to White River>>>> << River Yogrim starts in eponymous lake in The Pale, ends in Eastmarch into White River>>>> << River Yogrim many waterfalls, many fish>>>>",
     "hidden": false
   },
   {
     "id": "7.9",
     "keys": "Treva River#[t=5l=5f=2S=2]",
-    "entry": "Treva River:{<The Treva River is a small river at the center of the Rift in southeastern Skyrim>, <It flows northwest from Lake Honrich to Lake Geir>, <It was perhaps named after the eponymous founder of Treva's Farm on its eastern bank>}",
+    "entry": "<< Treva River small river center of The Rift>>>> << Treva River starts in Lake Honrich ends in Lake Geir>>>> << Treva River many fish important river The Rift>>>>",
     "hidden": false
   },
   {
     "id": "7.10",
     "keys": "(Jerall(s| Mountains))#[t=5l=5f=2S=2]",
-    "entry": "Jerall Mountains:{<The Jerall Mountains, also called the Jeralls, are a mountain range on the border between Cyrodiil and Skyrim>, <They meet the Velothi and Valus Mountains at the Morrowind border, and the Dragontail Mountains at the Hammerfell border>, <The Jeralls are rugged, steep, and inhospitable, with only a few traversable passes>, <Of particular note is the Pale Pass, which was the site of the abrupt end to the First Akaviri Invasion in 1E 2703, after which its location was lost>}",
+    "entry": "<< Jerall Mountains also known Jeralls, mountain range southern Skyrim border with Cyrodiil>>>> << Jerall Mountains rugged steep inhospitable, location of Pale Pass in southern Skyrim>>>>",
     "hidden": false
   },
   {
     "id": "7.11",
     "keys": "Valus Mountains#[t=5l=5f=2S=2]",
-    "entry": "Valus Mountains:{<The Valus Mountains are a mountain range on the border between Cyrodiil and Morrowind>, <They meet the Jerall Mountains at the Skyrim border. They are sometimes considered an extension of the Velothi Mountains>}",
+    "entry": "<< Valus Mountains mountain range southeastern Skyrim, border Morrowind and Cyrodiil>>>> << Valus Mountains southeastern Rift border Morrowind>>>>",
     "hidden": false
   },
   {
     "id": "7.12",
-    "keys": "Dragontail Mountains#[t=5l=5f=2S=2]",
-    "entry": "Dragontail Mountains:{<The Dragontail Mountains are a mountain range in western Skyrim>, <They are the limit of Skyrim's territory, where it borders Hammerfell>, <On the other side of the Dragontail Mountains is the region of Hammerfell called Craglorn>}",
+    "keys": "Dragon('s |)tail Mountains#[t=2l=5f=2S=2]",
+    "entry": "<< Dragon's Tail Mountains mountain range western Skyrim, border Hammerfell>>>>",
     "hidden": false
   },
   {
     "id": "7.13",
     "keys": "Dragon's Teeth Mountains#[t=5l=5f=2S=2]",
-    "entry": "Dragon's Teeth Mountains:{<The Dragon's Teeth Mountains is an expansive mountain range that spans a large portion of western Tamriel>, <stretching from the frozen summits of High Rock all the way to the forests of Valenwood, passing through Cyrodiil, Skyrim, and Hammerfell>, <The Dragon's Teeth Mountains are found near the Nordic town of Falkreath>}",
+    "entry": "<< Dragon's Teeth Mountains expansive mountain range western Skyrim, High Rock border>>>> << Dragon's Teeth Mountains provinces Cyrodiil High Rock Hammerfell Skyrim>>>>",
     "hidden": false
   },
   {
     "id": "7.14",
-    "keys": "Druadach Mountains#[t=5l=5f=2S=2]",
-    "entry": "Druadach Mountains:{<The Druadach Mountains are a mountain range which separate western Skyrim and eastern High Rock and Hammerfell>, <The misty peaks tower over Markarth and Karthwasten in the Reach, though they gradually diminish closer to Haafingar and Solitude>, <The range curves around the Karth River, and nearly stretches into Falkreath Hold>, <The mountains border the High Rock regions of Wrothgar and Bangkorai to the east>}",
+    "keys": "Druadach Mountains#[t=3l=5f=2S=2]",
+    "entry": "<< Druadach Mountains mountain range border Skyrim with High Rock, border Skyrim with Hammerfell>>>> << Druadach Mountains is Markarth, near Karth River, end in Solitude>>>>",
     "hidden": false
   },
   {
     "id": "7.15",
-    "keys": "Velothi Mountains#[t=5l=5f=2S=2]",
-    "entry": "Velothi Mountains:{<The Velothi Mountains are the mountain range separating Morrowind from Skyrim>, <They are named after the Chimer prophet Veloth who led the Chimer to leave their ancestral homes and resettle in Morrowind>, <The mountains form the eastern border of the Skyrim regions of Eastmarch and The Rift>, <At the southern tip of the mountain range, where it meets the Jerall and Valus Mountains>}",
+    "keys": "Druadach Mountains#[t=4l=5f=2S=2]",
+    "entry": "<< Druadach Mountains regions of Wrothgar Bangkorai in High Rock>>>>",
     "hidden": false
   },
   {
     "id": "7.16",
-    "keys": "(Throat of the World|Snow Throat)#[t=5l=5f=2S=2]",
-    "entry": "Throat of the World:{<The Throat of the World, also called Snow Throat, is the highest peak in the province of Skyrim>, <Seven thousand steps lead up the mountain to its summit, where the settlement of High Hrothgar is located, where the Greybeards live their lives of absolute silence>, <The legends of the Nords state that mankind was formed on the mountain when the sky breathed onto the land>, <Many pilgrims travel to the mountain and climb the seven thousand steps to its peak>}",
+    "keys": "Velothi Mountains#[t=5l=5f=2S=2]",
+    "entry": "<< Velothi Mountains eastern Skyrim, border with Morrowind>>>> << Velothi Mountains named after prophet Veloth patron saint of Morrowind>>>>",
     "hidden": false
   },
   {
     "id": "7.17",
-    "keys": "Jorrvaskr#[t=5l=5f=2S=2]",
-    "entry": "Jorrvaskr:{<<Jorrvask is the meadhall that is home to the Companions in the city of Whiterun>, <Jorrvaskr is made from the boat that brought Ysgramor from Atmora to Tamriel>, <Jorrvaskr is made of wood, since it is a ship upside down>}",
+    "keys": "(Throat of the World|Snow Throat)#[t=4l=5f=2S=2]",
+    "entry": "<< Snow Throat also known Throat of the World, highest peak in Skyrim>>>> << Snow Throat located central Skyrim between Whiterun Hold and The Rift>>>>",
     "hidden": false
   },
   {
     "id": "7.18",
-    "keys": "Skyforge#[t=5l=5f=2S=2]",
-    "entry": "Skyforge:{<<The Skyforge is an ancient forge located in Whiterun>, <Only the blacksmith of the Companions is allowed to use it>, <It is said that the Skyforge is magical and this is the reason equipment made there is so good>, <It is said that the Skyforge was blessed by Kyne herself>, <There is a huge hawk statue on top of the Skyforge>}",
+    "keys": "(Throat of the World|Snow Throat)#[t=5l=5f=2S=2]",
+    "entry": "<< Snow Throat climb seven thousand steps starting in Ivarstead, High Hrothgar on top of mountain>>>> << Snow Throat home of the monastic order Greybeards>>>>",
     "hidden": false
   },
   {
     "id": "7.19",
-    "keys": "(Dragonsreach)#[t=5l=5f=2S=2]",
-    "entry": "Dragonsreach:{<<Dragonsreach is the palace of the Jarl of Whiterun, a huge castle on top of the hill where the city of Whiterun is located>, <Dragonsreach was build to trap dragons before they became extinct>, <It is said that a dragon called Numinex was trapped in Dragonsreach by High King Olaf One-Eye in the First Era>, <The skull of Numinex lies on top of the Jarl's throne until today>}",
+    "keys": "Jorrvaskr#[t=3l=5f=2S=2]",
+    "entry": "<< Jorrvaskr meadhall in Whiterun, home of the Companions>>>> << Jorrvaskr ancient meadhall made from boat of Ysgramor>>>> << Jorrvaskr one of oldest places in Skyrim>>>> << Jorrvaskr is a ship turned into a manor>>>>",
     "hidden": false
   },
   {
     "id": "7.20",
-    "keys": "Understone Keep#[t=5l=5f=2S=2]",
-    "entry": "Understone Keep:{<Understone Keep is the seat of power in the Reach, located in the city of Markarth>,  <In ancient times, it used to be part of the Dwemer city of Nchuand-Zel, one of the many cities built by the Dwemer inside mountains and underground>,  <Because of this fact, the old name Nchuand-Zel stopped being used in favor of the new name, Understone Keep>,  <The Jarl of the Reach resides in Understone Keep>}",
+    "keys": "Skyforge#[t=4l=5f=2S=2]",
+    "entry": "[ Skyforge description:< ancient forge in Whiterun& located in Jorrvaskr backyard>/< believed to be blessed by Kyne herself>. Skyforge summary:< huge iron hawk statue on top>/< only the Companions blacksmith is allowed to use>.]",
     "hidden": false
   },
   {
     "id": "7.21",
+    "keys": "(Dragonsreach)#[t=4l=5f=2S=2]",
+    "entry": "<< Dragonsreach is palace of Jarl of Whiterun, huge castle top of hill in city of Whiterun>>>> << Dragonsreach built to trap dragons during dragon war in Merethic Era>>>> << Dragonsreach Numinex was trapped there by High King Olaf One-Eye in First Era>>>> << Dragonsreach skull of Numinex above Jarl's throne>>>>",
+    "hidden": false
+  },
+  {
+    "id": "7.22",
+    "keys": "Understone Keep#[t=5l=5f=2S=2]",
+    "entry": "<< Understone Keep seat of power The Reach, located city Markarth>>> << Understone Keep throne of the Ard of The Reach, Ard is title of ruler of The Reach>>>> << Understone Keep built inside mountain, used to be called Nchuand-Zel>>>>",
+    "hidden": false
+  },
+  {
+    "id": "7.23",
     "keys": "(Palace of (the |)Kings)#[t=5l=5f=2S=2]",
-    "entry": "Palace of the Kings:{<The Palace of the Kings, known historically as the Palace of Ysgramor, is a large castle at the far end of the Valunstrad district in Windhelm>, <It is one of the last remaining structures from the days of the First Empire of the Nords and is home to the hold's Jarl>, <Ysgramor built the palace so as to tower over the city, showing man's dominion over the very winds that had caused Yngol's death on the voyage from Atmora>, <It is made of stone blocks, in a unique architecture found only in Windhelm>}",
+    "entry": "<< Palace of Kings oldest building in Tamriel, built by ancient Nords>>>> << Palace of Kings seat of power of the Kingdom of Eastern Skyrim>>>> << Palace of Kings made of stone, located in city of Windhelm>>>> << Palace of Kings also known Palace of Ysgramor>>>>",
     "hidden": false
   }
 ]
