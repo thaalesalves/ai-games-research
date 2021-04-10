@@ -7,46 +7,116 @@
   },
   {
     "id": "14.2",
-    "keys": " #[t=1]",
-    "entry": "<<●>>>>",
+    "keys": "(You).*(loot|burgle|raid|despoil|divvy|ransack|pillage|steal).*[t=0l=3f=3]",
+    "entry": "<< Following detailed elaborate description, objects acquired>>>> << Item quality and type usual for circumstance>>>>",
     "hidden": false
   },
   {
     "id": "14.3",
-    "keys": " #[t=3]",
+    "keys": " #[m]",
     "entry": "<<●>>>>",
     "hidden": false
   },
   {
     "id": "14.4",
-    "keys": " #[t=6]",
+    "keys": " #[t=1]",
     "entry": "<<●>>>>",
     "hidden": false
   },
   {
     "id": "14.5",
-    "keys": " #[t=9]",
+    "keys": " #[t=3]",
     "entry": "<<●>>>>",
     "hidden": false
   },
   {
     "id": "14.6",
-    "keys": " #[t=12]",
+    "keys": " #[t=6]",
     "entry": "<<●>>>>",
     "hidden": false
   },
   {
     "id": "14.7",
-    "keys": " #[t=15]",
+    "keys": " #[t=9]",
     "entry": "<<●>>>>",
     "hidden": false
   },
   {
     "id": "14.8",
-    "keys": " #[m]",
+    "keys": " #[t=12]",
+    "entry": "<<●>>>>",
+    "hidden": false
+  },
+  {
+    "id": "14.9",
+    "keys": " #[t=15]",
+    "entry": "<<●>>>>",
+    "hidden": false
+  },
+  {
+    "id": "14.10",
+    "keys": " #[t=18]",
+    "entry": "<<●>>>>",
+    "hidden": false
+  },
+  {
+    "id": "14.11",
+    "keys": " #[t=21]",
+    "entry": "<<●>>>>",
+    "hidden": false
+  },
+  {
+    "id": "14.12",
+    "keys": " #[t=24]",
+    "entry": "<<●>>>>",
+    "hidden": false
+  },
+  {
+    "id": "14.13",
+    "keys": " #[t=27]",
+    "entry": "<<●>>>>",
+    "hidden": false
+  },
+  {
+    "id": "14.14",
+    "keys": " #[t=30]",
+    "entry": "<<●>>>>",
+    "hidden": false
+  },
+  {
+    "id": "14.15",
+    "keys": " #[t=33]",
+    "entry": "<<●>>>>",
+    "hidden": false
+  },
+  {
+    "id": "14.16",
+    "keys": " #[t=36]",
+    "entry": "<<●>>>>",
+    "hidden": false
+  },
+  {
+    "id": "14.17",
+    "keys": " #[t=39]",
+    "entry": "<<●>>>>",
+    "hidden": false
+  },
+  {
+    "id": "14.18",
+    "keys": " #[t=42]",
+    "entry": "<<●>>>>",
+    "hidden": false
+  },
+  {
+    "id": "14.19",
+    "keys": " #[t=45]",
+    "entry": "<<●>>>>",
+    "hidden": false
+  },
+  {
+    "id": "14.20",
+    "keys": " #[t=48]",
     "entry": "<<●>>>>",
     "hidden": false
   }
 ]
-
-
