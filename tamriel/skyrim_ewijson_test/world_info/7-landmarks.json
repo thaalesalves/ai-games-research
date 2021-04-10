@@ -136,5 +136,335 @@
     "keys": "(Palace of (the |)Kings)#[t=5l=5f=2S=2]",
     "entry": "<< Palace of Kings oldest building in Tamriel, built by ancient Nords>>>> << Palace of Kings seat of power of the Kingdom of Eastern Skyrim>>>> << Palace of Kings made of stone, located in city of Windhelm>>>> << Palace of Kings also known Palace of Ysgramor>>>>",
     "hidden": false
+  },
+  {
+    "id": "7.24",
+    "keys": "Blue Palace#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.25",
+    "keys": "Kilkreath Temple#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.26",
+    "keys": "Statue of Talos#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.27",
+    "keys": "Deep Folk Crossing#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.28",
+    "keys": "Statue of Azura#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.29",
+    "keys": "Gjukar's Monument#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.30",
+    "keys": "Bard's Leap Summit#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.31",
+    "keys": "Reachwind Eyrie#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.32",
+    "keys": "Ruins of Bthalft#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.33",
+    "keys": "Ruins of Rkund#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.34",
+    "keys": "Ruins of Lendoran#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.35",
+    "keys": "Ruins of Briar Rock#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.36",
+    "keys": "Sky Haven Temple#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.37",
+    "keys": "High Hrothgar#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.38",
+    "keys": "Weynon Stones#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.39",
+    "keys": "Dragon's Belly#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.40",
+    "keys": "Eastern Great Lift#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.41",
+    "keys": "Hjaalmarch Great Lift#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.42",
+    "keys": "Karthald Great Lift#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.43",
+    "keys": "Arkthzand Great Lift#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.44",
+    "keys": "Nalzthdbar Great Lift#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.45",
+    "keys": "Alftand Great Lift#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.46",
+    "keys": "Mzinchaleft Great Lift#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.47",
+    "keys": "Raldbthar Great Lift#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.48",
+    "keys": "Storm-Hawk's Altar#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.49",
+    "keys": "Sword's Point Watchtower#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.50",
+    "keys": "Whiterun Western Watchtower#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.51",
+    "keys": "Whiterun Northern Watchtower#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.52",
+    "keys": "Wolf's Eye Lighthouse#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.53",
+    "keys": "Frostflow Lighthouse#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.54",
+    "keys": "The Arcanaeum#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.55",
+    "keys": "Deepwood Vale Wayshrine#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.56",
+    "keys": "Dragon Bridge Wayshrine#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.57",
+    "keys": "Frozen Coast Wayshrine#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.58",
+    "keys": "Giant's Coast Wayshrine#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.59",
+    "keys": "Kilkreath Temple Wayshrine#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.60",
+    "keys": "Mor Khazgur Wayshrine#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.61",
+    "keys": "Morthal Wayshrine#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.62",
+    "keys": "Northern Watch Wayshrine#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.63",
+    "keys": "Solitude Wayshrine#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.64",
+    "keys": "Solitude Docks Wayshrine#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.65",
+    "keys": "Southern Watch Wayshrine#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.66",
+    "keys": "Briar Rock Wayshrine#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.67",
+    "keys": "Druadach Mountains Wayshrine#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.68",
+    "keys": "Karthwasten Wayshrine#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.69",
+    "keys": "Lost Valley Wayshrine#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.70",
+    "keys": "Markarth Wayshrine#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.71",
+    "keys": "North Markarth Wayshrine#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.72",
+    "keys": "Rebel's Retreat Wayshrine#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.73",
+    "keys": "Folgunthur#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.74",
+    "keys": "Valthume#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.75",
+    "keys": "Gloomreach#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.76",
+    "keys": "Rebel's Retreat#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.77",
+    "keys": "Druadach Redoubt#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
+  },
+  {
+    "id": "7.78",
+    "keys": "Red Eagle Redoubt#[t=5l=5f=2S=2]",
+    "entry": "",
+    "hidden": false
   }
 ]
