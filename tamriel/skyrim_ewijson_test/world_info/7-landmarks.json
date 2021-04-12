@@ -140,49 +140,49 @@
   {
     "id": "7.24",
     "keys": "Blue Palace#[t=5l=5f=2S=2]",
-    "entry": "",
+    "entry": "<< Blue Palace seat of power kingdom Western Skyrim& located in city Solitude>>>> << Blue Palace dark blue roof, stone walls, big courtyard with garden>>>>",
     "hidden": false
   },
   {
     "id": "7.25",
     "keys": "Kilkreath Temple#[t=5l=5f=2S=2]",
-    "entry": "",
+    "entry": "<< Kilkreath Temple dedicated to Meridia, huge Meridia statue in the courtyard>>>> << Kilkreath Temple inner temple subterrain, door behind the statue>>>>",
     "hidden": false
   },
   {
     "id": "7.26",
-    "keys": "Statue of Talos#[t=5l=5f=2S=2]",
-    "entry": "",
+    "keys": "(Winds District|Statue of Talos|Talos Statue)#[t=5l=5f=2S=2]",
+    "entry": "<< Statue of Talos image of Tiber Septim, altar shrine pray, stone statue Winds District of Whiterun>>>> << Statue of Talos looking heroic, stepping on big snake, sword in hand>>>>",
     "hidden": false
   },
   {
     "id": "7.27",
     "keys": "Deep Folk Crossing#[t=5l=5f=2S=2]",
-    "entry": "",
+    "entry": "<< Deep Folk Crossing ancient Dwemer bridge in northern Reach>>>><< Deep Folk Crossing landmark, made of gray smooth stone with Dwemer brass metal roof>>>><< Deep Folk Crossing made in Dwemer style architecture>>>>",
     "hidden": false
   },
   {
     "id": "7.28",
-    "keys": "Statue of Azura#[t=5l=5f=2S=2]",
-    "entry": "",
+    "keys": "(Azura Statue|Statue of Azura)#[t=5l=5f=2S=2]",
+    "entry": "<< Statue of Azura top of mountain in Winterhold region>>>><< Statue of Azura can be seen from kilometers away>>>><< Statue of Azura shrine altar, hundred feet tall, holds her hands high, holds moon right hand, holds sun left hand>>>>",
     "hidden": false
   },
   {
     "id": "7.29",
     "keys": "Gjukar's Monument#[t=5l=5f=2S=2]",
-    "entry": "",
+    "entry": "<< Gjukar's Monument ancient stone monument south of Rorikstead>>>> << Gjukar's Monument commemorates an ancient battle that happened here>>> << Gjukar's Monument monument is the head of a hawk>>>>",
     "hidden": false
   },
   {
     "id": "7.30",
-    "keys": "Bard's Leap Summit#[t=5l=5f=2S=2]",
-    "entry": "",
+    "keys": "Sundered Towers#[t=5l=5f=2S=2]",
+    "entry": "<< Sundered Towers entire construction extremly good condition, beautiful sight>>>> << Sundered Towers big staircases to ancient Nord ruin leading to the towers>>>> << Sundered Towers two Nordic style ancient towers surrounded by tall pillars with hawk heads>>>>",
     "hidden": false
   },
   {
     "id": "7.31",
     "keys": "Reachwind Eyrie#[t=5l=5f=2S=2]",
-    "entry": "",
+    "entry": "<<●Reachwind Eyrie ancient small Dwemer tower The Reach, built in Dwemer style architecture>>>> <<●Reachwind Eyrie made of smooth dark gray stone, brass roof>>>>",
     "hidden": false
   },
   {
@@ -458,12 +458,6 @@
   {
     "id": "7.77",
     "keys": "Druadach Redoubt#[t=5l=5f=2S=2]",
-    "entry": "",
-    "hidden": false
-  },
-  {
-    "id": "7.78",
-    "keys": "Red Eagle Redoubt#[t=5l=5f=2S=2]",
     "entry": "",
     "hidden": false
   }
