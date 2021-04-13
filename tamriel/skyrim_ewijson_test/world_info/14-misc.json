@@ -118,5 +118,11 @@
     "keys": " #[t=48]",
     "entry": "<<●>>>>",
     "hidden": false
+  },
+  {
+    "id": "14.21",
+    "keys": "(detailed description of).*[t=0l=3f=3]",
+    "entry": "<< Narrator provides elaborate description all relevant details to query>>>>",
+    "hidden": false
   }
 ]

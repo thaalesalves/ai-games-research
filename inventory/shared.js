@@ -57,7 +57,7 @@ function findItemInInventory(itemName) {
  */
 function removeFromInventory(itemName, itemQuantity) {
   console.log(`START removeFromInventory(): Removing ${itemQuantity} instances of "${itemName}" from player's inventory.`);
-  let loweredName = singularize(itemName.toLowerCase().replace(PUNCTUATION_REMOVE, ''));
+  let loweredName = itemName.toLowerCase().replace(PUNCTUATION_REMOVE, '');
   let item = findItemInInventory(loweredName);
   if (typeof item == 'undefined') {
     console.log(`END removeFromInventory(): Did not find ${itemName} in player's inventory.`);
@@ -114,7 +114,7 @@ function getInventory() {
 function addToInventory(itemName, itemQuantity) {
 
   console.log(`START addToInventory(): adding ${itemQuantity} instances of "${itemName}" to player's inventory.`);
-  let loweredName = singularize(itemName.toLowerCase().replace(PUNCTUATION_REMOVE, ''));
+  let loweredName = itemName.toLowerCase().replace(PUNCTUATION_REMOVE, '');
   let item = findItemInInventory(loweredName);
   if (typeof item == 'undefined') {
     console.log(`INSIDE addToInventory(): Player has no other instances of this item in their inventory. Adding these.`);
