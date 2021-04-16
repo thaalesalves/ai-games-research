@@ -296,9 +296,7 @@ function updateInventory() {
 function getType(itemName) {
   const checker = (input) => {
     return WEAPONS.some(word => input.toLowerCase().includes(word.toLowerCase())) ? 'weapon' :
-      CLOTHING.some(word => input.toLowerCase().includes(word.toLowerCase())) ? 'clothing' :
-        AMMO_PLURAL.some(word => input.toLowerCase().includes(word.toLowerCase())) ? 'ammo' :
-          AMMO.some(word => input.toLowerCase().includes(word.toLowerCase())) ? 'ammo' : 'misc';
+      CLOTHING.some(word => input.toLowerCase().includes(word.toLowerCase())) ? 'clothing' : 'misc';
   }
 
   return checker(itemName);
