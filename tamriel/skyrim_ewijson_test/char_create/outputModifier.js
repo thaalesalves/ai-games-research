@@ -3,10 +3,7 @@ const modifier = (text) => {
   const lowered = text.toLowerCase()
 
   // BEGIN EWIJSON
-  if (state.generate.process) {
-    parseGen(text);
-    return { text: '' };
-  }
+  if (state.generate.process) { parseGen(text); return {text: ''}; }
   // END EWIJSON
 
   // BEGIN Encounters

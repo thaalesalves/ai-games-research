@@ -16,7 +16,6 @@ const modifier = (text) => {
     };
 
     state.init = true;
-    state.shouldStop = false;
     addWorldEntry(playerWorldInfo.keys, playerWorldInfo.entry, false);
     state.worldInfoIndex = worldEntries.findIndex(wi => wi.keys.includes('you'));
 

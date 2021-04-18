@@ -5,10 +5,10 @@ const modifier = (text) => {
   let modifiedText = nameReplace(text);
   const lowered = modifiedText.toLowerCase();
   const commandMatcher = modifiedText.match(/\n? ?(?:> You |> You say "|)\/(.+?)["]?[.]?\n?$/i);
-  const commandPrefix = text.match(prefix);
   delete state.message
 
   if (!state.init && info.actionCount < 1) {
+    parseAsRoot(modifiedText, 'you');
     grabAllBrackets(modifiedText);
     state.character = {
       name: state.placeholders[0].trim(),
@@ -71,67 +71,16 @@ const modifier = (text) => {
     stop = true;
     modifiedText = '';
 
-    const cmd = commandMatcher[1].split(' ')[0];
-    const params = commandMatcher[1].replace(cmd, '') != null ? commandMatcher[1].replace(cmd, '').trim() : '';
-
-    if (cmd == 'invCheck') {
-      console.log(`Begin inventory check.`);
-      state.message = `${checkInventory()}`;
-      console.log(`End inventory check.`);
-    } else if (cmd == 'invAdd') {
-      console.log(`Begin inventory add.`);
-      const itemName = params.replace(LETTER_REGEX, '').trim();
-      const itemQuantity = Number.isNaN(parseInt(params.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(params.replace(DIGIT_REGEX, '').trim());
-
-      if (itemQuantity >= 1) {
-        state.message = `${addToInventory(itemName, itemQuantity)}`;
-      } else {
-        state.message = `You cannot add less than 1 unit of an item to your inventory.`;
-      }
-
-      console.log(`End inventory add.`);
-    } else if (cmd == 'invRemove') {
-      console.log(`Begin inventory remove.`);
-      const itemName = params.replace(LETTER_REGEX, '').trim();
-      const itemQuantity = Number.isNaN(parseInt(params.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(params.replace(DIGIT_REGEX, '').trim());
-
-      if (itemQuantity >= 1) {
-        state.message = `${removeFromInventory(itemName, itemQuantity)}`;
-      } else {
-        state.message = `You cannot remove less than 1 unit of an item from your inventory.`;
-      }
-
-      console.log(`End inventory remove.`);
-    } else if (cmd == 'invEquip') {
-      console.log(`Begin inventory equip.`);
-      const itemName = params.replace(LETTER_REGEX, '').trim();
-      state.message = `${equipItem(itemName)}`;
-      console.log(`End inventory equip.`);
-    } else if (cmd == 'invDebugWi') {
-      console.log(`Begin inventory debug.`);
-      debugInventory();
-      state.message = `Your inventory and player WI have been debugged.`;
-      console.log(`End inventory debug.`);
-    }
-  }
-
-  // BEGIN EWIJSON
-  if (info.actionCount == 0) {
-    parseAsRoot(text, 'you');
-  }
-
-  console.log(commandPrefix)
-  if (commandPrefix && commandPrefix[0]) {
-    const args = text.slice(commandPrefix[0].length).replace(/"\n$|.\n$/, '').split(/ +/);
-    const commandName = args.shift().replace(/\W*/gi, '');
+    const commandName = commandMatcher[1].split(' ')[0];
+    const args = commandMatcher[1].replace(commandName, '') != null ? commandMatcher[1].replace(commandName, '').trim() : '';
     if (!(commandName in commandList)) {
-      state.message = "Invalid Command!";
-      return { text: '', stop: true };
+      state.message = `Invalid command! Type ${prefixSymbol}scenarioHelp for a list of commands and ${prefixSymbol}commandHelp <command> for instructions on a specific command.`;
+      return { text: modifiedText, stop: stop };
     }
 
     const command = commandList[commandName];
     if (command.args && !args.length) {
-      let reply = `You didn't provide any arguments!\n`
+      let reply = `You didn't provide any arguments!\n`;
       if (command.usage) {
         reply += `Example: ${prefixSymbol}${command.name} ${command.usage}\n`;
       }
@@ -141,19 +90,17 @@ const modifier = (text) => {
       }
 
       state.message = reply;
-      return { text: '', stop: true };
+      return { text: modifiedText, stop: stop };
     }
-
 
     try {
       command.execute(args);
-      return { text: '', stop: true }
+      return { text: modifiedText, stop: stop };
     } catch (error) {
-      state.message = `There was an error!\n${error}`;
-      console.log(`There was an error!\n${error}`);
+      state.message = `There was an error. Stacktrace:\n${error}`;
+      console.log(`There was an error. Stacktrace:${error}`);
     }
   }
-  // END EWIJSON
 
   // BEGIN Encounters
 

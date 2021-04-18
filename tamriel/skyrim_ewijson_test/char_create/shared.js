@@ -1338,7 +1338,6 @@ let { cross } = state.settings;
 const { whitelistPath, synonymsPath, pathSymbol, wildcardPath, configPath, libraryPath, openListener, closeListener } = state.config;
 const Paths = [whitelistPath, synonymsPath, libraryPath];
 
-// Filter and group the array by the 'by' value to the limit of the 'restrict' value.
 const filter = (arr, by, restrict) => {
 
   const hash = {};
@@ -1424,14 +1423,14 @@ const regExMatch = (keys, text = undefined) => {
 
       if (expressions.every(exp => {
         const regExRaw = exp;
-        const regExString = regExRaw.replace(/(^\/)|(\/.*)$/g, '').replace(/\\(?=,)/, '');
+        const regExString = regExRaw.replace(/(^\/)|(\/.*)$/g, '').replace(/\\,/, '');
         const regExFlags = Expressions["flags"].test(regExRaw) ? [...new Set([...regExRaw.match(Expressions["flags"]).join('').split(''), 'g'])].join('') : Expressions["expectFlags"].test(regExRaw) ? 'g' : 'gi';
         const regEx = new RegExp(regExString, regExFlags);
         return regEx.test(string);
       })) {
         key = line;
         const regExRawLast = expressions.pop();
-        const regExString = regExRawLast.replace(/(^\/)|(\/.*)$/g, '').replace(/\\(?=,)/, '');
+        const regExString = regExRawLast.replace(/(^\/)|(\/.*)$/g, '').replace(/\\,/, '');
         const regExFlags = Expressions["flags"].test(regExRawLast) ? [...new Set([...regExRawLast.match(Expressions["flags"]).join('').split(''), 'g'])].join('') : Expressions["expectFlags"].test(regExRawLast) ? 'g' : 'gi'
         const regEx = new RegExp(regExString, regExFlags);
         result.push([...string.matchAll(regEx)].filter(Boolean).pop());
@@ -1523,7 +1522,7 @@ const addTrailingEntry = (entry, value = 0) => {
   return;
 }
 
-const addAustralianKangaroo = () => spliceContext(-1, '[A polite Australian kangaroo pulls a top-hat out of its pouch before greeting you.]');
+const addAustralianKangaroo = (entry, value = 0) => spliceContext(-1, '[A polite Australian kangaroo pulls a top-hat out of its pouch before greeting you.]');
 
 
 const Attributes = {
@@ -1536,7 +1535,6 @@ const Attributes = {
   'p': addPositionalEntry, // Inserts the <entry> <value> amount of lines into context, e.g [p=1] inserts it one line into context.
   'r': () => { }, // [r] picks randomly between entries with the same matching keys. e.g 'you.*catch#[rp=1]' and 'you.*catch#[rd]' has 50% each to be picked.
   's': showWorldEntry, // [r] reveals the entry once mentioned, used in conjuction with [e] to only reveal if all keywords are mentioned at once.
-  'S': () => { }, // [S] functions as a 'sticky' entry, it'll stick to the context independent of its conditions once activated. Non- value (0) is indefinite while a value is duration.
   't': addTrailingEntry, // [t] adds the entry at a line relative to the activator in context. [t=2] will trail context two lines behind the activating word.
   'w': () => { }, // [w] assigns the weight attribute, the higher value the more recent/relevant it will be in context/frontMemory/intermediateMemory etc.
   'x': () => { }, // [x] ignores the entry if not X amount of rounds have processed.
@@ -1545,13 +1543,7 @@ const Attributes = {
 
 const getWhitelist = () => { const index = getEntryIndex('_whitelist.'); return index >= 0 ? worldInfo[index]["entry"].split(/,|\n/g).map(e => e.trim()) : [] }
 const getWildcard = (display, offset = 0) => { const wildcard = display.split('.').slice(offset != 0 ? 0 : 1).join('.'); const list = display.split('.'); const index = list.indexOf(wildcard.slice(wildcard.lastIndexOf('.') + 1)); return [list[index].replace(wildcardPath, ''), index + offset] }
-const getPlaceholder = (value) => {
-  if (typeof value == 'string') {
-    let result = value;
-    while (Expressions["placeholder"].test(result)) { result = result.replace(Expressions["placeholder"], match => dataStorage[libraryPath][match.replace(/\$\{|\}/g, '')]) }
-    return result
-  } else { return value }
-};
+const getPlaceholder = (value) => typeof value == 'string' ? value.replace(Expressions["placeholder"], match => dataStorage[libraryPath][match.replace(/\$\{|\}/g, '')]) : value
 const updateListener = (value, display, visited) => {
   // Check if it has previously qualified in 'visited' instead of running regExMatch on each node.
   const qualified = visited.some(e => e.includes(display.split('.')[0]));
@@ -1643,7 +1635,7 @@ const globalReplacer = () => {
 
 // globalWhitelist - Should only make one call to it per turn in context modifiers. Other modifiers access it via state.
 const getGlobalWhitelist = () => state.settings.globalWhitelist = globalReplacer();
-const setProperty = (keys, value, obj) => { const property = keys.split('.').pop(); const path = keys.split('.')[1] ? keys.split('.').slice(0, -1).join('.') : keys.replace('.', ''); if (property) { getKey(path, obj)[property] = value ? value : null; } else { dataStorage[path] = value; } }
+const setProperty = (keys, value, obj) => { const property = keys.split('.').pop(); const path = keys.split('.')[1] ? keys.split('.').slice(0, -1).join('.') : keys.replace('.', ''); if (property[1]) { getKey(path, obj)[property] = value ? value : null; } else { dataStorage[path] = value; } }
 const getKey = (keys, obj) => { return keys.split('.').reduce((a, b) => { if (typeof a[b] != "object" || a[b] == null) { a[b] = {} } if (!a.hasOwnProperty(b)) { a[b] = {} } return a && a[b] }, obj) }
 
 const buildObjects = () => {
@@ -1730,10 +1722,9 @@ const getEWI = () => { return worldInfo.filter(e => Expressions["EWI"].test(e["k
 const processEWI = () => preprocess(getEWI());
 const execAttributes = (object) => {
 
-
   const { attributes } = object.metadata;
   const ignore = attributes.find(e => e[0] == 'x');
-  if (((ignore ? ignore[1] < history.length : true) && attributes.length > 0) && (object.metadata.hasOwnProperty('ignore') ? object.metadata.ignore.count > 0 || object.metadata.ignore.original != 0 : true)) {
+  if (((ignore ? ignore[1] < history.length : true) && attributes.length > 0) && (object.metadata.hasOwnProperty('ignore') ? object.metadata.ignore.count > 0 : true)) {
 
     try { attributes.forEach(pair => { Attributes[pair[0]](object, pair[1]) }) }
     catch (error) { console.log(`${error.name}: ${error.message}`) }
@@ -1743,50 +1734,47 @@ const execAttributes = (object) => {
 // Sort all Objects/entries by the order of most-recent mention before processing.
 // expects sortList to be populated by Objects with properties {"key": string, "entry": string}
 const preprocess = (list) => {
-  const search = copyLines.join('\n')
-  const attributed = list.filter(e => {
-
+  const search = copyLines.join('\n');
+  const attributed = list.map(e => {
     const match = regExMatch(getPlaceholder(e["keys"]));
     if (!e.hasOwnProperty('metadata')) { e.metadata = {}; };
-    if (Boolean(match[0])) // If match isn't found then return undefined and filter it out.
-    {
+    if (Boolean(match[0])) {
       e.metadata.index = search.lastIndexOf(match[0][match[0].length - 1]);
       e.metadata.qualifier = match[1];
       e.metadata.matches = match[0];
       e.metadata.attributes = getAttributes(match[1]).filter(a => { if (Attributes.hasOwnProperty(a[0])) { return true } else { state.message += `[${a[0]}] is an invalid attribute!\n`; return false } });
       const ignore = e.metadata.attributes.find(a => a[0] == 'i');
       if (ignore) {
-        if (!e.metadata.hasOwnProperty('ignore')) { e.metadata.ignore = { "original": ignore[1], "count": ignore[1], "turn": [] } }
-        if (ignore[1] != e.metadata.ignore.original) { e.metadata.ignore.original = ignore[1]; e.metadata.ignore.count = ignore[1]; }
-        if (!(e.metadata.ignore.turn.some(t => t == info.actionCount)) && getHistoryString(-1).includes(e.metadata.matches[0])) { if (e.metadata.ignore.count > 0) { e.metadata.ignore.count--; e.metadata.ignore.turn.push(info.actionCount) } }
-        if (e.metadata.ignore.turn.some(t => t > info.actionCount)) { const refund = e.metadata.ignore.turn.filter(t => t > info.actionCount); if (refund.length > 0) { e.metadata.ignore.count += refund.length; e.metadata.ignore.turn.splice(-refund.length) } }
-      }
+        if (!e.metadata.hasOwnProperty('ignore')) {
+          e.metadata.ignore = { "original": ignore[1], "count": ignore[1], "turn": [] }
+        }
 
-      const sticky = e.metadata.attributes.find(a => a[0] == 'S');
-      if (sticky) {
-        if (!e.metadata.hasOwnProperty('sticky')) { e.metadata.sticky = { "original": sticky[1], "count": sticky[1], "turn": [] } }
-        if (getHistoryString(-1).includes(e.metadata.matches[0])) { e.metadata.sticky.original = sticky[1]; e.metadata.sticky.count = sticky[1]; }
-        if (!e.metadata.sticky.turn.some(t => t == info.actionCount)) { if (e.metadata.sticky.count > 0) { e.metadata.sticky.count--; e.metadata.sticky.turn.push(info.actionCount) } }
-        if (e.metadata.sticky.turn.some(t => t > info.actionCount)) { const refund = e.metadata.sticky.turn.filter(t => t > info.actionCount); if (refund.length > 0) { e.metadata.sticky.count += refund.length; e.metadata.sticky.turn.splice(-refund.length) } }
+        if (ignore[1] != e.metadata.ignore.original) {
+          e.metadata.ignore.original == ignore[1];
+          e.metadata.ignore.count = ignore[1];
+        }
+
+        if (!(e.metadata.ignore.turn.some(t => t == info.actionCount)) && getHistoryString(-1).includes(e.metadata.matches[0])) {
+          e.metadata.ignore.count--;
+          e.metadata.ignore.turn.push(info.actionCount);
+        }
+
+        if (e.metadata.ignore.turn.some(t => t > info.actionCount)) {
+          const refund = e.metadata.ignore.turn.filter(t => t > info.actionCount);
+          e.metadata.ignore.count += refund.length;
+          refund.forEach(t => e.metadata.ignore.turn.splice(e.metadata.ignore.turn.indexOf(t), 1));
+        }
       }
       e.metadata.lastSeen = info.actionCount;
-      return true;
+      return e;
     }
 
-    // [S] - Sticky bypass.
-    else if (e.metadata.hasOwnProperty('sticky') && ((e.metadata.sticky.count > 0 && e.metadata.sticky.count != e.metadata.sticky.original) || e.metadata.sticky.original == 0)) {
-      if (!e.metadata.sticky.turn.some(t => t == info.actionCount)) { if (e.metadata.sticky.count > 0) { e.metadata.sticky.count--; e.metadata.sticky.turn.push(info.actionCount) } }
-      if (e.metadata.sticky.turn.some(t => t > info.actionCount)) { const refund = e.metadata.sticky.turn.filter(t => t > info.actionCount); if (refund.length > 0) { e.metadata.sticky.count += refund.length; e.metadata.sticky.turn.splice(-refund.length) } }
-      if (e.metadata.sticky.count == 0 && e.metadata.sticky.original != 0) { e.metadata.sticky.count = e.metadata.sticky.original; }
-      return true;
-    }
-
-  })
+  }).filter(Boolean)
 
   // TODO: Optimize this section.
   const randomized = getRandomObjects(attributed).filter(e => Expressions["EWI"].test(e.metadata.qualifier));
   const sorted = randomized.sort((a, b) => b.metadata.index - a.metadata.index);
-  const filtered = filter(sorted, Object.keys(Attributes).filter(a => Attributes[a].toString() != '() => {}'), 'f').flat().sort((a, b) => { const A = a.metadata.attributes.find(e => e[0] == 't'); const B = b.metadata.attributes.find(e => e[0] == 't'); return (A ? A[1] : 0) - (B ? B[1] : 0) });
+  const filtered = filter(sorted, Object.keys(Attributes).filter(a => Attributes[a].toString() != '() => {}'), 'f').flat();
   filtered.forEach(e => { execAttributes(e); });
 }
 
@@ -1807,7 +1795,7 @@ const crossLines = () => {
         }
       }
     }
-  })
+  });
 }
 
 const parseAsRoot = (text, root) => {
@@ -1817,14 +1805,21 @@ const parseAsRoot = (text, root) => {
       const obj = JSON.parse(string);
       worldEntriesFromObject(obj, root);
       text = text.replace(string, '');
-    })
+    });
   }
 }
 
-const getEntryIndex = (keys) => worldInfo.findIndex(e => e["keys"].toLowerCase() == keys.toLowerCase())
+const getEntryIndex = (keys) => worldInfo.findIndex(e => e["keys"].toLowerCase() == keys.toLowerCase());
 const updateHUD = () => {
   const { globalWhitelist } = state.settings;
-  state.displayStats.forEach((e, i) => { if (dataStorage.hasOwnProperty(e["key"].trim())) { state.displayStats[i] = { "key": `${e["key"].trim()}`, "value": `${cleanString(JSON.stringify(dataStorage[e["key"].trim()], globalWhitelist)).replace(/\{|\}/g, '')}    ` } } })
+  state.displayStats.forEach((e, i) => {
+    if (dataStorage.hasOwnProperty(e["key"].trim())) {
+      state.displayStats[i] = {
+        "key": `${e["key"].trim()}`,
+        "value": `${cleanString(JSON.stringify(dataStorage[e["key"].trim()], globalWhitelist)).replace(/\{|\}/g, '')}    `
+      }
+    }
+  });
 }
 
 state.commandList = {
@@ -1854,10 +1849,11 @@ state.commandList = {
       const path = args.join('').trim();
       if (dataStorage && dataStorage.hasOwnProperty(args[0].split('.')[0].trim())) {
         state.message = `Data Sheet for ${path}:\n${JSON.stringify(lens(dataStorage, path), null)}`;
+      } else {
+        state.message = `${path} was invalid!`;
       }
-      else { state.message = `${path} was invalid!` }
-      return
 
+      return;
     }
   },
   delete: {
@@ -1879,7 +1875,12 @@ state.commandList = {
     usage: '<root> or <root>.<property>',
     execute: (args) => {
       const keys = args[0].toLowerCase()
-      worldInfo.forEach(e => { if (e["keys"].toLowerCase().startsWith(keys)) { e["hidden"] = false; } })
+      worldInfo.forEach(e => {
+        if (e["keys"].toLowerCase().startsWith(keys)) {
+          e["hidden"] = false;
+        }
+      });
+
       state.message = `Showing all entries starting with ${keys} in World Information!`;
       return
     }
@@ -1891,7 +1892,12 @@ state.commandList = {
     usage: '<root> or <root>.<property>',
     execute: (args) => {
       const keys = args[0].toLowerCase()
-      worldInfo.forEach(e => { if (e["keys"].toLowerCase().startsWith(keys)) { e["hidden"] = true; } })
+      worldInfo.forEach(e => {
+        if (e["keys"].toLowerCase().startsWith(keys)) {
+          e["hidden"] = true;
+        }
+      })
+
       state.message = `Hiding all entries starting with ${keys} in World Information!`;
       return
     }
@@ -1934,16 +1940,24 @@ state.commandList = {
     args: true,
     usage: '<root>',
     execute: (args) => {
-      if (!state.displayStats) { state.displayStats = [] }
-      //getGlobalWhitelist(getHistoryString(-10).slice(-info.maxChars))
+      if (!state.displayStats) {
+        state.displayStats = []
+      }
+
       const { globalWhitelist } = state.settings;
       const root = args[0].trim();
       const index = state.displayStats.findIndex(e => e["key"].trim() == root)
-
       if (dataStorage.hasOwnProperty(root)) {
-        const object = { "key": root, "value": `${cleanString(JSON.stringify(dataStorage[root], globalWhitelist).replace(/\{|\}/g, '')).replace(/\{|\}/g, '')}    ` }
-        if (index >= 0) { state.displayStats.splice(index, 1) }
-        else { state.displayStats.push(object) }
+        const object = {
+          "key": root,
+          "value": `${cleanString(JSON.stringify(dataStorage[root], globalWhitelist).replace(/\{|\}/g, '')).replace(/\{|\}/g, '')}    `
+        }
+
+        if (index >= 0) {
+          state.displayStats.splice(index, 1)
+        } else {
+          state.displayStats.push(object)
+        }
       }
     }
   },
@@ -1955,6 +1969,105 @@ state.commandList = {
     execute: (args) => {
       state.settings.mode = !state.settings.mode
       state.message = `Conditions now search amount of ${state.settings.mode == true ? 'actions' : 'lines'}.`
+    }
+  },
+  invAdd: {
+    name: "invAdd",
+    description: "Adds objects to the player's inventory",
+    args: true,
+    usage: '<object name> <quantity>',
+    execute: (args) => {
+      console.log(`Begin inventory add.`);
+      const itemName = args.replace(LETTER_REGEX, '').trim();
+      const itemQuantity = Number.isNaN(parseInt(args.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(args.replace(DIGIT_REGEX, '').trim());
+
+      if (itemQuantity >= 1) {
+        state.message = `${addToInventory(itemName, itemQuantity)}`;
+      } else {
+        state.message = `You cannot add less than 1 unit of an item to your inventory.`;
+      }
+
+      console.log(`End inventory add.`);
+    }
+  },
+  invRemove: {
+    name: "invRemove",
+    description: "Removes objects from the player's inventory",
+    args: true,
+    usage: '<object name> <quantity>',
+    execute: (args) => {
+      console.log(`Begin inventory remove.`);
+      const itemName = args.replace(LETTER_REGEX, '').trim();
+      const itemQuantity = Number.isNaN(parseInt(args.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(args.replace(DIGIT_REGEX, '').trim());
+
+      if (itemQuantity >= 1) {
+        state.message = `${removeFromInventory(itemName, itemQuantity)}`;
+      } else {
+        state.message = `You cannot remove less than 1 unit of an item from your inventory.`;
+      }
+
+      console.log(`End inventory remove.`);
+    }
+  },
+  invEquip: {
+    name: "invEquip",
+    description: "Equips objects from the player's inventory",
+    args: true,
+    usage: '<object name>',
+    execute: (args) => {
+      console.log(`Begin inventory equip.`);
+      const itemName = args.replace(LETTER_REGEX, '').trim();
+      state.message = `${equipItem(itemName)}`;
+      console.log(`End inventory equip.`);
+    }
+  },
+  invEquip: {
+    name: "invCheck",
+    description: "Checks the player's inventory",
+    args: false,
+    usage: '',
+    execute: (args) => {
+      console.log(`Begin inventory check.`);
+      state.message = `${checkInventory()}`;
+      console.log(`End inventory check.`);
+    }
+  },
+  invDebug: {
+    name: "invDebug",
+    description: "Debugs player's inventory",
+    args: false,
+    usage: '',
+    execute: (args) => {
+      console.log(`Begin inventory debug.`);
+      debugInventory();
+      state.message = `Your inventory and player WI have been debugged.`;
+      console.log(`End inventory debug.`);
+    }
+  },
+  scenarioHelp: {
+    name: "scenarioHelp",
+    description: "Prints a list of commands",
+    args: false,
+    usage: `Really? You need help with the help command and expected this to work? I don't blame you. Hit me at AIDcord for help.`,
+    execute: (args) => {
+      console.log(`Begin help command.`);
+      let availableCommands = '';
+      Object.keys(state.commandList).forEach(key => {
+        availableCommands += ` ${state.commandList[key].name}`
+      });
+
+      availableCommands = availableCommands.trim().replace(/\s/g, ', ');
+      console.log(`Begin help command.`);
+      if (args == '') {
+        state.message = `List of available commands: ${availableCommands}`;
+      } else if ((!(args in commandList))) {
+        state.message = `This command was not found. List of available commands: ${availableCommands}`;
+      } else {
+        let cmd = commandList[args].usage;
+        state.message = `Example: /${cmd.name} ${cmd.usage}\n${cmd.description}`;
+      }
+
+      console.log(`End help command.`);
     }
   }
 };
