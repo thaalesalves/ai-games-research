@@ -74,7 +74,7 @@ const modifier = (text) => {
     const commandName = commandMatcher[1].split(' ')[0];
     const args = commandMatcher[1].replace(commandName, '') != null ? commandMatcher[1].replace(commandName, '').trim() : '';
     if (!(commandName in commandList)) {
-      state.message = `Invalid command! Type ${prefixSymbol}scenarioHelp for a list of commands and ${prefixSymbol}commandHelp <command> for instructions on a specific command.`;
+      state.message = `Invalid command! Type ${prefixSymbol}scenarioHelp for a list of commands and ${prefixSymbol}scenarioHelp <command> for instructions on a specific command.`;
       return { text: modifiedText, stop: stop };
     }
 
