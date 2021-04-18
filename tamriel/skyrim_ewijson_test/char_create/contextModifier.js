@@ -17,11 +17,6 @@ let copyMemoryLines = [...memoryLines];
 const modifier = (text) => {
   let stop = false;
 
-  if (state.shouldStop) {
-    state.shouldStop = false;
-    stop = true;
-  }
-
   // BEGIN Encounters
   // for mashing with other context scripts, keep this codeblock before 'const contextMemory'
   // encounter memory stuff:
@@ -44,13 +39,7 @@ const modifier = (text) => {
       }
     }
   }
-  // END Encounters
-
-  // const contextMemory = info.memoryLength ? text.slice(0, info.memoryLength) : ''
-  // const context = info.memoryLength ? text.slice(info.memoryLength + 1) : text
-  // const lines = context.split("\n")
-
-  // BEGIN Encounters
+  
   // for mashing with other context scripts, keep this between 'const lines' and 'const combinedLines'
   if (typeof (state.currentEncounter) !== 'undefined') { // if there's an event...
     lines.splice(-3, 0, state.encounterNote) // ...put it right below AN, so AI knows what's up

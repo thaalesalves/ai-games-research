@@ -64,7 +64,7 @@ const modifier = (text) => {
     delete state.placeholders;
   }
 
-  if (commandMatcher) {
+  if (modifiedText.match(prefix)) {
     console.log(`Command detected`);
     console.log(commandMatcher);
 

@@ -1323,7 +1323,7 @@ const Expressions = {
 }
 
 state.config = {
-  prefix: /^\n> You \/|^\n> You say "\/|^\/|^\n\//gi,
+  prefix: /\n? ?(?:> You |> You say "|)\/(.+?)["]?[.]?\n?$/i,
   prefixSymbol: '/',
   libraryPath: '_exp',
   whitelistPath: '_whitelist',
