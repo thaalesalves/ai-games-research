@@ -1,31 +1,55 @@
 [
   {
     "id": "10.1",
-    "keys": "bards college,college of bards",
-    "entry": " Bards College: { < The Bards College is an ancient institution dedicated to the formation of the arts>, < It is the most prestigious school of art in Tamriel, and the most ancient>, < It was founded some time in the First Era, during the reign of High King Olaf>, < Most of the best bards and painters in the history of Tamriel have studied here>, < It is a very prestigious academy of art located in the city of Solitude> }",
+    "keys": "((college of |)bards( college|))#[t=5l=5f=2S=2]",
+    "entry": "<< Bards College ancient school of the bardic arts, one of most prestigious in all of Tamriel>>>> << Bards College founded some time in the First Era, bard school art school>>>>",
     "hidden": false
   },
   {
     "id": "10.2",
-    "keys": "antiquarians circle,antiquarian circle",
-    "entry": " Antiquarians Circle: { < The Antiquarians Circle is the name of the campus of the University of Gwyllim that is dedicated to the study of History, Archaelogy and Paleontology, and is located in the city of Solitude>, < It is one of the most prestigious institutions of education in Tamriel, and many of the most prestigious historians and archaelogists studied at the Antiquarians Circle>, < It is located in the city of Solitude, while the other campi of the Unviersity of Gwyllim are located in Cyrodiil> }",
+    "keys": "((college of |)bards( college|))#[t=6l=5f=2S=2]",
+    "entry": "<< Bards College current leader Grandmaster Armilion>>>> << Bards College most of the best bards in Tamriel graduated here>>>> << Bards College located in the city of Solitude>>>>",
     "hidden": false
   },
   {
     "id": "10.3",
-    "keys": "college of winterhold",
-    "entry": "College of Winterhold:[TYPE<College of Winterhold>:guild/university/school/academy/college/guild of mages/college of mages/arcane school/university for learning magic/school of magic;LOCATION<College of Winterhold>:Winterhold;LEADER TITLE<College of Winterhold>:Arch-Mage;VICE LEADER TITLE<College of Winterhold>:Master Wizard;CITY<College of Winterhold>:Winterhold;REGION<College of Winterhold>:Winterhold;DESC<College of Winterhold>:the college of winterhold is a school of magic/the leader of the college has the title of arch-mage/the vice-leader has the title of master wizard/it is a big building in the city of winterhold/it is a big construction/it is a big castle/it is a beautiful construction/the college is thousands of years old/the college was founded by arch-mage shalidor/the college is a famous school of magic.]",
+    "keys": "(antiquarian(s|) circle)#[t=5l=5f=2S=2]",
+    "entry": "<< Antiquarian Circle school of archaeology paleontology history, located in city of Solitude>>>> << Antiquarian Circle is a branch of Gwyllim University>> << Antiquarian Circle current leader breton she Dean Desirée Beauclair>>>>",
     "hidden": false
   },
   {
     "id": "10.4",
-    "keys": "Companions",
-    "entry": "[ Companions description:< leader_title ≡ harbinger/ details ≡ The Companions are a group of fighters that date back to the Merethic Era, and were founded by Ysgramor. They're the oldest guild in Tamriel, and their headquarters is Jorrvaskr, in the city of Whiterun. They do contracts for those willing to pay, and also fight for the good and for the honor of Skyrim when need be>. Companions headquarters< Jorrvaskr>. Companions location< The Companions are in the city of Whiterun. Their headquarters is the ancient ship of Ysgramor, called Jorrvaskr>. ]",
+    "keys": "(antiquarian(s|) circle)#[t=6l=5f=2S=2]",
+    "entry": "<< Antiquarian Circle many of the best historians and archaeologists have graduated here>>>> << Antiquarian Circle founded some time in the First Era>>>>",
     "hidden": false
   },
   {
     "id": "10.5",
-    "keys": "Thieves Guild",
+    "keys": "college of winterhold#[t=5l=5f=2S=2]",
+    "entry": "<< College of Winterhold school of magic, located in city of Winterhold>>>> << College of Winterhold current leader she breton Arch-Mage Mélanie Sindeaux>>>>",
+    "hidden": false
+  },
+  {
+    "id": "10.6",
+    "keys": "college of winterhold#[t=6l=5f=2S=2]",
+    "entry": "<< College of Winterhold founded in First Era by Shalidor>>>> << College of Winterhold many powerful mages graduated here>>>>",
+    "hidden": false
+  },
+  {
+    "id": "10.7",
+    "keys": "Companions#[t=5l=5f=2S=2]",
+    "entry": "<< Companions ancient group of fighters, headquarter in meadhall called Jorrvaskr, do jobs for money>>>> << Companions protect citizens, current leader Harbinger Isenor Argonsson>>>>",
+    "hidden": false
+  },
+  {
+    "id": "10.8",
+    "keys": "Thieves Guild#[t=5l=5f=2S=2]",
+    "entry": "<< Thieves Guild organization in favor of thieves, worship Nocturnal, leader is the Gray Fox>>>> << Thieves Guild located The Ratways in Riften, steals from rich gives to poor, helps beggars>>>>",
+    "hidden": false
+  },
+  {
+    "id": "10.9",
+    "keys": "Dark Brotherhood#[t=5l=5f=2S=2]",
     "entry": "",
     "hidden": false
   }
