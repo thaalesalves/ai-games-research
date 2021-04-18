@@ -2,14 +2,6 @@ const modifier = (text) => {
   let modifiedText = text
   const lowered = text.toLowerCase()
 
-  /**
-   * EWIJSON stuff
-   */
-  if (state.generate.process) {
-    parseGen(text);
-    return { text: '' };
-  }
-
   // BEGIN Encounters
 
   // Debugging action counter: (uncomment to better check global timer-only encounters)

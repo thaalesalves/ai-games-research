@@ -2,81 +2,9 @@ const modifier = (text) => {
   const lowered = text.toLowerCase();
   let stop = false;
 
-  /**
-     * My stuff
-     */
   if (state.shouldStop) {
     state.shouldStop = false;
     stop = true;
-  }
-
-  /**
-   * EWIJSON stuff
-   */
-  // Position the various attribute tags, push them into temporary lists etc.
-  const execute = {
-
-    "Sanitize the whitelist.":
-    {
-      "req": true,
-      "args": null,
-      "exec": sanitizeWhitelist
-    },
-    "Build qualified entries as Objects in dataStorage.":
-    {
-      "req": true,
-      "args": null,
-      "exec": buildObjects
-    },
-
-    "Ensure _synonyms is handled first when creating the globalWhitelist.":
-    {
-      "req": Object.keys(dataStorage)[1] != synonymsPath || Object.keys(dataStorage)[0] != whitelistPath,
-      "args": null,
-      "exec": fixOrder
-    },
-    "Build a global whitelist based on context and wildcards.":
-    {
-      "req": true,
-      "args": null,
-      "exec": getGlobalWhitelist
-    },
-    "Sort and execute the Object entries.":
-    {
-      "req": true,
-      "args": null,
-      "exec": insertJSON
-    },
-    "Sort and execute the EWI Attribute entries.":
-    {
-      "req": worldInfo.length > 0,
-      "args": null,
-      "exec": processEWI
-    },
-    "Check the inserted JSON- lines for the presence of worldInfo keywords.":
-    {
-      "req": state.settings["cross"],
-      "args": null,
-      "exec": crossLines
-    },
-    /*  "Add the Stacks":
-     {
-         "req": Stacks,
-         "args": null,
-         "exec": addStacks
-     }, */
-    "Create an always visible entry that displays all created roots for Objects.":
-    {
-      "req": true,
-      "args": null,
-      "exec": trackRoots
-    },
-    "Refresh the variables presented in the HUD.":
-    {
-      "req": state.displayStats,
-      "args": null,
-      "exec": updateHUD
-    }
   }
 
   // BEGIN Encounters
