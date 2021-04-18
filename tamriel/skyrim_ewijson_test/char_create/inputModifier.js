@@ -1,8 +1,12 @@
+const { commandList } = state;
+const { prefix, prefixSymbol } = state.config;
 const modifier = (text) => {
   let stop = false;
   let modifiedText = nameReplace(text);
   const lowered = modifiedText.toLowerCase();
   const commandMatcher = modifiedText.match(/\n? ?(?:> You |> You say "|)\/(.+?)["]?[.]?\n?$/i);
+  const commandPrefix = text.match(prefix);
+  delete state.message
 
   if (!state.init && info.actionCount < 1) {
     grabAllBrackets(modifiedText);
@@ -27,20 +31,28 @@ const modifier = (text) => {
       }
     };
 
-    playerWorldInfo = {
-      keys: `${state.character.name},you`,
-      hidden: false,
+    playerSheetWorldInfo = {
+      keys: `(${state.character.name}|you)#[t=0l=2f=2S=1]`,
+      hidden: true,
       entry: 'you:['
         + `NAME:${state.character.name}; `
         + `SUMM:age<${state.character.age}y>/race<${state.character.race}>/${state.character.appearance.height}cm&${state.character.appearance.weight}kg; `
         + `APPE<you>:${state.character.appearance.features}/eyes<${state.character.eyes.eyeColor}>/hair<${state.character.hair.hairStyle}&${state.character.hair.hairColor}>; `
-        + `MIND:${state.character.personality}; `
+        + `MIND:${state.character.personality}.`
+        + ']'
+    };
+
+    playerInventoryWorldInfo = {
+      keys: `(${state.character.name}|you)#[t=1l=2f=2S=1]`,
+      hidden: true,
+      entry: 'you:['
         + `WORN<you>:nothing; `
         + `INV<you>:nothing.`
         + ']'
     };
 
-    addWorldEntry(playerWorldInfo.keys, playerWorldInfo.entry, false);
+    addWorldEntry(playerInventoryWorldInfo.keys, playerInventoryWorldInfo.entry, false);
+    addWorldEntry(playerSheetWorldInfo.keys, playerSheetWorldInfo.entry, false);
     state.character.worldInfoIndex = worldEntries.findIndex(wi => wi.keys.includes(state.character.name));
 
     getInventory();
@@ -102,6 +114,46 @@ const modifier = (text) => {
       console.log(`End inventory debug.`);
     }
   }
+
+  // BEGIN EWIJSON
+  if (info.actionCount == 0) {
+    parseAsRoot(text, 'you');
+  }
+
+  console.log(commandPrefix)
+  if (commandPrefix && commandPrefix[0]) {
+    const args = text.slice(commandPrefix[0].length).replace(/"\n$|.\n$/, '').split(/ +/);
+    const commandName = args.shift().replace(/\W*/gi, '');
+    if (!(commandName in commandList)) {
+      state.message = "Invalid Command!";
+      return { text: '', stop: true };
+    }
+
+    const command = commandList[commandName];
+    if (command.args && !args.length) {
+      let reply = `You didn't provide any arguments!\n`
+      if (command.usage) {
+        reply += `Example: ${prefixSymbol}${command.name} ${command.usage}\n`;
+      }
+
+      if (command.description) {
+        reply += `${command.description}`;
+      }
+
+      state.message = reply;
+      return { text: '', stop: true };
+    }
+
+
+    try {
+      command.execute(args);
+      return { text: '', stop: true }
+    } catch (error) {
+      state.message = `There was an error!\n${error}`;
+      console.log(`There was an error!\n${error}`);
+    }
+  }
+  // END EWIJSON
 
   // BEGIN Encounters
 
