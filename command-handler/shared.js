@@ -32,7 +32,7 @@ state.commandList = {
       } else if ((!(args in commandList))) {
         state.message = `This command was not found. List of available commands: ${availableCommands}`;
       } else {
-        let cmd = commandList[args].usage;
+        let cmd = commandList[args];
         state.message = `Example: /${cmd.name} ${cmd.usage}\n${cmd.description}`;
       }
 
