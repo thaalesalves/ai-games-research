@@ -1823,8 +1823,34 @@ const updateHUD = () => {
 }
 
 state.commandList = {
-  set: {
-    name: 'set',
+  scenarioHelp: {
+    name: "scenarioHelp",
+    description: "Prints a list of commands",
+    args: false,
+    usage: `Really? You need help with the help command and expected this to work? I don't blame you. Hit me at AIDcord for help.`,
+    execute: (args) => {
+      console.log(`Begin help command.`);
+      let availableCommands = '';
+      Object.keys(state.commandList).forEach(key => {
+        availableCommands += ` ${state.commandList[key].name}`
+      });
+
+      availableCommands = availableCommands.trim().replace(/\s/g, ', ');
+      console.log(`Begin help command.`);
+      if (args == '') {
+        state.message = `List of available commands: ${availableCommands}`;
+      } else if ((!(args in commandList))) {
+        state.message = `This command was not found. List of available commands: ${availableCommands}`;
+      } else {
+        let cmd = commandList[args];
+        state.message = `Example: /${cmd.name} ${cmd.usage}\n${cmd.description}`;
+      }
+
+      console.log(`End help command.`);
+    }
+  },
+  ewiSet: {
+    name: 'ewiSet',
     description: "Sets or updates a World Entry's keys and entry to the arguments given in addition to directly updating the object.",
     args: true,
     usage: '<root>.<property> <value>',
@@ -1840,8 +1866,8 @@ state.commandList = {
       return
     }
   },
-  get: {
-    name: 'get',
+  ewiGet: {
+    name: 'ewiGet',
     description: "Fetches and displays the properties of an object.",
     args: true,
     usage: '<root> or <root>.<property>',
@@ -1856,8 +1882,8 @@ state.commandList = {
       return;
     }
   },
-  delete: {
-    name: 'delete',
+  ewiDelete: {
+    name: 'ewiDelete',
     description: 'Deletes all dot-separated entries that match the provided argument.',
     args: true,
     usage: '<root> or <root>.<path>',
@@ -1868,8 +1894,8 @@ state.commandList = {
       state.message = `Deleted all entries matching: ${keys}`;
     }
   },
-  show: {
-    name: 'show',
+  ewiShow: {
+    name: 'ewiShow',
     description: "Shows entries starting with the provided argument in World Information.",
     args: true,
     usage: '<root> or <root>.<property>',
@@ -1885,8 +1911,8 @@ state.commandList = {
       return
     }
   },
-  hide: {
-    name: 'hide',
+  ewiHide: {
+    name: 'ewiHide',
     description: "Hides entries starting with the provided argument in World Information.",
     args: true,
     usage: '<root> or <root>.<property>',
@@ -1902,8 +1928,8 @@ state.commandList = {
       return
     }
   },
-  cross: {
-    name: 'cross',
+  ewiCross: {
+    name: 'ewiCross',
     description: `Toggles fetching of World Information from JSON Lines: ${state.settings["cross"]}`,
     args: false,
     execute: (args) => {
@@ -1912,8 +1938,8 @@ state.commandList = {
       return
     }
   },
-  filter: {
-    name: 'filter',
+  ewiFilter: {
+    name: 'ewiFilter',
     description: `Toggles the filtering of quotation and curly-brackets within JSON lines: ${state.settings["filter"]}\nSaves character count, but may have detrimental effects.`,
     args: false,
     execute: (args) => {
@@ -1922,8 +1948,8 @@ state.commandList = {
       return
     }
   },
-  from: {
-    name: "from",
+  ewiFrom: {
+    name: "ewiFrom",
     description: 'Creates an Object with the given root from the passed JSON- line.',
     args: true,
     usage: '<root> <JSON- Line/Object>',
@@ -1934,8 +1960,8 @@ state.commandList = {
       state.message = `Created Object '${root}' from ${obj}!`
     }
   },
-  hud: {
-    name: "hud",
+  ewiHud: {
+    name: "ewiHud",
     description: "Tracks the Object in the HUD",
     args: true,
     usage: '<root>',
@@ -1961,8 +1987,8 @@ state.commandList = {
       }
     }
   },
-  mode: {
-    name: "mode",
+  ewiMode: {
+    name: "ewiMode",
     description: "Switches between actions (true) or lines (false) for conditions.",
     args: false,
     usage: '',
@@ -1977,17 +2003,21 @@ state.commandList = {
     args: true,
     usage: '<object name> <quantity>',
     execute: (args) => {
-      console.log(`Begin inventory add.`);
-      const itemName = args.replace(LETTER_REGEX, '').trim();
-      const itemQuantity = Number.isNaN(parseInt(args.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(args.replace(DIGIT_REGEX, '').trim());
+      if (state.enableRpg) {
+        console.log(`Begin inventory add.`);
+        const itemName = args.replace(LETTER_REGEX, '').trim();
+        const itemQuantity = Number.isNaN(parseInt(args.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(args.replace(DIGIT_REGEX, '').trim());
 
-      if (itemQuantity >= 1) {
-        state.message = `${addToInventory(itemName, itemQuantity)}`;
+        if (itemQuantity >= 1) {
+          state.message = `${addToInventory(itemName, itemQuantity)}`;
+        } else {
+          state.message = `You cannot add less than 1 unit of an item to your inventory.`;
+        }
+
+        console.log(`End inventory add.`);
       } else {
-        state.message = `You cannot add less than 1 unit of an item to your inventory.`;
+        state.message = `Inventory mechanics are disabled. Re-enable them with "/invMechanics enable" to use commands again.`;
       }
-
-      console.log(`End inventory add.`);
     }
   },
   invRemove: {
@@ -1996,17 +2026,21 @@ state.commandList = {
     args: true,
     usage: '<object name> <quantity>',
     execute: (args) => {
-      console.log(`Begin inventory remove.`);
-      const itemName = args.replace(LETTER_REGEX, '').trim();
-      const itemQuantity = Number.isNaN(parseInt(args.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(args.replace(DIGIT_REGEX, '').trim());
+      if (state.enableRpg) {
+        console.log(`Begin inventory remove.`);
+        const itemName = args.replace(LETTER_REGEX, '').trim();
+        const itemQuantity = Number.isNaN(parseInt(args.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(args.replace(DIGIT_REGEX, '').trim());
 
-      if (itemQuantity >= 1) {
-        state.message = `${removeFromInventory(itemName, itemQuantity)}`;
+        if (itemQuantity >= 1) {
+          state.message = `${removeFromInventory(itemName, itemQuantity)}`;
+        } else {
+          state.message = `You cannot remove less than 1 unit of an item from your inventory.`;
+        }
+
+        console.log(`End inventory remove.`);
       } else {
-        state.message = `You cannot remove less than 1 unit of an item from your inventory.`;
+        state.message = `Inventory mechanics are disabled. Re-enable them with "/invMechanics enable" to use commands again.`;
       }
-
-      console.log(`End inventory remove.`);
     }
   },
   invEquip: {
@@ -2015,10 +2049,14 @@ state.commandList = {
     args: true,
     usage: '<object name>',
     execute: (args) => {
-      console.log(`Begin inventory equip.`);
-      const itemName = args.replace(LETTER_REGEX, '').trim();
-      state.message = `${equipItem(itemName)}`;
-      console.log(`End inventory equip.`);
+      if (state.enableRpg) {
+        console.log(`Begin inventory equip.`);
+        const itemName = args.replace(LETTER_REGEX, '').trim();
+        state.message = `${equipItem(itemName)}`;
+        console.log(`End inventory equip.`);
+      } else {
+        state.message = `Inventory mechanics are disabled. Re-enable them with "/invMechanics enable" to use commands again.`;
+      }
     }
   },
   invEquip: {
@@ -2027,9 +2065,13 @@ state.commandList = {
     args: false,
     usage: '',
     execute: (args) => {
-      console.log(`Begin inventory check.`);
-      state.message = `${checkInventory()}`;
-      console.log(`End inventory check.`);
+      if (state.enableRpg) {
+        console.log(`Begin inventory check.`);
+        state.message = `${checkInventory()}`;
+        console.log(`End inventory check.`);
+      } else {
+        state.message = `Inventory mechanics are disabled. Re-enable them with "/invMechanics enable" to use commands again.`;
+      }
     }
   },
   invDebug: {
@@ -2038,36 +2080,42 @@ state.commandList = {
     args: false,
     usage: '',
     execute: (args) => {
-      console.log(`Begin inventory debug.`);
-      debugInventory();
-      state.message = `Your inventory and player WI have been debugged.`;
-      console.log(`End inventory debug.`);
+      if (state.enableRpg) {
+        console.log(`Begin inventory debug.`);
+        debugInventory();
+        state.message = `Your inventory and player WI have been debugged.`;
+        console.log(`End inventory debug.`);
+      } else {
+        state.message = `Inventory mechanics are disabled. Re-enable them with "/invMechanics enable" to use commands again.`;
+      }
     }
   },
-  scenarioHelp: {
-    name: "scenarioHelp",
-    description: "Prints a list of commands",
+  invMechanics: {
+    name: "invMechanics",
+    description: "Toggles inventory system mechanics",
     args: false,
-    usage: `Really? You need help with the help command and expected this to work? I don't blame you. Hit me at AIDcord for help.`,
+    usage: '<enable or disable>',
     execute: (args) => {
-      console.log(`Begin help command.`);
-      let availableCommands = '';
-      Object.keys(state.commandList).forEach(key => {
-        availableCommands += ` ${state.commandList[key].name}`
-      });
-
-      availableCommands = availableCommands.trim().replace(/\s/g, ', ');
-      console.log(`Begin help command.`);
-      if (args == '') {
-        state.message = `List of available commands: ${availableCommands}`;
-      } else if ((!(args in commandList))) {
-        state.message = `This command was not found. List of available commands: ${availableCommands}`;
+      console.log(`Begin inventory toggle.`);
+      if (args != '') {
+        if (args == 'disable') {
+          state.enableRpg = false;
+          state.message = 'You have disabled the inventory system mechanics.';
+          console.log(`Disabled inventory mechanics toggle.`);
+        } else if (args == 'enable') {
+          state.enableRpg = true;
+          state.message = 'You have enabled the inventory system mechanics.';
+          console.log(`Enabled inventory mechanics toggle.`);
+        } else {
+          console.log('Wrong rpg mechanic toggle arg supplied.');
+          state.message = 'Invalid agument. Usage: /invMechanics <enable or disable>.';
+        }
       } else {
-        let cmd = commandList[args];
-        state.message = `Example: /${cmd.name} ${cmd.usage}\n${cmd.description}`;
+        console.log(`Checking inventory mechanics state.`);
+        state.message = `Inventory system mechanics are ${state.enableRpg ? 'enabled' : 'disabled'}`;
       }
 
-      console.log(`End help command.`);
+      console.log(`End inventory toggle.`);
     }
   }
 };
