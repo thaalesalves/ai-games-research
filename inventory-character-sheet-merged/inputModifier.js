@@ -4,7 +4,7 @@ const modifier = (text) => {
   let stop = false;
   let modifiedText = text;
   const lowered = text.toLowerCase();
-  const commandMatcher = modifiedText.match(/\n? ?(?:> You |> You say "|)\/(.+?)["]?[.]?\n?$/i);
+  delete state.message;
 
   if (!state.init && info.actionCount < 1) {
     grabAllBrackets(modifiedText);
@@ -58,9 +58,8 @@ const modifier = (text) => {
     delete state.placeholders;
   }
 
-  delete state.message
-
-  if (modifiedText.match(prefix)) {
+  const commandMatcher = modifiedText.match(prefix);
+  if (commandMatcher) {
     console.log(`Command detected`);
     console.log(commandMatcher);
 

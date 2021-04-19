@@ -4,7 +4,7 @@ const modifier = (text) => {
   let stop = false;
   let modifiedText = text;
   const lowered = text.toLowerCase();
-  const commandMatcher = modifiedText.match(/\n? ?(?:> You |> You say "|)\/(.+?)["]?[.]?\n?$/i);
+  delete state.message;
 
   if (!state.init && info.actionCount < 1) {
     playerWorldInfo = {
@@ -27,6 +27,7 @@ const modifier = (text) => {
     equipItem('Rusty Sword');
   }
 
+  const commandMatcher = modifiedText.match(prefix);
   if (commandMatcher) {
     console.log(`Command detected`);
     console.log(commandMatcher);

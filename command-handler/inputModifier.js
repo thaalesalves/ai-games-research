@@ -6,7 +6,8 @@ const modifier = (text) => {
   const lowered = modifiedText.toLowerCase();
   delete state.message
 
-  if (modifiedText.match(prefix)) {
+  const commandMatcher = modifiedText.match(prefix);
+  if (commandMatcher) {
     console.log(`Command detected`);
     console.log(commandMatcher);
 

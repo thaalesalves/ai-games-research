@@ -4,7 +4,6 @@ const modifier = (text) => {
   let stop = false;
   let modifiedText = nameReplace(text);
   const lowered = modifiedText.toLowerCase();
-  const commandMatcher = modifiedText.match(/\n? ?(?:> You |> You say "|)\/(.+?)["]?[.]?\n?$/i);
 
   if (!state.init && info.actionCount < 1) {
     parseAsRoot(modifiedText, 'you');
@@ -21,7 +20,8 @@ const modifier = (text) => {
         .replace('PLAYER_RACE', state.character.race);
   }
 
-  if (modifiedText.match(prefix)) {
+  const commandMatcher = modifiedText.match(prefix);
+  if (commandMatcher) {
     console.log(`Command detected`);
     console.log(commandMatcher);
 
