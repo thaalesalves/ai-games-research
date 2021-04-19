@@ -212,7 +212,7 @@ function equipItem(itemName) {
       return `\n${capitalize(itemNameLowerCase)} is not an equippable item.`;
     }
 
-    let playerWorldInfo = worldEntries.find(x => x.keys.includes('you'));
+    let playerWorldInfo = worldEntries.find(x => x.keys.includes('you)#[t=1l=2f=2S=1]'));
     let itemsWorn = playerWorldInfo.entry.match(WORN_REGEX)[0];
     let oldItem = getInventory().find(oldItem => oldItem.status == 'worn' && oldItem.type == itemToBeEquipped.type);
     if (typeof oldItem != 'undefined') {
@@ -248,8 +248,8 @@ function equipItem(itemName) {
  */
 function debugInventory() {
   console.log(`START debugInventory(): debugging player's inventory`);
-  state.worldInfoIndex = worldEntries.findIndex(wi => wi.keys.includes('you'));
-  let playerWorldInfo = worldEntries.find(x => x.keys.includes('you'));
+  state.worldInfoIndex = worldEntries.findIndex(wi => wi.keys.includes('you)#[t=1l=2f=2S=1]'));
+  let playerWorldInfo = worldEntries.find(x => x.keys.includes('you)#[t=1l=2f=2S=1]'));
 
   let itemsWorn = playerWorldInfo.entry.match(WORN_REGEX)[0];
   let itemsInInventory = playerWorldInfo.entry.match(INVENTORY_REGEX)[0];
@@ -277,7 +277,7 @@ function debugInventory() {
  */
 function updateInventory() {
   console.log(`START updateInventory(): updating player's inventory and WI with current items`);
-  let playerWorldInfo = worldEntries.find(x => x.keys.includes('you'));
+  let playerWorldInfo = worldEntries.find(x => x.keys.includes('you)#[t=1l=2f=2S=1]'));
   let itemsInInventory = playerWorldInfo.entry.match(INVENTORY_REGEX)[0];
   itemsInInventory = getInventory().map((k) => {
     console.log(`INSIDE updateInventory(): Sorting inventory items and quantities into player WI`);

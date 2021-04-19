@@ -1,2 +1,7 @@
-const modifier = (text) => { }
-modifier(text);
+const modifier = (text) => {
+  let modifiedText = text
+  const lowered = text.toLowerCase()
+  return { text: modifiedText }
+}
+
+modifier(text)
