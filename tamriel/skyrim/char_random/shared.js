@@ -183,7 +183,6 @@ const generateCharacter = () => {
   };
 
   addWorldEntry(playerWorldInfo.keys, playerWorldInfo.entry, false);
-  state.character.worldInfoIndex = worldEntries.findIndex(wi => wi.keys.includes(state.character.name));
 
   addToInventory(state.character.worn, 1);
   addToInventory(state.character.weapon, 1);

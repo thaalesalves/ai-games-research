@@ -37,7 +37,6 @@ const modifier = (text) => {
     };
 
     addWorldEntry(playerWorldInfo.keys, playerWorldInfo.entry, false);
-    state.character.worldInfoIndex = worldEntries.findIndex(wi => wi.keys.includes(state.character.name));
 
     state.init = true;
     modifiedText = modifiedText.replace(BRACKETS, '') + parseRace();

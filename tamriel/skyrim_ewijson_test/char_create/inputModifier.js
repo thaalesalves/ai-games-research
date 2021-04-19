@@ -53,7 +53,6 @@ const modifier = (text) => {
 
     addWorldEntry(playerInventoryWorldInfo.keys, playerInventoryWorldInfo.entry, false);
     addWorldEntry(playerSheetWorldInfo.keys, playerSheetWorldInfo.entry, false);
-    state.character.worldInfoIndex = worldEntries.findIndex(wi => wi.keys.includes(state.character.name));
 
     getInventory();
     parseRace(state.character);
