@@ -1,6 +1,6 @@
 const modifier = (text) => {
-  let modifiedText = text
-  const lowered = text.toLowerCase()
+  let modifiedText = text;
+  const lowered = text.toLowerCase();
 
   // BEGIN EWIJSON
   if (state.generate.process) { parseGen(text); return {text: ''}; }

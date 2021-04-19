@@ -59,7 +59,7 @@ const modifier = (text) => {
 
     state.enableInventory = true;
     state.init = true;
-    modifiedText = modifiedText.replace(BRACKETS, '') + generatePrompt();
+    modifiedText = modifiedText.replace(BRACKETS, '').replace(/You are.*\n\n/g, '') + generatePrompt();
     delete state.placeholders;
   }
 

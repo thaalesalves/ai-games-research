@@ -12,8 +12,7 @@ const modifier = (text) => {
 
     state.enableInventory = true;
     state.init = true;
-    modifiedText = text
-      + ` ${state.character.name}, and you are a ${state.character.gender} ${state.character.race} ${state.character.class}. You are ${state.character.age} years old, and your personality traits are: ${state.character.personality}. You eyes are ${state.character.eyes.eyeColor}, and your hair is of the style ${state.character.hair.hairStyle} and of color ${state.character.hair.hairColor}. You are ${state.character.appearance.height} centimeters tall, and you weigh ${state.character.appearance.weight} kg. Your physical features are: ${state.character.appearance.features}.\n\n---------------------------------------\n\n`
+    modifiedText = `${text} ${state.character.name}, and you are a ${state.character.gender} ${state.character.race} ${state.character.class}. `
       + state.character.storyStart
         .replace('YOUR_NAME', state.character.name)
         .replace('PLAYER_GENDER', state.character.gender)

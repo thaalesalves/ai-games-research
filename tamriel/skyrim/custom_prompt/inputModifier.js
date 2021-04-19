@@ -57,7 +57,7 @@ const modifier = (text) => {
 
     state.enableInventory = true;
     state.init = true;
-    modifiedText = modifiedText.replace(BRACKETS, '');
+    modifiedText = modifiedText.replace(BRACKETS, '').replace(/You are.*\n\n/g, '');
     delete state.placeholders;
   }
 
