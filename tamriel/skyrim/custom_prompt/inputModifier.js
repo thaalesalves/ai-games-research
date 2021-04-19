@@ -55,7 +55,7 @@ const modifier = (text) => {
     parseRace(state.character);
     parseClass(state.character);
 
-    state.enableRpg = true;
+    state.enableInventory = true;
     state.init = true;
     modifiedText = modifiedText.replace(BRACKETS, '');
     delete state.placeholders;

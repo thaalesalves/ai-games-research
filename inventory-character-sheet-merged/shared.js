@@ -308,79 +308,6 @@ state.config = {
 }
 
 state.commandList = {
-  invAdd: {
-    name: "invAdd",
-    description: "Adds objects to the player's inventory",
-    args: true,
-    usage: '<object name> <quantity>',
-    execute: (args) => {
-      console.log(`Begin inventory add.`);
-      const itemName = args.replace(LETTER_REGEX, '').trim();
-      const itemQuantity = Number.isNaN(parseInt(args.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(args.replace(DIGIT_REGEX, '').trim());
-
-      if (itemQuantity >= 1) {
-        state.message = `${addToInventory(itemName, itemQuantity)}`;
-      } else {
-        state.message = `You cannot add less than 1 unit of an item to your inventory.`;
-      }
-
-      console.log(`End inventory add.`);
-    }
-  },
-  invRemove: {
-    name: "invRemove",
-    description: "Removes objects from the player's inventory",
-    args: true,
-    usage: '<object name> <quantity>',
-    execute: (args) => {
-      console.log(`Begin inventory remove.`);
-      const itemName = args.replace(LETTER_REGEX, '').trim();
-      const itemQuantity = Number.isNaN(parseInt(args.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(args.replace(DIGIT_REGEX, '').trim());
-
-      if (itemQuantity >= 1) {
-        state.message = `${removeFromInventory(itemName, itemQuantity)}`;
-      } else {
-        state.message = `You cannot remove less than 1 unit of an item from your inventory.`;
-      }
-
-      console.log(`End inventory remove.`);
-    }
-  },
-  invEquip: {
-    name: "invEquip",
-    description: "Equips objects from the player's inventory",
-    args: true,
-    usage: '<object name>',
-    execute: (args) => {
-      console.log(`Begin inventory equip.`);
-      const itemName = args.replace(LETTER_REGEX, '').trim();
-      state.message = `${equipItem(itemName)}`;
-      console.log(`End inventory equip.`);
-    }
-  },
-  invEquip: {
-    name: "invCheck",
-    description: "Checks the player's inventory",
-    args: false,
-    usage: '',
-    execute: (args) => {
-      console.log(`Begin inventory check.`);
-      state.message = `${checkInventory()}`;
-      console.log(`End inventory check.`);
-    }
-  },
-  invDebug: {
-    name: "invDebug",
-    description: "Debugs player's inventory",
-    args: false,
-    usage: '',
-    execute: (args) => {
-      console.log(`Begin inventory debug.`);
-      debugInventory();
-      state.message = `Your inventory and player WI have been debugged.`;
-      console.log(`End inventory debug.`);
-    }
-  },
   scenarioHelp: {
     name: "scenarioHelp",
     description: "Prints a list of commands",
@@ -405,6 +332,127 @@ state.commandList = {
       }
 
       console.log(`End help command.`);
+    }
+  },
+  invAdd: {
+    name: "invAdd",
+    description: "Adds objects to the player's inventory",
+    args: true,
+    usage: '<object name> <quantity>',
+    execute: (args) => {
+      if (state.enableInventory) {
+        console.log(`Begin inventory add.`);
+        const itemName = args.replace(LETTER_REGEX, '').trim();
+        const itemQuantity = Number.isNaN(parseInt(args.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(args.replace(DIGIT_REGEX, '').trim());
+
+        if (itemQuantity >= 1) {
+          state.message = `${addToInventory(itemName, itemQuantity)}`;
+        } else {
+          state.message = `You cannot add less than 1 unit of an item to your inventory.`;
+        }
+
+        console.log(`End inventory add.`);
+      } else {
+        state.message = `Inventory mechanics are disabled. Re-enable them with "/invMechanics enable" to use commands again.`;
+      }
+    }
+  },
+  invRemove: {
+    name: "invRemove",
+    description: "Removes objects from the player's inventory",
+    args: true,
+    usage: '<object name> <quantity>',
+    execute: (args) => {
+      if (state.enableInventory) {
+        console.log(`Begin inventory remove.`);
+        const itemName = args.replace(LETTER_REGEX, '').trim();
+        const itemQuantity = Number.isNaN(parseInt(args.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(args.replace(DIGIT_REGEX, '').trim());
+
+        if (itemQuantity >= 1) {
+          state.message = `${removeFromInventory(itemName, itemQuantity)}`;
+        } else {
+          state.message = `You cannot remove less than 1 unit of an item from your inventory.`;
+        }
+
+        console.log(`End inventory remove.`);
+      } else {
+        state.message = `Inventory mechanics are disabled. Re-enable them with "/invMechanics enable" to use commands again.`;
+      }
+    }
+  },
+  invEquip: {
+    name: "invEquip",
+    description: "Equips objects from the player's inventory",
+    args: true,
+    usage: '<object name>',
+    execute: (args) => {
+      if (state.enableInventory) {
+        console.log(`Begin inventory equip.`);
+        const itemName = args.replace(LETTER_REGEX, '').trim();
+        state.message = `${equipItem(itemName)}`;
+        console.log(`End inventory equip.`);
+      } else {
+        state.message = `Inventory mechanics are disabled. Re-enable them with "/invMechanics enable" to use commands again.`;
+      }
+    }
+  },
+  invEquip: {
+    name: "invCheck",
+    description: "Checks the player's inventory",
+    args: false,
+    usage: '',
+    execute: (args) => {
+      if (state.enableInventory) {
+        console.log(`Begin inventory check.`);
+        state.message = `${checkInventory()}`;
+        console.log(`End inventory check.`);
+      } else {
+        state.message = `Inventory mechanics are disabled. Re-enable them with "/invMechanics enable" to use commands again.`;
+      }
+    }
+  },
+  invDebug: {
+    name: "invDebug",
+    description: "Debugs player's inventory",
+    args: false,
+    usage: '',
+    execute: (args) => {
+      if (state.enableInventory) {
+        console.log(`Begin inventory debug.`);
+        debugInventory();
+        state.message = `Your inventory and player WI have been debugged.`;
+        console.log(`End inventory debug.`);
+      } else {
+        state.message = `Inventory mechanics are disabled. Re-enable them with "/invMechanics enable" to use commands again.`;
+      }
+    }
+  },
+  invMechanics: {
+    name: "invMechanics",
+    description: "Toggles inventory system mechanics",
+    args: false,
+    usage: '<enable or disable>',
+    execute: (args) => {
+      console.log(`Begin inventory toggle.`);
+      if (args != '') {
+        if (args == 'disable') {
+          state.enableInventory = false;
+          state.message = 'You have disabled the inventory system mechanics.';
+          console.log(`Disabled inventory mechanics toggle.`);
+        } else if (args == 'enable') {
+          state.enableInventory = true;
+          state.message = 'You have enabled the inventory system mechanics.';
+          console.log(`Enabled inventory mechanics toggle.`);
+        } else {
+          console.log('Wrong rpg mechanic toggle arg supplied.');
+          state.message = 'Invalid agument. Usage: /invMechanics <enable or disable>.';
+        }
+      } else {
+        console.log(`Checking inventory mechanics state.`);
+        state.message = `Inventory system mechanics are ${state.enableInventory ? 'enabled' : 'disabled'}`;
+      }
+
+      console.log(`End inventory toggle.`);
     }
   }
 };

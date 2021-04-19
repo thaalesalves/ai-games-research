@@ -44,6 +44,7 @@ const modifier = (text) => {
 
     addWorldEntry(playerWorldInfo.keys, playerWorldInfo.entry, false);
 
+    state.enableInventory = true;
     state.init = true;
     addWorldEntry(playerWorldInfo.keys, playerWorldInfo.entry, false);
     state.worldInfoIndex = worldEntries.findIndex(wi => wi.keys.includes('you'));

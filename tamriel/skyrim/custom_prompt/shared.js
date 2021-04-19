@@ -1917,7 +1917,7 @@ state.commandList = {
     args: true,
     usage: '<object name> <quantity>',
     execute: (args) => {
-      if (state.enableRpg) {
+      if (state.enableInventory) {
         console.log(`Begin inventory add.`);
         const itemName = args.replace(LETTER_REGEX, '').trim();
         const itemQuantity = Number.isNaN(parseInt(args.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(args.replace(DIGIT_REGEX, '').trim());
@@ -1940,7 +1940,7 @@ state.commandList = {
     args: true,
     usage: '<object name> <quantity>',
     execute: (args) => {
-      if (state.enableRpg) {
+      if (state.enableInventory) {
         console.log(`Begin inventory remove.`);
         const itemName = args.replace(LETTER_REGEX, '').trim();
         const itemQuantity = Number.isNaN(parseInt(args.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(args.replace(DIGIT_REGEX, '').trim());
@@ -1963,7 +1963,7 @@ state.commandList = {
     args: true,
     usage: '<object name>',
     execute: (args) => {
-      if (state.enableRpg) {
+      if (state.enableInventory) {
         console.log(`Begin inventory equip.`);
         const itemName = args.replace(LETTER_REGEX, '').trim();
         state.message = `${equipItem(itemName)}`;
@@ -1979,7 +1979,7 @@ state.commandList = {
     args: false,
     usage: '',
     execute: (args) => {
-      if (state.enableRpg) {
+      if (state.enableInventory) {
         console.log(`Begin inventory check.`);
         state.message = `${checkInventory()}`;
         console.log(`End inventory check.`);
@@ -1994,7 +1994,7 @@ state.commandList = {
     args: false,
     usage: '',
     execute: (args) => {
-      if (state.enableRpg) {
+      if (state.enableInventory) {
         console.log(`Begin inventory debug.`);
         debugInventory();
         state.message = `Your inventory and player WI have been debugged.`;
@@ -2013,11 +2013,11 @@ state.commandList = {
       console.log(`Begin inventory toggle.`);
       if (args != '') {
         if (args == 'disable') {
-          state.enableRpg = false;
+          state.enableInventory = false;
           state.message = 'You have disabled the inventory system mechanics.';
           console.log(`Disabled inventory mechanics toggle.`);
         } else if (args == 'enable') {
-          state.enableRpg = true;
+          state.enableInventory = true;
           state.message = 'You have enabled the inventory system mechanics.';
           console.log(`Enabled inventory mechanics toggle.`);
         } else {
@@ -2026,7 +2026,7 @@ state.commandList = {
         }
       } else {
         console.log(`Checking inventory mechanics state.`);
-        state.message = `Inventory system mechanics are ${state.enableRpg ? 'enabled' : 'disabled'}`;
+        state.message = `Inventory system mechanics are ${state.enableInventory ? 'enabled' : 'disabled'}`;
       }
 
       console.log(`End inventory toggle.`);
