@@ -2,7 +2,7 @@ const { commandList } = state;
 const { prefix, prefixSymbol } = state.config;
 const modifier = (text) => {
   let stop = false;
-  let modifiedText = nameReplace(text);
+  let modifiedText = text;
   const lowered = modifiedText.toLowerCase();
   delete state.message
 
