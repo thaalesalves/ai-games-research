@@ -55,6 +55,13 @@ Example: /invAdd <object name> <quantity>
 Adds objects to the player's inventory
 ```
 
+Toggle inventory mechanics
+```
+/invMechanics
+Example: /invMechanics enable
+Toggles inventory mechanics
+```
+
 ## Future ideas for this framework (still need to be studied, they won't be available for some time, if at all)
 * Integration with Gnurro's RPGMech - being worked on!
 * Ammunition tracking - being worked on!
