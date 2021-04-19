@@ -5,11 +5,6 @@ const modifier = (text) => {
   const lowered = text.toLowerCase();
   let stop = false;
 
-  if (state.shouldStop) {
-    state.shouldStop = false;
-    stop = true;
-  }
-
   const combinedLines = lines.join("\n").slice(-(info.maxChars - info.memoryLength));
   const finalText = [contextMemory, combinedLines].join("");
   return { text: finalText, stop: stop };
