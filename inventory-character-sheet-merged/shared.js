@@ -301,3 +301,110 @@ function getType(itemName) {
 
   return checker(itemName);
 }
+
+state.config = {
+  prefix: /\n? ?(?:> You |> You say "|)\/(.+?)["]?[.]?\n?$/i,
+  prefixSymbol: '/',
+}
+
+state.commandList = {
+  invAdd: {
+    name: "invAdd",
+    description: "Adds objects to the player's inventory",
+    args: true,
+    usage: '<object name> <quantity>',
+    execute: (args) => {
+      console.log(`Begin inventory add.`);
+      const itemName = args.replace(LETTER_REGEX, '').trim();
+      const itemQuantity = Number.isNaN(parseInt(args.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(args.replace(DIGIT_REGEX, '').trim());
+
+      if (itemQuantity >= 1) {
+        state.message = `${addToInventory(itemName, itemQuantity)}`;
+      } else {
+        state.message = `You cannot add less than 1 unit of an item to your inventory.`;
+      }
+
+      console.log(`End inventory add.`);
+    }
+  },
+  invRemove: {
+    name: "invRemove",
+    description: "Removes objects from the player's inventory",
+    args: true,
+    usage: '<object name> <quantity>',
+    execute: (args) => {
+      console.log(`Begin inventory remove.`);
+      const itemName = args.replace(LETTER_REGEX, '').trim();
+      const itemQuantity = Number.isNaN(parseInt(args.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(args.replace(DIGIT_REGEX, '').trim());
+
+      if (itemQuantity >= 1) {
+        state.message = `${removeFromInventory(itemName, itemQuantity)}`;
+      } else {
+        state.message = `You cannot remove less than 1 unit of an item from your inventory.`;
+      }
+
+      console.log(`End inventory remove.`);
+    }
+  },
+  invEquip: {
+    name: "invEquip",
+    description: "Equips objects from the player's inventory",
+    args: true,
+    usage: '<object name>',
+    execute: (args) => {
+      console.log(`Begin inventory equip.`);
+      const itemName = args.replace(LETTER_REGEX, '').trim();
+      state.message = `${equipItem(itemName)}`;
+      console.log(`End inventory equip.`);
+    }
+  },
+  invEquip: {
+    name: "invCheck",
+    description: "Checks the player's inventory",
+    args: false,
+    usage: '',
+    execute: (args) => {
+      console.log(`Begin inventory check.`);
+      state.message = `${checkInventory()}`;
+      console.log(`End inventory check.`);
+    }
+  },
+  invDebug: {
+    name: "invDebug",
+    description: "Debugs player's inventory",
+    args: false,
+    usage: '',
+    execute: (args) => {
+      console.log(`Begin inventory debug.`);
+      debugInventory();
+      state.message = `Your inventory and player WI have been debugged.`;
+      console.log(`End inventory debug.`);
+    }
+  },
+  scenarioHelp: {
+    name: "scenarioHelp",
+    description: "Prints a list of commands",
+    args: false,
+    usage: `Really? You need help with the help command and expected this to work? I don't blame you. Hit me at AIDcord for help.`,
+    execute: (args) => {
+      console.log(`Begin help command.`);
+      let availableCommands = '';
+      Object.keys(state.commandList).forEach(key => {
+        availableCommands += ` ${state.commandList[key].name}`
+      });
+
+      availableCommands = availableCommands.trim().replace(/\s/g, ', ');
+      console.log(`Begin help command.`);
+      if (args == '') {
+        state.message = `List of available commands: ${availableCommands}`;
+      } else if ((!(args in commandList))) {
+        state.message = `This command was not found. List of available commands: ${availableCommands}`;
+      } else {
+        let cmd = commandList[args];
+        state.message = `Example: /${cmd.name} ${cmd.usage}\n${cmd.description}`;
+      }
+
+      console.log(`End help command.`);
+    }
+  }
+};

@@ -1,5 +1,6 @@
+const { commandList } = state;
+const { prefix, prefixSymbol } = state.config;
 const modifier = (text) => {
-  state.shouldStop = false;
   let stop = false;
   let modifiedText = text;
   const lowered = text.toLowerCase();
@@ -77,7 +78,6 @@ const modifier = (text) => {
     }
   }
 
-  console.log(`END inputmod: stop AI generation: ${state.shouldStop}`);
   return { text: modifiedText, stop: stop };
 }
 
