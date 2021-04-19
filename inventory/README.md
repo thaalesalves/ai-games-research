@@ -38,8 +38,21 @@ Your inventory contains: wooden bow (1x), leather tights (1x). Items equipped: w
 
 Debugging inventory
 ```
-/invDebugWi
+/invDebug
 Your inventory and player WI have been debugged.
+```
+
+Command reference
+```
+/scenarioHelp
+List of available commands: invAdd, invRemove..........
+```
+
+Specific command reference
+```
+/scenarioHelp
+Example: /invAdd <object name> <quantity>
+Adds objects to the player's inventory
 ```
 
 ## Future ideas for this framework (still need to be studied, they won't be available for some time, if at all)
