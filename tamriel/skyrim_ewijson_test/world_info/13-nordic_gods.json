@@ -1,55 +1,55 @@
 [
   {
     "id": "13.1",
-    "keys": "nord religion,acient nord religion,traditional nord religion",
+    "keys": "((ancient |)nord|) religion#[t=5l=3f=1S=2]",
     "entry": "Nord Religion:[TYPE<Nord Religion>:religion;DESC<Nord Religion>:The Ancient Nords worshiped Totems/that became gods with their own names after Ysgramor came back to Skyrim. Each of these Totems became a god of the nord pantheon. These animals were there the Snake/the Hawk/the Dragon/the Fox/the Whale/the Owl/the Bear/the Wolf and the Moth. Just by listening to which animals the nords worshiped/you might be able to guess which gods they represent..]",
     "hidden": false
   },
   {
     "id": "13.2",
-    "keys": "jhunal",
+    "keys": "jhunal#[t=5l=3f=1S=2]",
     "entry": "Jhunal:[TYPE<Jhunal>:god;SPHERE<Jhunal>:knowledge/widsom/mathematics;DESC<Jhunal>:Jhunal is represented by the Owl. He is the Rune God/and represents language/mathematics/knowledge and wisdom. He became Julianos in the Imperial Pantheon/and orders dedicated to him became keepers of the Elder Scrolls..]",
     "hidden": false
   },
   {
     "id": "13.3",
-    "keys": "kyne",
+    "keys": "kyne#[t=5l=3f=1S=2]",
     "entry": "Kyne:[TYPE<Kyne>:god;SPHERE<Kyne>:storms/mother god/wind;DESC<Kyne>:Kyne is the Hawk/and is out goddess of storms/the mother of all Nords. Kyne created the Nords atop the Snow Throat/and sent us to Altmora to fight against the elves. She is the wife of Shor/the nord Chief of Gods. With her aid/the Nords of old managed to learn to speak as dragons The Tongues and the Greybeards were created with her and because of her/to fight against the tyranny of Alduin. The Thu'um spoken by the dragons is roughly translated to Tamrielic as \"Storm Voice\"/in a reference to her. | Even the dragons acknowledge her/and call her Kaan. When Nords die/Kyne leads us to rest in Sovngarde..]",
     "hidden": false
   },
   {
     "id": "13.4",
-    "keys": "orkey",
+    "keys": "orkey#[t=5l=3f=1S=2]",
     "entry": "Orkey:[TYPE<Orkey>:god;SPHERE<Orkey>:death;DESC<Orkey>:Orkey is the Snake/and is the God of Death. He is a Testing God. Nords used to live as long as elves in the times of old. Orkey summoned Alduin/and the lifespan of the nords was eaten down to six years old/or \"bound them to the count of winters\" as the saying goes. High King Ysmir Wulfharth/who was turned into a boy/pleaded to Shor for help. Shor fought Alduin in Sovngarde/just as he did before Time had begun/and won the battle. | Most of the curse was thrown onto the nearby Orcs who worshiped Orkey as their patron. It was during this battle that Ysmir learned to use the Thu'um. Unfortunately/this battle cost his life. | In the Imperial Pantheon/Orkey became Arkay/the God of Life..]",
     "hidden": false
   },
   {
     "id": "13.5",
-    "keys": "shor",
+    "keys": "shor#[t=5l=3f=1S=2]",
     "entry": "Shor:[TYPE<Shor>:god;SPHERE<Shor>:humankind/chief god;DESC<Shor>:Shor is the Fox/and is the Chief God of the nord pantheon. He's the husband of Kyne/and is the patron of mankind. The old Imperial religion knows him as Shezarr/while Bretons call him Sheor. He might also be known as Doom Drum/Sep/Lorkhan/Lorkh and Lorkhaj by other races. Shor/Stuhn and Tsun led the Nords against the elven armies of Auri-El and Trinimac in Atmora/in a war known as the War of Manifest Metaphors. After the war ended/the Nords settled there. This led to the death of Shor and Tsun. Trinimac tore out Shor's heart and hid it from the Nords/so the nords would never get their Chief God back..]",
     "hidden": false
   },
   {
     "id": "13.6",
-    "keys": "mara",
+    "keys": "mara#[t=5l=3f=1S=2]",
     "entry": "Mara:[TYPE<Mara>:god;SPHERE<Mara>:love;DESC<Mara>:Mara is the Wolf. She's the goddess of love/and is the handmaiden of Kyne. When Alessia took the Nord Pantheon and modified it/she kept Mara as the goddess of love. But for the Empire/she is a matron goddess. The Nords know her as Kyne's handmaiden..]",
     "hidden": false
   },
   {
     "id": "13.7",
-    "keys": "dibella",
+    "keys": "dibella#[t=5l=3f=1S=2]",
     "entry": "Dibella:[TYPE<Dibella>:god;SPHERE<Dibella>:beauty/art/music;DESC<Dibella>:Dibella is the Moth/and she represents beauty/art and music. Some claim she was the mistress of Shor/but some believe that to be heresy. She is still worshiped in the Empire/but some places think her cult to be vulgar and inappropriate. That is also heresy to some..]",
     "hidden": false
   },
   {
     "id": "13.8",
-    "keys": "tsun",
+    "keys": "tsun#[t=5l=3f=1S=2]",
     "entry": "Tsun:[TYPE<Tsun>:god;SPHERE<Tsun>:adversity;DESC<Tsun>:Tsun is the Bear/and is the God of Adversity. He died during the War of Manifest Metaphors while protecting Shor/and his death is remembered as the beginning of the current world. He guards the Whalebone Bridge in Sovngarde/and only lets those worthy to pass the bridge and go into the Hall of Valor. He had great respect for magic/and was a master of the Voice..]",
     "hidden": false
   },
   {
     "id": "13.9",
-    "keys": "Stuhn",
+    "keys": "Stuhn#[t=5l=3f=1S=2]",
     "entry": "Stuhn:[TYPE<Stuhn>:god;SPHERE<Stuhn>:random/justice;DESC<Stuhn>:Stuhn is the Whale/and is the God of Ransom and Justice. He was the shield-thane of Shor/and brother of Tsun. He fought in the war against the ancient elves in Altmora/but lost his brother Tsun in the process. In the Imperial Pantheon/he became Stendarr..]",
     "hidden": false
   }
