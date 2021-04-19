@@ -59,7 +59,9 @@ const modifier = (text) => {
 
     state.enableInventory = true;
     state.init = true;
-    modifiedText = modifiedText.replace(BRACKETS, '').replace(/You are.*\n\n/g, '') + generatePrompt();
+    modifiedText = modifiedText.replace(BRACKETS, '').replace(/You are.*\n\n/g, '')
+      + `You stand and watch the sun set for a little while, the colours shifting through the spectrum until it finally sets, and darkness shrouds the city. The stars shine brightly above you, a million lights glittering like diamond dust on an endless black canvas.\nYou smile.\n\nA guard approaches you and stops by your side, also looking at the sky.\n"The Gods did a good job with this world, didn't they?", he asks.\nYou smile again. Looking at the stars makes you wonder what else is out there. You turn to the guard and nod at him, smiling.\nYou then continue into the Bloated Goat. The tavern is the typical sort of place you'd find in any city. A bunch of Nords drinking together, a couple of fights, and a whole lot of smoke from pipes and cigarettes. The scent of sweat and booze is thick in the air as you enter, and you're immediately greeted by the owner, a tall, bearded man with a stained apron and a rowdy attitude. His name is Isekaid.\nHe looks at you and says `
+      + generatePrompt();
     delete state.placeholders;
   }
 
