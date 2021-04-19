@@ -18,11 +18,6 @@ const modifier = (text) => {
   const lowered = text.toLowerCase();
   let stop = false;
 
-  if (state.shouldStop) {
-    state.shouldStop = false;
-    stop = true;
-  }
-
   // BEGIN Encounters
   // for mashing with other context scripts, keep this codeblock before 'const contextMemory'
   // encounter memory stuff:
