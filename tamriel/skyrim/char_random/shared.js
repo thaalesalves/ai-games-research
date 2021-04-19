@@ -2082,7 +2082,7 @@ state.commandList = {
       }
     }
   },
-  invEquip: {
+  invCheck: {
     name: "invCheck",
     description: "Checks the player's inventory",
     args: false,

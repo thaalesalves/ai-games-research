@@ -1,8 +1,9 @@
+const { commandList } = state;
+const { prefix, prefixSymbol } = state.config;
 const modifier = (text) => {
   let stop = false;
   let modifiedText = nameReplace(text);
   const lowered = modifiedText.toLowerCase();
-  const commandMatcher = modifiedText.match(/\n? ?(?:> You |> You say "|)\/(.+?)["]?[.]?\n?$/i);
 
   if (!state.init && info.actionCount < 1) {
     parseAsRoot(modifiedText, 'you');
