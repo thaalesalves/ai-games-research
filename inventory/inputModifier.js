@@ -1,5 +1,5 @@
-const { commandList } = state;
-const { prefix, prefixSymbol } = state.config;
+const { commandList } = state.regex;
+const { prefix, prefixSymbol, commandList } = state.config.regex;
 const modifier = (text) => {
   let stop = false;
   let modifiedText = text;
@@ -16,16 +16,16 @@ const modifier = (text) => {
         + ']'
     };
 
-    state.enableInventory = true;
-    state.init = true;
     addWorldEntry(playerWorldInfo.keys, playerWorldInfo.entry, false);
-    state.worldInfoIndex = worldEntries.findIndex(wi => wi.keys.includes('you'));
 
     getInventory();
     addToInventory('Rusty Sword', 1);
     addToInventory('Commoner clothes', 1);
     equipItem('Commoner clothes');
     equipItem('Rusty Sword');
+
+    state.init = true;
+    state.config.enableInventory = true;
   }
 
   const commandMatcher = modifiedText.match(prefix);
@@ -36,47 +36,34 @@ const modifier = (text) => {
     stop = true;
     modifiedText = '';
 
-    const cmd = commandMatcher[1].split(' ')[0];
-    const params = commandMatcher[1].replace(cmd, '') != null ? commandMatcher[1].replace(cmd, '').trim() : '';
+    const commandName = commandMatcher[1].split(' ')[0];
+    const args = commandMatcher[1].replace(commandName, '') != null ? commandMatcher[1].replace(commandName, '').trim() : '';
+    if (!(commandName in commandList)) {
+      state.message = `Invalid command! Type ${prefixSymbol}scenarioHelp for a list of commands and ${prefixSymbol}scenarioHelp <command> for instructions on a specific command.`;
+      return { text: modifiedText, stop: stop };
+    }
 
-    if (cmd == 'invCheck') {
-      console.log(`Begin inventory check.`);
-      state.message = `${checkInventory()}`;
-      console.log(`End inventory check.`);
-    } else if (cmd == 'invAdd') {
-      console.log(`Begin inventory add.`);
-      const itemName = params.replace(LETTER_REGEX, '').trim();
-      const itemQuantity = Number.isNaN(parseInt(params.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(params.replace(DIGIT_REGEX, '').trim());
-
-      if (itemQuantity >= 1) {
-        state.message = `${addToInventory(itemName, itemQuantity)}`;
-      } else {
-        state.message = `You cannot add less than 1 unit of an item to your inventory.`;
+    const command = commandList[commandName];
+    if (command.args && !args.length) {
+      let reply = `You didn't provide any arguments!\n`;
+      if (command.usage) {
+        reply += `Example: ${prefixSymbol}${command.name} ${command.usage}\n`;
       }
 
-      console.log(`End inventory add.`);
-    } else if (cmd == 'invRemove') {
-      console.log(`Begin inventory remove.`);
-      const itemName = params.replace(LETTER_REGEX, '').trim();
-      const itemQuantity = Number.isNaN(parseInt(params.replace(DIGIT_REGEX, '').trim())) ? 1 : parseInt(params.replace(DIGIT_REGEX, '').trim());
-
-      if (itemQuantity >= 1) {
-        state.message = `${removeFromInventory(itemName, itemQuantity)}`;
-      } else {
-        state.message = `You cannot remove less than 1 unit of an item from your inventory.`;
+      if (command.description) {
+        reply += `${command.description}`;
       }
 
-      console.log(`End inventory remove.`);
-    } else if (cmd == 'invEquip') {
-      console.log(`Begin inventory equip.`);
-      const itemName = params.replace(LETTER_REGEX, '').trim();
-      state.message = `${equipItem(itemName)}`;
-      console.log(`End inventory equip.`);
-    } else if (cmd == 'invDebugWi') {
-      console.log(`Begin inventory debug.`);
-      debugInventory();
-      state.message = `Your inventory and player WI have been debugged.`;
-      console.log(`End inventory debug.`);
+      state.message = reply;
+      return { text: modifiedText, stop: stop };
+    }
+
+    try {
+      command.execute(args);
+      return { text: modifiedText, stop: stop };
+    } catch (error) {
+      state.message = `There was an error. Stacktrace:\n${error}`;
+      console.log(`There was an error. Stacktrace:${error}`);
     }
   }
 

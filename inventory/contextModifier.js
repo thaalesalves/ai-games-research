@@ -1,3 +1,4 @@
+const { shootAgain, ammunition } = state.config.regex;
 const modifier = (text) => {
   const contextMemory = info.memoryLength ? text.slice(0, info.memoryLength) : '';
   const context = info.memoryLength ? text.slice(info.memoryLength) : text;
