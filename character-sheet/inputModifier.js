@@ -39,8 +39,8 @@ const modifier = (text) => {
     addWorldEntry(playerWorldInfo.keys, playerWorldInfo.entry, false);
 
     state.init = true;
-    modifiedText = modifiedText.replace(BRACKETS, '') + parseRace();
     delete state.placeholders;
+    modifiedText = modifiedText.replace(BRACKETS, '') + parseRace();
   }
 
   return { text: modifiedText, stop: stop };

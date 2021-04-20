@@ -1,5 +1,5 @@
-const { commandList } = state;
-const { prefix, prefixSymbol } = state.config;
+const { commandList } = state.regex;
+const { prefix, prefixSymbol, commandList } = state.config.regex;
 const modifier = (text) => {
   let stop = false;
   let modifiedText = text;
@@ -42,12 +42,8 @@ const modifier = (text) => {
         + ']'
     };
 
+    delete state.placeholders;
     addWorldEntry(playerWorldInfo.keys, playerWorldInfo.entry, false);
-
-    state.enableInventory = true;
-    state.init = true;
-    addWorldEntry(playerWorldInfo.keys, playerWorldInfo.entry, false);
-    state.worldInfoIndex = worldEntries.findIndex(wi => wi.keys.includes('you'));
 
     getInventory();
     addToInventory('Rusty Sword', 1);
@@ -55,8 +51,9 @@ const modifier = (text) => {
     equipItem('Commoner clothes');
     equipItem('Rusty Sword');
 
+    state.init = true;
+    state.config.enableInventory = true;
     modifiedText = modifiedText.replace(BRACKETS, '') + parseRace();
-    delete state.placeholders;
   }
 
   const commandMatcher = modifiedText.match(prefix);
