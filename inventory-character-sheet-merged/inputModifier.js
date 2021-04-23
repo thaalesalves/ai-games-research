@@ -1,4 +1,4 @@
-const { prefix, prefixSymbol } = regex;
+const { prefix, prefixSymbol } = regex.commands;
 const modifier = (text) => {
   let stop = false;
   let modifiedText = text;

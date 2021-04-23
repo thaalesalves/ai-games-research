@@ -1,16 +1,23 @@
 const regex = {
-  prefix: /\n? ?(?:> You |> You say "|)\/(.+?)["]?[.]?\n?$/i,
-  prefixSymbol: '/',
-  letter: /[0-9]/gi,
-  digit: /\D/g,
-  punctuation: /[^\w\s]/gi,
-  shootingWeapons: /(crossbow|bow)/i,
-  wornItem: /(?<=WORN<you>:)(.*)(?=;)/gi,
-  inventory: /(?<=INV<you>:)(.*)(?=.)/gi,
-  ammunition: /(?:(arrow(s|)|bullet(s|)))/i,
-  weapons: /(crossbow|gun|bazooka|dagger|knife|shuriken|chakhram|sword|claymore|zweihander|rapier|epee|kukri|trident|katana|cutlass|scimitar|nodachi|tanto|naginata|spear|pike|axe|halberd|mace|flail|hammer|pickaxe|stiletto|bow)/gi,
-  clothing: /(pant(ie|)s|tunic|breeches|loincloth|doublet|cloak|robe|surcoat|tabard|trousers|skirt|dress|gown|socks|gloves|hat|waistcoat|kilt|cummerbund|bowtie|necktie|tuxedo|kimono|karate gi|toe socks|sarong|scarf|legwarmers|trenchcoat|jacket|shorts|leggings|blouse|sweater|cardigantutu|rags|armor|jerkin|shirt|clothes|leathers|hood|cuirass|chainmail|gauntlets|vambraces|bracers|tights)/gi
+  commands: {
+    prefix: /\n? ?(?:> You |> You say "|)\/(.+?)["]?[.]?\n?$/i,
+    prefixSymbol: '/'
+  },
+  general: {
+    letter: /[0-9]/gi,
+    digit: /\D/g,
+    punctuation: /[^\w\s]/gi
+  },
+  inventory: {
+    shootingWeapons: /(crossbow|bow)/i,
+    wornItem: /(?<=WORN<you>:)(.*)(?=;)/gi,
+    playerInv: /(?<=INV<you>:)(.*)(?=.)/gi,
+    ammunition: /(?:(arrow(s|)|bullet(s|)))/i,
+    weapons: /(crossbow|gun|bazooka|dagger|knife|shuriken|chakhram|sword|claymore|zweihander|rapier|epee|kukri|trident|katana|cutlass|scimitar|nodachi|tanto|naginata|spear|pike|axe|halberd|mace|flail|hammer|pickaxe|stiletto|bow)/gi,
+    clothing: /(pant(ie|)s|tunic|breeches|loincloth|doublet|cloak|robe|surcoat|tabard|trousers|skirt|dress|gown|socks|gloves|hat|waistcoat|kilt|cummerbund|bowtie|necktie|tuxedo|kimono|karate gi|toe socks|sarong|scarf|legwarmers|trenchcoat|jacket|shorts|leggings|blouse|sweater|cardigantutu|rags|armor|jerkin|shirt|clothes|leathers|hood|cuirass|chainmail|gauntlets|vambraces|bracers|tights)/gi
+  }
 }
+
 /**
  * Function that executes exactly once when, the adventure starts
  */
@@ -40,7 +47,7 @@ function capitalize(string) {
  */
 function findItemInInventory(itemName) {
   console.log(`START findItemInInventory(): Looking for item "${itemName}" in player's inventory.`);
-  let loweredName = itemName.toLowerCase().replace(state.invSystem.config.punctuation, '');
+  let loweredName = itemName.toLowerCase().replace(regex.general.punctuation, '');
   let itemFound = getInventory().find((item) => {
     return item.name == loweredName;
   });
@@ -62,7 +69,7 @@ function findItemInInventory(itemName) {
  */
 function removeFromInventory(itemName, itemQuantity) {
   console.log(`START removeFromInventory(): Removing ${itemQuantity} instances of "${itemName}" from player's inventory.`);
-  let loweredName = itemName.toLowerCase().replace(state.invSystem.config.punctuation, '');
+  let loweredName = itemName.toLowerCase().replace(regex.general.punctuation, '');
   let item = findItemInInventory(loweredName);
   if (typeof item == 'undefined') {
     console.log(`END removeFromInventory(): Did not find ${itemName} in player's inventory.`);
@@ -118,7 +125,7 @@ function getInventory() {
 function addToInventory(itemName, itemQuantity) {
 
   console.log(`START addToInventory(): adding ${itemQuantity} instances of "${itemName}" to player's inventory.`);
-  let loweredName = itemName.toLowerCase().replace(state.invSystem.config.punctuation, '');
+  let loweredName = itemName.toLowerCase().replace(regex.general.punctuation, '');
   let item = findItemInInventory(loweredName);
   if (typeof item == 'undefined') {
     console.log(`INSIDE addToInventory(): Player has no other instances of this item in their inventory. Adding these.`);
@@ -158,7 +165,7 @@ function equipItem(itemName) {
     }
 
     let playerWorldInfo = worldEntries.find(x => x.keys.includes('you'));
-    let itemsWorn = playerWorldInfo.entry.match(state.invSystem.config.wornItem)[0];
+    let itemsWorn = playerWorldInfo.entry.match(regex.inventory.wornItem)[0];
     let oldItem = getInventory().find(oldItem => oldItem.status == 'worn' && oldItem.type == itemToBeEquipped.type);
     if (typeof oldItem != 'undefined') {
       const oldItemIndex = state.invSystem.inventory.findIndex(x => x.name == oldItem.name);
@@ -175,10 +182,10 @@ function equipItem(itemName) {
       .map((k) => {
         console.log(`INSIDE equipItem(): worn item found in inventory -> ${k.name}`);
         return k.name;
-      }).join('/');
+      }).join('&');
 
     console.log(`INSIDE equipItem(): finished building new WORN string -> ${itemsWorn}`);
-    playerWorldInfo.entry = playerWorldInfo.entry.replace(state.invSystem.config.wornItem, itemsWorn);
+    playerWorldInfo.entry = playerWorldInfo.entry.replace(regex.inventory.wornItem, itemsWorn);
 
     console.log(`END equipItem(): ${itemToBeEquipped.name} has been equipped.`);
     return `\nYou are now equipping ${itemToBeEquipped.name}.`;
@@ -195,22 +202,22 @@ function debugInventory() {
   console.log(`START debugInventory(): debugging player's inventory`);
   let playerWorldInfo = worldEntries.find(x => x.keys.includes('you'));
 
-  let itemsWorn = playerWorldInfo.entry.match(state.invSystem.config.wornItem)[0];
-  let itemsInInventory = playerWorldInfo.entry.match(state.invSystem.config.inventory)[0];
+  let itemsWorn = playerWorldInfo.entry.match(regex.inventory.wornItem)[0];
+  let itemsInInventory = playerWorldInfo.entry.match(regex.inventory.playerInv)[0];
 
   itemsWorn = getInventory().filter((x) => x.status == 'worn')
     .map((k) => {
       console.log(`INSIDE debugInventory(): Updating player WI with worn items`);
       return k.name;
-    }).join('/');
+    }).join('&');
 
   itemsInInventory = getInventory().map((k) => {
     console.log(`INSIDE debugInventory(): Updating player WI with inventory items`);
-    return `${k.name}< quantity: ${k.quantity}>`;
-  }).join('/');
+    return `${k.name}`;
+  }).join('&');
 
-  playerWorldInfo.entry = playerWorldInfo.entry.replace(state.invSystem.config.wornItem, itemsWorn);
-  playerWorldInfo.entry = playerWorldInfo.entry.replace(state.invSystem.inventory, itemsInInventory);
+  playerWorldInfo.entry = playerWorldInfo.entry.replace(regex.inventory.wornItem, itemsWorn);
+  playerWorldInfo.entry = playerWorldInfo.entry.replace(regex.inventory.playerInv, itemsInInventory);
 
   console.log("INSIDE debugInventory(): Fixed player WI with inventory's items.");
   console.log(`END debugInventory(): Player's WI fixed.`);
@@ -222,14 +229,15 @@ function debugInventory() {
 function updateInventory() {
   console.log(`START updateInventory(): updating player's inventory and WI with current items`);
   let playerWorldInfo = worldEntries.find(x => x.keys.includes('you'));
-  let itemsInInventory = playerWorldInfo.entry.match(state.invSystem.config.inventory)[0];
+  let itemsInInventory = playerWorldInfo.entry.match(regex.inventory.playerInv)[0];
   itemsInInventory = getInventory().map((k) => {
-    console.log(`INSIDE updateInventory(): Sorting inventory items and quantities into player WI`);
-    return `${k.name}<quantity:${k.quantity}>`;
-  }).join('/');
+    console.log(`INSIDE updateInventory(): Sorting inventory items and quantities into player WI. Current item: ${k.name}`);
+    return `${k.name}`;
+  }).join('&');
 
-  playerWorldInfo.entry = playerWorldInfo.entry.replace(state.invSystem.inventory, itemsInInventory);
-  console.log(`END updateInventory(): updated player's inventory and WI with current items`);
+  console.log(`INSIDE updateInventory(): Inserting items into WI: ${itemsInInventory}`);
+  playerWorldInfo.entry = playerWorldInfo.entry.replace(regex.inventory.playerInv, itemsInInventory);
+  console.log(`END updateInventory(): updated player's inventory and WI with current items.`);
 }
 
 /**
@@ -238,11 +246,11 @@ function updateInventory() {
  * @param {string} itemType
  */
 function getType(itemName) {
-  if (itemName.match(state.invSystem.config.weapons)) {
+  if (itemName.match(regex.inventory.weapons)) {
     return 'weapon';
-  } else if (itemName.match(state.invSystem.config.clothing)) {
+  } else if (itemName.match(regex.inventory.clothing)) {
     return 'clothing';
-  } else if (itemName.match(state.invSystem.config.ammunition)) {
+  } else if (itemName.match(regex.inventory.ammunition)) {
     return 'ammo';
   }
   return 'misc';
@@ -284,8 +292,8 @@ commandList = {
       console.log(`invadd: ${state.invSystem.config.enableFramework}`)
       console.log(`Begin inventory add.`);
       if (state.invSystem.config.enableFramework) {
-        const itemName = args.replace(state.invSystem.config.letter, '').trim();
-        const itemQuantity = Number.isNaN(parseInt(args.replace(state.invSystem.config.digit, '').trim())) ? 1 : parseInt(args.replace(state.invSystem.config.digit, '').trim());
+        const itemName = args.replace(regex.general.letter, '').trim();
+        const itemQuantity = Number.isNaN(parseInt(args.replace(regex.general.digit, '').trim())) ? 1 : parseInt(args.replace(regex.general.digit, '').trim());
 
         if (itemQuantity >= 1) {
           state.message = `${addToInventory(itemName, itemQuantity)}`;
@@ -308,8 +316,8 @@ commandList = {
     execute: (args) => {
       console.log(`Begin inventory remove.`);
       if (state.invSystem.config.enableFramework) {
-        const itemName = args.replace(state.invSystem.config.letter, '').trim();
-        const itemQuantity = Number.isNaN(parseInt(args.replace(state.invSystem.config.digit, '').trim())) ? 1 : parseInt(args.replace(state.invSystem.config.digit, '').trim());
+        const itemName = args.replace(regex.general.letter, '').trim();
+        const itemQuantity = Number.isNaN(parseInt(args.replace(regex.general.digit, '').trim())) ? 1 : parseInt(args.replace(regex.general.digit, '').trim());
 
         if (itemQuantity >= 1) {
           state.message = `${removeFromInventory(itemName, itemQuantity)}`;
@@ -332,7 +340,7 @@ commandList = {
     execute: (args) => {
       console.log(`Begin inventory equip.`);
       if (state.invSystem.config.enableFramework) {
-        const itemName = args.replace(state.invSystem.config.letter, '').trim();
+        const itemName = args.replace(regex.general.letter, '').trim();
         state.message = `${equipItem(itemName)}`;
       } else {
         console.log(`Mechanics are disabled.`);
