@@ -1,20 +1,28 @@
-state.config = {
-  regex: {
-    prefix: /\n? ?(?:> You |> You say "|)\/(.+?)["]?[.]?\n?$/i,
-    prefixSymbol: '/',
-    letter: /[0-9]/gi,
-    digit: /\D/g,
-    punctuation: /[^\w\s]/gi,
-    shootingWeapons: /(crossbow|bow)/i,
-    wornItem: /(?<=WORN<you>:)(.*)(?=;)/gi,
-    inventory: /(?<=INV<you>:)(.*)(?=.)/gi,
-    shootAgain: /(?:(another|more) arrow(s|)|shoot bow( again|)|you (try to |)shoot)/i,
-    ammunition: /(?:(arrow(s|)|bullet(s|)))/i,
-    weapons: /(crossbow|gun|bazooka|dagger|knife|shuriken|chakhram|sword|claymore|zweihander|rapier|epee|kukri|trident|katana|cutlass|scimitar|nodachi|tanto|naginata|spear|pike|axe|halberd|mace|flail|hammer|pickaxe|stiletto|bow)/gi,
-    clothing: /(pant(ie|)s|tunic|breeches|loincloth|doublet|cloak|robe|surcoat|tabard|trousers|skirt|dress|gown|socks|gloves|hat|waistcoat|kilt|cummerbund|bowtie|necktie|tuxedo|kimono|karate gi|sarong|scarf|legwarmers|trenchcoat|coat|jacket|shorts|leggings|blouse|sweater|cardigantutu|rags|armor|jerkin|shirt|clothes|leathers|hood|cuirass|chainmail|gauntlets|vambraces|bracers|tights)/gi,
-    brackets: /\[|\]/g,
-    bracketedWord: /\[(.*?)\]/g
+const regex = {
+  prefix: /\n? ?(?:> You |> You say "|)\/(.+?)["]?[.]?\n?$/i,
+  prefixSymbol: '/',
+  letter: /[0-9]/gi,
+  digit: /\D/g,
+  punctuation: /[^\w\s]/gi,
+  shootingWeapons: /(crossbow|bow)/i,
+  wornItem: /(?<=WORN<you>:)(.*)(?=;)/gi,
+  inventory: /(?<=INV<you>:)(.*)(?=.)/gi,
+  ammunition: /(?:(arrow(s|)|bullet(s|)))/i,
+  weapons: /(crossbow|gun|bazooka|dagger|knife|shuriken|chakhram|sword|claymore|zweihander|rapier|epee|kukri|trident|katana|cutlass|scimitar|nodachi|tanto|naginata|spear|pike|axe|halberd|mace|flail|hammer|pickaxe|stiletto|bow)/gi,
+  clothing: /(pant(ie|)s|tunic|breeches|loincloth|doublet|cloak|robe|surcoat|tabard|trousers|skirt|dress|gown|socks|gloves|hat|waistcoat|kilt|cummerbund|bowtie|necktie|tuxedo|kimono|karate gi|toe socks|sarong|scarf|legwarmers|trenchcoat|jacket|shorts|leggings|blouse|sweater|cardigantutu|rags|armor|jerkin|shirt|clothes|leathers|hood|cuirass|chainmail|gauntlets|vambraces|bracers|tights)/gi
+}
+/**
+ * Function that executes exactly once when, the adventure starts
+ */
+function setUpInventoryFramework() {
+  console.log(`START setUpInventoryFramework(): Initializing framework.`);
+  state.invSystem = {
+    inventory: [],
+    config: {
+      enableFramework: true
+    }
   }
+  console.log(`END setUpInventoryFramework(): Framework initialized.`);
 }
 
 /**
@@ -24,8 +32,8 @@ state.config = {
  * Removes backets from input text to handle them as placeholders
  */
 function grabAllBrackets(text) {
-  for (entry of text.match(state.config.regex.bracketedWord)) {
-    entry = entry.replace(state.config.regex.brackets, '');
+  for (entry of text.match(state.invSystem.config.regex.bracketedWord)) {
+    entry = entry.replace(state.invSystem.config.regex.brackets, '');
     if (!state.placeholders) {
       state.placeholders = new Array();
     }
@@ -89,7 +97,7 @@ function capitalize(string) {
  */
 function findItemInInventory(itemName) {
   console.log(`START findItemInInventory(): Looking for item "${itemName}" in player's inventory.`);
-  let loweredName = itemName.toLowerCase().replace(state.config.regex.punctuation, '');
+  let loweredName = itemName.toLowerCase().replace(state.invSystem.config.regex.punctuation, '');
   let itemFound = getInventory().find((item) => {
     return item.name == loweredName;
   });
@@ -111,7 +119,7 @@ function findItemInInventory(itemName) {
  */
 function removeFromInventory(itemName, itemQuantity) {
   console.log(`START removeFromInventory(): Removing ${itemQuantity} instances of "${itemName}" from player's inventory.`);
-  let loweredName = itemName.toLowerCase().replace(state.config.regex.punctuation, '');
+  let loweredName = itemName.toLowerCase().replace(state.invSystem.config.regex.punctuation, '');
   let item = findItemInInventory(loweredName);
   if (typeof item == 'undefined') {
     console.log(`END removeFromInventory(): Did not find ${itemName} in player's inventory.`);
@@ -151,13 +159,13 @@ function checkInventory() {
  */
 function getInventory() {
   console.log(`START getInventory(): verifying player's inventory.`);
-  if (typeof state.inventory == 'undefined') {
+  if (typeof state.invSystem.inventory == 'undefined') {
     console.log(`INSIDE getInventory(): Inventory array is undefined. Declaring it with an empty array.`);
-    state.inventory = [];
+    state.invSystem.inventory = [];
   }
 
   console.log(`END getInventory(): player's inventory exists. Returning its contents.`);
-  return state.inventory;
+  return state.invSystem.inventory;
 }
 
 /**
@@ -168,7 +176,7 @@ function getInventory() {
 function addToInventory(itemName, itemQuantity) {
 
   console.log(`START addToInventory(): adding ${itemQuantity} instances of "${itemName}" to player's inventory.`);
-  let loweredName = itemName.toLowerCase().replace(state.config.regex.punctuation, '');
+  let loweredName = itemName.toLowerCase().replace(state.invSystem.config.regex.punctuation, '');
   let item = findItemInInventory(loweredName);
   if (typeof item == 'undefined') {
     console.log(`INSIDE addToInventory(): Player has no other instances of this item in their inventory. Adding these.`);
@@ -179,7 +187,7 @@ function addToInventory(itemName, itemQuantity) {
       type: getType(itemName)
     };
 
-    state.inventory.push(item);
+    state.invSystem.inventory.push(item);
   } else {
     console.log(`INSIDE addToInventory(): Player already has other instances of this item in their inventory. Incrementing the quantity by ${itemQuantity}.`);
     item.quantity = item.quantity + itemQuantity;
@@ -200,7 +208,7 @@ function equipItem(itemName) {
   const itemNameLowerCase = itemName.toLowerCase();
   let itemToBeEquipped = findItemInInventory(itemNameLowerCase);
   if (typeof itemToBeEquipped != 'undefined') {
-    const itemToBeEquippedIndex = state.inventory.findIndex(x => x.name == itemToBeEquipped.name);
+    const itemToBeEquippedIndex = state.invSystem.inventory.findIndex(x => x.name == itemToBeEquipped.name);
     console.log(`INSIDE equipItem(): ${itemName} exists in player's inventory`);
     if (itemToBeEquipped.type != 'weapon' && itemToBeEquipped.type != 'clothing' && itemToBeEquipped.type != 'ammo') {
       console.log(`END equipItem(): item is not equippable.`);
@@ -208,19 +216,19 @@ function equipItem(itemName) {
     }
 
     let playerWorldInfo = worldEntries.find(x => x.keys.includes('you'));
-    let itemsWorn = playerWorldInfo.entry.match(state.config.regex.wornItem)[0];
+    let itemsWorn = playerWorldInfo.entry.match(state.invSystem.config.regex.wornItem)[0];
     let oldItem = getInventory().find(oldItem => oldItem.status == 'worn' && oldItem.type == itemToBeEquipped.type);
     if (typeof oldItem != 'undefined') {
-      const oldItemIndex = state.inventory.findIndex(x => x.name == oldItem.name);
+      const oldItemIndex = state.invSystem.inventory.findIndex(x => x.name == oldItem.name);
       console.log(`INSIDE equipItem(): Player has another item of the same type equipped. Unequipping old item.`);
       itemsWorn.replace(oldItem.name.toLowerCase(), '');
       console.log(`INSIDE equipItem(): Removing worn status from ${oldItem.name}.`);
       oldItem.status = 'in inventory';
-      state.inventory[oldItemIndex] = oldItem;
+      state.invSystem.inventory[oldItemIndex] = oldItem;
     }
 
     itemToBeEquipped.status = 'worn';
-    state.inventory[itemToBeEquippedIndex] = itemToBeEquipped;
+    state.invSystem.inventory[itemToBeEquippedIndex] = itemToBeEquipped;
     itemsWorn = getInventory().filter((x) => x.status == 'worn')
       .map((k) => {
         console.log(`INSIDE equipItem(): worn item found in inventory -> ${k.name}`);
@@ -228,7 +236,7 @@ function equipItem(itemName) {
       }).join('/');
 
     console.log(`INSIDE equipItem(): finished building new WORN string -> ${itemsWorn}`);
-    playerWorldInfo.entry = playerWorldInfo.entry.replace(state.config.regex.wornItem, itemsWorn);
+    playerWorldInfo.entry = playerWorldInfo.entry.replace(state.invSystem.config.regex.wornItem, itemsWorn);
 
     console.log(`END equipItem(): ${itemToBeEquipped.name} has been equipped.`);
     return `\nYou are now equipping ${itemToBeEquipped.name}.`;
@@ -245,8 +253,8 @@ function debugInventory() {
   console.log(`START debugInventory(): debugging player's inventory`);
   let playerWorldInfo = worldEntries.find(x => x.keys.includes('you'));
 
-  let itemsWorn = playerWorldInfo.entry.match(state.config.regex.wornItem)[0];
-  let itemsInInventory = playerWorldInfo.entry.match(state.config.regex.inventory)[0];
+  let itemsWorn = playerWorldInfo.entry.match(state.invSystem.config.regex.wornItem)[0];
+  let itemsInInventory = playerWorldInfo.entry.match(state.invSystem.config.regex.inventory)[0];
 
   itemsWorn = getInventory().filter((x) => x.status == 'worn')
     .map((k) => {
@@ -259,8 +267,8 @@ function debugInventory() {
     return `${k.name}< quantity: ${k.quantity}>`;
   }).join('/');
 
-  playerWorldInfo.entry = playerWorldInfo.entry.replace(state.config.regex.wornItem, itemsWorn);
-  playerWorldInfo.entry = playerWorldInfo.entry.replace(state.config.regex.inventory, itemsInInventory);
+  playerWorldInfo.entry = playerWorldInfo.entry.replace(state.invSystem.config.regex.wornItem, itemsWorn);
+  playerWorldInfo.entry = playerWorldInfo.entry.replace(state.invSystem.config.regex.inventory, itemsInInventory);
 
   console.log("INSIDE debugInventory(): Fixed player WI with inventory's items.");
   console.log(`END debugInventory(): Player's WI fixed.`);
@@ -272,13 +280,13 @@ function debugInventory() {
 function updateInventory() {
   console.log(`START updateInventory(): updating player's inventory and WI with current items`);
   let playerWorldInfo = worldEntries.find(x => x.keys.includes('you'));
-  let itemsInInventory = playerWorldInfo.entry.match(state.config.regex.inventory)[0];
+  let itemsInInventory = playerWorldInfo.entry.match(state.invSystem.config.regex.inventory)[0];
   itemsInInventory = getInventory().map((k) => {
     console.log(`INSIDE updateInventory(): Sorting inventory items and quantities into player WI`);
     return `${k.name}<quantity:${k.quantity}>`;
   }).join('/');
 
-  playerWorldInfo.entry = playerWorldInfo.entry.replace(state.config.regex.inventory, itemsInInventory);
+  playerWorldInfo.entry = playerWorldInfo.entry.replace(state.invSystem.config.regex.inventory, itemsInInventory);
   console.log(`END updateInventory(): updated player's inventory and WI with current items`);
 }
 
@@ -288,17 +296,17 @@ function updateInventory() {
  * @param {string} itemType
  */
 function getType(itemName) {
-  if (itemName.match(state.config.regex.weapons)) {
+  if (itemName.match(state.invSystem.config.regex.weapons)) {
     return 'weapon';
-  } else if (itemName.match(state.config.regex.clothing)) {
+  } else if (itemName.match(state.invSystem.config.regex.clothing)) {
     return 'clothing';
-  } else if (itemName.match(state.config.regex.ammunition)) {
+  } else if (itemName.match(state.invSystem.config.regex.ammunition)) {
     return 'ammo';
   }
   return 'misc';
 }
 
-state.config.commandList = {
+commandList = {
   scenarioHelp: {
     name: "scenarioHelp",
     description: "Prints a list of commands",
@@ -307,8 +315,8 @@ state.config.commandList = {
     execute: (args) => {
       console.log(`Begin help command.`);
       let availableCommands = '';
-      Object.keys(state.config.commandList).forEach(key => {
-        availableCommands += ` ${state.config.commandList[key].name}`
+      Object.keys(state.invSystem.commandList).forEach(key => {
+        availableCommands += ` ${state.invSystem.commandList[key].name}`
       });
 
       availableCommands = availableCommands.trim().replace(/\s/g, ', ');
@@ -331,10 +339,10 @@ state.config.commandList = {
     args: true,
     usage: '<object name> <quantity>',
     execute: (args) => {
-      if (state.config.enableInventory) {
+      if (state.invSystem.config.enableFramework) {
         console.log(`Begin inventory add.`);
-        const itemName = args.replace(state.config.regex.letter, '').trim();
-        const itemQuantity = Number.isNaN(parseInt(args.replace(state.config.regex.digit, '').trim())) ? 1 : parseInt(args.replace(state.config.regex.digit, '').trim());
+        const itemName = args.replace(state.invSystem.config.regex.letter, '').trim();
+        const itemQuantity = Number.isNaN(parseInt(args.replace(state.invSystem.config.regex.digit, '').trim())) ? 1 : parseInt(args.replace(state.invSystem.config.regex.digit, '').trim());
 
         if (itemQuantity >= 1) {
           state.message = `${addToInventory(itemName, itemQuantity)}`;
@@ -354,10 +362,10 @@ state.config.commandList = {
     args: true,
     usage: '<object name> <quantity>',
     execute: (args) => {
-      if (state.config.enableInventory) {
+      if (state.invSystem.config.enableFramework) {
         console.log(`Begin inventory remove.`);
-        const itemName = args.replace(state.config.regex.letter, '').trim();
-        const itemQuantity = Number.isNaN(parseInt(args.replace(state.config.regex.digit, '').trim())) ? 1 : parseInt(args.replace(state.config.regex.digit, '').trim());
+        const itemName = args.replace(state.invSystem.config.regex.letter, '').trim();
+        const itemQuantity = Number.isNaN(parseInt(args.replace(state.invSystem.config.regex.digit, '').trim())) ? 1 : parseInt(args.replace(state.invSystem.config.regex.digit, '').trim());
 
         if (itemQuantity >= 1) {
           state.message = `${removeFromInventory(itemName, itemQuantity)}`;
@@ -377,9 +385,9 @@ state.config.commandList = {
     args: true,
     usage: '<object name>',
     execute: (args) => {
-      if (state.config.enableInventory) {
+      if (state.invSystem.config.enableFramework) {
         console.log(`Begin inventory equip.`);
-        const itemName = args.replace(state.config.regex.letter, '').trim();
+        const itemName = args.replace(state.invSystem.config.regex.letter, '').trim();
         state.message = `${equipItem(itemName)}`;
         console.log(`End inventory equip.`);
       } else {
@@ -393,7 +401,7 @@ state.config.commandList = {
     args: false,
     usage: '',
     execute: (args) => {
-      if (state.config.enableInventory) {
+      if (state.invSystem.config.enableFramework) {
         console.log(`Begin inventory check.`);
         state.message = `${checkInventory()}`;
         console.log(`End inventory check.`);
@@ -408,7 +416,7 @@ state.config.commandList = {
     args: false,
     usage: '',
     execute: (args) => {
-      if (state.config.enableInventory) {
+      if (state.invSystem.config.enableFramework) {
         console.log(`Begin inventory debug.`);
         debugInventory();
         state.message = `Your inventory and player WI have been debugged.`;
@@ -427,11 +435,11 @@ state.config.commandList = {
       console.log(`Begin inventory toggle.`);
       if (args != '') {
         if (args == 'disable') {
-          state.config.enableInventory = false;
+          state.invSystem.config.enableFramework = false;
           state.message = 'You have disabled the inventory system mechanics.';
           console.log(`Disabled inventory mechanics toggle.`);
         } else if (args == 'enable') {
-          state.config.enableInventory = true;
+          state.invSystem.config.enableFramework = true;
           state.message = 'You have enabled the inventory system mechanics.';
           console.log(`Enabled inventory mechanics toggle.`);
         } else {
@@ -440,10 +448,10 @@ state.config.commandList = {
         }
       } else {
         console.log(`Checking inventory mechanics state.`);
-        state.message = `Inventory system mechanics are ${state.config.enableInventory ? 'enabled' : 'disabled'}`;
+        state.message = `Inventory system mechanics are ${state.invSystem.config.enableFramework ? 'enabled' : 'disabled'}`;
       }
 
       console.log(`End inventory toggle.`);
     }
   }
-};
+}
