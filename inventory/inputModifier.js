@@ -1,12 +1,11 @@
-const { commandList } = state.regex;
-const { prefix, prefixSymbol, commandList } = state.config.regex;
+const { prefix, prefixSymbol } = regex;
 const modifier = (text) => {
   let stop = false;
   let modifiedText = text;
   const lowered = text.toLowerCase();
   delete state.message;
 
-  if (!state.init && info.actionCount < 1) {
+  if (info.actionCount < 1) {
     playerWorldInfo = {
       keys: `you`,
       hidden: false,
@@ -18,18 +17,14 @@ const modifier = (text) => {
 
     addWorldEntry(playerWorldInfo.keys, playerWorldInfo.entry, false);
 
-    getInventory();
+    setUpInventoryFramework();
     addToInventory('Rusty Sword', 1);
     addToInventory('Commoner clothes', 1);
     equipItem('Commoner clothes');
     equipItem('Rusty Sword');
-
-    state.init = true;
-    state.config.enableInventory = true;
   }
 
-  const commandMatcher = modifiedText.match(prefix);
-  if (commandMatcher) {
+  if (commandMatcher = modifiedText.match(prefix)) {
     console.log(`Command detected`);
     console.log(commandMatcher);
 
