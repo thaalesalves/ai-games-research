@@ -1,5 +1,6 @@
 const regex = {
   commands: {
+    actions: /\n? ?(?:> You |> You say ")(\w+?)( [\w ]+)?[".]?\n?$/i,
     prefix: /\n? ?(?:> You |> You say "|)\/(.+?)["]?[.]?\n?$/i,
     prefixSymbol: '/'
   },
@@ -15,6 +16,9 @@ const regex = {
     ammunition: /(?:(arrow(s|)|bullet(s|)))/i,
     weapons: /(crossbow|gun|bazooka|dagger|knife|shuriken|chakhram|sword|claymore|zweihander|rapier|epee|kukri|trident|katana|cutlass|scimitar|nodachi|tanto|naginata|spear|pike|axe|halberd|mace|flail|hammer|pickaxe|stiletto|bow)/gi,
     clothing: /(pant(ie|)s|tunic|breeches|loincloth|doublet|cloak|robe|surcoat|tabard|trousers|skirt|dress|gown|socks|gloves|hat|waistcoat|kilt|cummerbund|bowtie|necktie|tuxedo|kimono|karate gi|toe socks|sarong|scarf|legwarmers|trenchcoat|jacket|shorts|leggings|blouse|sweater|cardigantutu|rags|armor|jerkin|shirt|clothes|leathers|hood|cuirass|chainmail|gauntlets|vambraces|bracers|tights)/gi
+  },
+  triggers: {
+    
   }
 }
 
@@ -256,7 +260,7 @@ function getType(itemName) {
   return 'misc';
 }
 
-commandList = {
+const commandList = {
   scenarioHelp: {
     name: "scenarioHelp",
     description: "Prints a list of commands",

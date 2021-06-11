@@ -315,7 +315,7 @@ function getType(itemName) {
   return 'misc';
 }
 
-commandList = {
+const commandList = {
   scenarioHelp: {
     name: "scenarioHelp",
     description: "Prints a list of commands",
