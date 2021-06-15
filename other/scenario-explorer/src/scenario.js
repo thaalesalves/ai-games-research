@@ -5,13 +5,15 @@ let placeholders = [];
 let placeholderAnswers = [];
 
 const grabPlaceholders = (text) => {
-  for (entry of text.match(/\[(\$\{|)(.*?)(\}|)\]/g)) {
-    entry = entry.replace(/\[(\$\{|)|(\}|)\]/g, '');
-    if (!placeholders) {
-      placeholders = new Array();
-    }
+  if (text.match(/\[(\$\{|)(.*?)(\}|)\]/g)) {
+    for (entry of text.match(/\[(\$\{|)(.*?)(\}|)\]/g)) {
+      entry = entry.replace(/\[(\$\{|)|(\}|)\]/g, '');
+      if (!placeholders) {
+        placeholders = new Array();
+      }
 
-    placeholders.push(entry);
+      placeholders.push(entry);
+    }
   }
 }
 
@@ -63,7 +65,6 @@ const getDateString = () => {
 }
 
 const saveStory = (adventure, title) => {
-  console.log(`DEBUG: adventure -> ${JSON.stringify(adventure)}`);
   let input = rl.question(`Type your adventure's name (defaults to ${title}): `);
   let storyTitle = input ? input : title;
   const defaultOutputFile = `stories/${storyTitle ? storyTitle.replace(/[^a-z0-9]/gi, '_').toLowerCase() : character.name.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_${getDateString()}.json`;
