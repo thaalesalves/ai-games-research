@@ -4,7 +4,6 @@ The AID Elder Scrolls scenario ported to KoboldAI.
 ## Requirements
 * NodeJS
 * Terminal/command prompt
-* `imperial-metric`
 * `readline-sync`
 * `fs`
 

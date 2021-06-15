@@ -9,7 +9,6 @@
         "start": "node tamriel-scenario.js"
     },
     "dependencies": {
-        "imperial-metric": "",
         "readline-sync": ""
     }
 }
