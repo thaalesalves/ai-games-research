@@ -1,0 +1,15 @@
+{
+    "name": "tamriel-scenario",
+    "version": "1.0.0",
+    "description": "AID TAmriel scenario ported to KAI",
+    "author": "coffeehumanoid (thaalesalves)",
+    "license": "ISC",
+    "repository": {},
+    "scripts": {
+        "start": "node tamriel-scenario.js"
+    },
+    "dependencies": {
+        "imperial-metric": "",
+        "readline-sync": ""
+    }
+}
