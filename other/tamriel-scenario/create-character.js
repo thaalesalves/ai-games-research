@@ -149,9 +149,9 @@ module.exports = {
     return {
       key: `${character.name},you,You,YOU`,
       content: '{ ' +
-        `Mark description:< name: < ${character.name}>>/< age: <${character.age}>>/< ${character.gender}>/< height: < ${character.appearance.height}>>/< weight: < ${character.appearance.weight}>>/< class: < ${character.class}>>.` +
-        `Mark appearance:< ${character.appearance.features}>/< eyes: < ${character.eyes}>>/< hair: < ${character.hair.style}& ${character.hair.color}>>/< race: < ${character.race}>>. ` +
-        `Mark mental:< ${character.personality}>.` +
+        `You description:< name: < ${character.name}>>/< age: <${character.age}>>/< ${character.gender}>/< height: < ${character.appearance.height}>>/< weight: < ${character.appearance.weight}>>/< class: < ${character.class}>>.` +
+        `You appearance:< ${character.appearance.features}>/< eyes: < ${character.eyes}>>/< hair: < ${character.hair.style}& ${character.hair.color}>>/< race: < ${character.race}>>. ` +
+        `You mental:< ${character.personality}>.` +
         '}'
     };
   },
