@@ -146,7 +146,6 @@ module.exports = {
     };
   },
   create: () => {
-    console.log('\n');
     return {
       name: rl.question("Type your character's name: ").trim(),
       gender: rl.question("Type your character's gender: ").trim(),
@@ -167,7 +166,6 @@ module.exports = {
     };
   },
   createCustomPrompt: () => {
-    console.log('\n');
     return {
       name: rl.question("Type your character's name: ").trim(),
       gender: rl.question("Type your character's gender: ").trim(),

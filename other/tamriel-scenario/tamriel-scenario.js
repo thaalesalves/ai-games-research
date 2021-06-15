@@ -63,15 +63,13 @@ const main = () => {
       process.exit(1);
     case "1":
       charSheet = characterCreator.create();
-      prompt = promptGenerator.customCharacterPrompt(charSheet);
+      charSheet.prompt = promptGenerator.customCharacterPrompt(charSheet);
       break;
     case "2":
       charSheet = characterCreator.createCustomPrompt();
-      prompt = charSheet.prompt;
       break;
     case "3":
       charSheet = characterCreator.generateCharacter();
-      prompt = charSheet.prompt;
       break;
     default:
       console.log("Invalid option chosen.")
@@ -81,8 +79,8 @@ const main = () => {
   worldInfo.push(characterCreator.buildWorldInfo(charSheet));
   console.log("\n======== CHARACTER DESCRIPTION ========");
   console.log(JSON.stringify(charSheet, null, 2));
-  console.log("\n=======================================");
-  saveAdventure(buildAdventure(worldInfo, prompt, authorsNote));
+  console.log("\n=======================================\n");
+  saveAdventure(buildAdventure(worldInfo, charSheet.prompt, authorsNote));
 }
 
 main();
