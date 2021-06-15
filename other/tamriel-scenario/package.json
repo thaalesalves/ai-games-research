@@ -9,6 +9,7 @@
         "start": "node src/tamriel-scenario.js"
     },
     "dependencies": {
-        "readline-sync": ""
+        "press-any-key": "^0.1.1",
+        "readline-sync": "^1.4.10"
     }
 }

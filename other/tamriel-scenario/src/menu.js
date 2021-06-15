@@ -8,7 +8,19 @@ let menuOptions = [
   {
     text: `Exit`,
     execute: () => {
-      process.exit(1);
+      process.exit(0);
+    }
+  },
+  {
+    text: `Scenario sinopsis`,
+    execute: () => {
+      console.clear();
+      status = "Returning from sinopsis.";
+      return `========================= TAMRIEL: THE REIGN OF KATARIAH =========================\n` +
+      `The year is 3E 153, and Katariah Ra'athim is Empress of Tamriel.\n` +
+      `The Empire is in peace under her rule, after decades of wars and schisms.\n` +
+      `Potema, Kintyra II, Uriel III, Pelagius the Mad are all gone, and under Pelagius' wife, the Empire has a chance for stability.\n` +
+      `==================================================================================`;
     }
   },
   {

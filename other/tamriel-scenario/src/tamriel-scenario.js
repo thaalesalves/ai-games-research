@@ -3,6 +3,7 @@ const fs = require(`fs`);
 const rl = require('readline-sync');
 const characterCreator = require('./create-character.js');
 const path = require('path');
+const pressAnyKey = require('press-any-key');
 
 const getDateString = () => {
   const date = new Date();
@@ -45,14 +46,26 @@ const getAuthorsNote = () => {
 }
 
 const main = () => {
-  let charSheet = menu.showMenu();
-  let basedir = path.resolve(__dirname, '..');
-  let worldInfo = JSON.parse(fs.readFileSync(`${basedir}/wi/tamriel-reign-katariah.json`, 'utf8'));
-  worldInfo.push(characterCreator.buildWorldInfo(charSheet));
-  console.log(`\n======== CHARACTER DESCRIPTION ========`);
-  console.log(JSON.stringify(charSheet, null, 2));
-  console.log(`\n=======================================\n`);
-  saveAdventure(buildAdventure(worldInfo, charSheet.prompt, getAuthorsNote()), charSheet);
+  let menuReturn = menu.showMenu();
+  if (menuReturn.name) {
+    let basedir = path.resolve(__dirname, '..');
+    let worldInfo = JSON.parse(fs.readFileSync(`${basedir}/wi/tamriel-reign-katariah.json`, 'utf8'));
+    worldInfo.push(characterCreator.buildWorldInfo(menuReturn));
+    console.log(`\n======== CHARACTER DESCRIPTION ========`);
+    console.log(JSON.stringify(menuReturn, null, 2));
+    console.log(`\n=======================================\n`);
+    saveAdventure(buildAdventure(worldInfo, menuReturn.prompt, getAuthorsNote()), menuReturn);
+    return;
+  }
+
+  console.log(menuReturn);
+  pressAnyKey('Press any key to go back to the menu...', {
+    ctrlC: "reject"
+  }).then(() => {
+    main();
+  }).catch(() => {
+    process.exit(1);
+  });
 }
 
 main();
