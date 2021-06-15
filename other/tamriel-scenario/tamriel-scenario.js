@@ -3,12 +3,18 @@ rl = require('readline-sync');
 characterCreator = require('./create-character.js');
 promptGenerator = require('./prompt-generator.js');
 
+let status;
+let menuOptions = [
+  "Create character",
+  "Create character (and write your own prompt)",
+  "Random character"
+];
+
 const printMenu = () => {
   console.clear();
+  console.log(status ? `Message: ${status}` : '');
   console.log("========================= TAMRIEL: THE THIRD ERA =========================");
-  console.log("1. Create character");
-  console.log("2. Create character (and write your own prompt)");
-  console.log("3. Random character");
+  menuOptions.forEach((menuOption, i) => console.log(`${i + 1}. ${menuOption}`));
   console.log("0. Exit");
   console.log("==========================================================================");
   return rl.question("Choose an option: ");
@@ -57,7 +63,6 @@ const main = () => {
   let worldInfo = JSON.parse(fs.readFileSync('./tamriel-world-info.json', 'utf8'));
   let prompt;
   let charSheet;
-  let authorsNote = getAuthorsNote();
   switch (option) {
     case "0":
       process.exit(1);
@@ -72,7 +77,7 @@ const main = () => {
       charSheet = characterCreator.generateCharacter();
       break;
     default:
-      console.log("Invalid option chosen.")
+      status = `Invalid option chosen: ${option}.`;
       main();
   }
 
@@ -80,7 +85,7 @@ const main = () => {
   console.log("\n======== CHARACTER DESCRIPTION ========");
   console.log(JSON.stringify(charSheet, null, 2));
   console.log("\n=======================================\n");
-  saveAdventure(buildAdventure(worldInfo, charSheet.prompt, authorsNote));
+  saveAdventure(buildAdventure(worldInfo, charSheet.prompt, getAuthorsNote()));
 }
 
 main();
