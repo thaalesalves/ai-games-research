@@ -56,7 +56,7 @@ const buildAdventure = (worldInfo, prompt, authorsNote) => {
 
 const getAuthorsNote = () => {
   const defaultAuthorsNote = '[Writing style: elegant, dramatic, vivid] [Genre: Fantasy]';
-  const authorsNote = rl.question(`Write your author's note (defaults to ${defaultAuthorsNote} if left empty): `);
+  const authorsNote = rl.question(`Write your author's note (defaults to "${defaultAuthorsNote}" if left empty): `);
   return authorsNote ? authorsNote : defaultAuthorsNote;
 }
 
