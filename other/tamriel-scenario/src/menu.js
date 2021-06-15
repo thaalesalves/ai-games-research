@@ -59,7 +59,12 @@ const printMenu = () => {
 module.exports = {
   showMenu: () => {
     let option = printMenu();
-    return menuOptions[option].execute();
+    if (menuOptions[option]) {
+      return menuOptions[option].execute();
+    }
+    
+    status = `Invalid option chosen: ${option}`;
+    printMenu();
   },
   charSheet: charSheet
 }
