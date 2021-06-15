@@ -6,7 +6,7 @@
     "license": "ISC",
     "repository": {},
     "scripts": {
-        "start": "node tamriel-scenario.js"
+        "start": "node src/tamriel-scenario.js"
     },
     "dependencies": {
         "readline-sync": ""

@@ -1,24 +1,8 @@
-fs = require(`fs`);
-rl = require('readline-sync');
-characterCreator = require('./create-character.js');
-promptGenerator = require('./prompt-generator.js');
-
-let status;
-let menuOptions = [
-  `Create character`,
-  `Create character (and write your own prompt)`,
-  `Random character`
-];
-
-const printMenu = () => {
-  console.clear();
-  console.log(status ? `Message: ${status}` : '');
-  console.log(`========================= TAMRIEL: THE THIRD ERA =========================`);
-  menuOptions.forEach((menuOption, i) => console.log(`${i + 1}. ${menuOption}`));
-  console.log(`0. Exit`);
-  console.log(`==========================================================================`);
-  return rl.question(`Choose an option: `);
-}
+const menu = require('./menu.js');
+const fs = require(`fs`);
+const rl = require('readline-sync');
+const characterCreator = require('./create-character.js');
+const path = require('path');
 
 const getDateString = () => {
   const date = new Date();
@@ -61,28 +45,9 @@ const getAuthorsNote = () => {
 }
 
 const main = () => {
-  let option = printMenu();
-  let worldInfo = JSON.parse(fs.readFileSync('./tamriel-world-info.json', 'utf8'));
-  let prompt;
-  let charSheet;
-  switch (option) {
-    case `0`:
-      process.exit(1);
-    case `1`:
-      charSheet = characterCreator.create();
-      charSheet.prompt = promptGenerator.customCharacterPrompt(charSheet);
-      break;
-    case `2`:
-      charSheet = characterCreator.createCustomPrompt();
-      break;
-    case `3`:
-      charSheet = characterCreator.generateCharacter();
-      break;
-    default:
-      status = `Invalid option chosen: ${option}.`;
-      main();
-  }
-
+  let charSheet = menu.showMenu();
+  let basedir = path.resolve(__dirname, '..');
+  let worldInfo = JSON.parse(fs.readFileSync(`${basedir}/wi/tamriel-reign-katariah.json`, 'utf8'));
   worldInfo.push(characterCreator.buildWorldInfo(charSheet));
   console.log(`\n======== CHARACTER DESCRIPTION ========`);
   console.log(JSON.stringify(charSheet, null, 2));
