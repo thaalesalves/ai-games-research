@@ -9,7 +9,8 @@ const scenariosDir = `${basedir}/scenarios/`;
 
 const listScenarioFiles = () => {
   files = fs.readdirSync(scenariosDir);
-  files.forEach((file, i) => console.log(`${i}. ${file}`));
+  files.filter((file) => file.match(/.*\.(json)/ig))
+    .forEach((file, i) => console.log(`${i}. ${file}`));
 }
 
 const printMenu = () => {
