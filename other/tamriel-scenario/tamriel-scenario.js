@@ -27,9 +27,10 @@ const getDateString = () => {
   return `${date.getFullYear()}${month}${day}`
 }
 
-const saveAdventure = (adventure) => {
-  let storyTitle = rl.question(`Type your adventure's name: `);
-  const defaultOutputFile = `stories/${storyTitle.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_${getDateString()}.json`;
+const saveAdventure = (adventure, character) => {
+  let input = rl.question(`Type your adventure's name (defaults to ${character.name}): `);
+  let storyTitle = input ? input : character.name;
+  const defaultOutputFile = `stories/${storyTitle ? storyTitle.replace(/[^a-z0-9]/gi, '_').toLowerCase() : character.name.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_${getDateString()}.json`;
   let customOutputFile = rl.question(`Path to where the story should be saved (defaults to ${defaultOutputFile}): `);
   const outputFile = customOutputFile ? customOutputFile : defaultOutputFile;
   fs.writeFile(`${outputFile}`, JSON.stringify(adventure), 'utf8', (err) => {
@@ -86,7 +87,7 @@ const main = () => {
   console.log(`\n======== CHARACTER DESCRIPTION ========`);
   console.log(JSON.stringify(charSheet, null, 2));
   console.log(`\n=======================================\n`);
-  saveAdventure(buildAdventure(worldInfo, charSheet.prompt, getAuthorsNote()));
+  saveAdventure(buildAdventure(worldInfo, charSheet.prompt, getAuthorsNote()), charSheet);
 }
 
 main();
