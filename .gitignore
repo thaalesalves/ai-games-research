@@ -2,3 +2,4 @@
 *.rar
 *.zip
 stories/
+node_modules/
