@@ -3,9 +3,6 @@ The AID Elder Scrolls scenario ported to KoboldAI.
 
 ## Requirements
 * NodeJS
-* Terminal/command prompt
-* `readline-sync`
-* `fs`
 
 ## Usage
 1. Open your terminal and `cd` your way into this directory.
