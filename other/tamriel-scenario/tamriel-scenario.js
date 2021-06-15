@@ -35,15 +35,21 @@ const saveAdventure = (adventure) => {
   });
 }
 
-const buildAdventure = (worldInfo, prompt) => {
+const buildAdventure = (worldInfo, prompt, authorsNote) => {
   return {
-    gamestarted: false,
+    gamestarted: true,
     prompt: prompt,
     memory: '',
-    authorsnote: '',
+    authorsnote: authorsNote,
     actions: [],
     worldinfo: worldInfo,
   };
+}
+
+const getAuthorsNote = () => {
+  const defaultAuthorsNote = '[Writing style: elegant, dramatic, vivid] [Genre: Fantasy]';
+  const authorsNote = rl.question(`Write your author's note (defaults to ${defaultAuthorsNote} if left empty): `);
+  return authorsNote ? authorsNote : defaultAuthorsNote;
 }
 
 const main = () => {
@@ -51,6 +57,7 @@ const main = () => {
   let worldInfo = JSON.parse(fs.readFileSync('./tamriel-world-info.json', 'utf8'));
   let prompt;
   let charSheet;
+  let authorsNote = getAuthorsNote();
   switch (option) {
     case "0":
       process.exit(1);
@@ -72,7 +79,10 @@ const main = () => {
   }
 
   worldInfo.push(characterCreator.buildWorldInfo(charSheet));
-  saveAdventure(buildAdventure(worldInfo, prompt));
+  console.log("\n======== CHARACTER DESCRIPTION ========");
+  console.log(JSON.stringify(charSheet, null, 2));
+  console.log("\n=======================================");
+  saveAdventure(buildAdventure(worldInfo, prompt, authorsNote));
 }
 
 main();

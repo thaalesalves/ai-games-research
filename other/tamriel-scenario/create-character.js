@@ -11,12 +11,10 @@ const RANDOM_CHARACTERS = [
     age: '17',
     personality: 'strong, tough, intimidating',
     class: 'peasant',
-    eyes: {
-      eyeColor: 'light brown'
-    },
+    eyes: 'light brown',
     hair: {
-      hairStyle: 'short and messy',
-      hairColor: 'light blond'
+      style: 'short and messy',
+      color: 'light blond'
     },
     appearance: {
       height: '187',
@@ -38,12 +36,10 @@ const RANDOM_CHARACTERS = [
     age: `25`,
     personality: `very intimidating`,
     class: `peasant`,
-    eyes: {
-      eyeColor: `dark brown`
-    },
+    eyes: `dark brown`,
     hair: {
-      hairStyle: `long hair`,
-      hairColor: `black`
+      style: `long hair`,
+      color: `black`
     },
     appearance: {
       height: `182`,
@@ -68,12 +64,10 @@ const RANDOM_CHARACTERS = [
     age: `32`,
     personality: `brave, kind, loyal`,
     class: `sailor`,
-    eyes: {
-      eyeColor: `blue`
-    },
+    eyes: `blue`,
     hair: {
-      hairStyle: `curly`,
-      hairColor: `brown`
+      style: `curly`,
+      color: `brown`
     },
     appearance: {
       height: `185`,
@@ -95,12 +89,10 @@ const RANDOM_CHARACTERS = [
     age: `26`,
     personality: `self-centered,arrogant,dishonorable`,
     class: `warrior`,
-    eyes: {
-      eyeColor: `steely blue`
-    },
+    eyes: `steely blue`,
     hair: {
-      hairStyle: `long and straight`,
-      hairColor: `dark blonde`
+      style: `long and straight`,
+      color: `dark blonde`
     },
     appearance: {
       height: `180`,
@@ -122,12 +114,10 @@ const RANDOM_CHARACTERS = [
     age: `23`,
     personality: `brave,courageous,foolhardy`,
     class: `warrior`,
-    eyes: {
-      eyeColor: `blue`
-    },
+    eyes: `blue`,
     hair: {
-      hairStyle: `long`,
-      hairColor: `blonde`
+      style: `long`,
+      color: `blonde`
     },
     appearance: {
       height: `180`,
