@@ -13,7 +13,7 @@ let menuOptions = [
     }
   },
   {
-    text: `Adventure Call with Falconhoof`,
+    text: `Adventure Call with Falconhoof (not implemented yet)`,
     execute: () => {
     }
   },
@@ -24,7 +24,7 @@ let menuOptions = [
     }
   },
   {
-    text: `Tamriel: Character Generators`,
+    text: `Tamriel: Character Generators (not implemented yet)`,
     execute: () => {
     }
   },

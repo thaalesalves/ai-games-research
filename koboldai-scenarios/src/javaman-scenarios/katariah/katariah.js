@@ -7,6 +7,7 @@ const characterCreator = require('./create-character.js');
 const promptGenerator = require('./prompt-generator.js');
 
 let message;
+let sinopsis = `Tamriel has gone through a lot in the last decades. Wars, schisms, battles, political fights... and unstability to its citizens. After the War of the Red Diamond, between Potema, Uriel III and Kintyra II, the Empire went through a lot. Armies were deployed to fight the Wolf Queen of Solitude and her Undead Army until her son, Uriel III, died. She lived for another 10 years as Queen of Solitude, until Pelagius III succeeded her.\nIt is said that Potema's own insanity cursed the Blue Palace and its Royal Wing. Pelagius descended into complete madness while he was King of Solitude, and got even worse after he inherited the Ruby Throne, and reached a bad point. His wife, the Dunmer called Katariah Ra'athim, assumed the Throne as Empress Regent of Tamriel while Pelagius, now known as Pelagius the Mad, was in a bad state and could not execise his position as Emperor.\nNow it is the year 3E 153, and Emperor Pelagius III the Mad has died recently. Vrage assumed his place as King of Solitude, and Katariah was officially crowned Empress of Tamriel. Her reign is calm and stable, and Tamriel hasn't seen such a happy phase in decades.\n`;
 let menuOptions = [
   {
     text: `Back`,
@@ -40,9 +41,7 @@ const printMenu = () => {
   console.clear();
   console.log(message ? `Message: ${message}` : '');
   console.log(`========================= TAMRIEL: THE REIGN OF KATARIAH =========================`);
-  console.log(`The year is 3E 153, and Katariah Ra'athim is Empress of Tamriel.\n` +
-  `The Empire is in peace under her rule, after decades of wars and schisms.\n` +
-  `Potema, Kintyra II, Uriel III, Pelagius the Mad are all gone, and under Pelagius' wife, the Empire has a chance for stability.\n`.replace(/(\S+\s*){1,10}/g, "$&\n"));
+  console.log(sinopsis.replace(/(\S+\s*){1,15}/g, "$&\n"));
   menuOptions.forEach((menuOption, i) => console.log(`${i}. ${menuOption.text}`));
   console.log(`==================================================================================`);
   return rl.question(`Choose an option: `);
