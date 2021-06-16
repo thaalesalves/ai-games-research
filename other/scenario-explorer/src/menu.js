@@ -16,12 +16,7 @@ let menuOptions = [
     }
   },
   {
-    text: `Open scenario`,
-    execute: () => {
-    }
-  },
-  {
-    text: `Random scenario`,
+    text: `Open scenario from file (not implemented yet)`,
     execute: () => {
     }
   }
