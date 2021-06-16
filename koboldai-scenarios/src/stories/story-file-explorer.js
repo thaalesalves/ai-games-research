@@ -1,7 +1,7 @@
 const rl = require('readline-sync');
 const fs = require("fs");
 const path = require('path');
-const scenarios = require('../app/options.js');
+const options = require('../app/options.js');
 const menu = require('../app/menu.js');
 
 let basedir = path.resolve(__dirname, '../..');
@@ -13,6 +13,7 @@ const listStoryFiles = () => {
   files = fs.readdirSync(storiesInputDir);
   files.filter((file) => file.match(/.*\.(json)/ig))
     .forEach((file, i) => console.log(`${i + 1}. ${file}`));
+  console.log(`${files.length}. Open from specific file`);
 }
 
 const printMenu = () => {
@@ -24,14 +25,26 @@ const printMenu = () => {
 }
 
 const execute = () => {
-  const option = printMenu();
-  if (option != "0") {
-    const file = fs.readFileSync(`${storiesInputDir}/${files[option]}`, 'utf8');
-    scenarios.execute(JSON.parse(file), 'story');
-    return;
-  }
+  let option;
+  while (!option) {
+    option = printMenu();
+    if (!option) {
+      message = "Please choose an option.";
+      execute();
+    } else if (option != "0") {
+      let file;
+      if (option == files.length) {
+        file = fs.readFileSync(rl.question(`Type the full path and file name to the story file: `), 'utf8');
+      } else {
+        file = fs.readFileSync(`${storiesInputDir}/${files[option]}`, 'utf8');
+      }
 
-  menu.showMenu("Back from story file selection.")
+      options.execute(JSON.parse(file), 'story');
+      return;
+    }
+
+    menu.showMenu("Back from story file selection.");
+  }
 }
 
 module.exports.execute = execute;

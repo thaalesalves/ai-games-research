@@ -11,14 +11,15 @@ let menuOptions = [
     }
   },
   {
-    text: `Explore scenarios`,
+    text: `Javaman's scenarios (not implemented yet)`,
     execute: () => {
       scenarios.execute();
     }
   },
   {
-    text: `Open scenario from file (not implemented yet)`,
+    text: `Explore scenarios`,
     execute: () => {
+      scenarios.execute();
     }
   },
   {
@@ -26,12 +27,7 @@ let menuOptions = [
     execute: () => {
       stories.execute();
     }
-  },
-  {
-    text: `Open story from file (not implemented yet)`,
-    execute: () => {
-    }
-  },
+  }
 ];
 
 const printMenu = () => {
