@@ -28,7 +28,7 @@ const buildStory = (scenario) => {
     gamestarted: true,
     prompt: scenario.prompt,
     memory: '',
-    authorsnote: scenario.authorsNote,
+    authorsnote: util.getAuthorsNote(scenario.authorsNote),
     actions: [],
     worldinfo: util.formatWorldInfo(scenario.worldInfo),
   }

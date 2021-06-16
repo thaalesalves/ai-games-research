@@ -31,6 +31,12 @@ const formatWorldInfo = (originalWi) => {
   return formattedWi;
 }
 
+const getAuthorsNote = (originalAuthorsNote) => {
+  const defaultAuthorsNote = originalAuthorsNote ? originalAuthorsNote : '[Writing style: elegant, dramatic, vivid] [Genre: Fantasy]';
+  const authorsNote = rl.question(`Write your author's note (defaults to "${defaultAuthorsNote}" if left empty): `);
+  return authorsNote ? authorsNote : defaultAuthorsNote;
+}
+
 const removeAccents = (str) => {
   const map = {
     '-': ' ',
@@ -61,5 +67,6 @@ const removeAccents = (str) => {
 module.exports = {
   removeAccents: removeAccents,
   formatWorldInfo: formatWorldInfo,
-  saveStory: saveStory
+  saveStory: saveStory,
+  getAuthorsNote: getAuthorsNote
 }
