@@ -4,19 +4,6 @@ const util = require('../app/utils.js');
 let placeholders = [];
 let placeholderAnswers = [];
 
-const grabPlaceholders = (text) => {
-  if (text.match(/\[(\$\{|)(.*?)(\}|)\]/g)) {
-    for (entry of text.match(/\[(\$\{|)(.*?)(\}|)\]/g)) {
-      entry = entry.replace(/\[(\$\{|)|(\}|)\]/g, '');
-      if (!placeholders) {
-        placeholders = new Array();
-      }
-
-      placeholders.push(entry);
-    }
-  }
-}
-
 const answerQuestions = () => {
   placeholders.forEach((question) => {
     placeholderAnswers.push(rl.question(`${question}: `));
@@ -41,7 +28,7 @@ const printMenu = (scenario) => {
   console.log(title);
   console.log(scenario.description.replace(/(\S+\s*){1,10}/g, "$&\n"));
   console.log(bottom);
-  grabPlaceholders(scenario.prompt);
+  util.grabPlaceholders(scenario.prompt);
   answerQuestions();
 }
 

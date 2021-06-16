@@ -1,6 +1,7 @@
 const rl = require('readline-sync');
 const scenarios = require('../scenarios/scenario-file-explorer.js');
-const stories = require('../stories/story-file-explorer.js')
+const stories = require('../stories/story-file-explorer.js');
+const javaScenarios = require('../javaman-scenarios/javaman-scenarios.js');
 
 let status;
 let menuOptions = [
@@ -11,9 +12,9 @@ let menuOptions = [
     }
   },
   {
-    text: `Javaman's scenarios (not implemented yet)`,
+    text: `Javaman's scenarios`,
     execute: () => {
-      scenarios.execute();
+      javaScenarios.execute();
     }
   },
   {
@@ -41,13 +42,16 @@ const printMenu = () => {
 
 const showMenu = (message) => {
   status = message ? message : '';
-  let option = printMenu();
-  if (menuOptions[option]) {
-    return menuOptions[option].execute();
-  }
+  let option;
+  while (!option || option >= menuOptions.length || option < menuOptions) {
+    option = printMenu();
+    if (menuOptions[option]) {
+      return menuOptions[option].execute();
+    }
 
-  status = `Invalid option chosen: ${option}`;
-  printMenu();
+    status = option ? `Invalid option chosen: ${option}` : "Please choose an option.";
+    printMenu();
+  }
 }
 
 module.exports.showMenu = showMenu;

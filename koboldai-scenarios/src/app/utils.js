@@ -8,6 +8,19 @@ const getDateString = () => {
   return `${date.getFullYear()}${month}${day}`
 }
 
+const grabPlaceholders = (text) => {
+  if (text.match(/\[(\$\{|)(.*?)(\}|)\]/g)) {
+    for (entry of text.match(/\[(\$\{|)(.*?)(\}|)\]/g)) {
+      entry = entry.replace(/\[(\$\{|)|(\}|)\]/g, '');
+      if (!placeholders) {
+        placeholders = new Array();
+      }
+
+      placeholders.push(entry);
+    }
+  }
+}
+
 const saveStory = (adventure, title) => {
   let input = rl.question(`Type your adventure's name (defaults to ${title}): `);
   let storyTitle = input ? input : title;
@@ -68,5 +81,6 @@ module.exports = {
   removeAccents: removeAccents,
   formatWorldInfo: formatWorldInfo,
   saveStory: saveStory,
-  getAuthorsNote: getAuthorsNote
+  getAuthorsNote: getAuthorsNote,
+  grabPlaceholders: grabPlaceholders
 }
