@@ -1,6 +1,6 @@
 const rl = require('readline-sync');
-const scn = require('./scenario.js');
-const str = require('./story.js');
+const scn = require('../scenarios//scenario.js');
+const str = require('../stories/story.js');
 const menu = require('./menu.js');
 
 const listItems = (items) => {

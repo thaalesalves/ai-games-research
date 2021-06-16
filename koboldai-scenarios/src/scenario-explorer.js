@@ -1,4 +1,4 @@
-const menu = require('./menu.js');
+const menu = require('./app/menu.js');
 
 const main = () => {
   menu.showMenu();

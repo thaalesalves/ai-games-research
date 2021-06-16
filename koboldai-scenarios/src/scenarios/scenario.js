@@ -1,5 +1,5 @@
 const rl = require('readline-sync');
-const util = require('./utils.js');
+const util = require('../app/utils.js');
 
 let placeholders = [];
 let placeholderAnswers = [];

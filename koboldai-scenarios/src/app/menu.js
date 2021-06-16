@@ -1,6 +1,6 @@
 const rl = require('readline-sync');
-const scenarios = require('./scenario-file-explorer.js');
-const stories = require('./story-file-explorer.js')
+const scenarios = require('../scenarios/scenario-file-explorer.js');
+const stories = require('../stories/story-file-explorer.js')
 
 let status;
 let menuOptions = [

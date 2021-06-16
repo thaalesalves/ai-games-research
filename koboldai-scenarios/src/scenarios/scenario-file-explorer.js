@@ -1,10 +1,10 @@
 const rl = require('readline-sync');
 const fs = require("fs");
 const path = require('path');
-const scenarios = require('./options.js');
-const menu = require('./menu.js');
+const scenarios = require('../app/options.js');
+const menu = require('../app/menu.js');
 
-let basedir = path.resolve(__dirname, '..');
+let basedir = path.resolve(__dirname, '../..');
 let files = [];
 const scenariosDir = `${basedir}/scenarios/`;
 
