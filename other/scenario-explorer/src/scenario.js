@@ -75,14 +75,14 @@ const saveStory = (adventure, title) => {
   process.exit(0);
 }
 
-module.exports = {
-  execute: (scenario) => {
-    printMenu(scenario);
-    placeholderAnswers.forEach((answer, i) => {
-      scenario.prompt = scenario.prompt.replace(placeholders[i], answer).replace(/\[(\$\{|)|(\}|)\]/g, '');
-    });
+const execute = (scenario) => {
+  printMenu(scenario);
+  placeholderAnswers.forEach((answer, i) => {
+    scenario.prompt = scenario.prompt.replace(placeholders[i], answer).replace(/\[(\$\{|)|(\}|)\]/g, '');
+  });
 
-    let story = buildStory(scenario);
-    saveStory(story, scenario.title);
-  }
+  let story = buildStory(scenario);
+  saveStory(story, scenario.title);
 }
+
+module.exports.execute = execute;

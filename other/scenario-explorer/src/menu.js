@@ -36,15 +36,15 @@ const printMenu = () => {
   return rl.question(`Choose an option: `);
 }
 
-module.exports = {
-  showMenu: (message) => {
-    status = message ? message : '';
-    let option = printMenu();
-    if (menuOptions[option]) {
-      return menuOptions[option].execute();
-    }
-
-    status = `Invalid option chosen: ${option}`;
-    printMenu();
+const showMenu = (message) => {
+  status = message ? message : '';
+  let option = printMenu();
+  if (menuOptions[option]) {
+    return menuOptions[option].execute();
   }
+
+  status = `Invalid option chosen: ${option}`;
+  printMenu();
 }
+
+module.exports.showMenu = showMenu;

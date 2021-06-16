@@ -2,15 +2,17 @@ const rl = require('readline-sync');
 const fs = require("fs");
 const path = require('path');
 const scenarios = require('./scenarios-options.js');
+const menu = require('./menu.js');
 
 let basedir = path.resolve(__dirname, '..');
 let files = [];
 const scenariosDir = `${basedir}/scenarios/`;
 
 const listScenarioFiles = () => {
+  console.log(`0. Back`);
   files = fs.readdirSync(scenariosDir);
   files.filter((file) => file.match(/.*\.(json)/ig))
-    .forEach((file, i) => console.log(`${i}. ${file}`));
+    .forEach((file, i) => console.log(`${i + 1}. ${file}`));
 }
 
 const printMenu = () => {
@@ -21,11 +23,15 @@ const printMenu = () => {
   return rl.question(`Choose an option: `);
 }
 
-module.exports = {
-  execute: () => {
-    const fileOption = printMenu();
+const execute = () => {
+  const fileOption = printMenu();
+  if (fileOption != "0") {
     const file = fs.readFileSync(`${scenariosDir}/${files[fileOption]}`, 'utf8');
     scenarios.execute(JSON.parse(file));
-    process.exit(0);
+    return;
   }
+
+  menu.showMenu("Back from file selection.")
 }
+
+module.exports.execute = execute;
