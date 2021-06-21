@@ -1,6 +1,7 @@
 *.tar
 *.rar
 *.zip
-stories/
+./stories/
+./scenarios/
 node_modules/
 package-lock.json
