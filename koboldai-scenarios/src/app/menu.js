@@ -31,7 +31,7 @@ let menuOptions = [
     }
   },
   {
-    text: `Convert from AI Dungeon (still under development)`,
+    text: `Convert directly from AI Dungeon`,
     execute: () => {
       const username = rl.question("Type your AI Dungeon username: ");
       const userToken = rl.question("Paste your user token: ");

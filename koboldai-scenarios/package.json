@@ -1,15 +1,14 @@
 {
     "name": "aid-scenario-explorer",
     "version": "1.0.0",
-    "description": "Explorer for AID exported scenarios (to use with KoboldAI)",
-    "author": "coffeehumanoid (thaalesalves)",
+    "description": "Explorer for AID exported scenarios and stories (to use with KoboldAI and NovelAI)",
+    "author": "coffeehumanoid / javaman (thaalesalves)",
     "license": "ISC",
     "repository": {},
     "scripts": {
         "start": "node src/scenario-explorer.js"
     },
     "dependencies": {
-        "graphql": "^15.5.1",
         "node-fetch": "^2.6.1",
         "readline-sync": "^1.4.10"
     }
