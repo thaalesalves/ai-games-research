@@ -3,8 +3,7 @@ const rl = require('readline-sync');
 const aid = require('./graphql/ai-dungeon.js');
 const options = require('../app/options-graphql.js');
 
-const execute = (userToken) => {
-  const username = rl.question("Type your AI Dungeon username: ");
+const execute = (username, userToken, fromSaved) => {
   fetch('https://api.aidungeon.io/graphql', {
     method: 'POST',
     headers: {
@@ -13,7 +12,7 @@ const execute = (userToken) => {
     },
     body: JSON.stringify({
       query: `${aid.query}\n${aid.scenarioFragment}`,
-      variables: aid.scenarioVariables(username)
+      variables: aid.scenarioVariables(username, fromSaved)
     })
   })
   .then(res => res.json())

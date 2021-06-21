@@ -2,7 +2,7 @@ const rl = require('readline-sync');
 const scenarios = require('../scenarios/scenario-file-explorer.js');
 const stories = require('../stories/story-file-explorer.js');
 const javaScenarios = require('../javaman-scenarios/javaman-scenarios.js');
-const aidungeon = require('../aidungeon/extract-scenarios.js');
+const aidungeon = require('../aidungeon/aid-operations.js');
 
 let status;
 let menuOptions = [
@@ -33,8 +33,9 @@ let menuOptions = [
   {
     text: `Convert from AI Dungeon (still under development)`,
     execute: () => {
+      const username = rl.question("Type your AI Dungeon username: ");
       const userToken = rl.question("Paste your user token: ");
-      aidungeon.execute(userToken);
+      aidungeon.execute(username, userToken);
     }
   }
 ];
