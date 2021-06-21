@@ -5,9 +5,11 @@ let placeholders = [];
 let placeholderAnswers = [];
 
 const answerQuestions = () => {
-  placeholders.forEach((question) => {
-    placeholderAnswers.push(rl.question(`${question}: `));
-  });
+  if (typeof placeholders != 'undefined') {
+    placeholders.forEach((question) => {
+      placeholderAnswers.push(rl.question(`${question}: `));
+    });
+  }
 }
 
 const buildStory = (scenario) => {
