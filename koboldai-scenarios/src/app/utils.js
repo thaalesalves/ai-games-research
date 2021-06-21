@@ -9,10 +9,12 @@ const getDateString = () => {
 }
 
 const grabPlaceholders = (text) => {
-  if (text.match(/\[(\$\{|)(.*?)(\}|)\]/g)) {
-    for (entry of text.match(/\[(\$\{|)(.*?)(\}|)\]/g)) {
-      placeholders = new Array();
-      placeholders.push(entry.replace(/\[(\$\{|)|(\}|)\]/g, ''));
+  let withoutBrackets = text.replace(/\[|\]/g, '');
+  const placeholdersFound = withoutBrackets.match(/\$\{(.*?)\}/g);
+  if (placeholdersFound) {
+    for (let entry of placeholdersFound) {
+      let placeholders = new Array();
+      placeholders.push(entry.replace(/\$\{|\}/g, ''));
       return placeholders;
     }
   }
