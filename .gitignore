@@ -1,7 +1,7 @@
 *.tar
 *.rar
 *.zip
-./stories/
-./scenarios/
+/koboldai-scenarios/stories/
+/koboldai-scenarios/scenarios/
 node_modules/
 package-lock.json
