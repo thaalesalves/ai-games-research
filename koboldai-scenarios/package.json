@@ -9,6 +9,8 @@
         "start": "node src/scenario-explorer.js"
     },
     "dependencies": {
+        "graphql": "^15.5.1",
+        "node-fetch": "^2.6.1",
         "readline-sync": "^1.4.10"
     }
 }

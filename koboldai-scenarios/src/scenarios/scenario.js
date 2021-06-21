@@ -28,7 +28,7 @@ const printMenu = (scenario) => {
   console.log(title);
   console.log(scenario.description.replace(/(\S+\s*){1,10}/g, "$&\n"));
   console.log(bottom);
-  util.grabPlaceholders(scenario.prompt);
+  placeholders = util.grabPlaceholders(scenario.prompt);
   answerQuestions();
 }
 

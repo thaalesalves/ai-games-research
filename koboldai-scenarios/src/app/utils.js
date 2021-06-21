@@ -11,20 +11,17 @@ const getDateString = () => {
 const grabPlaceholders = (text) => {
   if (text.match(/\[(\$\{|)(.*?)(\}|)\]/g)) {
     for (entry of text.match(/\[(\$\{|)(.*?)(\}|)\]/g)) {
-      entry = entry.replace(/\[(\$\{|)|(\}|)\]/g, '');
-      if (!placeholders) {
-        placeholders = new Array();
-      }
-
-      placeholders.push(entry);
+      placeholders = new Array();
+      placeholders.push(entry.replace(/\[(\$\{|)|(\}|)\]/g, ''));
+      return placeholders;
     }
   }
 }
 
-const saveStory = (adventure, title) => {
-  let input = rl.question(`Type your adventure's name (defaults to ${title}): `);
+const saveStory = (adventure, title, type) => {
+  let input = rl.question(`Type your ${type ? type : 'adventure'}'s name (defaults to ${title}): `);
   let storyTitle = input ? input : title;
-  const defaultOutputFile = `stories/${storyTitle ? storyTitle.replace(/[^a-z0-9]/gi, '_').toLowerCase() : character.name.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_${getDateString()}.json`;
+  const defaultOutputFile = `${type ? type : 'storie'}s/${storyTitle ? storyTitle.replace(/[^a-z0-9]/gi, '_').toLowerCase() : character.name.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_${getDateString()}.json`;
   let customOutputFile = rl.question(`Path to where the story should be saved (defaults to ${defaultOutputFile}): `);
   const outputFile = customOutputFile ? customOutputFile : defaultOutputFile;
   fs.writeFileSync(`${outputFile}`, JSON.stringify(adventure), 'utf8');
