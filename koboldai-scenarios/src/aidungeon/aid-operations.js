@@ -1,7 +1,13 @@
+const fs = require(`fs`);
 const rl = require('readline-sync');
-const scenarios = require('../aidungeon/aid-scenarios.js');
-const stories = require('../aidungeon/aid-stories.js');
+const scenarios = require('./graphql/aid-scenarios.js');
+const stories = require('./graphql/aid-stories.js');
 
+const configFile = "./aid-credentials.txt";
+let option;
+let username;
+let userToken;
+let credentials;
 let message;
 let menuOptions = [
   {
@@ -39,8 +45,18 @@ const printMenu = () => {
   return rl.question(`Choose an option: `);
 }
 
-const execute = (username, userToken) => {
-  let option;
+const execute = () => {
+  try {
+    credentials = fs.readFileSync(configFile, 'utf8');
+  } catch (e) {
+    username = rl.question("Type your AI Dungeon username: ");
+    userToken = rl.question("Paste your user token: ", { hideEchoBack: true });
+    fs.writeFileSync(configFile, `${username}\n${userToken}`);
+  }
+
+  username = credentials.split("\n")[0];
+  userToken = credentials.split("\n")[1];
+
   while (!option) {
     option = printMenu();
     if (!option) {

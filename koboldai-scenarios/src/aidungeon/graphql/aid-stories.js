@@ -1,7 +1,6 @@
 const fetch = require("node-fetch");
-const rl = require('readline-sync');
-const aid = require('./graphql/ai-dungeon.js');
-const options = require('../app/options-graphql.js');
+const aid = require('./ai-dungeon.js');
+const options = require('../../app/options-graphql.js');
 
 const execute = (username, userToken, fromSaved) => {
   fetch('https://api.aidungeon.io/graphql', {

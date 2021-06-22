@@ -29,7 +29,7 @@ const execute = (items, type) => {
     return;
   }
 
-  menu.showMenu("Back from scenario selection.")
+  menu.showMenu("Back from scenario selection.");
 }
 
 module.exports.execute = execute;

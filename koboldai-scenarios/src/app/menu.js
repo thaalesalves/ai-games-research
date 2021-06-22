@@ -33,9 +33,7 @@ let menuOptions = [
   {
     text: `Convert directly from AI Dungeon`,
     execute: () => {
-      const username = rl.question("Type your AI Dungeon username: ");
-      const userToken = rl.question("Paste your user token: ", { hideEchoBack: true });
-      aidungeon.execute(username, userToken);
+      aidungeon.execute();
     }
   }
 ];
