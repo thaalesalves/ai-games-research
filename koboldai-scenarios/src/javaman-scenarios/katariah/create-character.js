@@ -1,3 +1,5 @@
+const rl = require('readline-sync');
+
 const DIGIT_REGEX = /\D/g;
 const limitCharacterDetails = (text) => {
   return text.replace(/, /g, ',').split(',').slice(0, 3).join('/').trim();
