@@ -1,0 +1,6 @@
+# KoboldAI Scripts
+A few scripts and apps to make your KoboldAI experience better. Most things here will be written in JavaScript or TypeScript.
+
+## Contents
+* **[AID scenario explorer for KoboldAI](koboldai-scenarios):** This is a simple NodeJS app that will interpret [CuriousNekomimi's script](https://github.com/CuriousNekomimi/AIDCAT) scenario extraction output into something readable by KAI, with all WIs, AN, prompt, actions, memory and everything. You will be able to type in placeholders and everything just like in AID, and keep a list of scenarios in an easy to use interface for later. It also supports reading your stories scenarios and bookmarked scenarios directly from AID.
+* **[KoboldAI bundled for Docker](koboldai-docker):** This is a simple Docker image that contains KoboldAI. It is setup and configured, so you just need to run it to play. Either Docker or Podman are required to run this, so you don't need to worry about installing Pythong, dealing with its confusing dependencies and stuff.
